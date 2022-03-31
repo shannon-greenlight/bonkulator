@@ -5,16 +5,16 @@
       "Application": "Pcbnew",
       "Version": "(6.0.1)"
     },
-    "CreationDate": "2022-02-15T11:42:13-08:00"
+    "CreationDate": "2022-03-20T11:31:47-07:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
       "Name": "main_board",
       "GUID": "6d61696e-5f62-46f6-9172-642e6b696361",
-      "Revision": "rev?"
+      "Revision": "2.0"
     },
     "Size": {
-      "X": 60.45,
+      "X": 70.85,
       "Y": 110.05
     },
     "LayerNumber": 4,
@@ -24,8 +24,8 @@
   "DesignRules": [
     {
       "Layers": "Outer",
-      "PadToPad": 0.0,
-      "PadToTrack": 0.0,
+      "PadToPad": 0.2,
+      "PadToTrack": 0.2,
       "TrackToTrack": 0.2,
       "MinLineWidth": 0.2,
       "TrackToRegion": 0.508,

@@ -447,6 +447,10 @@
     [
       "808a57ff-0ced-4535-b028-9fea6b6c5f09",
       "Inputs"
+    ],
+    [
+      "eae55a42-d110-46e1-b06f-560b3d6a7f91",
+      "Output Monitors"
     ]
   ],
   "text_variables": {}

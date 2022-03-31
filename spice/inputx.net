@@ -1,0 +1,13 @@
+* C:\Users\shann\Dropbox\moog\bonkulator\spice\inputx.asc
+XU1 N002 Output +12 -12 Output AD823
+V1 N001 0 3.3
+V2 +12 0 12
+V3 0 -12 12
+V4 N003 0 SINE(0 5 10)
+R1 N002 N003 116.7K
+R2 0 N002 50K
+R3 N002 N001 35K
+.tran 0 .5 0
+.lib ADI.lib
+.backanno
+.end
