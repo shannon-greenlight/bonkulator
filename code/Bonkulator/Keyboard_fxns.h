@@ -1,8 +1,9 @@
 #include <Wire.h>
 // Keyboard functions
 
-// real definitions
 void select_button_down(void);
+void scan_keyboard(void);
+
 // #define KEYBOARD_ROW_0 0
 #define KEYBOARD_ROW_1 A0
 #define KEYBOARD_ROW_2 A1
@@ -43,6 +44,20 @@ uint8_t crunch_key()
 	keys_row |= !digitalRead(KEYBOARD_COLUMN_2) << 2;
 	keys_row |= !digitalRead(KEYBOARD_COLUMN_3) << 3;
 	return keys_row;
+}
+
+bool key_available()
+{
+	return (select_button_available) || keys_row_0 || keys_row_1 || keys_row_2;
+}
+
+void wait_all_keys_up()
+{
+	while (key_available())
+	{
+		delay(10);
+		scan_keyboard();
+	}
 }
 
 void scan_keyboard()
@@ -99,7 +114,7 @@ void scan_keyboard()
 		}
 		else
 		{
-			keypress = '\n';
+			keypress = '!';
 			select_button_available = true;
 			select_button_pushed = false;
 		}
@@ -108,26 +123,18 @@ void scan_keyboard()
 	{
 		select_button_available = false;
 	}
-	// Serial.println("Sanity: " + String(sanity_cnt));
-}
-
-bool key_available()
-{
-	return (select_button_available) || keys_row_0 || keys_row_1 || keys_row_2;
-}
-
-void wait_all_keys_up()
-{
-	while (key_available())
+	if (key_available() && !ui.display_is_on)
 	{
-		scan_keyboard();
+		restore_display();
+		wait_all_keys_up();
+		reset_keyboard();
 	}
+	// Serial.println("Sanity: " + String(sanity_cnt));
 }
 
 void calc_keypress()
 {
 	esc_mode = false;
-	output_mode = false;
 	if (keys_row_0 == 1)
 	{
 		esc_mode = true;
@@ -155,52 +162,325 @@ void calc_keypress()
 
 	if (keys_row_1 == 1)
 	{
-		output_mode = true;
-		keypress = '0';
+		// keypress = '0';
+		set_selected_fxn(OUTPUT_0_FXN);
 		return;
 	}
 	if (keys_row_1 == 2)
 	{
-		output_mode = true;
-		keypress = '1';
+		set_selected_fxn(OUTPUT_1_FXN);
 		return;
 	}
 	if (keys_row_1 == 4)
 	{
-		output_mode = true;
-		keypress = '2';
+		set_selected_fxn(OUTPUT_2_FXN);
 		return;
 	}
 	if (keys_row_1 == 8)
 	{
-		output_mode = true;
-		keypress = '3';
+		set_selected_fxn(OUTPUT_3_FXN);
 		return;
 	}
 
 	if (keys_row_2 == 1)
 	{
-		output_mode = true;
-		keypress = '4';
+		set_selected_fxn(OUTPUT_4_FXN);
 		return;
 	}
 	if (keys_row_2 == 2)
 	{
-		output_mode = true;
-		keypress = '5';
+		set_selected_fxn(OUTPUT_5_FXN);
 		return;
 	}
 	if (keys_row_2 == 4)
 	{
-		output_mode = true;
-		keypress = '6';
+		set_selected_fxn(OUTPUT_6_FXN);
 		return;
 	}
 	if (keys_row_2 == 8)
 	{
-		output_mode = true;
-		keypress = '7';
+		set_selected_fxn(OUTPUT_7_FXN);
 		return;
+	}
+}
+
+void process_key()
+{
+	// ui.terminal_debug("Process key: " + String(keypress));
+	switch (keypress)
+	{
+	case '~':
+		// hardware_begin();
+		// output_device.begin(AD5328_LDAC_PASSTHRU, AD5328_VDD_NONE, AD5328_BUFFERED_NONE, AD5328_GAIN_NONE);
+		// digitalWrite(T3_LED, HIGH);
+		// timer_debug();
+		// add_waveform();
+		// timer_init();
+		// ui.terminal_debug("Server status: " + String(server.status()));
+		dump_waveform(selected_output.get(), true);
+		dump_waveform(selected_output.get(), false);
+		// output_debug();
+		// selected_trigger->do_cmd('!');
+		// (*settings_update_fxns[2])();
+		break;
+	case 'Z': // disable display and terminal
+		ui.all_off();
+		break;
+	case 'z':
+		restore_display();
+		break;
+	case '!':
+		activate();
+		break;
+	case 'u':
+		adjust_param(1);
+		break;
+	case 'd':
+		adjust_param(-1);
+		break;
+	case '*':
+		set_selected_fxn(SETTINGS_FXN);
+		break;
+	// case '+':
+	// 	set_selected_fxn(remembered_fxn.get() + 1);
+	// 	break;
+	// case '-':
+	// 	set_selected_fxn(remembered_fxn.get() - 1);
+	// 	break;
+	case 'A': // up arrow in esc mode A
+		if (esc_mode)
+		{
+			dec_param_num();
+			// selected_fxn->inc_param_num_by(-1);
+		}
+		break;
+	case 'B': // dn arrow B
+		if (esc_mode)
+		{
+			inc_param_num();
+			// selected_fxn->inc_param_num_by(1);
+		}
+		break;
+	case 'C': // right arrow in esc mode C
+		if (esc_mode)
+		{
+			// selected_fxn->inc_dig_num_by(1);
+			inc_dig_num();
+		}
+		break;
+	case 'D': // left arrow D
+		if (esc_mode)
+		{
+			// selected_fxn->inc_dig_num_by(-1);
+			dec_dig_num();
+		}
+		break;
+	}
+	esc_mode = keypress == 27 || keypress == '[';
+}
+
+void process_cmd(String in_str)
+{
+	// Serial.println("Process cmd: " + in_str);
+	// ui.terminal_debug("Process cmd: " + in_str);
+	// noInterrupts();
+
+	char cmd = in_str.charAt(0);
+	int int_param = in_str.substring(1).toInt();
+	int val;
+	// bool enabled;
+	bool trigger_enabled;
+	int selected_trig_num = OUTPUT_ENABLE_T0 + selected_trigger->trig_num;
+	int selected_output_temp = selected_output.get();
+
+	// ui.terminal_debug("Process cmd: " + in_str + " int_param: " + String(in_str.substring(0).toInt()) + " cmd: " + String(cmd));
+
+	switch (cmd)
+	{
+	case '[':
+		esc_mode = true;
+		cmd = in_str.charAt(1);
+		break;
+	case ':':
+		selected_fxn->put_dig_num(int_param);
+		selected_fxn->printParams();
+		break;
+	case 'f':
+		set_selected_fxn(int_param);
+		break;
+	case 'p':
+		selected_fxn->put_param_num(int_param);
+		selected_fxn->printParams();
+		break;
+	case 'c':
+		// clear trigger
+		select_trigger(int_param);
+		selected_trigger->clear();
+		break;
+	case 't':
+		// select trigger
+		// ui.terminal_debug("process_cmd: " + in_str.substring(1, 2));
+		select_trigger(in_str.substring(1, 2).toInt());
+		selected_fxn->printParams();
+		if (in_str.charAt(2) == '!')
+		{
+			selected_trigger->trigger();
+		}
+		break;
+	case 'T':
+		// Toggle trigger enable for selected trigger. eg. t1 T4 -- toggles output 4 in trigger 1
+		set_selected_fxn(int_param);
+		// (the_output)().put_param_num(selected_trig_num);
+		// (the_output)().param_num = selected_trig_num;
+		(*bonk_outputs[int_param]).param_num = selected_trig_num;
+		trigger_enabled = (the_output)().get_param(selected_trig_num) == 1 ? 0 : 1;
+		(the_output)().put_param(trigger_enabled, selected_trig_num);
+		// ui.terminal_debug("T Output: " + (the_output)().name + " Trig num: " + String((the_output)().param_num) + " Enabled: " + String(trigger_enabled));
+		output_update_trigger();
+		set_selected_fxn(selected_output_temp);
+		break;
+	case 'D':
+		switch (int_param)
+		{
+		case 0:
+			// ui.terminal_debug("Disable All Triggers!");
+			for (int i = 0; i < NUM_OUTPUTS; i++)
+			{
+				for (int j = 0; j < NUM_TRIGGERS; j++)
+				{
+					bonk_output(i).put_param(0, OUTPUT_ENABLE_T0 + j);
+					if (i == 0) // we only need to do this once
+					{
+						(*triggers[j]).disable_all();
+					}
+				}
+			}
+			break;
+		case 1:
+			// ui.terminal_debug("Trigger All Triggers!");
+			for (int i = 0; i < NUM_TRIGGERS; i++)
+			{
+				select_trigger(i);
+				selected_trigger->trigger();
+			}
+			break;
+		case 2:
+			// ui.terminal_debug("Clear All Triggers!");
+			clear_all_triggers();
+			// for (int i = 0; i < NUM_TRIGGERS; i++)
+			// {
+			// 	select_trigger(i);
+			// 	selected_trigger->clear();
+			// }
+			break;
+		case 3:
+			// ui.terminal_debug("Display All Triggers!");
+			trigger_report();
+			break;
+		}
+		break;
+	case 'J':
+		switch (int_param)
+		{
+		case 0:
+			ui.display_off();
+			break;
+		case 1:
+			ui.display_on();
+			break;
+		}
+		break;
+	case 'O':
+		(the_output)().put_param_w_offset(int_param, OUTPUT_OFFSET);
+		break;
+	case 'Q':
+		(the_output)().put_param(int_param, OUTPUT_QUANTIZE);
+		break;
+	case 'S':
+		(the_output)().put_param(int_param, OUTPUT_SCALE);
+		break;
+	case 'R':
+		(the_output)().put_param(int_param, OUTPUT_RANDOMNESS);
+		break;
+	case 'V':
+		(the_output)().put_param(int_param, OUTPUT_DACVAL);
+		break;
+	case 'W':
+		printWifiStatus();
+		break;
+	case '$':
+		// String sval = urlDecode(in_str.substring(1));
+		selected_fxn->put_string_var(urlDecode(in_str.substring(1)));
+		break;
+	case '#':
+		selected_fxn->put_param_w_offset(int_param);
+		if (in_output_fxn())
+		{
+			switch (selected_fxn->param_num)
+			{
+			case OUTPUT_SCALE:
+			case OUTPUT_OFFSET:
+			case OUTPUT_RANDOMNESS:
+			case OUTPUT_QUANTIZE:
+				apply_params();
+				graph_waveform(selected_output.get());
+				break;
+
+			default:
+				break;
+			}
+		}
+		break;
+	}
+
+	// Serial.println("Process cmd: " + in_str + " int_param: " + String(in_str.substring(0).toInt()) + " cmd: " + String(cmd));
+	if (cmd >= '-' && cmd <= '9')
+	{
+		// selected_fxn->put_param(in_str.toInt());
+		selected_fxn->put_param_w_offset(in_str.substring(0).toInt());
+		if (in_output_fxn())
+		{
+			switch (selected_fxn->param_num)
+			{
+			case OUTPUT_SCALE:
+			case OUTPUT_OFFSET:
+			case OUTPUT_RANDOMNESS:
+			case OUTPUT_QUANTIZE:
+				apply_params();
+				graph_waveform(selected_output.get());
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+
+	if (String(cmd) != "\n" && cmd != 'p')
+	{
+		if (String(cmd) == "%")
+		{
+			keypress = 27;
+		}
+		else
+		{
+			keypress = cmd;
+		}
+
+		process_key();
+	}
+}
+
+void check_keyboard()
+{
+	scan_keyboard();
+	if (key_available())
+	{
+		calc_keypress();
+		process_key();
+		wait_all_keys_up();
+		delay(10);
+		reset_keyboard();
 	}
 }
 
@@ -213,11 +493,12 @@ void check_serial()
 		char c = Serial.read();
 		bool is_esc_char = esc_mode && (c == 'A' || c == 'B' || c == 'C' || c == 'D');
 		// Serial.println(in_str + " .. " + String(c));
-		if (c == '$')
+		// ui.terminal_debug(in_str + " .. " + String(c));
+		if (c == '$' || c == '-' || c == '+')
 		{
 			entering_string = true;
 		}
-		if (!entering_string && (c == '~' || c == '*' || c == '!' || c == 'u' || c == 'd' || c == '+' || c == '-' || c == 'z' || c == 'Z' || is_esc_char))
+		if (!entering_string && (in_str.length() < 2 || is_esc_char) && (c == '~' || c == '*' || c == '!' || c == 'u' || c == 'd' || c == 'z' || c == 'Z' || is_esc_char))
 		{
 			// process this immediately with process_keypress
 			keypress = c;
@@ -239,146 +520,31 @@ void check_serial()
 				else
 				{
 					in_str += c;
+					if (c == '!')
+					{
+						cmd_available = true;
+						entering_string = false;
+					}
 				}
 			}
 		}
-	}
-}
-
-void process_cmd(String in_str)
-{
-	// Serial.println("Process cmd: " + in_str);
-	// ui.terminal_debug("Process cmd: " + in_str);
-	// noInterrupts();
-	char cmd = in_str.charAt(0);
-	int int_param = in_str.substring(1).toInt();
-	int val;
-	remote_adjusting = false;
-
-	switch (cmd)
-	{
-	case '[':
-		esc_mode = true;
-		cmd = in_str.charAt(1);
-		break;
-	case ':':
-		selected_fxn->put_dig_num(int_param);
-		selected_fxn->printParams();
-		break;
-	case 'p':
-		selected_fxn->put_param_num(int_param);
-		selected_fxn->printParams();
-		break;
-	case '#':
-		selected_fxn->put_param(int_param);
-		selected_fxn->printParam();
-		break;
-	case '$':
-		String sval = urlDecode(in_str.substring(1));
-		selected_fxn->put_string_var(sval);
-		selected_fxn->printParam();
-		break;
-	}
-
-	keypress = cmd;
-}
-
-void process_key()
-{
-	// ui.terminal_debug("Process key: " + String(keypress));
-	switch (keypress)
-	{
-	case '0':
-	case '1':
-	case '2':
-	case '3':
-	case '4':
-	case '5':
-	case '6':
-	case '7':
-		selected_output.put(keypress - '0');
-		in_wifi = false;
-		break;
-	case '*':
-		in_wifi = false;
-		break;
-	}
-
-	switch (keypress)
-	{
-	case '!':
-		activate();
-		break;
-	case 'u':
-		adjust_param(1);
-		break;
-	case 'd':
-		adjust_param(-1);
-		break;
-	case '0':
-		selected_fxn = &output0;
-		selected_fxn->display();
-		break;
-	case '1':
-		selected_fxn = &output1;
-		selected_fxn->display();
-		break;
-	case '2':
-		selected_fxn = &output2;
-		selected_fxn->display();
-		break;
-	case '3':
-		selected_fxn = &output3;
-		selected_fxn->display();
-		break;
-	case '4':
-		selected_fxn = &output4;
-		selected_fxn->display();
-		break;
-	case '5':
-		selected_fxn = &output5;
-		selected_fxn->display();
-		break;
-	case '6':
-		selected_fxn = &output6;
-		selected_fxn->display();
-		break;
-	case '7':
-		selected_fxn = &output7;
-		selected_fxn->display();
-		break;
-	case '*':
-		selected_fxn = &settings_fxn;
-		selected_fxn->display();
-		break;
-	case 'A': // up arrow in esc mode A
-		if (esc_mode)
+		if (keypress || cmd_available)
 		{
-			selected_fxn->inc_param_num_by(-1);
+			if (cmd_available)
+			{
+				process_cmd(in_str);
+				in_str = "";
+				keypress = 0;
+				cmd_available = false;
+			}
+			else
+			{
+				process_key();
+				reset_keyboard();
+				in_str = "";
+			}
 		}
-		break;
-	case 'B': // dn arrow B
-		if (esc_mode)
-		{
-			selected_fxn->inc_param_num_by(1);
-		}
-		break;
-	case 'C': // right arrow in esc mode C
-		if (esc_mode)
-		{
-			// selected_fxn->inc_dig_num_by(1);
-			inc_dig_num();
-		}
-		break;
-	case 'D': // left arrow D
-		if (esc_mode)
-		{
-			// selected_fxn->inc_dig_num_by(-1);
-			dec_dig_num();
-		}
-		break;
 	}
-	esc_mode = keypress == 27 || keypress == '[';
 }
 
 void select_button_down()

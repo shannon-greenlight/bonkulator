@@ -1,0 +1,18 @@
+Rework 4 boards. Boards are approx 72x110mm, 4-layer.
+
+1. Replace 0805 SMD 10K with 56K. 
+	a. R93, R94, R95, R96, R121, R122, R123, R124, R139, R140
+2. Add through-hole components.
+	a. 14 3.5mm Jacks
+	b. 1 4-pin header
+	c. 24 LEDs -- see note
+	d. 1 Rotary Encoder
+	e. 2 Test Points
+	f. 16 Pushbuttons
+
+note:
+	4 LEDs require hand-wiring to swap position with adjacent LED.
+	D37 <-> D19
+	D38 <-> D20
+
+

@@ -1,31 +1,113 @@
 // Rotary Encoder
-#include <RotaryEncoder.h>
+// see https://playground.arduino.cc/Main/RotaryEncoders
 
-void intFxnA(void)
+#define encoder0PinA ROTARY_A_PIN
+#define encoder0PinB ROTARY_B_PIN
+
+volatile int encoder0Pos = 0;
+int oldPosition = 0;
+
+void doEncoderA()
 {
-  e.aChanInt();
+  // look for a low-to-high on channel A
+  if (digitalRead(encoder0PinA) == HIGH)
+  {
+
+    // check channel B to see which way encoder is turning
+    if (digitalRead(encoder0PinB) == LOW)
+    {
+      encoder0Pos += 1; // CW
+    }
+    else
+    {
+      encoder0Pos += -1; // CCW
+    }
+  }
+
+  else // must be a high-to-low edge on channel A
+  {
+    // check channel B to see which way encoder is turning
+    if (digitalRead(encoder0PinB) == HIGH)
+    {
+      encoder0Pos += 1; // CW
+    }
+    else
+    {
+      encoder0Pos += -1; // CCW
+    }
+  }
+  // Serial.println(encoder0Pos, DEC);
+  // use for debugging - remember to comment out
 }
 
-void intFxnB(void)
+void doEncoderB()
 {
-  e.bChanInt();
+  // look for a low-to-high on channel B
+  if (digitalRead(encoder0PinB) == HIGH)
+  {
+
+    // check channel A to see which way encoder is turning
+    if (digitalRead(encoder0PinA) == HIGH)
+    {
+      encoder0Pos += 1; // CW
+    }
+    else
+    {
+      encoder0Pos += -1; // CCW
+    }
+  }
+
+  // Look for a high-to-low on channel B
+  else
+  {
+    // check channel B to see which way encoder is turning
+    if (digitalRead(encoder0PinA) == LOW)
+    {
+      encoder0Pos += 1; // CW
+    }
+    else
+    {
+      encoder0Pos += -1; // CCW
+    }
+  }
 }
 
 void set_encoder()
 {
-  switch (settings_get_encoder_type())
+  if (settings_get_encoder_type())
   {
-  case 0:                     // bourns
-    e.msb_pin = ROTARY_B_PIN; // A7
-    e.lsb_pin = ROTARY_A_PIN; // A6
-    break;
-  case 1: // amazon
-    e.msb_pin = ROTARY_A_PIN;
-    e.lsb_pin = ROTARY_B_PIN;
-    break;
+    attachInterrupt(ROTARY_B_PIN, doEncoderA, CHANGE);
+    attachInterrupt(ROTARY_A_PIN, doEncoderB, CHANGE);
   }
+  else
+  {
+    attachInterrupt(ROTARY_A_PIN, doEncoderA, CHANGE);
+    attachInterrupt(ROTARY_B_PIN, doEncoderB, CHANGE);
+  }
+}
 
-  // now set up interrupts
-  attachInterrupt(digitalPinToInterrupt(e.lsb_pin), intFxnB, RISING);
-  attachInterrupt(digitalPinToInterrupt(e.msb_pin), intFxnA, RISING);
+bool encoder_is_adjusting()
+{
+  bool adjusting = encoder0Pos != oldPosition;
+  if (adjusting)
+  {
+    oldPosition = encoder0Pos;
+  }
+  return adjusting;
+}
+
+void resetEncoder()
+{
+  oldPosition = encoder0Pos = 0;
+}
+
+int getEncoderValue()
+{
+  return (encoder0Pos > 0) ? 1 : -1;
+}
+
+void rotary_encoder_begin()
+{
+  resetEncoder();
+  set_encoder(); // sets msb,lsb for two types of encoder
 }

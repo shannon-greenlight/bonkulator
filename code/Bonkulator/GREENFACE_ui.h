@@ -8,6 +8,7 @@
 #include "TerminalVT100.h"
 
 #include "version_num.h"
+#include "hardware_defs.h"
 
 // OLED Display
 /*
@@ -21,11 +22,8 @@ A5   SCL
 #define LINE_3 52
 
 #define STATUS_ROW "5"
-#define FXN_ROW "6"
-#define PULSE_LEN_ROW "7"
-#define DECAY_ROW "9"
-#define RANDOM_ROW "11"
-#define DEBUG_ROW "21"
+#define FXN_ROW "7"
+#define DEBUG_ROW "2"
 
 #define OLED_RESET 16 // Pin 15 -RESET digital signal
 #define LOGO16_GLCD_HEIGHT 16
@@ -37,6 +35,7 @@ class GREENFACE_ui
 public:
   bool display_is_on = true;
   bool terminal_mirror = true;
+  String old_fxn = "";
 
   // todo use extern
   const int lines[4] = {LINE_1, LINE_2, LINE_3, LINE_0};
@@ -66,6 +65,7 @@ public:
     (*display).setTextColor(WHITE, BLACK);
     //(*display).setRotation(2);
     //(*display).startscrollright(0,15);
+    old_fxn = "";
     if (true)
     {
       for (int i = 0; i < 48; i += 2)
@@ -163,30 +163,11 @@ public:
 
   void terminal_printText(String text, int line)
   {
-    String row = String(8 + ((line - 20) / 8));
-    // switch (line)
-    // {
-    // case LINE_1:
-    //   row = PULSE_LEN_ROW;
-    //   break;
-    // case LINE_2:
-    //   row = DECAY_ROW;
-    //   break;
-    // case LINE_3:
-    //   row = RANDOM_ROW;
-    //   break;
-    // case 0:
-    //   row = FXN_ROW;
-    //   text = "Fxn: " + text;
-    //   break;
-    // default:
-    //   row = "-1";
-    // }
+    String row = String(9 + ((line - 20) / 8));
     if (row == FXN_ROW)
     {
-      text = "Fxn: " + text;
+      // text = "Function: " + text;
     }
-    // text = text + " Line: " + String(line);
     terminal_printRow(text, row);
   }
 
@@ -237,6 +218,29 @@ public:
     // terminalPrintParam(row, label, String(buf));
   }
 
+  int constrainX(int x)
+  {
+    return constrain(x, 0, 127);
+  }
+
+  int constrainY(int y)
+  {
+    return constrain(y, LINE_1, 63);
+  }
+
+  void drawPixel(int x, int y, int color = WHITE, bool constrain_vals = false)
+  {
+    if (display_is_on)
+    {
+      if (constrain_vals)
+      {
+        x = constrainX(x);
+        y = constrainX(y);
+      }
+      (*display).drawPixel(x, y, color);
+    }
+  }
+
   void drawHLine(int y, int color = WHITE)
   {
     if (display_is_on)
@@ -245,14 +249,62 @@ public:
     }
   }
 
+  void drawVLine(int x, int color = WHITE)
+  {
+    if (display_is_on)
+    {
+      (*display).drawFastVLine(x, LINE_1, 64, color);
+    }
+  }
+
+  void drawVHash(int x, int y, int color = WHITE)
+  {
+    if (display_is_on)
+    {
+      (*display).drawFastVLine(x, constrainY(y - 4), 11, color);
+    }
+  }
+
+  void drawXHash(int x, int y, int color = WHITE)
+  {
+    if (display_is_on)
+    {
+      // upper left
+      drawPixel(x - 2, y - 2, WHITE, true);
+      drawPixel(x - 1, y - 1, WHITE, true);
+
+      // upper right
+      drawPixel(x + 2, y - 2, WHITE, true);
+      drawPixel(x + 1, y - 1, WHITE, true);
+
+      // lower left
+      drawPixel(x - 2, y + 2, WHITE, true);
+      drawPixel(x - 1, y + 1, WHITE, true);
+
+      // lower right
+      drawPixel(x + 2, y + 2, WHITE, true);
+      drawPixel(x + 1, y + 1, WHITE, true);
+    }
+  }
+
   void hiliteLine(uint16_t line_num, int num_lines = 3, int offset = 9)
   {
+    String s = "---------------------";
+    String blank = "                     ";
     for (int i = 0; i < num_lines; i++)
     {
       drawHLine(lines[i] + offset, BLACK);
+      if (terminal_mirror)
+      {
+        terminal_printText(blank, lines[i] + offset);
+      }
     }
     // Serial.println("Hilighting: "+String(lines[line_num]+offset));
     drawHLine(lines[line_num] + offset, WHITE);
+    if (terminal_mirror)
+    {
+      terminal_printText(s, lines[line_num] + offset);
+    }
   }
 
   void hiliteChar(uint16_t line_num, uint8_t char_num)
@@ -278,20 +330,40 @@ public:
     //  terminal_debug("fill offset: " + String(offset));
   }
 
-  void drawPixel(int x, int y, int color = WHITE)
-  {
-    if (display_is_on)
-    {
-      (*display).drawPixel(x, y, color);
-    }
-  }
-
   void graphData(int *data)
   {
     for (int i = 0; i < 128; i++)
     {
       drawPixel(i, data[i], WHITE);
     }
+  }
+
+  int fit_data(int intval, int scale)
+  {
+    float val = float(intval) / scale;
+    return max(16, 63 - (int(48 * val)));
+  }
+
+  void graph_waveform(uint16_t *waveform_data, byte data_len)
+  {
+    // ui.terminal_debug("Graph waveform: " + String(output_num));
+    int data[WAVEFORM_PARTS];
+
+    int index = 0; // index into source waveform data
+    float index_inc = WAVEFORM_PARTS / float(data_len);
+
+    fill(BLACK, 16);
+
+    for (int i = 0; i < 128; i++)
+    {
+      data[i] = fit_data(waveform_data[index], DAC_FS);
+      if (i + 1 > (index + 1) * index_inc)
+      {
+        index++;
+      }
+    }
+    graphData(data);
+    showDisplay();
   }
 
   const int basex = 116;
@@ -351,10 +423,22 @@ public:
 
   void newFxn(String fxn)
   {
-    clearDisplay();
-    t.clrDown(FXN_ROW);
-    terminalSplash();
-    printLine(fxn, 0, 2);
+    if (fxn != old_fxn)
+    {
+      clearDisplay();
+      t.clrDown(FXN_ROW);
+      terminalSplash();
+      printLine(fxn, 0, fxn.length() > 9 ? 1 : 2);
+    }
+  }
+
+  String format_float(float val, int digits, const char *format = "%.2f")
+  {
+    char buf[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // buffer to print up to 9 digits
+    // String format = "%"+String(digits)+"d";
+    // Serial.println("Format: "+String(format));
+    snprintf(buf, digits + 1, format, val);
+    return String(buf);
   }
 
   void printParam(String label, int param, int digits, const char *format, uint16_t line_num, int font_size = 1, String suffix = "")

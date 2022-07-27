@@ -1,23 +1,22 @@
 #include "GREENFACE_ui.h"
 // display screen
-#define SCREEN_WIDTH 128 // OLED display width, in pixels
-#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+#define TERMINAL_WIDTH 76 // Display area under title box
+#define SCREEN_WIDTH 128  // OLED display width, in pixels
+#define SCREEN_HEIGHT 64  // OLED display height, in pixels
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 GREENFACE_ui ui(&display);
 
-void terminal_print_status(bool repeat_on, bool triggered, float scale, int offset)
+void terminal_print_status(bool force = false)
 {
-  if (ui.terminal_mirror)
+  static String old_status = "";
+  int pos = TERMINAL_WIDTH / 2 - status_string.length() / 2;
+  if (ui.terminal_mirror & (status_string != old_status || force))
   {
-    ui.t.setCursor(STATUS_ROW, "33");
-    ui.t.print(triggered ? "TRIGGERED" : "         ");
-    String rpeat = repeat_on ? "ON " : "OFF";
-    ui.t.setCursor(FXN_ROW, "16");
-    ui.t.print("Repeat: " + rpeat);
-    ui.t.setCursor(FXN_ROW, "28");
-    float percent = 100 * scale;
-    ui.t.print("CV Scale: " + String(percent) + String("%"));
-    ui.t.print(" Offset: " + String(offset));
+    ui.t.setCursor(STATUS_ROW, "1");
+    ui.t.clrToEOL();
+    ui.t.setCursor(STATUS_ROW, String(pos));
+    ui.t.print(status_string);
+    old_status = status_string;
   }
 }
 
@@ -26,7 +25,7 @@ void terminalSplash()
   // Use Putty to communicate (VT100 terminal)
   ui.t.clrScreen();
   ui.t.setCursor("1", "1");
-  const int stars = 76;
+  const int stars = TERMINAL_WIDTH;
 
   ui.t.printChars(stars, "*");
   ui.t.println("");

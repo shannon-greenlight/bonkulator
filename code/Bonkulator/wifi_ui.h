@@ -53,36 +53,74 @@ String params_toJSON()
   return selected_fxn->params_toJSON();
 }
 
+String list_fxns()
+{
+  String out = "\"fxns\" : [";
+  out += list_outputs();
+  out += ", " + enquote("Settings");
+  out += "],";
+  return out;
+}
+
 void send_data_to_client(WiFiClient client, char cmd)
 {
+  // ui.terminal_debug("Send data to client: " + String(cmd));
   if (cmd == '[')
     return;
-  // client.print(toJSON("fxn", fxn_name()));
-  // client.print(",");
-  // client.print(toJSON("fxn_num", String(fxn.get())));
-  // client.print(",");
-  // if (cmd == ' ' || cmd == 'f' || cmd == '+' || cmd == '-')
-  //   client.print(list_fxns());
+  client.print(toJSON("fxn", selected_fxn->name));
+  client.print(",");
+  client.print(toJSON("fxn_num", String(remembered_fxn.get())));
+  client.print(",");
+  if (cmd == ' ' || cmd == 'f' || cmd == '+' || cmd == '-')
+    client.print(list_fxns());
   client.print(toJSON("device_name", settings_get_device_name()));
   client.print(",");
   client.print(toJSON("cmd", String(cmd)));
   client.print(",");
-  client.print(toJSON("digit_num", String(selected_fxn->digit_num)));
+  uint8_t digit_num = selected_fxn->digit_num;
+  if (selected_fxn->get_min_w_offset() < 0)
+  {
+    digit_num--;
+  }
+  client.print(toJSON("digit_num", String(digit_num)));
   client.print(",");
   client.print(toJSON("param_num", String(selected_fxn->param_num)));
   client.print(",");
+  client.print(toJSON("param_active", String(selected_fxn->get_param_active())));
+  client.print(",");
 
-  // client.print(toJSON("dac_fs", String(DAC_FS)));
-  // client.print(",");
-  // client.print(toJSON("adc_fs", String(ADC_FS)));
-  // client.print(",");
+  client.print(toJSON("fs_volts", output_get_fs()));
+  client.print(",");
+  client.print(toJSON("offset_max", "100"));
+  client.print(",");
+  client.print(toJSON("offset_min", "-100"));
+  client.print(",");
+  client.print(toJSON("scale_max", "100"));
+  client.print(",");
+  client.print(toJSON("dac_fs", String(DAC_FS)));
+  client.print(",");
+  client.print(toJSON("adc_fs", String(ADC_FS)));
+  client.print(",");
 
-  if (wifi_ui_message > "" || true)
+  if (selected_fxn != &settings_fxn)
   {
+    set_wifi_message();
     client.print(toJSON("message", wifi_ui_message));
     client.print(",");
   }
   wifi_ui_message = "";
+
+  client.print("\"triggers\" : [");
+  for (int trig_num = 0; trig_num < NUM_TRIGGERS; trig_num++)
+  {
+    if (trig_num > 0)
+    {
+      client.print(",");
+    }
+    // ui.terminal_debug((*triggers[trig_num]).params_toJSON());
+    client.print((*triggers[trig_num]).params_toJSON());
+  }
+  client.print("],");
 
   client.print("\"params\" : [");
   client.print(selected_fxn->params_toJSON());
@@ -92,6 +130,8 @@ void send_data_to_client(WiFiClient client, char cmd)
 void _do_server()
 {
   char cmd;
+
+  // ui.terminal_debug("Do server. Asking: ");
 
   WiFiClient client = server.available(); // listen for incoming clients
 
@@ -135,15 +175,13 @@ void _do_server()
           { // if you got a newline, then clear currentLine:
             if (strstr(currentLine.c_str(), "POST"))
             {
+              currentLine.replace("%23", "#");
               cmd = currentLine[6];
               if (cmd == '[')
               {
-                esc_mode = true;
+                // esc_mode = true;
                 cmd = currentLine[7];
               }
-
-              // Serial.println("Command: " + String(cmd));
-              // int c = cmd;
               String in_str = "";
               int i = 0;
               char inchar = currentLine[i + 6];
@@ -157,9 +195,12 @@ void _do_server()
               {
                 in_str = " ";
               }
-              // Serial.println("Receiving: " + in_str + "*");
+              // Serial.println("Receiving: " + currentLine + "*");
 
               process_cmd(in_str);
+
+              // Serial.println("Command: " + String(cmd));
+              // int c = cmd;
             }
             currentLine = "";
           }
@@ -179,8 +220,12 @@ void _do_server()
   }
 
   //  if (!triggered && fxn.get() != LFO_FXN && wifi_status == WL_CONNECTED)
-  if (wifi_status == WL_CONNECTED)
+  static int cnt = 0;
+  if (wifi_status == WL_CONNECTED && cnt++ > 10)
+  {
     ui.printWiFiBars(WiFi.RSSI());
+    cnt = 0;
+  }
 }
 
 void do_server()

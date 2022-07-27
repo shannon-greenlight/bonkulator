@@ -1,3 +1,10 @@
+void scale_int(int *val, float scale)
+{
+    *val *= scale;
+    *val = min(DAC_FS, *val);
+    // *val = max(0, *val);
+}
+
 String toJSON(String key, String value)
 {
     String s1 = "\\";
@@ -45,6 +52,28 @@ bool in_settings()
     return selected_fxn == &settings_fxn;
 }
 
+// bool in_output_fxn()
+// {
+//     // return true if we are in an output fxn
+//     return !in_settings();
+// }
+
+// bool in_output_fxn()
+// {
+//     // return true if we are in an output fxn
+//     for (int i = 0; i < NUM_OUTPUTS; i++)
+//     {
+//         if (selected_fxn == bonk_outputs[i])
+//             return true;
+//     }
+//     return false;
+// }
+
+bool in_output_fxn()
+{
+    return selected_fxn_num < SETTINGS_FXN;
+}
+
 void adjust_param(int encoder_val)
 {
     if (in_settings())
@@ -59,12 +88,13 @@ void adjust_param(int encoder_val)
 
 void check_rotary_encoder()
 {
-    if (e.is_adjusting())
+    if (encoder_is_adjusting())
     {
         reset_inactivity_timer();
         // ui.terminal_debug("Rotary: " + String(e.getEncoderValue()));
-        adjust_param(e.getEncoderValue());
-        e.resetEncoder();
+        adjust_param(getEncoderValue());
+        resetEncoder();
+        delay(25);
     }
 }
 
@@ -72,48 +102,71 @@ void activate()
 {
     if (in_settings())
     {
-        if (settings_fxn.param_num == SETTINGS_WIFI)
-        {
-            select_wifi_fxn();
-            select_wifi_ok();
-        }
+        settings_activate();
+    }
+    else if (in_output_fxn())
+    {
+        selected_trigger->trigger();
+    }
+    else if (in_user_waveform_fxn())
+    {
+        user_waveforms_activate();
+    }
+    else if (in_wifi)
+    {
+        wifi_activate();
     }
 }
 
-uint16_t get_param(int p_num)
+// uint16_t get_param(int p_num)
+// {
+//     if (in_wifi)
+//     {
+//         return wifi_get_param(p_num);
+//     }
+//     else
+//     {
+//         return selected_fxn->get_param(p_num);
+//     }
+// }
+
+void inc_param_num()
 {
-    if (in_wifi)
+    selected_fxn->inc_param_num_by(1);
+}
+
+void dec_param_num()
+{
+    selected_fxn->inc_param_num_by(-1);
+}
+
+void inc_dig_num()
+{
+    selected_fxn->inc_dig_num_by(1);
+
+    if (in_output_fxn() && (the_output)().param_num == OUTPUT_WAVEFORM)
     {
-        return wifi_get_param(p_num);
+        graph_waveform(selected_output.get());
     }
-    else
+
+    if (in_user_waveform_fxn() && selected_fxn->param_num == USER_WAVEFORMS_NAME)
     {
-        return selected_fxn->get_param(p_num);
+        user_waveforms_update_waveform();
     }
 }
 
-int inc_dig_num()
+void dec_dig_num()
 {
-    if (in_wifi)
+    selected_fxn->inc_dig_num_by(-1);
+    if ((in_output_fxn() && (the_output)().param_num == OUTPUT_WAVEFORM) || (in_user_waveform_fxn() && selected_fxn->param_num == USER_WAVEFORMS_NAME))
     {
-        wifi_inc_dig_num_by(1);
-        select_wifi_fxn();
-    }
-    else
-    {
-        selected_fxn->inc_dig_num_by(1);
+        selected_fxn->printParams();
     }
 }
 
-int dec_dig_num()
+void new_output(SPANK_fxn *output)
 {
-    if (in_wifi)
-    {
-        wifi_inc_dig_num_by(-1);
-        select_wifi_fxn();
-    }
-    else
-    {
-        selected_fxn->inc_dig_num_by(-1);
-    }
+    selected_fxn = output;
+    apply_params();
+    selected_fxn->display();
 }

@@ -4,76 +4,122 @@
 */
 
 typedef void (*FunctionPointer)();
+typedef void (*update_fxn)(void);
+
+// #define WAVEFORM_PARTS 128
+// #define NUM_OUTPUTS 8
+
+#define OUTPUT_0_FXN 0
+#define OUTPUT_1_FXN 1
+#define OUTPUT_2_FXN 2
+#define OUTPUT_3_FXN 3
+#define OUTPUT_4_FXN 4
+#define OUTPUT_5_FXN 5
+#define OUTPUT_6_FXN 6
+#define OUTPUT_7_FXN 7
+#define SETTINGS_FXN 8
+#define NUM_FXNS 9
 
 // Load Greenface libraries
 #include "secrets\arduino_secrets.h"
 #include "version_num.h"
 #include "face1.h" // greenface logo art
 
-// variables
-String in_str = "";                      // for serial input
-volatile boolean fp_key_pressed = false; // only set by front panel keypress
-volatile int keypress = 0;               // set by several sources
-boolean cmd_available = false;
-boolean remote_adjusting = false;
-boolean esc_mode = false;
-boolean output_mode = false;
+// interrupt variables
+volatile uint32_t Timer0Count = 0;
+volatile int16_t adc0;
+
+volatile int keypress = 0; // set by several sources
 volatile unsigned long select_button_down_time = 0;
 volatile boolean select_button_pushed;
+volatile int inactivity_timer = 0;
+volatile unsigned long inactivity_timer_last_reading;
+// volatile uint16_t cv0_val;
+// volatile uint16_t cv1_val;
+
+// variables
+String in_str = ""; // for serial input
+boolean cmd_available = false;
+boolean esc_mode = false;
 boolean select_button_available;
 String wifi_ui_message = "";
 boolean in_wifi = false;
+String status_string;
+
+void init_all();
+void set_selected_fxn(int fxn_index);
+bool key_available();
 
 // settings
 String settings_get_device_name();
 uint16_t settings_get_encoder_type();
 int settings_get_inactivity_timeout();
-void settings_display();
+bool wifi_enabled(void);
+void timer_service_settings();
+bool get_output_calibrated(int);
 
 // inactivity timer
 void reset_inactivity_timer();
 void restore_display();
 
-void code_red(bool on)
-{
-  analogWrite(LEDR, on ? 0 : 255);
-  analogWrite(LEDB, 255);
-  // analogWrite(LEDG, 255);
-}
+// timer
+FunctionPointer timer_fxn;
+void dump_waveform(int output_num, bool dump_ref);
+void apply_params();
+void graph_waveform(int output_num);
+void set_waveform(int, int);
+void update_cv(int cv_num);
+void set_wifi_message();
+void timer_debug();
+void timer_init();
+void set_offset_correction(int val);
+void set_scale_correction(int val);
+void set_output_calibrated(int val);
+int get_scale_correction(int output);
+// int get_offset_correction();
+void get_corrections();
 
-bool wifi_enabled(void);
-void disable_ext_trigger(); // need to figure this out 4 triggers now not mixed with select
+// triggers
+String check_output_triggers();
+bool check_any_triggers();
+void clear_all_triggers();
 
-#define ROTARY_P_PIN 4
-#define ROTARY_A_PIN 5
-#define ROTARY_B_PIN 6
+volatile int last_encoder_val = 0;
+volatile int state;
+volatile int encoderValue;
+volatile int channel;
 
-#define CS_PIN 7
-#define DOUT_PIN 8
-#define CLK_PIN 9
-
-// Triggers
-#define T0_PIN 10
-#define T1_PIN 11
-#define T2_PIN 12
-#define T3_PIN 13
-
-// Trigger LEDs
-#define T0_LED 0
-#define T1_LED 1
-#define T2_LED 2
-#define T3_LED 3
+void noop() {}
 
 // interface to modules
+#include "lolevel_fxns.h"
+#include "hardware_fxns.h"
 #include "BONK_ui.h"
 #include "EEPROM_fxns.h"
 #include "Rotary_Encoder_fxns.h"
-#include "WIFI_Util.h"
 #include "SPANK_fxn.h"
-
+#include "WIFI_Util.h"
+EEPROM_Int selected_output = EEPROM_Int(0, 7); // the output we are working on
+EEPROM_Int remembered_fxn = EEPROM_Int(0, 8);  // 0-7=OutputX, 8=Settings
 SPANK_fxn *selected_fxn;
 
+#include "TRIGGER.h"
+
+TRIGGER trig0(0);
+TRIGGER trig1(1);
+TRIGGER trig2(2);
+TRIGGER trig3(3);
+TRIGGER *selected_trigger;
+#define NUM_TRIGGERS 4
+TRIGGER *triggers[NUM_TRIGGERS] = {&trig0, &trig1, &trig2, &trig3};
+void select_trigger(int int_param); // used by Keyboard fxns
+
+uint8_t selected_fxn_num = 0;
+
+#include "wifi_fxns.h"
 #include "BONK_output_fxns.h"
+#include "user_waveforms_fxns.h"
+#include "output_cal_fxns.h"
 #include "settings_fxns.h"
 #include "hilevel_fxns.h"
 
@@ -83,6 +129,7 @@ SPANK_fxn *selected_fxn;
 
 // guts of DAC servicing
 #include "timer.h"
+#include "trigger_fxns.h"
 
 // EEO must come after last EEPROM var is declared
 #define EEO Greenface_EEPROM::eeprom_offset
@@ -90,11 +137,36 @@ SPANK_fxn *selected_fxn;
 void init_all()
 {
   init_all_outputs();
+  user_waveforms_init();
   settings_init();
+  output_cal_init();
+  timer_init();
 
   // do this last
   selected_output.write_int(EEPROM_INIT_FLAG, EEPROM_INIT_PATTERN);
   selected_output.write_int(EEPROM_OFFSET_FLAG, Greenface_EEPROM::eeprom_offset);
+}
+
+void set_selected_fxn(int fxn_index)
+{
+  fxn_index = constrain(fxn_index, OUTPUT_0_FXN, SETTINGS_FXN);
+  selected_fxn_num = fxn_index;
+  if (fxn_index == SETTINGS_FXN)
+  {
+    int param_num = settings_fxn.param_num;
+    selected_fxn = &settings_fxn;
+    clear_all_triggers();
+    settings_fxn.param_num = param_num;
+    timer_fxn = &timer_service_settings;
+  }
+  else
+  {
+    selected_fxn = bonk_outputs[fxn_index];
+    selected_output.put(fxn_index);
+    timer_fxn = &timer_service_outputs;
+  }
+  remembered_fxn.put(fxn_index);
+  selected_fxn->display();
 }
 
 // the setup function runs once when you press reset or power the board
@@ -102,39 +174,30 @@ void setup()
 {
   Wire.begin();
   SPI.begin();
-  Serial.begin(9600);
-  analogWriteResolution(10);
-  while (digitalRead(T0_PIN))
+  Serial.begin(115200);
+  // delay(5000);
+  while (digitalRead(KEYBOARD_COLUMN_0))
   {
   };
-  Serial.println("Howdy!");
+  timer_fxn = &timer_service_outputs;
   selected_output.begin(true);
   selected_output.xfer();
+  remembered_fxn.begin(false);
+  remembered_fxn.xfer();
+  ee_info.begin(false);
+  ee_info.xfer();
 
   ui.begin(face1);
 
-  e.numFxns = 0;
-  set_encoder(); // sets msb,lsb for two types of encoder
-
-  pinMode(DOUT_PIN, OUTPUT);
-  pinMode(CLK_PIN, OUTPUT);
-  pinMode(CS_PIN, OUTPUT);
-  pinMode(A0, OUTPUT);
-
-  pinMode(T0_LED, OUTPUT);
-  pinMode(T1_LED, OUTPUT);
-  pinMode(T2_LED, OUTPUT);
-  pinMode(T3_LED, OUTPUT);
-
-  attachInterrupt(digitalPinToInterrupt(T0_PIN), trigger0, RISING);
-  attachInterrupt(digitalPinToInterrupt(T1_PIN), trigger1, RISING);
-  attachInterrupt(digitalPinToInterrupt(T2_PIN), trigger2, RISING);
-  attachInterrupt(digitalPinToInterrupt(T3_PIN), trigger3, RISING);
+  // rotary_encoder_begin();
+  hardware_begin();
 
   timer_begin();
+  triggers_begin();
   keyboard_begin();
   settings_begin();
-  begin_all_outputs();
+  output_cal_begin();
+  rotary_encoder_begin();
 
   if (!eeprom_is_initialized())
   {
@@ -142,19 +205,14 @@ void setup()
     init_all();
     selected_output.test();
   }
+  Serial.println("Howdy!");
+  outputs_begin();
+  user_waveforms_begin();
 
   wifi_begin();
-  // connect if wifi is active
-  wifi_attempt_connect(true);
-
   Serial.println("Whew... made it!");
-  wifi_new_fxn();
-  // select_wifi_fxn();
-  // splash();
-  selected_fxn = &settings_fxn;
-  selected_fxn->display();
-  // Serial.println("Selected output: " + String(selected_output.get()));
-  // selected_output.inc();
+
+  set_selected_fxn(remembered_fxn.get());
 }
 
 // the loop function runs over and over again forever
@@ -162,48 +220,40 @@ void loop()
 {
   static bool toggle = false;
   static unsigned long cnt = 0;
+  static unsigned long now;
 
-  // code_red(esc_mode);
-
-  scan_keyboard();
-  if (key_available())
-  {
-    calc_keypress();
-    process_key();
-    wait_all_keys_up();
-    delay(10);
-    reset_keyboard();
-  }
+  check_keyboard();
+  // ui.terminal_debug("Keyboard checked");
 
   check_serial();
-  if (keypress || cmd_available)
+  // ui.terminal_debug("Serial checked");
+
+  if (in_output_fxn())
   {
-    if (cmd_available)
-    {
-      process_cmd(in_str);
-      in_str = "";
-      cmd_available = false;
-    }
-    else
-    {
-      check_display_restore();
-      process_key();
-      reset_keyboard();
-      in_str = "";
-    }
+    status_string = check_output_triggers();
+    timer_loop();
   }
+  else if (in_user_waveform_fxn())
+  {
+    status_string = check_user_recording();
+  }
+  terminal_print_status();
 
   do_server();
+  // ui.terminal_debug("Server checked");
 
   check_rotary_encoder();
+  // ui.terminal_debug("Encoder checked");
 
-  timer_loop();
+  check_inactivity_timer();
+  // ui.terminal_debug("Inactivity checked");
 
   if (cnt++ > 1)
   {
     toggle = !toggle;
-    int val = toggle ? 0 : 255;
+    int val = toggle ? 200 : 255;
     analogWrite(LEDG, val);
     cnt = 0;
   }
+  // ui.terminal_debug("Count checked");
 }

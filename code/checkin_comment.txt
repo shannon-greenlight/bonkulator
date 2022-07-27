@@ -1,2 +1,2 @@
-Check-in comment for Bonkulator-75 
-v0.02
+Check-in comment for Bonkulator-273 
+Moves randomize/quantioze to interrupt. Other cleanup. Fixes T3 update.
