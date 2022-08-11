@@ -16,10 +16,16 @@ void scan_keyboard(void);
 #define KEYBOARD_COLUMN_3 A7
 
 //
-// "private" vars
+// "class" vars
+volatile int keypress = 0; // set by several sources
+volatile unsigned long select_button_down_time = 0;
+volatile boolean select_button_pushed;
 volatile uint8_t keys_row_0;
 volatile uint8_t keys_row_1;
 volatile uint8_t keys_row_2;
+
+boolean esc_mode = false;
+boolean select_button_available;
 
 void reset_keyboard()
 {
@@ -64,7 +70,7 @@ void scan_keyboard()
 {
 	uint8_t same_cnt = 0;
 	uint8_t sanity_cnt = 0;
-	int last_val;
+	int last_val = 0;
 	int current_val;
 	while (sanity_cnt++ < 100 && same_cnt < 5)
 	{
@@ -163,43 +169,43 @@ void calc_keypress()
 	if (keys_row_1 == 1)
 	{
 		// keypress = '0';
-		set_selected_fxn(OUTPUT_0_FXN);
+		select_fxn(OUTPUT_0_FXN);
 		return;
 	}
 	if (keys_row_1 == 2)
 	{
-		set_selected_fxn(OUTPUT_1_FXN);
+		select_fxn(OUTPUT_1_FXN);
 		return;
 	}
 	if (keys_row_1 == 4)
 	{
-		set_selected_fxn(OUTPUT_2_FXN);
+		select_fxn(OUTPUT_2_FXN);
 		return;
 	}
 	if (keys_row_1 == 8)
 	{
-		set_selected_fxn(OUTPUT_3_FXN);
+		select_fxn(OUTPUT_3_FXN);
 		return;
 	}
 
 	if (keys_row_2 == 1)
 	{
-		set_selected_fxn(OUTPUT_4_FXN);
+		select_fxn(OUTPUT_4_FXN);
 		return;
 	}
 	if (keys_row_2 == 2)
 	{
-		set_selected_fxn(OUTPUT_5_FXN);
+		select_fxn(OUTPUT_5_FXN);
 		return;
 	}
 	if (keys_row_2 == 4)
 	{
-		set_selected_fxn(OUTPUT_6_FXN);
+		select_fxn(OUTPUT_6_FXN);
 		return;
 	}
 	if (keys_row_2 == 8)
 	{
-		set_selected_fxn(OUTPUT_7_FXN);
+		select_fxn(OUTPUT_7_FXN);
 		return;
 	}
 }
@@ -215,10 +221,17 @@ void process_key()
 		// digitalWrite(T3_LED, HIGH);
 		// timer_debug();
 		// add_waveform();
-		// timer_init();
+		// input_corrections_init();
 		// ui.terminal_debug("Server status: " + String(server.status()));
-		dump_waveform(selected_output.get(), true);
-		dump_waveform(selected_output.get(), false);
+		// input_cal_init();
+		// ui.terminal_debug(String(cv_time_inc(2048, 128.)));
+		// Serial.println(String(cv_time_inc(1023, 128.)));
+		// Serial.println(String(cv_time_inc(512, 128.)));
+		ui.terminal_debug("Data len: " + String(outputs[selected_output.get()].data_len));
+		// printWifiStatus();
+		// Serial.println("Server Status: " + String((server.status())));
+		// dump_waveform(selected_output.get(), true);
+		// dump_waveform(selected_output.get(), false);
 		// output_debug();
 		// selected_trigger->do_cmd('!');
 		// (*settings_update_fxns[2])();
@@ -239,13 +252,13 @@ void process_key()
 		adjust_param(-1);
 		break;
 	case '*':
-		set_selected_fxn(SETTINGS_FXN);
+		select_fxn(SETTINGS_FXN);
 		break;
 	// case '+':
-	// 	set_selected_fxn(remembered_fxn.get() + 1);
+	// 	select_fxn(remembered_fxn.get() + 1);
 	// 	break;
 	// case '-':
-	// 	set_selected_fxn(remembered_fxn.get() - 1);
+	// 	select_fxn(remembered_fxn.get() - 1);
 	// 	break;
 	case 'A': // up arrow in esc mode A
 		if (esc_mode)
@@ -283,13 +296,11 @@ void process_cmd(String in_str)
 {
 	// Serial.println("Process cmd: " + in_str);
 	// ui.terminal_debug("Process cmd: " + in_str);
-	// noInterrupts();
 
 	char cmd = in_str.charAt(0);
 	int int_param = in_str.substring(1).toInt();
-	int val;
-	// bool enabled;
-	bool trigger_enabled;
+	int dig1 = in_str.substring(1, 2).toInt();
+	int dig2 = in_str.substring(2, 3).toInt();
 	int selected_trig_num = OUTPUT_ENABLE_T0 + selected_trigger->trig_num;
 	int selected_output_temp = selected_output.get();
 
@@ -306,7 +317,7 @@ void process_cmd(String in_str)
 		selected_fxn->printParams();
 		break;
 	case 'f':
-		set_selected_fxn(int_param);
+		select_fxn(int_param);
 		break;
 	case 'p':
 		selected_fxn->put_param_num(int_param);
@@ -328,21 +339,30 @@ void process_cmd(String in_str)
 		}
 		break;
 	case 'T':
-		// Toggle trigger enable for selected trigger. eg. t1 T4 -- toggles output 4 in trigger 1
-		set_selected_fxn(int_param);
-		// (the_output)().put_param_num(selected_trig_num);
-		// (the_output)().param_num = selected_trig_num;
-		(*bonk_outputs[int_param]).param_num = selected_trig_num;
-		trigger_enabled = (the_output)().get_param(selected_trig_num) == 1 ? 0 : 1;
-		(the_output)().put_param(trigger_enabled, selected_trig_num);
-		// ui.terminal_debug("T Output: " + (the_output)().name + " Trig num: " + String((the_output)().param_num) + " Enabled: " + String(trigger_enabled));
-		output_update_trigger();
-		set_selected_fxn(selected_output_temp);
-		break;
-	case 'D':
-		switch (int_param)
+		switch (dig1)
 		{
 		case 0:
+			// ui.terminal_debug("Disable Trigger! Output: " + String(dig2));
+			select_fxn(dig2);
+			(the_output)().param_put(0, selected_trig_num);
+			output_update_trigger();
+			select_fxn(selected_output_temp);
+			break;
+		case 1:
+			// ui.terminal_debug("Enable Trigger! Output: " + String(dig2));
+			select_fxn(dig2);
+			(the_output)().param_put(1, selected_trig_num);
+			output_update_trigger();
+			select_fxn(selected_output_temp);
+			break;
+		case 2:
+			// ui.terminal_debug("Toggle Trigger! Output: " + String(dig2));
+			select_fxn(dig2);
+			(the_output)().param_put((the_output)().get_param(selected_trig_num) == 1 ? 0 : 1, selected_trig_num);
+			output_update_trigger();
+			select_fxn(selected_output_temp);
+			break;
+		case 3:
 			// ui.terminal_debug("Disable All Triggers!");
 			for (int i = 0; i < NUM_OUTPUTS; i++)
 			{
@@ -356,7 +376,7 @@ void process_cmd(String in_str)
 				}
 			}
 			break;
-		case 1:
+		case 4:
 			// ui.terminal_debug("Trigger All Triggers!");
 			for (int i = 0; i < NUM_TRIGGERS; i++)
 			{
@@ -364,16 +384,11 @@ void process_cmd(String in_str)
 				selected_trigger->trigger();
 			}
 			break;
-		case 2:
+		case 5:
 			// ui.terminal_debug("Clear All Triggers!");
 			clear_all_triggers();
-			// for (int i = 0; i < NUM_TRIGGERS; i++)
-			// {
-			// 	select_trigger(i);
-			// 	selected_trigger->clear();
-			// }
 			break;
-		case 3:
+		case 6:
 			// ui.terminal_debug("Display All Triggers!");
 			trigger_report();
 			break;
@@ -390,6 +405,34 @@ void process_cmd(String in_str)
 			break;
 		}
 		break;
+	case 'M':
+		switch (int_param)
+		{
+		case 1:
+			input_cal_params_macro();
+			break;
+		case 2:
+			output_cal_params_macro();
+			break;
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+		case 14:
+		case 15:
+		case 16:
+		case 17:
+			user_waveform_params_macro(int_param - 10);
+			break;
+		default:
+			gen_params_macro(selected_fxn);
+		}
+		break;
+	case 'D':
+		ui.clearTerminal();
+		dump_waveform(dig1, dig2 > 0);
+		Serial.println("Time_inc: " + String(outputs[dig1].time_inc));
+		break;
 	case 'O':
 		(the_output)().put_param_w_offset(int_param, OUTPUT_OFFSET);
 		break;
@@ -403,14 +446,18 @@ void process_cmd(String in_str)
 		(the_output)().put_param(int_param, OUTPUT_RANDOMNESS);
 		break;
 	case 'V':
-		(the_output)().put_param(int_param, OUTPUT_DACVAL);
+		(the_output)().put_param(int_param, OUTPUT_IDLE_VALUE);
 		break;
 	case 'W':
+		ui.clearTerminal();
 		printWifiStatus();
 		break;
 	case '$':
 		// String sval = urlDecode(in_str.substring(1));
 		selected_fxn->put_string_var(urlDecode(in_str.substring(1)));
+		break;
+	case '/':
+		// comment character. Do nothing
 		break;
 	case '#':
 		selected_fxn->put_param_w_offset(int_param);
@@ -422,7 +469,7 @@ void process_cmd(String in_str)
 			case OUTPUT_OFFSET:
 			case OUTPUT_RANDOMNESS:
 			case OUTPUT_QUANTIZE:
-				apply_params();
+				apply_params_to_waveform();
 				graph_waveform(selected_output.get());
 				break;
 
@@ -434,7 +481,7 @@ void process_cmd(String in_str)
 	}
 
 	// Serial.println("Process cmd: " + in_str + " int_param: " + String(in_str.substring(0).toInt()) + " cmd: " + String(cmd));
-	if (cmd >= '-' && cmd <= '9')
+	if (cmd >= '-' && cmd <= '9' && cmd != '/')
 	{
 		// selected_fxn->put_param(in_str.toInt());
 		selected_fxn->put_param_w_offset(in_str.substring(0).toInt());
@@ -446,7 +493,7 @@ void process_cmd(String in_str)
 			case OUTPUT_OFFSET:
 			case OUTPUT_RANDOMNESS:
 			case OUTPUT_QUANTIZE:
-				apply_params();
+				apply_params_to_waveform();
 				graph_waveform(selected_output.get());
 				break;
 
@@ -486,7 +533,9 @@ void check_keyboard()
 
 void check_serial()
 {
-	static bool entering_string = false;
+	static String in_str = ""; // for serial input
+	static boolean cmd_available = false;
+	static bool entering_string = false; // or entering a number or comment
 
 	if (Serial.available() > 0)
 	{
@@ -494,7 +543,7 @@ void check_serial()
 		bool is_esc_char = esc_mode && (c == 'A' || c == 'B' || c == 'C' || c == 'D');
 		// Serial.println(in_str + " .. " + String(c));
 		// ui.terminal_debug(in_str + " .. " + String(c));
-		if (c == '$' || c == '-' || c == '+')
+		if (c == '$' || c == '-' || c == '+' || c == '/')
 		{
 			entering_string = true;
 		}

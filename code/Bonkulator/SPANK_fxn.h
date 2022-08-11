@@ -24,7 +24,6 @@
 
 extern String toJSON(String, String);
 
-// extern String settings_get_device_name();
 typedef void (*update_fxn)(void);
 
 // library interface description
@@ -37,6 +36,7 @@ public:
     String name;
     String *labels;
     String *string_params;
+    String *alt_values;
     EEPROM_String *string_vars;
     int16_t *offsets;
     bool *active_params;
@@ -47,6 +47,7 @@ public:
     uint8_t digit_num;
     void begin(void);
     void init();
+    uint8_t get_param_type(int);
     uint16_t get_param(int16_t indx = -1);     // returns raw
     int get_param_w_offset(int16_t indx = -1); // returns offset param as int
     String get_param_as_string(int16_t indx = -1);
@@ -104,7 +105,6 @@ private:
     void print_param(uint16_t, uint16_t);
     void print_string_param(uint16_t, uint16_t);
     void print_string_var(uint16_t, uint16_t);
-    uint8_t get_param_type(int);
     void exe_update_fxn(void);
     // const uint8_t int_param_type = 0;
     // const uint8_t string_param_type = 1;

@@ -1,2 +1,48 @@
-Check-in comment for Bonkulator-273 
-Moves randomize/quantioze to interrupt. Other cleanup. Fixes T3 update.
+Check-in comment for Bonkulator-291 
+Major cleanup of timer.h. More to come...
+
+Check-in comment for Bonkulator-292 
+More streamlining timer.h. Creates waveform_fxns.h.
+
+Check-in comment for Bonkulator-293 
+Adds gen_params_macro. 
+
+Check-in comment for Bonkulator-294 
+Adds user_waveform_macro. 
+Check-in comment for Bonkulator-295 
+Adds comment char to keyboard. Finishes user waveform macro
+ 
+Check-in comment for Bonkulator-296 
+Cleanup of globals. 
+Check-in comment for Bonkulator-297 
+More cleanup of globals.
+ 
+Check-in comment for Bonkulator-298 
+Cleans up compiler warnings. Fixes WiFi login.
+ 
+Check-in comment for Bonkulator-299
+Adds Is_release(). Various cleanup.
+ 
+Check-in comment for Bonkulator-300
+New Trigger commands.
+ 
+Check-in comment for Bonkulator-301 
+Adds clearTerminal and Dump Waveform remote command
+ 
+Check-in comment for Bonkulator-302
+Fixes to waveform generation. 
+ 
+Check-in comment for Bonkulator-303 
+Adds Init delay and post delay.
+ 
+Check-in comment for Bonkulator-304 
+Fixes T3?
+ 
+Check-in comment for Bonkulator-305
+Adds Toggle waveform
+ 
+Check-in comment for Bonkulator-306 
+Safety checkin 
+
+Check-in comment for Bonkulator-307 
+Looks like glitch in waveform gen is fixed.

@@ -136,7 +136,8 @@ void wifi_connect()
     // todo - why does it only work one time?
     int count = 0;
     wifi_active.reset();
-    pass = wifi_password.get();
+    // pass = wifi_password.get();
+    pass = wifi_fxn.get_param_as_string_var(0);
     ssid = wifi_ssid.get();
     ui.newFxn(ssid);
     // ui.clearDisplay();
@@ -146,7 +147,6 @@ void wifi_connect()
     wifi_status = WL_IDLE_STATUS;
     wifi_chk_time = 0;
     // WIFI_setup();
-    // keypress = 0;
     do
     {
         if (wifi_status != WL_CONNECTED && millis() > wifi_chk_time)
@@ -284,6 +284,7 @@ void wifi_begin()
     // wifi_fxn.digit_num = 4;
 
     // connect if wifi is active
+    // wifi_attempt_connect(!IS_RELEASE);
     wifi_attempt_connect(false);
     wifi_new_fxn();
 }

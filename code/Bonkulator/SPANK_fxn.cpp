@@ -162,6 +162,7 @@ void SPANK_fxn::put_string_var(String val, int16_t indx)
         string_vars[get_param(indx)].put(val);
         printParam();
         exe_update_fxn();
+        // Serial.println("indx: " + String(indx) + " param: " + String(get_param(indx)) + " val: " + val);
     }
 }
 
@@ -228,13 +229,15 @@ void SPANK_fxn::adjust_param(int e, unsigned long delta)
         printParam();
         break;
     default:
-        uint16_t the_param = get_param();
+        int the_param = get_param();
         int multiplier = 1;
         uint8_t ndigs = get_num_digits(param_num);
         int dig = (ndigs - digit_num) - 1;
         // Serial.println("mult: "+String(dig));
         multiplier = pow(10, dig);
         the_param += e * multiplier;
+        // Serial.println("param: " + String(the_param));
+        the_param = constrain(the_param, 0, 32767);
         put_param(the_param);
         break;
     }
@@ -284,6 +287,16 @@ void SPANK_fxn::print_param(uint16_t p_num, uint16_t line_num)
     uint8_t param_type = get_param_type(p_num);
     float param_float;
     String label = get_label(p_num);
+
+    if (alt_values)
+    {
+        String alt_value = alt_values[p_num];
+        if (alt_value.length() > 0)
+        {
+            (*ui).printLine(label + alt_value, (*ui).lines[line_num], 1);
+            return;
+        }
+    }
 
     switch (param_type)
     {
@@ -351,7 +364,7 @@ void SPANK_fxn::put_param_w_offset(int val, int8_t _param_num)
 
 void SPANK_fxn::param_put(uint16_t val, int8_t _param_num)
 {
-    params.put(val, param_num);
+    params.put(val, _param_num);
 }
 
 void SPANK_fxn::put_param(uint16_t val, int8_t _param_num)
@@ -368,7 +381,7 @@ void SPANK_fxn::put_param(uint16_t val, int8_t _param_num)
     }
     if (val > get_max())
         val = get_max();
-    if (val1 < get_min())
+    if (val < get_min() || val > 32767)
         val = get_min();
     // Serial.print("final val: ");
     // Serial.println(val);

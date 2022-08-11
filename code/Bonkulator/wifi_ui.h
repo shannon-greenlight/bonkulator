@@ -127,19 +127,18 @@ void send_data_to_client(WiFiClient client, char cmd)
   client.print("]");
 }
 
-void _do_server()
+void do_server()
 {
-  char cmd;
+  char cmd = '/';
 
   // ui.terminal_debug("Do server. Asking: ");
 
   WiFiClient client = server.available(); // listen for incoming clients
 
-  // ui.terminal_debug("Do server. Client: " + String(client));
-
   if (client)
   { // if you get a client,
     // Serial.println("new client"); // print a message out the serial port
+    status_string = ("Do server. Client: " + String(client));
     String currentLine = ""; // make a String to hold incoming data from the client
     while (client.connected())
     { // loop while the client's connected
@@ -179,7 +178,6 @@ void _do_server()
               cmd = currentLine[6];
               if (cmd == '[')
               {
-                // esc_mode = true;
                 cmd = currentLine[7];
               }
               String in_str = "";
@@ -228,10 +226,10 @@ void _do_server()
   }
 }
 
-void do_server()
+void check_wifi()
 {
   if (wifi_enabled() && wifi_active.get())
   {
-    _do_server();
+    do_server();
   }
 }

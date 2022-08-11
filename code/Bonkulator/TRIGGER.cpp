@@ -3,12 +3,16 @@
 
 #include "TRIGGER.h"
 #include "SPANK_fxn.h"
+#include "hardware_defs.h"
 
 extern String toJSON(String key, String value);
+extern void trigger_output(byte trig_num, int output_num);
+extern bool in_output_fxn();
 
 TRIGGER::TRIGGER(int _trig_num)
 {
     trig_num = _trig_num;
+    blanking_period = 0;
 }
 
 void TRIGGER::start()
@@ -19,24 +23,34 @@ void TRIGGER::start()
 void TRIGGER::trigger()
 {
     start();
-    if (start_time > debounce_time)
+    if (start_time > blanking_period)
     {
         state = TRIGGER_ACTIVE;
-        debounce_time = start_time + 20;
+        blanking_period = start_time + 5;
+        if (in_output_fxn())
+        {
+            for (int output_num = 0; output_num < NUM_OUTPUTS; output_num++)
+            {
+                if (get_output(output_num) == 1)
+                {
+                    trigger_output(trig_num, output_num);
+                }
+            }
+        }
     }
 }
 
-// not used anymore
+// used by user waveform recording
 void TRIGGER::clear()
 {
-    // outputs = 0;
-    Serial.println("Clearing trigger: " + String(trig_num));
+    state = TRIGGER_IDLE;
+    // Serial.println("Clearing trigger: " + String(trig_num));
 }
 
 void TRIGGER::disable_all()
 {
     outputs = 0;
-    Serial.println("Disabling triggers for TRIG: " + String(trig_num));
+    // Serial.println("Disabling triggers for TRIG: " + String(trig_num));
 }
 
 String TRIGGER::params_toJSON()

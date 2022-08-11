@@ -2,9 +2,12 @@
 #include <Greenface_AD5328.h>
 #include <MCP3X21.h>
 #include <Adafruit_ADS1X15.h>
+#include "EEPROM_ArrInt.h"
 
 // Adafruit_ADS1115 ads;  /* Use this for the 16-bit version */
 Adafruit_ADS1015 ads; /* Use this for the 12-bit version */
+
+#define NUM_INPUTS 2
 
 Greenface_AD5328 output_device(CS_PIN, DOUT_PIN, CLK_PIN, 0);
 // MCP3021 cv0_device(0x4D);
@@ -43,6 +46,33 @@ void hardware_begin()
     ads.setGain(GAIN_TWO);
 }
 
+int adc_read_raw(int adc_num)
+{
+    int adc = 0;
+    switch (adc_num)
+    {
+    case 0:
+        adc = ads.readADC_Differential_0_3();
+        break;
+
+    case 1:
+        adc = ads.readADC_Differential_1_3();
+        break;
+
+    default:
+        break;
+    }
+    return adc;
+}
+
+int adc_read(int adc_num)
+{
+    int adc = adc_read_raw(adc_num) * -1;
+    adc += get_raw_input_offset_correction(adc_num);
+    adc *= get_input_scale_correction(adc_num) / 1000.0;
+    return adc;
+}
+
 void dac_out(byte dac, int val)
 {
     val = DAC_FS - val;
@@ -75,3 +105,16 @@ void set_t0_led(bool state)
 {
     digitalWrite(T0_LED, state);
 }
+
+// for the MCP4921
+// todo move this unused DAC code to a library
+// void output_dac(int dac_num, int output_value)
+// {
+//   byte me;
+//   me = (dac_num + 1) << 4 | (output_value >> 4);
+//   digitalWrite(CS_PIN, LOW);
+//   shiftOut(DOUT_PIN, CLK_PIN, MSBFIRST, me);
+//   me = output_value << 4;
+//   shiftOut(DOUT_PIN, CLK_PIN, MSBFIRST, me);
+//   digitalWrite(CS_PIN, HIGH);
+// }

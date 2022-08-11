@@ -17,7 +17,7 @@ String csv_elem(String s, char delim, int instance)
     // vector <String> out;
     int indx = 0;
     int found = 0;
-    for (int i = 0; i < s.length() + 1; i++)
+    for (unsigned int i = 0; i < s.length() + 1; i++)
     {
         if (s.charAt(i) == delim || i == s.length())
         {

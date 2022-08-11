@@ -1,66 +1,11 @@
 // Trigger functions
 
-// trigger is "private" to trigger_outputs
-void trigger(int output_num, int trig_num)
-{
-    // digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
-    OutputData *outptr = &outputs[output_num];
-    bool enabled = false;
-    int led_pin;
-    switch (trig_num)
-    {
-    case 0:
-        enabled = (*bonk_outputs[output_num]).get_param(OUTPUT_ENABLE_T0);
-        if (enabled)
-            led_pin = T0_LED;
-        break;
-    case 1:
-        enabled = (*bonk_outputs[output_num]).get_param(OUTPUT_ENABLE_T1);
-        if (enabled)
-            led_pin = T1_LED;
-        break;
-    case 2:
-        enabled = (*bonk_outputs[output_num]).get_param(OUTPUT_ENABLE_T2);
-        if (enabled)
-            led_pin = T2_LED;
-        break;
-    case 3:
-        enabled = (*bonk_outputs[output_num]).get_param(OUTPUT_ENABLE_T3);
-        if (enabled)
-            led_pin = T3_LED;
-        break;
-    }
-    if (enabled)
-    {
-        (*bonk_outputs[output_num]).trigger(led_pin);
-        outptr->repeat_count = (*bonk_outputs[output_num]).get_param(OUTPUT_REPEAT);
-        outptr->next_time = (*bonk_outputs[output_num]).get_param(OUTPUT_DELAY) + millis();
-        if (!(*bonk_outputs[output_num]).triggered)
-        {
-            outptr->current_index = 0;
-            set_idle_value(output_num);
-            // dac_out(output_num, (*bonk_outputs[output_num]).get_param(OUTPUT_DACVAL) + _offset_corrections[output_num]);
-        }
-        digitalWrite(led_pin, (*bonk_outputs[output_num]).triggered);
-    }
-}
-
-void trigger_outputs(int trig_num)
-{
-    long msecs = millis();
-    for (int output_num = 0; output_num < NUM_OUTPUTS; output_num++)
-    {
-        OutputData *outptr = &outputs[output_num];
-        trigger(output_num, trig_num);
-    }
-}
-
 void clear_trigger(int output_num, int trig_num)
 {
     OutputData *outptr = &outputs[output_num];
     (*bonk_outputs[output_num]).clear_trigger(trig_num);
     outptr->repeat_count = (*bonk_outputs[output_num]).get_param(OUTPUT_REPEAT);
-    outptr->next_time = (*bonk_outputs[output_num]).get_param(OUTPUT_DELAY) + millis();
+    outptr->next_time = (*bonk_outputs[output_num]).get_param(OUTPUT_INIT_DELAY) + millis();
 }
 
 void clear_outputs(int trig_num)
@@ -69,46 +14,6 @@ void clear_outputs(int trig_num)
     {
         clear_trigger(output_num, trig_num);
     }
-}
-
-void trigger0()
-{
-    trig0.trigger();
-}
-
-void trigger1()
-{
-    trig1.trigger();
-}
-
-void trigger2()
-{
-    trig2.trigger();
-}
-
-void trigger3()
-{
-    trig3.trigger();
-}
-
-void test_trig0()
-{
-    trig0.start();
-}
-
-void test_trig1()
-{
-    trig1.start();
-}
-
-void test_trig2()
-{
-    trig2.start();
-}
-
-void test_trig3()
-{
-    trig3.start();
 }
 
 void select_trigger(int int_param)
@@ -139,7 +44,7 @@ void clear_all_triggers()
     {
         clear_outputs(i);
         // select_trigger(i);
-        // selected_trigger->clear();
+        (*triggers[i]).clear();
     }
     select_trigger(trigger_save);
 }
@@ -152,7 +57,8 @@ bool check_any_triggers()
         if ((*triggers[i]).state == TRIGGER_ACTIVE)
         {
             triggered = true;
-            (*triggers[i]).state = TRIGGER_IDLE;
+            // (*triggers[i]).state = TRIGGER_IDLE;
+            (*triggers[i]).clear();
         }
     }
     return triggered;
@@ -160,22 +66,87 @@ bool check_any_triggers()
 
 String check_output_triggers()
 {
-    for (int i = 0; i < NUM_TRIGGERS; i++)
-    {
-        if ((*triggers[i]).state == TRIGGER_ACTIVE)
-        {
-            trigger_outputs(i);
-            (*triggers[i]).state = TRIGGER_IDLE;
-        }
-    }
     String out = "";
+    String t = "     ";
     for (int i = 0; i < NUM_OUTPUTS; i++)
     {
-        uint8_t trig_num = bonk_output(i).triggered_by;
-        String t = " T" + String(trig_num) + "  ";
-        out += String(i) + ":" + (bonk_output(i).triggered ? t : "     ");
+        if ((*bonk_outputs[i]).get_param(OUTPUT_CLOCK) == 1)
+        {
+            t = " EXT";
+        }
+        else
+        {
+            t = "     ";
+            if ((*bonk_outputs[i]).triggered)
+            {
+                t = " T" + String(bonk_output(i).triggered_by) + "  ";
+            }
+        }
+        out += String(i) + ":" + t;
     }
     return out;
+}
+
+void trigger0()
+{
+    trig0.trigger();
+}
+
+void trigger1()
+{
+    trig1.trigger();
+}
+
+void trigger2()
+{
+    trig2.trigger();
+}
+
+void trigger3()
+{
+    trig3.trigger();
+}
+
+void trigger_output(byte trig_num, int output_num)
+{
+    OutputData *outptr = &outputs[output_num];
+    (*bonk_outputs[output_num]).trigger(trig_num);
+    if ((*bonk_outputs[output_num]).triggered || (*bonk_outputs[output_num]).get_param(OUTPUT_WAVEFORM) == WAVEFORM_TOGGLE)
+    {
+        outptr->repeat_count = (*bonk_outputs[output_num]).get_param(OUTPUT_REPEAT);
+        outptr->next_time = (*bonk_outputs[output_num]).get_param(OUTPUT_INIT_DELAY) + millis();
+    }
+    else
+    {
+        outptr->current_index = 0;
+        set_idle_value(output_num);
+    }
+    // set led
+    digitalWrite(trig_num, (*bonk_outputs[output_num]).triggered);
+}
+
+void trigger_report()
+{
+    ui.t.clrDown("15");
+    ui.terminal_printRow("Trigger Report", "16");
+    Serial.println(F("Output\tT0\tT1\tT2\tT3\tTRIG"));
+    ui.t.printChars(48, "-");
+    Serial.print("\r\n");
+    // Serial.println(F("----------------------------------"));
+    for (int i = 0; i < NUM_OUTPUTS; i++)
+    {
+        Serial.print(String(i));
+        Serial.print("\t");
+        Serial.print(String((*bonk_outputs[i]).get_param(OUTPUT_ENABLE_T0)));
+        Serial.print("\t");
+        Serial.print(String((*bonk_outputs[i]).get_param(OUTPUT_ENABLE_T1)));
+        Serial.print("\t");
+        Serial.print(String((*bonk_outputs[i]).get_param(OUTPUT_ENABLE_T2)));
+        Serial.print("\t");
+        Serial.print(String((*bonk_outputs[i]).get_param(OUTPUT_ENABLE_T3)));
+        Serial.print("\t");
+        Serial.println(String((*bonk_outputs[i]).triggered));
+    }
 }
 
 void triggers_begin()

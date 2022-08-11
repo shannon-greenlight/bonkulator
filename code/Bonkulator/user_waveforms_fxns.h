@@ -257,14 +257,6 @@ void timer_service_user_waveforms_record()
 {
     if (Timer0Count % user_waveforms_record_inc == 0)
     {
-        // todo record value
-        // adc0 = ads.readADC_Differential_0_3();
-        // // adc0 = constrain(adc0, -2048, 2047);
-        // adc0 *= 1.2412; // ads1015 full scale = 4.096. System FS = 3.3V, multiply by ratio
-        // adc0 += 4096;
-        // // adc0 += 3300;
-        // adc0 = adc0 >> 3;
-        // adc0 = DAC_FS - adc0;
         float adc_val = (float)adc0;
         adc_val *= -1;
         adc_val += 1650.0;
@@ -274,12 +266,7 @@ void timer_service_user_waveforms_record()
         int16_t val = (int)adc_val;
 
         uint16_t *user_waveform_data = _user_waveforms_data[user_waveform_num];
-        // _user_waveform5_data[user_waveforms_record_index] = adc0;
-        // _user_waveform5_data[user_waveforms_record_index] = user_waveforms_record_index * 8;
         user_waveform_data[user_waveforms_record_index] = val;
-
-        // dac_out(user_waveform_num, user_waveforms_record_index * 8);
-        // dac_out(user_waveform_num, val);
 
         // inc pointer and test for done
         user_waveforms_record_index++;

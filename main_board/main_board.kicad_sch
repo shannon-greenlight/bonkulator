@@ -7049,6 +7049,9 @@
     (path "/7a60301c-22b0-4754-bff1-74254f58da40"
       (reference "TP2") (unit 1) (value "TestPoint") (footprint "TestPoint:TestPoint_Keystone_5005-5009_Compact")
     )
+    (path "/b200c1d4-b772-4a0d-a7bc-c10bcb241496/2583e742-cd64-42f3-a8da-4d420c274124"
+      (reference "TP3") (unit 1) (value "TestPoint") (footprint "TestPoint:TestPoint_Keystone_5005-5009_Compact")
+    )
     (path "/b200c1d4-b772-4a0d-a7bc-c10bcb241496/fea106f6-281b-4569-b6ed-43305f8c74d5"
       (reference "U1") (unit 1) (value "TL072CDR") (footprint "Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.29x3mm")
     )

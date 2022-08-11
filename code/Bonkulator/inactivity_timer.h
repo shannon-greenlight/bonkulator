@@ -1,17 +1,12 @@
 // inactivity timer routines
 // todo maybe make this stuff a ui method
 
+int inactivity_timer = 0;
+unsigned long inactivity_timer_last_reading;
+
 void reset_inactivity_timer()
 {
     inactivity_timer = 0;
-}
-
-void inc_inactivity_timer()
-{
-    if ((inactivity_timer < settings_get_inactivity_timeout()))
-    {
-        inactivity_timer++;
-    }
 }
 
 void check_inactivity_timer()

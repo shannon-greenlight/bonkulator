@@ -29,6 +29,49 @@ EEPROM_String settings_device_name(20);
 EEPROM_String settings_string_vars[] = {settings_device_name};
 SPANK_fxn settings_fxn("Settings", settings_labels, settings_stuff, sizeof(_settings_params) / sizeof(_settings_params[0]), &ui);
 
+#define ASK_INIT_PARAMETERS 0
+#define ASK_INIT_INPUTS 1
+#define ASK_INIT_OUTPUTS 2
+#define ASK_INIT_ALL 3
+
+uint16_t _ask_init_params[1];
+uint16_t _ask_init_mins[] = {0};
+uint16_t _ask_init_maxs[] = {3};
+uint16_t _ask_init_init_vals[] = {0};
+uint16_t *ask_init_stuff[] = {_ask_init_params, _ask_init_mins, _ask_init_maxs, _ask_init_init_vals};
+String ask_init_labels[] = {"Reset: "};
+String ask_init_string_params[] = {"Parameters  ,Input Corrs ,Output Corrs,All         "};
+bool ask_init_param_active[] = {1};
+
+SPANK_fxn ask_init_fxn("Press Activate to: ", ask_init_labels, ask_init_stuff, sizeof(_ask_init_params) / sizeof(_ask_init_params[0]), &ui);
+
+bool in_ask_init()
+{
+    return selected_fxn == &ask_init_fxn;
+}
+
+void ask_init()
+{
+    int init_type = ask_init_fxn.get_param(0);
+    switch (init_type)
+    {
+    case ASK_INIT_PARAMETERS:
+        init_parameters();
+        break;
+    case ASK_INIT_INPUTS:
+        input_corrections_init();
+        break;
+    case ASK_INIT_OUTPUTS:
+        output_corrections_init();
+        break;
+    case ASK_INIT_ALL:
+        init_all();
+        break;
+    }
+    status_string = ask_init_fxn.get_param_as_string(0) + " Reset";
+    restore_display();
+}
+
 void settings_put_param(int val)
 {
     settings_fxn.put_param(val);
@@ -56,14 +99,7 @@ void settings_adjust_param(int encoder_val, unsigned long delta)
         restore_display();
         break;
     default:
-        if (false && in_wifi)
-        {
-            // wifi_adjust_param(encoder_val);
-        }
-        else
-        {
-            settings_fxn.adjust_param(encoder_val, delta);
-        }
+        settings_fxn.adjust_param(encoder_val, delta);
     }
 }
 
@@ -98,7 +134,7 @@ void dac_cal()
     // ui.terminal_debug("Calibrate DAC someday...");
     // for (int i = 0; i < NUM_OUTPUTS; i++)
     // {
-    //     (*bonk_outputs[i]).put_param(512, OUTPUT_DACVAL);
+    //     (*bonk_outputs[i]).put_param(512, OUTPUT_IDLE_VALUE);
     //     // dac_out(i, 512);
     // }
 }
@@ -117,19 +153,23 @@ void settings_activate()
         // ui.terminal_debug("User Waveforms!");
         selected_fxn = user_waveforms[settings_fxn.get_param(SETTINGS_USER_WAVEFORMS)];
         user_waveforms_update_index();
+        user_waveforms_recording_state = RECORDING_IDLE;
         selected_fxn->display();
         // ui.terminal_debug("User Waveforms: setting param# " + String(settings_fxn.param_num));
         break;
 
     case SETTINGS_RESET:
-        init_all();
+        selected_fxn = &ask_init_fxn;
+        selected_fxn->display();
         break;
 
     case SETTINGS_CAL:
         switch (settings_fxn.get_param(SETTINGS_CAL))
         {
         case 0:
-            adc_cal();
+            selected_fxn = &input_cal_fxn;
+            selected_fxn->display();
+            // adc_cal();
             break;
         case 1:
             selected_fxn = &output_cal_fxn;
@@ -149,6 +189,7 @@ void settings_init()
 {
     settings_fxn.string_vars[0].put("Bonky");
     settings_fxn.init();
+    ask_init_fxn.init();
 }
 
 void settings_begin()
@@ -160,9 +201,37 @@ void settings_begin()
     settings_fxn.string_params = settings_string_params;
     settings_fxn.update_fxns = settings_update_fxns;
     settings_fxn.active_params = settings_param_active;
+    ask_init_fxn.begin();
+    ask_init_fxn.string_params = ask_init_string_params;
 }
 
 void timer_service_settings()
 {
     // do nothing for now
+}
+
+void user_waveform_params_macro(int waveform_num, bool print_header = true)
+{
+    SPANK_fxn *fxn = user_waveforms[waveform_num];
+    uint16_t *waveform_data = _user_waveforms_data[waveform_num];
+    // fxn->param_num = USER_WAVEFORMS_VALUE;
+    if (print_header)
+    {
+        ui.t.clrScreen();
+        ui.terminal_debug("// Macro for: " + fxn->name);
+    }
+    Serial.println("*p" + String(SETTINGS_USER_WAVEFORMS));
+    Serial.println(String(waveform_num));
+    Serial.println("!");
+    gen_params_macro(fxn, false);
+
+    Serial.println("p" + String(USER_WAVEFORMS_INDEX));
+    Serial.println("0");
+    Serial.println("p" + String(USER_WAVEFORMS_VALUE));
+
+    for (int i = 0; i < WAVEFORM_PARTS; i++)
+    {
+        Serial.println(String(waveform_data[i]));
+        Serial.println("!");
+    }
 }

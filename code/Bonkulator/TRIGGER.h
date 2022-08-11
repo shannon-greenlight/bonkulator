@@ -29,7 +29,7 @@ public:
 private:
     uint32_t outputs; // up to 32 outputs. 8 for now
     long start_time;
-    long debounce_time = 0;
+    long blanking_period = 0;
 };
 
 #endif

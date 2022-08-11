@@ -93,12 +93,17 @@ public:
     // delay(2000);
   }
 
+  void clearTerminal()
+  {
+    t.clrScreen();
+  }
+
   void clearDisplay()
   {
     // clr terminal here
     if (terminal_mirror)
     {
-      t.clrScreen();
+      clearTerminal();
     }
     (*display).clearDisplay();
   }
