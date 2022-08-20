@@ -47,17 +47,10 @@ int settings_get_inactivity_timeout();
 bool wifi_enabled(void);
 void timer_service_settings();
 
-// inactivity timer
-void reset_inactivity_timer();
-void restore_display();
-
 // cv fxns
 void cv_set(int cv_num, int output, int16_t cv_val);
 int cv_time_inc(int cv, float param);
 void update_cv(int cv_num);
-
-// output_fxns
-void set_idle_value(int output_num);
 
 // timer
 FunctionPointer timer_fxn;
@@ -96,13 +89,10 @@ void noop() {}
 #include "EEPROM_fxns.h"
 #include "lolevel_fxns.h"
 #include "hardware_fxns.h"
-#include "BONK_ui.h"
-// #include "EEPROM_fxns.h"
 #include "Rotary_Encoder_fxns.h"
 #include "SPANK_fxn.h"
 #include "WIFI_Util.h"
 
-void gen_params_macro(SPANK_fxn *item, bool print_header);
 EEPROM_Int selected_output = EEPROM_Int(0, 7); // the output we are working on
 EEPROM_Int remembered_fxn = EEPROM_Int(0, 8);  // 0-7=OutputX, 8=Settings
 SPANK_fxn *selected_fxn;
@@ -120,6 +110,7 @@ void select_trigger(int int_param); // used by Keyboard fxns
 
 uint8_t selected_fxn_num = 0;
 
+#include "BONK_ui.h"
 #include "wifi_fxns.h"
 #include "waveform_data.h"
 #include "BONK_output_fxns.h"
@@ -131,7 +122,6 @@ uint8_t selected_fxn_num = 0;
 
 #include "Keyboard_fxns.h"
 #include "wifi_ui.h"
-#include "inactivity_timer.h"
 
 // guts of DAC servicing
 #include "cv_fxns.h"
@@ -191,10 +181,11 @@ void setup()
   Wire.begin();
   SPI.begin();
   Serial.begin(115200);
-  // delay(5000);
+
   while (digitalRead(KEYBOARD_COLUMN_0) && !IS_RELEASE)
   {
   };
+
   timer_fxn = &timer_service_outputs;
   selected_output.begin(true);
   selected_output.xfer();
@@ -220,13 +211,12 @@ void setup()
     init_all();
     selected_output.test();
   }
-  Serial.println("Howdy!");
   outputs_begin();
   user_waveforms_begin();
 
   wifi_begin();
   select_fxn(remembered_fxn.get());
-  // Serial.println("Whew... made it!");
+  Serial.println("Howdy!");
 }
 
 // the loop function runs over and over again forever
@@ -267,7 +257,7 @@ void loop()
   check_rotary_encoder();
   // ui.terminal_debug("Encoder checked");
 
-  check_inactivity_timer();
+  ui.check_inactivity_timer(settings_get_inactivity_timeout());
   // ui.terminal_debug("Inactivity checked");
 
   if (cnt++ > 1)

@@ -90,7 +90,7 @@ void check_rotary_encoder()
 {
     if (encoder_is_adjusting())
     {
-        reset_inactivity_timer();
+        ui.reset_inactivity_timer();
         // ui.terminal_debug("Rotary: " + String(e.getEncoderValue()));
         adjust_param(getEncoderValue());
         resetEncoder();
@@ -161,31 +161,4 @@ void new_output(SPANK_fxn *output)
     selected_fxn = output;
     apply_params_to_waveform();
     selected_fxn->display();
-}
-
-void gen_params_macro(SPANK_fxn *item, bool print_header = true)
-{
-    if (print_header)
-    {
-        ui.t.clrScreen();
-        ui.terminal_debug("// Macro for: " + item->name);
-    }
-    uint8_t param_type;
-    for (int i = 0; i < item->num_params; i++)
-    {
-        param_type = item->get_param_type(i);
-        // Serial.println(item->labels[i] + String(item->get_param_w_offset(i)) + " type: " + String(param_type));
-        switch (param_type)
-        {
-        case SPANK_INT_PARAM_TYPE:
-        case SPANK_STRING_PARAM_TYPE:
-            Serial.println("p" + String(i));
-            Serial.println(String(item->get_param_w_offset(i)));
-            break;
-        case SPANK_STRING_VAR_TYPE:
-            Serial.println("p" + String(i));
-            Serial.println("$" + String(item->get_param_as_string_var(i)));
-            break;
-        }
-    }
 }

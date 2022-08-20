@@ -79,3 +79,5 @@ code/Bonkulator/libraries
 code/Bonkulator/secrets
 code/out
 out
+
+manual/*.tmp

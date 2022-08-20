@@ -6,6 +6,7 @@ void update_cv(int cv_num)
 
     outptr->offset = 0;
     outptr->scale = 1.0;
+    update_idle_value();
     update_waveform();
 }
 
@@ -26,7 +27,8 @@ float cv_scale_pow(int cv, float param)
 }
 
 // simple scale -- 0 through 1*param
-// (5/3.32 * 1.2412) + 2048 = 3817.2
+// (5/3.32 * 1241.2) + 2048 = 3917.247
+// (5/3.01 * 1241.2) + 2048 = 4109.794
 #define CV_FS 3917.247
 float cv_scale(int cv, float param)
 {
@@ -49,6 +51,7 @@ int cv_period(int cv, float param, SPANK_fxn bonk_output)
 int16_t cv_offset(int16_t cv_val)
 {
     // status_string = "CV1: " + String(cv_val) + " ADC1: " + String(adc1);
+    // ui.terminal_debug("cv_val: " + String(cv_val) + " ratio: " + String((float)cv_val / ADC_FS));
     return (((float)cv_val / ADC_FS) * 2 * DAC_FS) - DAC_FS;
     // return (((float)cv_val / CV_FS) * 2 * DAC_FS) - DAC_FS;
     // return cv_scale(cv_val, 2 * DAC_FS) - DAC_FS;
@@ -139,6 +142,12 @@ void cv_set(int cv_num, int output, int16_t cv_val)
             }
         }
         break;
+    case CV_IDLE_VALUE:
+        set_idle_value(cv_val / 4, output);
+        break;
+    case CV_RANDOMNESS:
+        set_randomness_factor(cv_val * 100.0 / ADC_FS, bonk_output.get_param(OUTPUT_SCALE) / 100.0, output);
+        break;
     }
 }
 
@@ -147,7 +156,7 @@ void cv_set(int cv_num, int output, int16_t cv_val)
 void apply_cv(int output_num, int cv_num, OutputData *outptr)
 {
     int cv_type = (*bonk_outputs[output_num]).get_param(cv_num);
-    int val = outptr->output_value; // using int givces us headroom for math
+    int val = outptr->output_value; // using int gives us headroom for math
     int offset_adjust = DAC_FS * (1 - outptr->scale) / 2;
 
     switch (cv_type)

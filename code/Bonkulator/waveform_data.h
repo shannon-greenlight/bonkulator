@@ -7,6 +7,7 @@ typedef struct
     byte current_index;
     unsigned long next_time;
     uint16_t output_value;
+    uint16_t idle_value;
     int16_t randomness_factor; // range: -1023 -> 1023
     float scale;               // range: 0 - 100, for CV
     int16_t offset;            // range: -4095 -> 4095, for CV
@@ -46,13 +47,13 @@ uint16_t waveform7_data[WAVEFORM_PARTS];
 
 OutputData outputs[8] =
     {
-        // waveform_data, data_len, current_index, next_time, output_value, randomness_factor, scale, offset, time_inc, repeat_count, ok_set_idle
-        {waveform0_data, WAVEFORM_PARTS, 0, 0, 0, 0, 0, 0, 10, 0, false},
-        {waveform1_data, WAVEFORM_PARTS, 0, 0, 0, 0, 0, 0, 0, 0, false},
-        {waveform2_data, WAVEFORM_PARTS, 0, 0, 0, 0, 0, 0, 0, 0, false},
-        {waveform3_data, WAVEFORM_PARTS, 0, 0, 0, 0, 0, 0, 0, 0, false},
-        {waveform4_data, WAVEFORM_PARTS, 0, 0, 0, 0, 0, 0, 0, 0, false},
-        {waveform5_data, WAVEFORM_PARTS, 0, 0, 0, 0, 0, 0, 0, 0, false},
-        {waveform6_data, WAVEFORM_PARTS, 0, 0, 0, 0, 0, 0, 0, 0, false},
-        {waveform7_data, WAVEFORM_PARTS, 0, 0, 0, 0, 0, 0, 0, 0, false},
+        // waveform_data, data_len, current_index, next_time, output_value, idle_value, randomness_factor, scale, offset, time_inc, repeat_count, ok_set_idle
+        {waveform0_data, WAVEFORM_PARTS, 0, 0, 0, 0, 0, 0, 0, 10, 0, false},
+        {waveform1_data, WAVEFORM_PARTS, 0, 0, 0, 0, 0, 0, 0, 0, 0, false},
+        {waveform2_data, WAVEFORM_PARTS, 0, 0, 0, 0, 0, 0, 0, 0, 0, false},
+        {waveform3_data, WAVEFORM_PARTS, 0, 0, 0, 0, 0, 0, 0, 0, 0, false},
+        {waveform4_data, WAVEFORM_PARTS, 0, 0, 0, 0, 0, 0, 0, 0, 0, false},
+        {waveform5_data, WAVEFORM_PARTS, 0, 0, 0, 0, 0, 0, 0, 0, 0, false},
+        {waveform6_data, WAVEFORM_PARTS, 0, 0, 0, 0, 0, 0, 0, 0, 0, false},
+        {waveform7_data, WAVEFORM_PARTS, 0, 0, 0, 0, 0, 0, 0, 0, 0, false},
 };

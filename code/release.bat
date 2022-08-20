@@ -43,10 +43,10 @@ echo #define IS_RELEASE false >> %file_path2%
 echo. >> %file_path2%
 echo #endif >> %file_path2%
 
-echo Need to implement updater!
-goto end
-
 copy .\out\Bonkulator.ino.bin updater
+copy .\out\Bonkulator.ino.elf updater
+copy Blink.ino.elf.uf2 updater
+echo %release_num% > updater\release.txt
 
 "C:\Program Files\7-Zip\7z.exe" a -r .\releases\bonkulator_updater_%release_num%.zip updater 
 

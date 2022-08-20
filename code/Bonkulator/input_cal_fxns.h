@@ -10,7 +10,7 @@
 
 uint16_t _input_cal_params[INPUT_CAL_NUM_PARAMS];
 uint16_t _input_cal_mins[] = {0, 0, 0, 0};
-uint16_t _input_cal_maxs[] = {1, ADC_FS, 1000, 1};
+uint16_t _input_cal_maxs[] = {1, ADC_FS, 1300, 1};
 uint16_t _input_cal_init_vals[] = {0, 0, 1000, 0};
 uint16_t *input_cal_stuff[] = {_input_cal_params, _input_cal_mins, _input_cal_maxs, _input_cal_init_vals};
 String input_cal_labels[] = {"Input: ", "Offset: ", "Scale: ", "Calibrated: "};
@@ -83,17 +83,14 @@ void input_cal_update_offset()
     int offset = input_cal_fxn.get_param_w_offset(INPUT_CAL_OFFSET);
     int input = input_cal_fxn.get_param(INPUT_CAL_INPUT_NUM);
     input_offset_corrections.put(offset, input);
-    ui.terminal_debug("Offset correction: " + String(offset) + " for input " + String(input));
+    // ui.terminal_debug("Offset correction: " + String(offset) + " for input " + String(input));
 }
 
 void input_cal_update_scale()
 {
-    // (*bonk_outputs[input_cal_fxn.get_param(INPUT_CAL_INPUT_NUM)]).put_param(0, INPUT_IDLE_VALUE);
     int scale = input_cal_fxn.get_param(INPUT_CAL_SCALE);
-    int offset = input_cal_fxn.get_param_w_offset(INPUT_CAL_OFFSET);
     int input = input_cal_fxn.get_param(INPUT_CAL_INPUT_NUM);
     input_scale_corrections.put(scale, input);
-    ui.terminal_debug("Scale correction: " + String(scale) + " Offset: " + String(offset));
 }
 
 void input_cal_update_state()
@@ -158,6 +155,9 @@ bool in_input_cal_fxn()
     return selected_fxn == &input_cal_fxn;
 }
 
+// 1.65V * 3.01, A/D FS * circuit gain
+#define IN_FS_VOLTS 4.9665
+
 String check_input_cal()
 {
     int param_num = input_cal_fxn.param_num;
@@ -165,12 +165,15 @@ String check_input_cal()
     {
         int input = input_cal_fxn.get_param(INPUT_CAL_INPUT_NUM);
         int val = adc_read(input);
-        float reading = 3.32 * val / 1000.0;
-        return "Input: " + String(input) + " Value: " + String(reading);
+        // int raw = adc_read_raw(input);
+        // float reading = 3.23 * val / 1000.0;
+        float reading = IN_FS_VOLTS * val / 1650;
+        // return "Input: " + String(input) + " Reading: " + String(reading) + " Value: " + String(val) + " raw: " + String(raw);
+        return "Input: " + String(input) + " Reading: " + String(reading);
     }
     else
     {
-        return "------";
+        return "Apply 0V to set Offset, 4V to set Scale";
     }
 }
 

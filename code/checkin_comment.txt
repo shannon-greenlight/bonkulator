@@ -46,3 +46,29 @@ Safety checkin
 
 Check-in comment for Bonkulator-307 
 Looks like glitch in waveform gen is fixed.
+ 
+Check-in comment for Bonkulator-308 
+Brings back outptr->output_value.
+ 
+Check-in comment for Bonkulator-309 
+Safety 
+Check-in comment for Bonkulator-310 
+Fixes input cal scaleing.
+ 
+Check-in comment for Bonkulator-311 
+Changes Output scale correction to range 0:1000.
+Adds CV_IDLE_VALUE. 
+Check-in comment for Bonkulator-312 
+Makes CV_IDLE independant of parameter setting. 
+
+Check-in comment for Bonkulator-313 
+Adds CV_RANDOMNESS
+ 
+Check-in comment for Bonkulator-314 
+Fixes inactivity timeout.
+ 
+Check-in comment for Bonkulator-315 
+Moves inactivity timer to ui.
+ 
+Check-in comment for Bonkulator-316 
+Re-organization and cleanup.

@@ -10,8 +10,8 @@
 
 uint16_t _output_cal_params[OUTPUT_CAL_NUM_PARAMS];
 uint16_t _output_cal_mins[] = {0, 0, 0, 0};
-uint16_t _output_cal_maxs[] = {NUM_OUTPUTS - 1, DAC_FS, 10000, 1};
-uint16_t _output_cal_init_vals[] = {0, 512, 9763, 0};
+uint16_t _output_cal_maxs[] = {NUM_OUTPUTS - 1, DAC_FS, 1000, 1};
+uint16_t _output_cal_init_vals[] = {0, 512, 976, 0};
 uint16_t *output_cal_stuff[] = {_output_cal_params, _output_cal_mins, _output_cal_maxs, _output_cal_init_vals};
 String output_cal_labels[] = {"Output: ", "Offset: ", "Scale: ", "Calibrated: "};
 String output_cal_string_params[] = {"", "", "", "No ,Yes"};
@@ -101,11 +101,9 @@ void output_cal_update_offset()
 
 void output_cal_update_scale()
 {
-    // (*bonk_outputs[output_cal_fxn.get_param(OUTPUT_CAL_OUTPUT_NUM)]).put_param(0, OUTPUT_IDLE_VALUE);
     int scale = output_cal_fxn.get_param(OUTPUT_CAL_SCALE);
     int offset = output_cal_fxn.get_param_w_offset(OUTPUT_CAL_OFFSET);
-    // int dac_val = ((float)scale / 10000.0) * DAC_FS;
-    int dac_val = ((DAC_FS - DAC_MID) * scale / 10000.0) + DAC_MID;
+    int dac_val = ((DAC_FS - DAC_MID) * scale / 1000.0) + DAC_MID;
     dac_val += offset;
     dac_out(output_cal_fxn.get_param(OUTPUT_CAL_OUTPUT_NUM), dac_val);
     // ui.terminal_debug("Scale correction: " + String(scale) + " DAC: " + String(dac_val));

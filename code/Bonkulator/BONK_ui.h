@@ -47,6 +47,14 @@ void newFxn(String fxn)
   ui.printLine(fxn, 0, 2);
 }
 
+void restore_display()
+{
+  ui.all_on();
+  ui.reset_inactivity_timer();
+  selected_fxn->display();
+  terminal_print_status(true);
+}
+
 void splash()
 {
   ui.clearDisplay();
@@ -57,4 +65,31 @@ void splash()
   ui.printText(settings_get_device_name(), 0, 40, 1);
 
   terminalSplash();
+}
+
+void gen_params_macro(SPANK_fxn *item, bool print_header = true)
+{
+  if (print_header)
+  {
+    ui.t.clrScreen();
+    ui.terminal_debug("// Macro for: " + item->name);
+  }
+  uint8_t param_type;
+  for (int i = 0; i < item->num_params; i++)
+  {
+    param_type = item->get_param_type(i);
+    // Serial.println(item->labels[i] + String(item->get_param_w_offset(i)) + " type: " + String(param_type));
+    switch (param_type)
+    {
+    case SPANK_INT_PARAM_TYPE:
+    case SPANK_STRING_PARAM_TYPE:
+      Serial.println("p" + String(i));
+      Serial.println(String(item->get_param_w_offset(i)));
+      break;
+    case SPANK_STRING_VAR_TYPE:
+      Serial.println("p" + String(i));
+      Serial.println("$" + String(item->get_param_as_string_var(i)));
+      break;
+    }
+  }
 }

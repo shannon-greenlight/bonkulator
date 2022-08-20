@@ -10,8 +10,6 @@
 #define SETTINGS_CAL 7
 #define SETTINGS_NUM_PARAMS 8
 
-#define HEART_RATE 25 // todo adapt this to new OS
-
 uint16_t _settings_params[SETTINGS_NUM_PARAMS];
 uint16_t _settings_mins[] = {0, 0, 0, 0, 1, 0, 0, 0};
 uint16_t _settings_maxs[] = {0, 0, 1, 1, 9999, 7, 1, 1};
@@ -69,7 +67,8 @@ void ask_init()
         break;
     }
     status_string = ask_init_fxn.get_param_as_string(0) + " Reset";
-    restore_display();
+    selected_fxn->display();
+    terminal_print_status(true);
 }
 
 void settings_put_param(int val)
@@ -120,7 +119,7 @@ bool wifi_enabled()
 
 int settings_get_inactivity_timeout()
 {
-    return settings_fxn.get_param(SETTINGS_SCREEN) * HEART_RATE * 60;
+    return settings_fxn.get_param(SETTINGS_SCREEN);
     // return max(300, settings_fxn.get_param(SETTINGS_SCREEN) * 300); // 1 minute = 300 heartbeats
 }
 

@@ -35,14 +35,14 @@ uint16_t quantize_value(uint16_t value, uint16_t output_num)
 void output_next_value(int output_num)
 {
   OutputData *outptr = &outputs[output_num];
-  uint16_t output_value = outptr->waveform_data[outptr->current_index % outptr->data_len];
+  outptr->output_value = outptr->waveform_data[outptr->current_index % outptr->data_len];
   apply_cv(output_num, OUTPUT_CV0, outptr);
   apply_cv(output_num, OUTPUT_CV1, outptr);
 
-  output_value = randomize_value(output_value, outptr->randomness_factor);
-  output_value = quantize_value(output_value, output_num);
+  outptr->output_value = randomize_value(outptr->output_value, outptr->randomness_factor);
+  outptr->output_value = quantize_value(outptr->output_value, output_num);
 
-  dac_out(output_num, output_value);
+  dac_out(output_num, outptr->output_value);
 }
 
 // this is an interrupt fxn!
@@ -65,7 +65,7 @@ void timer_service_outputs()
         }
         else
         {
-          set_idle_value(i);
+          send_idle_value(i);
         }
       }
     }
@@ -82,7 +82,7 @@ void timer_service_outputs()
           if (outptr->current_index == outptr->data_len)
           {
             // start of delay period
-            set_idle_value(i);
+            send_idle_value(i);
           }
           else
           {
@@ -113,7 +113,7 @@ void timer_service_outputs()
       {
         if (outptr->ok_set_idle)
         {
-          set_idle_value(i);
+          send_idle_value(i);
           outptr->ok_set_idle = false;
         }
       }

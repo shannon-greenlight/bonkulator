@@ -41,6 +41,10 @@ enum
 #define CV_SCALE 1
 #define CV_OFFSET 2
 #define CV_PERIOD 3
+#define CV_IDLE_VALUE 4
+#define CV_RANDOMNESS 5
+
+#define CV_TYPES "Off   ,Scale ,Offset,Period,Idle Value,Randomness"
 
 #define TIME_INC_MIN 1
 #define TIME_INC_MAX 32000
@@ -53,12 +57,12 @@ enum
 
 #define TRIGGER_STATES F("Disabled,Enabled ")
 
-uint16_t _output_mins[] = {0, PERIOD_MIN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-uint16_t _output_maxs[] = {NUM_WAVEFORMS - 1, PERIOD_MAX, DELAY_MAX, DELAY_MAX, 32767, 1, 1, 1, 1, 3, 3, 100, 200, 99, 1, DAC_FS, 1};
-uint16_t _output_init_vals[] = {0, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 100, 0, 0, 512, 0};
+uint16_t _output_mins[] = {0, PERIOD_MIN, 0, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 0, 0, 0, 0, 0, 0};
+uint16_t _output_maxs[] = {NUM_WAVEFORMS - 1, PERIOD_MAX, DELAY_MAX, DELAY_MAX, 32767, 1, 1, 1, 1, CV_RANDOMNESS, CV_RANDOMNESS, 100, 200, 99, 1, DAC_FS, 1};
+uint16_t _output_init_vals[] = {0, 128, 0, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 100, 100, 0, 0, 512, 0};
 String output_labels[] = {"Waveform: ", "Period/Parts: ", "Init Delay: ", "Post Delay: ", "Repeat: ", "T0: ", "T1: ", "T2: ", "T3: ", "CV0: ", "CV1: ", "Scale: ", "Offset: ", "Randomness: ", "Quantize: ", "Idle Value: ", "Clock: "};
-String output_string_params[] = {INIT_WAVEFORMS, "", "", "", "", TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, "Off   ,Scale ,Offset,Period", "Off   ,Scale ,Offset,Time-inc", "", "", "", "No ,Yes", "", "Internal,External"};
-int16_t output_offsets[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_OFFSET_OFFSET, 0, 0, 0}; // allows negative numbers
+String output_string_params[] = {INIT_WAVEFORMS, "", "", "", "", TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, CV_TYPES, CV_TYPES, "", "", "", "No ,Yes", "", "Internal,External"};
+int16_t output_offsets[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_OFFSET_OFFSET, 0, 0, 0, 0}; // allows negative numbers
 
 // Output definitions
 uint16_t _output0_params[NUM_OUTPUT_PARAMS];
@@ -329,7 +333,7 @@ String output_get_fs()
 {
     float ideal_fs = 128.0 / 24.0; // 5.33333V
     uint16_t scale_correction = get_output_scale_correction(selected_output.get());
-    uint16_t ideal_dac = (scale_correction / 10000.0) * DAC_FS; // should produce ideal fs
+    uint16_t ideal_dac = (scale_correction / 1000.0) * DAC_FS; // should produce ideal fs
     float fs_volts = (DAC_FS - DAC_MID) * ideal_fs / (ideal_dac - DAC_MID);
     return String(fs_volts * 2);
 }
@@ -431,16 +435,43 @@ void update_cv1()
     update_cv(OUTPUT_CV1);
 }
 
+void set_idle_value(uint16_t val, int output)
+{
+    OutputData *outptr = &outputs[output];
+    outptr->idle_value = val + get_raw_output_offset_correction(output);
+}
+
+// randomness range 0:100, scale range 0.0:1.0
+void set_randomness_factor(uint16_t randomness, float scale_factor, int output)
+{
+    OutputData *outptr = &outputs[output];
+    float randomness_factor = DAC_FS * scale_factor * randomness / 200;
+    outptr->randomness_factor = (int)randomness_factor;
+}
+
+void update_randomness_factor()
+{
+    int output = selected_output.get();
+    float scale_factor = (the_output)().get_param(OUTPUT_SCALE) / 100.0;
+    int randomness = (the_output)().get_param(OUTPUT_RANDOMNESS);
+    set_randomness_factor(randomness, scale_factor, output);
+}
+
+void send_idle_value(int output_num)
+{
+    dac_out(output_num, outputs[output_num].idle_value);
+    // dac_out(output_num, (*bonk_outputs[output_num]).get_param(OUTPUT_IDLE_VALUE) + get_raw_output_offset_correction(output_num));
+}
+
 void update_idle_value()
 {
     // ui.terminal_debug("update_idle_value: " + String((the_output)().triggered));
+    int output = selected_output.get();
+    set_idle_value((*bonk_outputs[output]).get_param(OUTPUT_IDLE_VALUE), output);
+    // OutputData *outptr = &outputs[output];
+    // outptr->idle_value = (*bonk_outputs[output]).get_param(OUTPUT_IDLE_VALUE) + get_raw_output_offset_correction(output);
     if (!(the_output)().triggered)
-        set_idle_value(selected_output.get());
-}
-
-void set_idle_value(int output_num)
-{
-    dac_out(output_num, (*bonk_outputs[output_num]).get_param(OUTPUT_IDLE_VALUE) + get_raw_output_offset_correction(output_num));
+        send_idle_value(output);
 }
 
 void update_clock()
@@ -495,9 +526,9 @@ void outputs_begin()
         output->offsets = output_offsets;
         output->display_fxn = &output_display;
         output->alt_values = alt_values[i];
-        set_idle_value(i);
 
         selected_output.put(i); // required by update_ fxns
+        update_idle_value();
         update_clock();
         // update_repeat_count();
         for (int j = 0; j < 4; j++)
@@ -514,11 +545,18 @@ void outputs_begin()
 void check_outputs()
 {
     bool in_use;
+    bool adc0_in_use = false;
+    bool adc1_in_use = false;
     for (int trig = 0; trig < 4; trig++)
     {
         in_use = false;
         for (int output = 0; output < NUM_OUTPUTS; output++)
         {
+            if ((*bonk_outputs[output]).get_param(OUTPUT_CV0) > 0)
+                adc0_in_use = true;
+            if ((*bonk_outputs[output]).get_param(OUTPUT_CV1) > 0)
+                adc1_in_use = true;
+
             bool this_trig_enabled;
             switch (trig)
             {
@@ -566,15 +604,25 @@ void check_outputs()
         }
     }
 
-    adc0 = adc_read(0);
-    adc1 = adc_read(1);
+    // ui.terminal_debug("adc0_in_use: " + String(adc0_in_use) + " adc1_in_use: " + String(adc1_in_use));
+
+    if (adc0_in_use)
+    {
+        adc0 = adc_read(0);
+    }
+    if (adc1_in_use)
+    {
+        adc1 = adc_read(1);
+    }
 
     for (int cv = 0; cv < 2; cv++)
     {
         for (int output = 0; output < NUM_OUTPUTS; output++)
         {
-            cv_set(OUTPUT_CV0, output, adc0);
-            cv_set(OUTPUT_CV1, output, adc1);
+            if (adc0_in_use)
+                cv_set(OUTPUT_CV0, output, adc0);
+            if (adc1_in_use)
+                cv_set(OUTPUT_CV1, output, adc1);
         }
     }
 }

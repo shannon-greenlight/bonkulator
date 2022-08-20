@@ -47,7 +47,7 @@ void correct_ref_waveform()
     uint16_t *waveform_ref = waveform_reference[output];
     byte data_len = outputs[output].data_len;
 
-    float scale_factor = output_scale_corrections.get(output) / 10000.;
+    float scale_factor = output_scale_corrections.get(output) / 1000.;
     int offset_factor = output_offset_corrections.get(output);
     // int offset_adjust = DAC_MID - DAC_MID * scale_factor;
 
@@ -80,7 +80,6 @@ void apply_params_to_waveform()
     float scale = (the_output)().get_param(OUTPUT_SCALE);
     int offset = (the_output)().get_param(OUTPUT_OFFSET);
     int randomness = (the_output)().get_param(OUTPUT_RANDOMNESS);
-    OutputData *outptr = &outputs[output];
 
     uint16_t *waveform_data = outputs[output].waveform_data;
     uint16_t *waveform_ref = waveform_reference[output];
@@ -89,10 +88,9 @@ void apply_params_to_waveform()
     float scale_factor = scale / 100;
     // int offset_factor = offset - (DAC_FS + 1) + output_offset_corrections.get(output);
     int offset_factor = ((offset + OUTPUT_OFFSET_OFFSET) / 100.0) * (DAC_FS + 1);
-    // int offset_factor = (DAC_FS + 1) - offset;
     int offset_adjust = DAC_FS * (100 - scale) / 200;
-    float randomness_factor = DAC_FS * scale_factor * randomness / 200;
-    outptr->randomness_factor = (int)randomness_factor;
+
+    set_randomness_factor(randomness, scale_factor, output);
 
     // ui.terminal_debug("Apply params -- Offset factor: " + String(offset_factor) + " offset: " + String(offset));
     // ui.terminal_debug("Apply params -- Randomness factor: " + String(randomness_factor) + " int: " + String((int)randomness_factor));
@@ -104,18 +102,8 @@ void apply_params_to_waveform()
         temp = waveform_ref[i] * scale_factor;
         temp += offset_factor;
         temp += offset_adjust;
-        // temp += random(-randomness_factor, randomness_factor);
-        // temp = max(0, temp); // constrain output
 
-        // if (quantize)
-        // {
-        //   // temp += 4;
-        //   temp &= 0xFFF8;
-        // }
-
-        temp = max(0, temp);      // constrain output
-        temp = min(DAC_FS, temp); // constrain output
-        waveform_data[i] = temp;
+        waveform_data[i] = constrain(temp, 0, DAC_FS);
     }
 }
 

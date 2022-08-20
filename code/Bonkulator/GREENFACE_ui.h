@@ -89,6 +89,7 @@ public:
       //    //delay(2);
       //  }
     }
+    reset_inactivity_timer();
     // showDisplay();
     // delay(2000);
   }
@@ -128,6 +129,21 @@ public:
   {
     display_is_on = true;
     (*display).ssd1306_command(SSD1306_DISPLAYON);
+  }
+
+  unsigned long inactivity_timer = 0;
+
+  void reset_inactivity_timer()
+  {
+    inactivity_timer = millis();
+  }
+
+  void check_inactivity_timer(int timeout)
+  {
+    if (millis() > (inactivity_timer + timeout * 60000) && display_is_on) // Screen Saver
+    {
+      screen_saver();
+    }
   }
 
   void screen_saver()

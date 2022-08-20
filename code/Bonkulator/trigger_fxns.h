@@ -119,7 +119,7 @@ void trigger_output(byte trig_num, int output_num)
     else
     {
         outptr->current_index = 0;
-        set_idle_value(output_num);
+        send_idle_value(output_num);
     }
     // set led
     digitalWrite(trig_num, (*bonk_outputs[output_num]).triggered);
