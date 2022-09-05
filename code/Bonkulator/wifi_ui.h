@@ -197,6 +197,7 @@ void do_server()
 
               process_cmd(in_str);
 
+              // Serial.println("Command: " + in_str);
               // Serial.println("Command: " + String(cmd));
               // int c = cmd;
             }

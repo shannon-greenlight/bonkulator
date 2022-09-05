@@ -40,6 +40,7 @@ void reset_keyboard()
 	keypress = 0;
 	select_button_pushed = false;
 	select_button_available = false;
+	key_held_down = false;
 }
 
 uint8_t crunch_key()
@@ -59,11 +60,14 @@ bool key_available()
 
 void wait_all_keys_up()
 {
-	while (key_available())
+	unsigned long started = millis();
+	key_held_down = false;
+	while (key_available() && millis() < started + 2000)
 	{
 		delay(10);
 		scan_keyboard();
 	}
+	key_held_down = millis() >= started + 2000;
 }
 
 void scan_keyboard()
@@ -212,7 +216,7 @@ void calc_keypress()
 
 void process_key()
 {
-	// ui.terminal_debug("Process key: " + String(keypress));
+	ui.terminal_debug("Process key: " + String(keypress));
 	switch (keypress)
 	{
 	case '~':
@@ -227,7 +231,15 @@ void process_key()
 		// ui.terminal_debug(String(cv_time_inc(2048, 128.)));
 		// Serial.println(String(cv_time_inc(1023, 128.)));
 		// Serial.println(String(cv_time_inc(512, 128.)));
-		ui.terminal_debug("Data len: " + String(outputs[selected_output.get()].data_len));
+		// Serial.println("Data len: " + String(outputs[selected_output.get()].data_len));
+
+		int16_t x1, y1;
+		uint16_t w, h;
+
+		ui.display->getTextBounds(" ", 0, 0, &x1, &y1, &w, &h);
+		Serial.println("Char width: " + String(w));
+		Serial.println("Chars / line: " + String(SCREEN_WIDTH / w));
+
 		// printWifiStatus();
 		// Serial.println("Server Status: " + String((server.status())));
 		// dump_waveform(selected_output.get(), true);
@@ -253,6 +265,12 @@ void process_key()
 		break;
 	case '*':
 		select_fxn(SETTINGS_FXN);
+		break;
+	case 'i':
+		selected_fxn->insert_char(' ');
+		break;
+	case 127:
+		selected_fxn->remove_char();
 		break;
 	// case '+':
 	// 	select_fxn(remembered_fxn.get() + 1);
@@ -524,8 +542,8 @@ void check_keyboard()
 	if (key_available())
 	{
 		calc_keypress();
-		process_key();
 		wait_all_keys_up();
+		process_key();
 		delay(10);
 		reset_keyboard();
 	}
@@ -542,12 +560,12 @@ void check_serial()
 		char c = Serial.read();
 		bool is_esc_char = esc_mode && (c == 'A' || c == 'B' || c == 'C' || c == 'D');
 		// Serial.println(in_str + " .. " + String(c));
-		// ui.terminal_debug(in_str + " .. " + String(c));
+		ui.terminal_debug(String(int(c)) + " esc: " + String(esc_mode));
 		if (c == '$' || c == '-' || c == '+' || c == '/')
 		{
 			entering_string = true;
 		}
-		if (!entering_string && (in_str.length() < 2 || is_esc_char) && (c == '~' || c == '*' || c == '!' || c == 'u' || c == 'd' || c == 'z' || c == 'Z' || is_esc_char))
+		if (!entering_string && (in_str.length() < 2 || is_esc_char) && (c == 'i' || c == 127 || c == '~' || c == '*' || c == '!' || c == 'u' || c == 'd' || c == 'z' || c == 'Z' || is_esc_char))
 		{
 			// process this immediately with process_keypress
 			keypress = c;

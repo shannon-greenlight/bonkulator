@@ -1,3 +1,6 @@
+// for when you just want to do nothing
+void noop() {}
+
 void code_red(bool on)
 {
     analogWrite(LEDR, on ? 0 : 255);

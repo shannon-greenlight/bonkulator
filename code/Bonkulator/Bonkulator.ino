@@ -27,10 +27,11 @@ typedef void (*update_fxn)(void);
 volatile uint32_t Timer0Count = 0;
 
 // variables
+boolean key_held_down = false;
 int16_t adc0;
 int16_t adc1;
 String wifi_ui_message = "";
-boolean in_wifi = false;
+boolean in_wifi();
 String status_string;
 uint16_t calculated_time_inc = 0;
 
@@ -46,6 +47,7 @@ uint16_t settings_get_encoder_type();
 int settings_get_inactivity_timeout();
 bool wifi_enabled(void);
 void timer_service_settings();
+void init_parameters();
 
 // cv fxns
 void cv_set(int cv_num, int output, int16_t cv_val);
@@ -81,9 +83,6 @@ bool check_any_triggers();
 void clear_all_triggers();
 void trigger_output(byte trig_num, int output_num);
 void trigger_report();
-
-// for when you just want to do nothing
-void noop() {}
 
 // interface to modules
 #include "EEPROM_fxns.h"
@@ -136,6 +135,7 @@ void init_parameters()
   init_all_outputs();
   user_waveforms_init();
   settings_init();
+  wifi_init();
 
   input_cal_init();
   output_cal_init();
@@ -215,8 +215,8 @@ void setup()
   user_waveforms_begin();
 
   wifi_begin();
-  select_fxn(remembered_fxn.get());
   Serial.println("Howdy!");
+  select_fxn(remembered_fxn.get());
 }
 
 // the loop function runs over and over again forever

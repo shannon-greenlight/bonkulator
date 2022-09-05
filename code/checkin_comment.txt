@@ -71,4 +71,32 @@ Check-in comment for Bonkulator-315
 Moves inactivity timer to ui.
  
 Check-in comment for Bonkulator-316 
-Re-organization and cleanup.
+Re-organization and cleanup. 
+
+Check-in comment for Bonkulator-317 
+More cleanup.
+
+Check-in comment for Bonkulator-318 
+Fixes output init scale factor. 
+Changes in_wifi to test if in wi_fi fxn.
+ 
+Check-in comment for Bonkulator-319 
+Adds insert and delete to string variables. 
+
+Check-in comment for Bonkulator-320 
+Fixes insert_char. Some cleanup for reconcile w. Spankulator.
+ 
+Check-in comment for Bonkulator-321 
+More reconcile w. Spankulator. 
+
+Check-in comment for Bonkulator-322 
+Same. 
+
+Check-in comment for Bonkulator-323 
+Saves Libraries.
+ 
+Check-in comment for Bonkulator-324 
+Adds wifi_init() 
+Check-in comment for Bonkulator-325 
+Moves libraries.
+

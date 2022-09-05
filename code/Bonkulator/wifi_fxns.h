@@ -136,17 +136,12 @@ void wifi_connect()
     // todo - why does it only work one time?
     int count = 0;
     wifi_active.reset();
-    // pass = wifi_password.get();
     pass = wifi_fxn.get_param_as_string_var(0);
     ssid = wifi_ssid.get();
     ui.newFxn(ssid);
-    // ui.clearDisplay();
-    // ui.terminal_debug("Connecting to: " + wifi_ssid.get() + " Password: " + wifi_password.get());
-    // ui.printText(wifi_ssid.get(), 0, 0, 2);
     ui.printLine("Status: ", LINE_1, 1);
     wifi_status = WL_IDLE_STATUS;
     wifi_chk_time = 0;
-    // WIFI_setup();
     do
     {
         if (wifi_status != WL_CONNECTED && millis() > wifi_chk_time)
@@ -193,20 +188,20 @@ void wifi_attempt_connect(boolean force)
 void wifi_connected()
 {
     wifi_active.set();
-    // Serial.println("Connected to: "+wifi_ssid.get());
     ui.newFxn(wifi_ssid.get());
-    // ui.clearDisplay();
-    // ui.printText(wifi_ssid.get(), 0, 0, wifi_ssid.length() > 9 ? 1 : 2);
     ui.printLine("Status: " + getConnectionStatus(wifi_status), LINE_1, 1);
     ui.printLine("IP: " + IpAddress2String(WiFi.localIP()), LINE_2, 1);
-    // ui.printLine(WiFi.localIP(),LINE_2,1);
     ui.printLine("Signal: " + String(WiFi.RSSI()) + " dBm", LINE_3, 1);
+}
+
+boolean in_wifi()
+{
+    return selected_fxn == &wifi_fxn;
 }
 
 void wifi_display()
 {
-    in_wifi = wifi_enabled();
-    if (in_wifi)
+    if (wifi_enabled())
     {
         switch (select_wifi_screen)
         {
@@ -256,6 +251,12 @@ void wifi_new_fxn()
     wifi_fxn.digit_num = numSsid = 0;
     wifi_fxn.param_num = 0;
     wifi_fxn.num_params = 1;
+}
+
+void wifi_init()
+{
+    wifi_fxn.init();
+    wifi_password.put("a");
 }
 
 void wifi_begin()

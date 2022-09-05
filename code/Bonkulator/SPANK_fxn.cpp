@@ -5,9 +5,8 @@
 
 #include "SPANK_fxn.h"
 
+extern uint16_t get_chars_per_line();
 extern void noop();
-extern void red_alert();
-extern void code_red(bool);
 
 // vector<string> split (const string &s, char delim) {
 //     vector<string> result;
@@ -22,24 +21,6 @@ extern void code_red(bool);
 // }
 
 extern String csv_elem(String s, char delim, int instance);
-// {
-//     // vector <String> out;
-//     int indx = 0;
-//     int found = 0;
-//     for (int i = 0; i < s.length() + 1; i++)
-//     {
-//         if (s.charAt(i) == delim || i == s.length())
-//         {
-//             if (found == instance)
-//             {
-//                 return s.substring(indx, i);
-//             }
-//             found++;
-//             indx = i + 1;
-//         }
-//     }
-//     return "Not found!";
-// }
 
 SPANK_fxn::SPANK_fxn(String _name, String *_labels, uint16_t **_params, uint16_t _num_params, GREENFACE_ui *_ui) : params(*_params, _num_params)
 {
@@ -53,7 +34,6 @@ SPANK_fxn::SPANK_fxn(String _name, String *_labels, uint16_t **_params, uint16_t
     mins = _params[1];
     maxs = _params[2];
     init_vals = _params[3];
-    // display_fxn = &red_alert;
     display_fxn = &noop;
 }
 
@@ -206,26 +186,32 @@ int SPANK_fxn::get_max_w_offset(int16_t indx)
 
 void SPANK_fxn::adjust_param(int e, unsigned long delta)
 {
-    int string_var_char;
+    char string_var_char;
     EEPROM_String *string_var = &string_vars[get_param(param_num)];
     switch (get_param_type(param_num))
     {
     case SPANK_STRING_VAR_TYPE:
         string_var_char = (*string_var).charAt(digit_num);
         // Serial.println("string: " + string_var.get());
-        // Serial.println("varchar: " + String(string_var_char));
         string_var_char += e;
         if (string_var_char > 0x7b)
         {
-            string_var_char = 0x21;
+            string_var_char = 0x20;
         }
-        if (string_var_char < 0x21)
+        if (string_var_char < 0x20)
         {
             string_var_char = 0x7b;
         }
-        // string_var_char = max(0x21, string_var_char);
-        // string_var_char = min(0x7b, string_var_char);
-        (*string_var).putCharAt(char(string_var_char), digit_num);
+
+        // ui->terminal_debug("varchar: " + String(string_var_char) + " strlen: " + String((*string_var).length()));
+        if (digit_num >= (*string_var).length())
+        {
+            (*string_var).append(String(string_var_char));
+        }
+        else
+        {
+            (*string_var).putCharAt((string_var_char), digit_num);
+        }
         printParam();
         break;
     default:
@@ -272,14 +258,16 @@ void SPANK_fxn::print_string_param(uint16_t p_num, uint16_t line_num)
 
 void SPANK_fxn::print_string_var(uint16_t p_num, uint16_t line_num)
 {
-    int pos, too;
     EEPROM_String *string_var = &string_vars[get_param(p_num)];
     String label = get_label(p_num);
     int label_len = label.length();
-    pos = max(0, digit_num - label_len);
-    too = min(pos + label_len + 1, (*string_var).length());
-    //(*ui).printLine(label + (*string_var).get().substring(pos, too), line_num, 2);
-    (*ui).printLine(label + (*string_var).get(), (*ui).lines[line_num], 1);
+    String pad;
+    int num_blanks = get_chars_per_line() - (label_len + (*string_var).length());
+    for (int i = 0; i < num_blanks; i++)
+    {
+        pad.concat(' ');
+    }
+    (*ui).printLine(label + (*string_var).get() + pad, (*ui).lines[line_num], 1);
 }
 
 void SPANK_fxn::print_param(uint16_t p_num, uint16_t line_num)
@@ -348,15 +336,7 @@ void SPANK_fxn::put_param_w_offset(int val, int8_t _param_num)
     }
     if (offsets)
     {
-        // Serial.print("Put param w offset - Init val: ");
-        // Serial.print(val);
-        // Serial.print(" index: ");
-        // Serial.print(param_num);
-        // Serial.print(" offset: ");
-        // Serial.print(offsets[param_num]);
         val -= offsets[param_num];
-        // Serial.print(" Final val: ");
-        // Serial.println(val);
     }
     param = (uint16_t)val;
     put_param(param, param_num);
@@ -369,12 +349,8 @@ void SPANK_fxn::param_put(uint16_t val, int8_t _param_num)
 
 void SPANK_fxn::put_param(uint16_t val, int8_t _param_num)
 {
-    boolean is_string = false;
     String s;
-    int16_t val1 = val; // deals with 'negative' numbers
     int save_param_num = param_num;
-    // Serial.print("Put param: ");
-    // Serial.println(val1);
     if (_param_num != -1)
     {
         param_num = _param_num;
@@ -418,6 +394,30 @@ void SPANK_fxn::put_param_num(int val)
     digit_num = 0; // might only have one digit
 }
 
+void SPANK_fxn::insert_char(char c)
+{
+    uint8_t param_type = get_param_type(param_num);
+    if (param_type == SPANK_STRING_VAR_TYPE)
+    {
+        String s = string_vars[get_param(param_num)].get();
+        string_vars[get_param(param_num)].put(s.substring(0, digit_num) + String(c) + s.substring(digit_num));
+        printParam();
+    }
+}
+
+void SPANK_fxn::remove_char()
+{
+    uint8_t param_type = get_param_type(param_num);
+    if (param_type == SPANK_STRING_VAR_TYPE)
+    {
+        String s = string_vars[get_param(param_num)].get();
+        s.remove(digit_num - 1, 1);
+        string_vars[get_param(param_num)].put(s);
+        inc_dig_num_by(-1);
+        printParam();
+    }
+}
+
 void SPANK_fxn::inc_param_num_by(int val)
 {
     if (param_num == 0 && val == -1)
@@ -453,7 +453,7 @@ void SPANK_fxn::put_dig_num(int val)
 void SPANK_fxn::inc_dig_num_by(int val)
 {
     // uint8_t num_digs = log10(get_max(param_num))+1;
-    if (get_max() >= 10)
+    if (get_max() >= 10 || get_param_type(param_num) == SPANK_STRING_VAR_TYPE)
     {
         uint16_t num_digs = get_num_digits(param_num);
         digit_num += val;
@@ -500,7 +500,6 @@ void SPANK_fxn::printParams()
 String SPANK_fxn::params_toJSON()
 {
     String out = "";
-    boolean is_string = false;
     String s, label;
     uint8_t param_type;
 
@@ -653,7 +652,7 @@ uint8_t SPANK_fxn::get_num_digits(int this_param_num)
         break;
     case SPANK_STRING_VAR_TYPE:
         // string_var = string_vars[get_param(this_param_num)];
-        return string_vars[get_param(this_param_num)].length();
+        return string_vars[get_param(this_param_num)].size;
         break;
     default:
         int pad = offsets[this_param_num] < 0 ? 2 : 1;

@@ -2,6 +2,11 @@
 #ifndef Hardware_defs_h
 #define Hardware_defs_h
 
+#define STATUS_ROW "5"
+#define FXN_ROW "7"
+#define DEBUG_ROW "2"
+#define TERMINAL_BASE 9
+
 #define ROTARY_P_PIN 4
 #define ROTARY_A_PIN 5
 #define ROTARY_B_PIN 6
@@ -27,7 +32,7 @@
 #define ADC_FS 4095
 #define ADC_FS_OVER_2 2048
 #define ADC_FS_OVER_4 1024
-#define IDEAL_SCALE_CORRECTION 9736 // for correcting DAC outputs. .9736 is 5.478 / 5.333 which is desired FS / board FS
+#define IDEAL_SCALE_CORRECTION 974 // for correcting DAC outputs. .9736 is 5.478 / 5.333 which is desired FS / board FS
 
 #define NUM_OUTPUTS 8
 #define WAVEFORM_PARTS 128

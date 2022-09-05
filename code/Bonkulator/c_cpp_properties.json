@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:\\Users\\shann\\Dropbox\\moog\\Arduino-Libs\\**"
+            ],
+            "forcedInclude": [
+                "${default}",
+            ],
+            "intelliSenseMode": "msvc-x64",
+        }
+    ],
+    "version": 4
+}

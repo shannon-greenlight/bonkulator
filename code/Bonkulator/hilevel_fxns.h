@@ -112,7 +112,7 @@ void activate()
     {
         user_waveforms_activate();
     }
-    else if (in_wifi)
+    else if (in_wifi())
     {
         wifi_activate();
     }
@@ -134,25 +134,41 @@ void dec_param_num()
 
 void inc_dig_num()
 {
-    selected_fxn->inc_dig_num_by(1);
-
-    if (in_output_fxn() && (the_output)().param_num == OUTPUT_WAVEFORM)
+    if (selected_fxn->get_param_type(selected_fxn->param_num) == SPANK_STRING_VAR_TYPE && key_held_down)
     {
-        graph_waveform(selected_output.get());
+        // insert new char
+        selected_fxn->insert_char(' ');
     }
-
-    if (in_user_waveform_fxn() && selected_fxn->param_num == USER_WAVEFORMS_NAME)
+    else
     {
-        user_waveforms_update_waveform();
+        selected_fxn->inc_dig_num_by(1);
+
+        if (in_output_fxn() && (the_output)().param_num == OUTPUT_WAVEFORM)
+        {
+            graph_waveform(selected_output.get());
+        }
+
+        if (in_user_waveform_fxn() && selected_fxn->param_num == USER_WAVEFORMS_NAME)
+        {
+            user_waveforms_update_waveform();
+        }
     }
 }
 
 void dec_dig_num()
 {
-    selected_fxn->inc_dig_num_by(-1);
-    if ((in_output_fxn() && (the_output)().param_num == OUTPUT_WAVEFORM) || (in_user_waveform_fxn() && selected_fxn->param_num == USER_WAVEFORMS_NAME))
+    if (selected_fxn->get_param_type(selected_fxn->param_num) == SPANK_STRING_VAR_TYPE && key_held_down)
     {
-        selected_fxn->printParams();
+        // insert new char
+        selected_fxn->remove_char();
+    }
+    else
+    {
+        selected_fxn->inc_dig_num_by(-1);
+        if ((in_output_fxn() && (the_output)().param_num == OUTPUT_WAVEFORM) || (in_user_waveform_fxn() && selected_fxn->param_num == USER_WAVEFORMS_NAME))
+        {
+            selected_fxn->printParams();
+        }
     }
 }
 

@@ -32,7 +32,7 @@ echo. >> checkin_comment.txt
 echo Check-in comment for Bonkulator-%backup_number% >> checkin_comment.txt
 call notepad checkin_comment.txt
 
-robocopy Bonkulator %backup_path%\Bonkulator\ /e /xd "C:\Users\shann\Dropbox\moog\bonkulator\code\Bonkulator\libraries"
+robocopy Bonkulator %backup_path%\Bonkulator\ /e 
 rem xcopy /i /exclude:excluded_from_backup.txt Bonkulator %backup_path%\Bonkulator /e
 xcopy /i /exclude:excluded_from_backup.txt Updater %backup_path%\updater /e
 

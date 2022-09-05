@@ -10,24 +10,12 @@
 #include "version_num.h"
 #include "hardware_defs.h"
 
-// OLED Display
-/*
-HardWare I2C pins
-A4   SDA
-A5   SCL
-*/
 #define LINE_0 0
 #define LINE_1 20
 #define LINE_2 36
 #define LINE_3 52
 
-#define STATUS_ROW "5"
-#define FXN_ROW "7"
-#define DEBUG_ROW "2"
-
 #define OLED_RESET 16 // Pin 15 -RESET digital signal
-#define LOGO16_GLCD_HEIGHT 16
-#define LOGO16_GLCD_WIDTH 16
 extern String settings_get_device_name();
 
 class GREENFACE_ui
@@ -35,15 +23,18 @@ class GREENFACE_ui
 public:
   bool display_is_on = true;
   bool terminal_mirror = true;
-  String old_fxn = "";
+  unsigned long inactivity_timer = 0;
 
   // todo use extern
   const int lines[4] = {LINE_1, LINE_2, LINE_3, LINE_0};
   TerminalVT100 t;
   Adafruit_SSD1306 *display;
-  GREENFACE_ui(Adafruit_SSD1306 *_display)
+  String product_name;
+
+  GREENFACE_ui(Adafruit_SSD1306 *_display, String _product_name)
   {
     display = _display;
+    product_name = _product_name;
   }
 
   void drawBitmap(int x, int y, const uint8_t *bitmap)
@@ -65,7 +56,6 @@ public:
     (*display).setTextColor(WHITE, BLACK);
     //(*display).setRotation(2);
     //(*display).startscrollright(0,15);
-    old_fxn = "";
     if (true)
     {
       for (int i = 0; i < 48; i += 2)
@@ -131,8 +121,6 @@ public:
     (*display).ssd1306_command(SSD1306_DISPLAYON);
   }
 
-  unsigned long inactivity_timer = 0;
-
   void reset_inactivity_timer()
   {
     inactivity_timer = millis();
@@ -184,11 +172,7 @@ public:
 
   void terminal_printText(String text, int line)
   {
-    String row = String(9 + ((line - 20) / 8));
-    if (row == FXN_ROW)
-    {
-      // text = "Function: " + text;
-    }
+    String row = String(TERMINAL_BASE + ((line - 20) / 8));
     terminal_printRow(text, row);
   }
 
@@ -212,25 +196,6 @@ public:
     printText(head, 0, 0, 2);
     printText(body, 0, 20, 3);
     printText(foot, 0, 48, 2);
-  }
-
-  int calc_line(int line_num)
-  {
-    switch (line_num)
-    {
-    case 0:
-      return LINE_0;
-      break;
-    case 1:
-      return LINE_1;
-      break;
-    case 2:
-      return LINE_2;
-      break;
-    case 3:
-      return LINE_3;
-      break;
-    }
   }
 
   void printLine(String text, int line, int fontsize = 2)
@@ -432,7 +397,7 @@ public:
 
     t.printChars(stars, "*");
     t.println("");
-    t.printTitle(stars, F("The Bonkulator  by  GREENFACE LABS "));
+    t.printTitle(stars, product_name + "  by  GREENFACE LABS ");
     t.setCursor("2", String(stars));
     t.println("*");
     t.printTitle(stars, String(VERSION_NUM) + " " + settings_get_device_name());
@@ -444,20 +409,15 @@ public:
 
   void newFxn(String fxn)
   {
-    if (fxn != old_fxn)
-    {
-      clearDisplay();
-      t.clrDown(FXN_ROW);
-      terminalSplash();
-      printLine(fxn, 0, fxn.length() > 9 ? 1 : 2);
-    }
+    clearDisplay();
+    t.clrDown(FXN_ROW);
+    terminalSplash();
+    printLine(fxn, 0, fxn.length() > 9 ? 1 : 2);
   }
 
   String format_float(float val, int digits, const char *format = "%.2f")
   {
     char buf[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // buffer to print up to 9 digits
-    // String format = "%"+String(digits)+"d";
-    // Serial.println("Format: "+String(format));
     snprintf(buf, digits + 1, format, val);
     return String(buf);
   }
@@ -465,8 +425,6 @@ public:
   void printParam(String label, int param, int digits, const char *format, uint16_t line_num, int font_size = 1, String suffix = "")
   {
     char buf[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // buffer to print up to 9 digits
-    // String format = "%"+String(digits)+"d";
-    // Serial.println("Format: "+String(format));
     snprintf(buf, digits + 1, format, param);
     printLine(label + String(buf) + suffix, lines[line_num], font_size);
   }
@@ -490,5 +448,18 @@ public:
     printLine(sval, lines[line_num] + offset, font_size);
     //(*display).println(prefix + "-");
   }
+
+  void splash()
+  {
+    clearDisplay();
+    printText(product_name, 0, 0, 1);
+    printText(F("_______________"), 0, 8, 1);
+    printText(VERSION_NUM "", 0, 16, 1);
+    printText(F("Hi, my name is:"), 0, 32, 1);
+    printText(settings_get_device_name(), 0, 40, 1);
+
+    terminalSplash();
+  }
 };
+
 #endif

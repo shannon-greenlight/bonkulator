@@ -20,7 +20,7 @@
 #define SPANK_INT_PARAM_TYPE 0
 #define SPANK_STRING_PARAM_TYPE 1
 #define SPANK_STRING_VAR_TYPE 2
-#define SPANK_FLOAT_VAR_TYPE 3 // unused and unfinished
+#define SPANK_FLOAT_VAR_TYPE 3
 
 extern String toJSON(String, String);
 
@@ -29,7 +29,6 @@ typedef void (*update_fxn)(void);
 // library interface description
 class SPANK_fxn
 {
-    // user-accessible "public" interface
 public:
     typedef void (SPANK_fxn::*FunctionPointer)();
     SPANK_fxn(String _name, String *_labels, uint16_t **_params, uint16_t _num_params, GREENFACE_ui *_ui);
@@ -62,6 +61,8 @@ public:
     void param_put(uint16_t val, int8_t _param_num = -1); // raw no testing, printing
     void put_param(uint16_t val, int8_t _param_num = -1);
     void put_param_w_offset(int val, int8_t _param_num = -1);
+    void insert_char(char);
+    void remove_char();
     void put_param_num(int val);
     int check_param(int the_param);
     void inc_param_num_by(int val);
