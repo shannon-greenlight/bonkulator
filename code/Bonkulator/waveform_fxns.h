@@ -163,7 +163,7 @@ void graph_waveform(int output_num)
         waveform_data[i] = quantize_value(waveform_data[i], selected_output.get());
     }
     // ui.terminal_debug("Graph waveform - len: " + String(outputs[output_num].data_len));
-    ui.graph_waveform(waveform_data, outputs[output_num].data_len);
+    ui.graph_waveform(waveform_data, outputs[output_num].data_len, DAC_FS);
 }
 
 uint16_t get_waveform_parts(int output)

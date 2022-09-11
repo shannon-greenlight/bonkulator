@@ -52,6 +52,11 @@ bool in_settings()
     return selected_fxn == &settings_fxn;
 }
 
+boolean in_wifi()
+{
+    return selected_fxn == &wifi_fxn;
+}
+
 // bool in_output_fxn()
 // {
 //     // return true if we are in an output fxn
@@ -172,7 +177,7 @@ void dec_dig_num()
     }
 }
 
-void new_output(SPANK_fxn *output)
+void new_output(Greenface_gadget *output)
 {
     selected_fxn = output;
     apply_params_to_waveform();

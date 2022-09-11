@@ -2,7 +2,7 @@
 #include <TerminalVT100.h>
 
 #include "TRIGGER.h"
-#include "SPANK_fxn.h"
+#include <Greenface_gadget.h>
 #include "hardware_defs.h"
 
 extern String toJSON(String key, String value);

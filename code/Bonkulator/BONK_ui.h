@@ -1,11 +1,11 @@
 // display screen
 #define PRODUCT_NAME "The Bonkulator"
-#include "GREENFACE_ui.h"
+#include <Greenface_ui.h>
 #define TERMINAL_WIDTH 76 // Display area under title box
 #define SCREEN_WIDTH 128  // OLED display width, in pixels
 #define SCREEN_HEIGHT 64  // OLED display height, in pixels
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
-GREENFACE_ui ui(&display, PRODUCT_NAME);
+Greenface_ui ui(&display, PRODUCT_NAME);
 
 void terminal_print_status(bool force = false)
 {
@@ -40,7 +40,7 @@ void restore_display()
   terminal_print_status(true);
 }
 
-void gen_params_macro(SPANK_fxn *item, bool print_header = true)
+void gen_params_macro(Greenface_gadget *item, bool print_header = true)
 {
   if (print_header)
   {

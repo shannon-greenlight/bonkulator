@@ -27,6 +27,7 @@ typedef void (*update_fxn)(void);
 volatile uint32_t Timer0Count = 0;
 
 // variables
+String version_num = VERSION_NUM;
 boolean key_held_down = false;
 int16_t adc0;
 int16_t adc1;
@@ -89,12 +90,12 @@ void trigger_report();
 #include "lolevel_fxns.h"
 #include "hardware_fxns.h"
 #include "Rotary_Encoder_fxns.h"
-#include "SPANK_fxn.h"
+#include <Greenface_gadget.h>
 #include "WIFI_Util.h"
 
 EEPROM_Int selected_output = EEPROM_Int(0, 7); // the output we are working on
 EEPROM_Int remembered_fxn = EEPROM_Int(0, 8);  // 0-7=OutputX, 8=Settings
-SPANK_fxn *selected_fxn;
+Greenface_gadget *selected_fxn;
 
 #include "TRIGGER.h"
 
@@ -110,7 +111,7 @@ void select_trigger(int int_param); // used by Keyboard fxns
 uint8_t selected_fxn_num = 0;
 
 #include "BONK_ui.h"
-#include "wifi_fxns.h"
+#include <Greenface_wifi_fxns.h>
 #include "waveform_data.h"
 #include "BONK_output_fxns.h"
 #include "user_waveforms_fxns.h"

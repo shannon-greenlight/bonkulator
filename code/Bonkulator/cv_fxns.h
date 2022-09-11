@@ -42,7 +42,7 @@ int cv_time_inc(int cv, float param)
     return constrain(val, TIME_INC_MIN, TIME_INC_MAX);
 }
 
-int cv_period(int cv, float param, SPANK_fxn bonk_output)
+int cv_period(int cv, float param, Greenface_gadget bonk_output)
 {
     int val = cv_scale_pow(cv, param);
     return constrain(val, PERIOD_MIN, PERIOD_MAX);
@@ -57,7 +57,7 @@ int16_t cv_offset(int16_t cv_val)
     // return cv_scale(cv_val, 2 * DAC_FS) - DAC_FS;
 }
 
-bool sole_cv(int cv_num, int cv_type, SPANK_fxn bonk_output)
+bool sole_cv(int cv_num, int cv_type, Greenface_gadget bonk_output)
 {
     return ((cv_num == OUTPUT_CV0 && bonk_output.get_param(OUTPUT_CV1) != cv_type) || (cv_num == OUTPUT_CV1 && bonk_output.get_param(OUTPUT_CV0) != cv_type));
 }
@@ -76,7 +76,7 @@ void cv_set(int cv_num, int output, int16_t cv_val)
     // cv_val = ADC_FS - cv_val;
 
     OutputData *outptr = &outputs[output];
-    SPANK_fxn bonk_output = (*bonk_outputs[output]);
+    Greenface_gadget bonk_output = (*bonk_outputs[output]);
     byte cv_type = bonk_output.get_param(cv_num);
 
     // int16_t toffset;

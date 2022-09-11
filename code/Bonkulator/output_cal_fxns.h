@@ -17,7 +17,7 @@ String output_cal_labels[] = {"Output: ", "Offset: ", "Scale: ", "Calibrated: "}
 String output_cal_string_params[] = {"", "", "", "No ,Yes"};
 int16_t output_cal_offsets[] = {0, OUTPUT_CAL_OFFSET_CORRECTION, 0}; // allows negative numbers
 
-SPANK_fxn output_cal_fxn("Calibrate", output_cal_labels, output_cal_stuff, sizeof(_output_cal_params) / sizeof(_output_cal_params[0]), &ui);
+Greenface_gadget output_cal_fxn("Calibrate", output_cal_labels, output_cal_stuff, sizeof(_output_cal_params) / sizeof(_output_cal_params[0]));
 
 // output corrections
 int16_t _output_scale_corrections[NUM_OUTPUTS] = {0, 0, 0, 0, 0, 0, 0, 0};
@@ -169,7 +169,7 @@ void output_cal_begin()
 
 void output_cal_params_macro()
 {
-    SPANK_fxn *fxn = &output_cal_fxn;
+    Greenface_gadget *fxn = &output_cal_fxn;
     for (int i = 0; i < NUM_OUTPUTS; i++)
     {
         output_cal_fxn.param_put(i, OUTPUT_CAL_OUTPUT_NUM);

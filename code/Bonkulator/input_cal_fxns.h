@@ -17,7 +17,7 @@ String input_cal_labels[] = {"Input: ", "Offset: ", "Scale: ", "Calibrated: "};
 String input_cal_string_params[] = {"", "", "", "No ,Yes"};
 int16_t input_cal_offsets[] = {0, INPUT_CAL_OFFSET_CORRECTION, 0}; // allows negative numbers
 
-SPANK_fxn input_cal_fxn("Calibrate", input_cal_labels, input_cal_stuff, sizeof(_input_cal_params) / sizeof(_input_cal_params[0]), &ui);
+Greenface_gadget input_cal_fxn("Calibrate", input_cal_labels, input_cal_stuff, sizeof(_input_cal_params) / sizeof(_input_cal_params[0]));
 
 // void (*func_ptr[3])() = {fun1, fun2, fun3};
 
@@ -179,7 +179,7 @@ String check_input_cal()
 
 void input_cal_params_macro()
 {
-    SPANK_fxn *fxn = &input_cal_fxn;
+    Greenface_gadget *fxn = &input_cal_fxn;
     input_cal_fxn.param_put(0, INPUT_CAL_INPUT_NUM);
     gen_params_macro(fxn, true);
     input_cal_fxn.param_put(1, INPUT_CAL_INPUT_NUM);

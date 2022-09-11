@@ -25,7 +25,7 @@ update_fxn settings_update_fxns[SETTINGS_NUM_PARAMS] = {nullptr, nullptr, set_en
 
 EEPROM_String settings_device_name(20);
 EEPROM_String settings_string_vars[] = {settings_device_name};
-SPANK_fxn settings_fxn("Settings", settings_labels, settings_stuff, sizeof(_settings_params) / sizeof(_settings_params[0]), &ui);
+Greenface_gadget settings_fxn("Settings", settings_labels, settings_stuff, sizeof(_settings_params) / sizeof(_settings_params[0]));
 
 #define ASK_INIT_PARAMETERS 0
 #define ASK_INIT_INPUTS 1
@@ -41,7 +41,7 @@ String ask_init_labels[] = {"Reset: "};
 String ask_init_string_params[] = {"Parameters  ,Input Corrs ,Output Corrs,All         "};
 bool ask_init_param_active[] = {1};
 
-SPANK_fxn ask_init_fxn("Press Activate to: ", ask_init_labels, ask_init_stuff, sizeof(_ask_init_params) / sizeof(_ask_init_params[0]), &ui);
+Greenface_gadget ask_init_fxn("Press Activate to: ", ask_init_labels, ask_init_stuff, sizeof(_ask_init_params) / sizeof(_ask_init_params[0]));
 
 bool in_ask_init()
 {
@@ -211,7 +211,7 @@ void timer_service_settings()
 
 void user_waveform_params_macro(int waveform_num, bool print_header = true)
 {
-    SPANK_fxn *fxn = user_waveforms[waveform_num];
+    Greenface_gadget *fxn = user_waveforms[waveform_num];
     uint16_t *waveform_data = _user_waveforms_data[waveform_num];
     // fxn->param_num = USER_WAVEFORMS_VALUE;
     if (print_header)

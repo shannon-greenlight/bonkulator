@@ -2,11 +2,6 @@
 #ifndef Hardware_defs_h
 #define Hardware_defs_h
 
-#define STATUS_ROW "5"
-#define FXN_ROW "7"
-#define DEBUG_ROW "2"
-#define TERMINAL_BASE 9
-
 #define ROTARY_P_PIN 4
 #define ROTARY_A_PIN 5
 #define ROTARY_B_PIN 6

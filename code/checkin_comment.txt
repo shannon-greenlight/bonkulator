@@ -99,4 +99,28 @@ Check-in comment for Bonkulator-324
 Adds wifi_init() 
 Check-in comment for Bonkulator-325 
 Moves libraries.
+ 
+Check-in comment for Bonkulator-326 
+Getting ready to move greenface_ui 
 
+Check-in comment for Bonkulator-327
+Moved Greenface_ui 
+ 
+Check-in comment for Bonkulator-328 
+Removes old GREENFACE_ui 
+
+Check-in comment for Bonkulator-329 
+Phase I moving Spank_fxn.
+ 
+Check-in comment for Bonkulator-330 
+Phase II moving Spank_fxn.
+ 
+Check-in comment for Bonkulator-331 
+ 
+Check-in comment for Bonkulator-332 
+ 
+Check-in comment for Bonkulator-333 
+Finally positioned cursor at end for backit.bat. 
+
+Check-in comment for Bonkulator-334 
+Moved in_wifi() from library to hilevel

@@ -1,4 +1,4 @@
-#include "SPANK_fxn.h"
+#include <Greenface_gadget.h>
 
 enum
 {
@@ -67,37 +67,37 @@ int16_t output_offsets[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_OFFSET_OF
 // Output definitions
 uint16_t _output0_params[NUM_OUTPUT_PARAMS];
 uint16_t *output0_stuff[] = {_output0_params, _output_mins, _output_maxs, _output_init_vals};
-SPANK_fxn output0("Output 0", output_labels, output0_stuff, sizeof(_output0_params) / sizeof(_output0_params[0]), &ui);
+Greenface_gadget output0("Output 0", output_labels, output0_stuff, sizeof(_output0_params) / sizeof(_output0_params[0]));
 
 uint16_t _output1_params[NUM_OUTPUT_PARAMS];
 uint16_t *output1_stuff[] = {_output1_params, _output_mins, _output_maxs, _output_init_vals};
-SPANK_fxn output1("Output 1", output_labels, output1_stuff, sizeof(_output1_params) / sizeof(_output1_params[0]), &ui);
+Greenface_gadget output1("Output 1", output_labels, output1_stuff, sizeof(_output1_params) / sizeof(_output1_params[0]));
 
 uint16_t _output2_params[NUM_OUTPUT_PARAMS];
 uint16_t *output2_stuff[] = {_output2_params, _output_mins, _output_maxs, _output_init_vals};
-SPANK_fxn output2("Output 2", output_labels, output2_stuff, sizeof(_output1_params) / sizeof(_output1_params[0]), &ui);
+Greenface_gadget output2("Output 2", output_labels, output2_stuff, sizeof(_output1_params) / sizeof(_output1_params[0]));
 
 uint16_t _output3_params[NUM_OUTPUT_PARAMS];
 uint16_t *output3_stuff[] = {_output3_params, _output_mins, _output_maxs, _output_init_vals};
-SPANK_fxn output3("Output 3", output_labels, output3_stuff, sizeof(_output1_params) / sizeof(_output1_params[0]), &ui);
+Greenface_gadget output3("Output 3", output_labels, output3_stuff, sizeof(_output1_params) / sizeof(_output1_params[0]));
 
 uint16_t _output4_params[NUM_OUTPUT_PARAMS];
 uint16_t *output4_stuff[] = {_output4_params, _output_mins, _output_maxs, _output_init_vals};
-SPANK_fxn output4("Output 4", output_labels, output4_stuff, sizeof(_output1_params) / sizeof(_output1_params[0]), &ui);
+Greenface_gadget output4("Output 4", output_labels, output4_stuff, sizeof(_output1_params) / sizeof(_output1_params[0]));
 
 uint16_t _output5_params[NUM_OUTPUT_PARAMS];
 uint16_t *output5_stuff[] = {_output5_params, _output_mins, _output_maxs, _output_init_vals};
-SPANK_fxn output5("Output 5", output_labels, output5_stuff, sizeof(_output1_params) / sizeof(_output1_params[0]), &ui);
+Greenface_gadget output5("Output 5", output_labels, output5_stuff, sizeof(_output1_params) / sizeof(_output1_params[0]));
 
 uint16_t _output6_params[NUM_OUTPUT_PARAMS];
 uint16_t *output6_stuff[] = {_output6_params, _output_mins, _output_maxs, _output_init_vals};
-SPANK_fxn output6("Output 6", output_labels, output6_stuff, sizeof(_output1_params) / sizeof(_output1_params[0]), &ui);
+Greenface_gadget output6("Output 6", output_labels, output6_stuff, sizeof(_output1_params) / sizeof(_output1_params[0]));
 
 uint16_t _output7_params[NUM_OUTPUT_PARAMS];
 uint16_t *output7_stuff[] = {_output7_params, _output_mins, _output_maxs, _output_init_vals};
-SPANK_fxn output7("Output 7", output_labels, output7_stuff, sizeof(_output1_params) / sizeof(_output1_params[0]), &ui);
+Greenface_gadget output7("Output 7", output_labels, output7_stuff, sizeof(_output1_params) / sizeof(_output1_params[0]));
 
-SPANK_fxn *bonk_outputs[NUM_OUTPUTS] = {
+Greenface_gadget *bonk_outputs[NUM_OUTPUTS] = {
     &output0,
     &output1,
     &output2,
@@ -273,12 +273,12 @@ String *alt_values[NUM_OUTPUTS] =
 
 void update_clock();
 
-SPANK_fxn bonk_output(int output_num)
+Greenface_gadget bonk_output(int output_num)
 {
     return *bonk_outputs[output_num];
 }
 
-SPANK_fxn the_output()
+Greenface_gadget the_output()
 {
     return *bonk_outputs[selected_output.get()];
 }
@@ -315,7 +315,7 @@ void output_display()
 
 void display_output()
 {
-    SPANK_fxn output = the_output();
+    Greenface_gadget output = the_output();
     output.display();
     // (the_output)().display();
     // (*bonk_outputs[selected_output.get()]).display();
@@ -382,7 +382,7 @@ void add_waveform()
 
 void output_update_trigger()
 {
-    // SPANK_fxn output = *bonk_outputs[selected_output.get()];
+    // Greenface_gadget output = *bonk_outputs[selected_output.get()];
     int trig_num = (the_output)().param_num - OUTPUT_ENABLE_T0;
     int trig_type = (the_output)().get_param();
     // Serial.println("Selected output: " + String(selected_output.get()) + " trigger: " + String(trig_num) + " trig_type: " + String(trig_type));
@@ -407,7 +407,7 @@ void update_user_waveform_names(String names)
 {
     for (int i = 0; i < NUM_OUTPUTS; i++)
     {
-        SPANK_fxn *output = bonk_outputs[i];
+        Greenface_gadget *output = bonk_outputs[i];
         output->string_params[0] = String(INIT_STD_WAVEFORMS + names);
     }
 }
@@ -519,7 +519,7 @@ void outputs_begin()
     int output_memory = selected_output.get();
     for (int i = 0; i < NUM_OUTPUTS; i++)
     {
-        SPANK_fxn *output = bonk_outputs[i];
+        Greenface_gadget *output = bonk_outputs[i];
         output->begin();
         output->string_params = output_string_params;
         output->update_fxns = output_update_fxns;

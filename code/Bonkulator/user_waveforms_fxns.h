@@ -1,4 +1,4 @@
-#include "SPANK_fxn.h"
+#include <Greenface_gadget.h>
 #include <EEPROM_Arr16.h>
 
 #define USER_WAVEFORMS_NAME 0
@@ -44,53 +44,53 @@ bool user_waveforms_param_active[] = {0, 0, 1, 1, 0};
 // User Wave definitions
 uint16_t _user_waveform0_params[NUM_USER_WAVEFORMS_PARAMS];
 uint16_t *user_waveform0_stuff[] = {_user_waveform0_params, _user_waveforms_mins, _user_waveforms_maxs, _user_waveforms_init_vals};
-SPANK_fxn user_waveform0("User 0", user_waveforms_labels, user_waveform0_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]), &ui);
+Greenface_gadget user_waveform0("User 0", user_waveforms_labels, user_waveform0_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]));
 EEPROM_String user_waveform0_name(20);
 EEPROM_String user_waveform0_string_vars[] = {user_waveform0_name};
 
 uint16_t _user_waveform1_params[NUM_USER_WAVEFORMS_PARAMS];
 uint16_t *user_waveform1_stuff[] = {_user_waveform1_params, _user_waveforms_mins, _user_waveforms_maxs, _user_waveforms_init_vals};
-SPANK_fxn user_waveform1("User 1", user_waveforms_labels, user_waveform1_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]), &ui);
+Greenface_gadget user_waveform1("User 1", user_waveforms_labels, user_waveform1_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]));
 EEPROM_String user_waveform1_name(20);
 EEPROM_String user_waveform1_string_vars[] = {user_waveform1_name};
 
 uint16_t _user_waveform2_params[NUM_USER_WAVEFORMS_PARAMS];
 uint16_t *user_waveform2_stuff[] = {_user_waveform2_params, _user_waveforms_mins, _user_waveforms_maxs, _user_waveforms_init_vals};
-SPANK_fxn user_waveform2("User 2", user_waveforms_labels, user_waveform2_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]), &ui);
+Greenface_gadget user_waveform2("User 2", user_waveforms_labels, user_waveform2_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]));
 EEPROM_String user_waveform2_name(20);
 EEPROM_String user_waveform2_string_vars[] = {user_waveform2_name};
 
 uint16_t _user_waveform3_params[NUM_USER_WAVEFORMS_PARAMS];
 uint16_t *user_waveform3_stuff[] = {_user_waveform3_params, _user_waveforms_mins, _user_waveforms_maxs, _user_waveforms_init_vals};
-SPANK_fxn user_waveform3("User 3", user_waveforms_labels, user_waveform3_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]), &ui);
+Greenface_gadget user_waveform3("User 3", user_waveforms_labels, user_waveform3_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]));
 EEPROM_String user_waveform3_name(20);
 EEPROM_String user_waveform3_string_vars[] = {user_waveform3_name};
 
 uint16_t _user_waveform4_params[NUM_USER_WAVEFORMS_PARAMS];
 uint16_t *user_waveform4_stuff[] = {_user_waveform4_params, _user_waveforms_mins, _user_waveforms_maxs, _user_waveforms_init_vals};
-SPANK_fxn user_waveform4("User 4", user_waveforms_labels, user_waveform4_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]), &ui);
+Greenface_gadget user_waveform4("User 4", user_waveforms_labels, user_waveform4_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]));
 EEPROM_String user_waveform4_name(20);
 EEPROM_String user_waveform4_string_vars[] = {user_waveform4_name};
 
 uint16_t _user_waveform5_params[NUM_USER_WAVEFORMS_PARAMS];
 uint16_t *user_waveform5_stuff[] = {_user_waveform5_params, _user_waveforms_mins, _user_waveforms_maxs, _user_waveforms_init_vals};
-SPANK_fxn user_waveform5("User 5", user_waveforms_labels, user_waveform5_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]), &ui);
+Greenface_gadget user_waveform5("User 5", user_waveforms_labels, user_waveform5_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]));
 EEPROM_String user_waveform5_name(20);
 EEPROM_String user_waveform5_string_vars[] = {user_waveform5_name};
 
 uint16_t _user_waveform6_params[NUM_USER_WAVEFORMS_PARAMS];
 uint16_t *user_waveform6_stuff[] = {_user_waveform6_params, _user_waveforms_mins, _user_waveforms_maxs, _user_waveforms_init_vals};
-SPANK_fxn user_waveform6("User 6", user_waveforms_labels, user_waveform6_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]), &ui);
+Greenface_gadget user_waveform6("User 6", user_waveforms_labels, user_waveform6_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]));
 EEPROM_String user_waveform6_name(20);
 EEPROM_String user_waveform6_string_vars[] = {user_waveform6_name};
 
 uint16_t _user_waveform7_params[NUM_USER_WAVEFORMS_PARAMS];
 uint16_t *user_waveform7_stuff[] = {_user_waveform7_params, _user_waveforms_mins, _user_waveforms_maxs, _user_waveforms_init_vals};
-SPANK_fxn user_waveform7("User 7", user_waveforms_labels, user_waveform7_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]), &ui);
+Greenface_gadget user_waveform7("User 7", user_waveforms_labels, user_waveform7_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]));
 EEPROM_String user_waveform7_name(20);
 EEPROM_String user_waveform7_string_vars[] = {user_waveform7_name};
 
-SPANK_fxn *user_waveforms[NUM_USER_WAVEFORMS] = {
+Greenface_gadget *user_waveforms[NUM_USER_WAVEFORMS] = {
     &user_waveform0,
     &user_waveform1,
     &user_waveform2,
@@ -188,7 +188,7 @@ int get_user_waveform_num()
 void graph_user_waveform(int waveform_num)
 {
     // ui.graph_waveform(_user_waveforms_data[waveform_num], user_waveforms[waveform_num]->get_param(USER_WAVEFORMS_PARTS));
-    ui.graph_waveform(_user_waveforms_data[waveform_num], WAVEFORM_PARTS);
+    ui.graph_waveform(_user_waveforms_data[waveform_num], WAVEFORM_PARTS, DAC_FS);
     ui.drawXHash(user_waveforms[waveform_num]->get_param(USER_WAVEFORMS_INDEX), ui.fit_data(user_waveforms[waveform_num]->get_param(USER_WAVEFORMS_VALUE), DAC_FS));
 }
 
@@ -217,7 +217,7 @@ void user_waveforms_update_name()
     String names;
     for (int i = 0; i < NUM_USER_WAVEFORMS; i++)
     {
-        SPANK_fxn *user_waveform = user_waveforms[i];
+        Greenface_gadget *user_waveform = user_waveforms[i];
         names += ",";
         names += user_waveform->get_param_as_string_var(USER_WAVEFORMS_NAME);
     }
@@ -235,7 +235,7 @@ void user_waveforms_begin()
 {
     for (int i = 0; i < NUM_OUTPUTS; i++)
     {
-        SPANK_fxn *user_waveform = user_waveforms[i];
+        Greenface_gadget *user_waveform = user_waveforms[i];
         user_waveform->begin();
         user_waveform->string_params = user_waveforms_string_params;
         user_waveform->update_fxns = user_waveforms_update_fxns;
