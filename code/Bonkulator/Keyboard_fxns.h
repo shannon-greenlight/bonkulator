@@ -216,7 +216,7 @@ void calc_keypress()
 
 void process_key()
 {
-	ui.terminal_debug("Process key: " + String(keypress));
+	// ui.terminal_debug("Process key: " + String(keypress));
 	switch (keypress)
 	{
 	case '~':
@@ -560,7 +560,7 @@ void check_serial()
 		char c = Serial.read();
 		bool is_esc_char = esc_mode && (c == 'A' || c == 'B' || c == 'C' || c == 'D');
 		// Serial.println(in_str + " .. " + String(c));
-		ui.terminal_debug(String(int(c)) + " esc: " + String(esc_mode));
+		// ui.terminal_debug(String(int(c)) + " esc: " + String(esc_mode));
 		if (c == '$' || c == '-' || c == '+' || c == '/')
 		{
 			entering_string = true;

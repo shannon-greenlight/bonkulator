@@ -49,6 +49,7 @@ Temporary Items
 *.zip
 
 *.kicad_pcb-bak
+*.kicad_sch-bak
 
 
 fp-info-cache
@@ -57,7 +58,9 @@ spice/*.raw
 
 ~$*
 
-*.csv
+main_board/bom/lcsc/lcsc_bom.xls
+main_board/fab/pos/*.csv
+main_board/fab/gerber/*.csv
 
 *.xml
 
