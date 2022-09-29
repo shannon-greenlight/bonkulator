@@ -4,6 +4,11 @@
 
   (paper "A4")
 
+  (title_block
+    (title "Bonkulator Panel")
+    (rev "2.1")
+  )
+
   (lib_symbols
     (symbol "Graphic:Logo_Open_Hardware_Small" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
       (property "Reference" "#LOGO" (id 0) (at 0 6.985 0)

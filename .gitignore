@@ -89,3 +89,4 @@ out
 cache
 
 manual/*.tmp
+docs/*.tmp
