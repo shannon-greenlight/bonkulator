@@ -66,6 +66,8 @@ void ask_init()
         init_all();
         break;
     }
+    outputs_begin();
+    user_waveforms_begin();
     status_string = ask_init_fxn.get_param_as_string(0) + " Reset";
     selected_fxn->display();
     terminal_print_status(true);
