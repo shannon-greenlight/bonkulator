@@ -123,4 +123,17 @@ Check-in comment for Bonkulator-333
 Finally positioned cursor at end for backit.bat. 
 
 Check-in comment for Bonkulator-334 
-Moved in_wifi() from library to hilevel
+Moved in_wifi() from library to hilevel 
+
+Check-in comment for Bonkulator-335 
+Fixes init of outputs.
+Fixes Control-Access issue in WiFi.
+ 
+Check-in comment for Bonkulator-336 
+Only sets CV when cv val changes. 
+
+Check-in comment for Bonkulator-337 
+Safety
+ 
+Check-in comment for Bonkulator-338 
+Fixes cv affecting other outputs

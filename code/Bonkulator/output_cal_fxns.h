@@ -106,7 +106,7 @@ void output_cal_update_scale()
     int dac_val = ((DAC_FS - DAC_MID) * scale / 1000.0) + DAC_MID;
     dac_val += offset;
     dac_out(output_cal_fxn.get_param(OUTPUT_CAL_OUTPUT_NUM), dac_val);
-    ui.terminal_debug("Scale correction: " + String(scale) + " DAC: " + String(dac_val));
+    // ui.terminal_debug("Scale correction: " + String(scale) + " DAC: " + String(dac_val));
     set_output_scale_correction(scale);
 }
 

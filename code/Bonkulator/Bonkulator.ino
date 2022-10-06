@@ -60,7 +60,7 @@ FunctionPointer timer_fxn;
 void timer_debug();
 
 // waveforms
-void apply_params_to_waveform();
+void apply_params_to_waveform(int output);
 void dump_waveform(int output_num, bool dump_ref);
 void graph_waveform(int output_num);
 void set_waveform(int, int);

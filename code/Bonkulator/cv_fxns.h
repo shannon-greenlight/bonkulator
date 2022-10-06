@@ -42,10 +42,15 @@ int cv_time_inc(int cv, float param)
     return constrain(val, TIME_INC_MIN, TIME_INC_MAX);
 }
 
-int cv_period(int cv, float param, Greenface_gadget bonk_output)
+int cv_period(int cv, float param, int output)
 {
     int val = cv_scale_pow(cv, param);
-    return constrain(val, PERIOD_MIN, PERIOD_MAX);
+    val = constrain(val, PERIOD_MIN, PERIOD_MAX);
+    // outputs[output].period = val;
+    // set_waveform(output, (*bonk_outputs[output]).get_param(OUTPUT_WAVEFORM));
+    // update_waveform();
+    // ui.terminal_debug("CV: " + String(cv) + " Val: " + String(val) + " Output: " + String(output));
+    return val;
 }
 
 int16_t cv_offset(int16_t cv_val)
@@ -70,84 +75,106 @@ void cv_set(int cv_num, int output, int16_t cv_val)
     // if (cv_num == OUTPUT_CV0)
     //   ui.terminal_debug("cv_val: " + String(cv_val));
 
-    // cv_val *= 1.2412; // ads1015 full scale = 4.096. System FS = 3.3V, multiply by ratio
-    // cv_val = constrain(cv_val, -2048, 2047);
-    // cv_val += 2048;
-    // cv_val = ADC_FS - cv_val;
-
     OutputData *outptr = &outputs[output];
     Greenface_gadget bonk_output = (*bonk_outputs[output]);
     byte cv_type = bonk_output.get_param(cv_num);
 
-    // int16_t toffset;
-    static float temp_offset;
-    static float temp_scale;
-    static uint16_t temp_time_inc;
-
-    // now set value
-    switch (cv_type)
+    if (cv_type > 0)
     {
-    case CV_SCALE:
-        if (sole_cv(cv_num, CV_SCALE, bonk_output))
+        int ui_period;
+        int16_t *cv_mem;
+        switch (cv_num)
         {
-            outptr->scale = cv_scale_pow(cv_val, 1.0);
+        case 0:
+            cv_mem = &outptr->cv0_val[output];
+            break;
+        case 1:
+            cv_mem = &outptr->cv1_val[output];
+            break;
+        default:
+            cv_mem = &outptr->cv0_val[output];
         }
-        else
+
+        if (abs(cv_val - *cv_mem) > 2)
         {
-            switch (cv_num)
+            // Serial.println("Period: " + String(outptr->period));
+            // Serial.println("CV val: " + String(cv_val) + " mem: " + String(*cv_mem));
+            // int16_t toffset;
+            static float temp_offset;
+            static float temp_scale;
+            static uint16_t temp_period;
+
+            // now set value
+            switch (cv_type)
             {
-            case OUTPUT_CV0:
-                temp_scale = cv_scale_pow(cv_val, 1.0);
+            case CV_SCALE:
+                if (sole_cv(cv_num, CV_SCALE, bonk_output))
+                {
+                    outptr->scale = cv_scale_pow(cv_val, 1.0);
+                }
+                else
+                {
+                    switch (cv_num)
+                    {
+                    case OUTPUT_CV0:
+                        temp_scale = cv_scale_pow(cv_val, 1.0);
+                        break;
+                    case OUTPUT_CV1:
+                        outptr->scale = cv_scale_pow(cv_val, temp_scale);
+                        break;
+                    }
+                }
                 break;
-            case OUTPUT_CV1:
-                outptr->scale = cv_scale_pow(cv_val, temp_scale);
+            case CV_OFFSET:
+                if (sole_cv(cv_num, CV_OFFSET, bonk_output))
+                {
+                    outptr->offset = cv_offset(cv_val);
+                    // ui.terminal_debug("CV Val: " + String(cv_val) + " Offset: " + String(outptr->offset));
+                }
+                else
+                {
+                    switch (cv_num)
+                    {
+                    case OUTPUT_CV0:
+                        temp_offset = cv_offset(cv_val);
+                        break;
+                    case OUTPUT_CV1:
+                        outptr->offset = cv_offset(cv_val) + temp_offset;
+                        break;
+                    }
+                }
+                break;
+            case CV_PERIOD:
+                ui_period = (*bonk_outputs[output]).get_param(OUTPUT_PERIOD);
+                if (sole_cv(cv_num, CV_PERIOD, bonk_output))
+                {
+                    outptr->period = cv_period(cv_val, (float)ui_period, output);
+                }
+                else
+                {
+                    Serial.println();
+                    switch (cv_num)
+                    {
+                    case OUTPUT_CV0:
+                        temp_period = cv_period(cv_val, (float)ui_period, output);
+                        break;
+                    case OUTPUT_CV1:
+                        outptr->period = cv_period(cv_val, (float)temp_period, output);
+                        break;
+                    }
+                }
+                set_waveform(output, (*bonk_outputs[output]).get_param(OUTPUT_WAVEFORM));
+                break;
+            case CV_IDLE_VALUE:
+                set_idle_value(cv_val / 4, output);
+                break;
+            case CV_RANDOMNESS:
+                set_randomness_factor(cv_val * 100.0 / ADC_FS, bonk_output.get_param(OUTPUT_SCALE) / 100.0, output);
                 break;
             }
         }
-        break;
-    case CV_OFFSET:
-        if (sole_cv(cv_num, CV_OFFSET, bonk_output))
-        {
-            outptr->offset = cv_offset(cv_val);
-            // ui.terminal_debug("CV Val: " + String(cv_val) + " Offset: " + String(outptr->offset));
-        }
-        else
-        {
-            switch (cv_num)
-            {
-            case OUTPUT_CV0:
-                temp_offset = cv_offset(cv_val);
-                break;
-            case OUTPUT_CV1:
-                outptr->offset = cv_offset(cv_val) + temp_offset;
-                break;
-            }
-        }
-        break;
-    case CV_PERIOD:
-        if (sole_cv(cv_num, CV_PERIOD, bonk_output))
-        {
-            outptr->time_inc = cv_time_inc(cv_val, (float)calculated_time_inc);
-        }
-        else
-        {
-            switch (cv_num)
-            {
-            case OUTPUT_CV0:
-                temp_time_inc = cv_time_inc(cv_val, (float)calculated_time_inc);
-                break;
-            case OUTPUT_CV1:
-                outptr->time_inc = cv_time_inc(cv_val, temp_time_inc);
-                break;
-            }
-        }
-        break;
-    case CV_IDLE_VALUE:
-        set_idle_value(cv_val / 4, output);
-        break;
-    case CV_RANDOMNESS:
-        set_randomness_factor(cv_val * 100.0 / ADC_FS, bonk_output.get_param(OUTPUT_SCALE) / 100.0, output);
-        break;
+
+        *cv_mem = cv_val;
     }
 }
 

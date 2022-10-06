@@ -180,6 +180,6 @@ void dec_dig_num()
 void new_output(Greenface_gadget *output)
 {
     selected_fxn = output;
-    apply_params_to_waveform();
+    apply_params_to_waveform(selected_output.get());
     selected_fxn->display();
 }

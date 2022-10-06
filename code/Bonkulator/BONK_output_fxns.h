@@ -418,6 +418,12 @@ void update_waveform()
     set_waveform(selected_output.get(), wave_num);
 }
 
+void update_period()
+{
+    outputs[selected_output.get()].period = (the_output)().get_param(OUTPUT_PERIOD);
+    update_waveform();
+}
+
 void update_and_graph_waveform()
 {
     update_waveform();
@@ -497,7 +503,7 @@ void update_clock()
 
 update_fxn output_update_fxns[NUM_OUTPUT_PARAMS] = {
     update_and_graph_waveform,
-    update_waveform,
+    update_period,
     nullptr,
     nullptr,
     nullptr,
@@ -526,6 +532,7 @@ void outputs_begin()
         output->offsets = output_offsets;
         output->display_fxn = &output_display;
         output->alt_values = alt_values[i];
+        outputs[i].period = output->get_param(OUTPUT_PERIOD);
 
         selected_output.put(i); // required by update_ fxns
         update_idle_value();

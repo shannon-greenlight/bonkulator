@@ -39,9 +39,9 @@ void dump_waveform(int output, bool dump_ref)
 //   }
 // }
 
-void correct_ref_waveform()
+void correct_ref_waveform(int output)
 {
-    int output = selected_output.get();
+    // int output = selected_output.get();
 
     // uint16_t *waveform_data = outputs[output].waveform_data;
     uint16_t *waveform_ref = waveform_reference[output];
@@ -74,9 +74,9 @@ void correct_ref_waveform()
     }
 }
 
-void apply_params_to_waveform()
+void apply_params_to_waveform(int output)
 {
-    int output = selected_output.get();
+    // int output = selected_output.get();
     float scale = (the_output)().get_param(OUTPUT_SCALE);
     int offset = (the_output)().get_param(OUTPUT_OFFSET);
     int randomness = (the_output)().get_param(OUTPUT_RANDOMNESS);
@@ -169,7 +169,8 @@ void graph_waveform(int output_num)
 uint16_t get_waveform_parts(int output)
 {
     // uint16_t period = 268;
-    uint16_t period = (*bonk_outputs[output]).get_param(OUTPUT_PERIOD);
+    uint16_t period = (outputs[output]).period;
+    // uint16_t period = (*bonk_outputs[output]).get_param(OUTPUT_PERIOD);
     uint16_t leftover = period % WAVEFORM_PARTS;
     float ratio = (float)period / WAVEFORM_PARTS;
     if (leftover == 0)
@@ -211,6 +212,7 @@ void set_waveform(int output, int waveform)
     outputs[output].data_len = waveform_parts;
     float user_inc_factor = (WAVEFORM_PARTS / (float)waveform_parts);
 
+    // ui.terminal_debug("Set Waveform output: " + String(output) + " waveform: " + String(waveform));
     // ui.terminal_debug("Set Waveform user_inc_factor: " + String(user_inc_factor) + " parts: " + String(waveform_parts) + " userlen: " + String(user_waveform.length()));
 
     for (int i = 0; i < waveform_parts; i++)
@@ -254,8 +256,8 @@ void set_waveform(int output, int waveform)
         // Serial.println(temp);
     }
     // dump_waveform(selected_output.get(), true);
-    correct_ref_waveform();
+    correct_ref_waveform(output);
     // dump_waveform(selected_output.get(), true);
-    apply_params_to_waveform();
+    apply_params_to_waveform(output);
     // graph_waveform(selected_output.get());
 }

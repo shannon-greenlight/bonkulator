@@ -487,7 +487,7 @@ void process_cmd(String in_str)
 			case OUTPUT_OFFSET:
 			case OUTPUT_RANDOMNESS:
 			case OUTPUT_QUANTIZE:
-				apply_params_to_waveform();
+				apply_params_to_waveform(selected_output.get());
 				graph_waveform(selected_output.get());
 				break;
 
@@ -511,7 +511,7 @@ void process_cmd(String in_str)
 			case OUTPUT_OFFSET:
 			case OUTPUT_RANDOMNESS:
 			case OUTPUT_QUANTIZE:
-				apply_params_to_waveform();
+				apply_params_to_waveform(selected_output.get());
 				graph_waveform(selected_output.get());
 				break;
 
