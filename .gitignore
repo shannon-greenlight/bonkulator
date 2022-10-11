@@ -87,6 +87,7 @@ code/Bonkulator/secrets
 code/out
 out
 cache
+scripts
 
 manual/*.tmp
 docs/*.tmp
