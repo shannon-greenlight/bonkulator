@@ -1,0 +1,235 @@
+(export 
+  (version D) 
+  (design 
+    (source C:\Users\shann\Dropbox\moog\BonkDaddy\BonkDaddyPanel\BonkDaddyPanel\\DuDadPanel.sch) 
+    (date "1/23/2022 6:01:18 AM") 
+    (tool "Eeschema (5.1.10)-1") 
+    (sheet 
+      (number 1) 
+      (name /) 
+      (tstamps /) 
+      (title_block 
+        (title) 
+        (company) 
+        (rev) 
+        (date) 
+        (source BonkDaddyPanel.sch) 
+        (comment 
+          (number 1) 
+          (value "")) 
+        (comment 
+          (number 2) 
+          (value "")) 
+        (comment 
+          (number 3) 
+          (value "")) 
+        (comment 
+          (number 4) 
+          (value ""))))) 
+  (components 
+    (comp 
+      (ref H1) 
+      (value MountingHole_Pad) 
+      (footprint panel:MountingHole_3.2mm_M3_SmPad) 
+      (datasheet ~) 
+      (libsource 
+        (lib Mechanical) 
+        (part MountingHole_Pad) 
+        (description "Mounting Hole with connection")) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 5E49F7D7)) 
+    (comp 
+      (ref H2) 
+      (value MountingHole_Pad) 
+      (footprint panel:MountingHole_3.2mm_M3_SmPad) 
+      (datasheet ~) 
+      (libsource 
+        (lib Mechanical) 
+        (part MountingHole_Pad) 
+        (description "Mounting Hole with connection")) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 5E49FAAE)) 
+    (comp 
+      (ref H3) 
+      (value MountingHole_Pad) 
+      (footprint panel:MountingHole_3.2mm_M3_SmPad) 
+      (datasheet ~) 
+      (libsource 
+        (lib Mechanical) 
+        (part MountingHole_Pad) 
+        (description "Mounting Hole with connection")) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 5E49FFE8)) 
+    (comp 
+      (ref H4) 
+      (value MountingHole_Pad) 
+      (footprint panel:MountingHole_3.2mm_M3_SmPad) 
+      (datasheet ~) 
+      (libsource 
+        (lib Mechanical) 
+        (part MountingHole_Pad) 
+        (description "Mounting Hole with connection")) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 5E4A06FE)) 
+    (comp 
+      (ref H14) 
+      (value "Red LED") 
+      (footprint MountingHole:MountingHole_3.2mm_M3_DIN965) 
+      (datasheet ~) 
+      (libsource 
+        (lib Mechanical) 
+        (part MountingHole) 
+        (description "Mounting Hole without connection")) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 5E4A5785)) 
+    (comp 
+      (ref H15) 
+      (value "Green LED") 
+      (footprint MountingHole:MountingHole_3.2mm_M3_DIN965) 
+      (datasheet ~) 
+      (libsource 
+        (lib Mechanical) 
+        (part MountingHole) 
+        (description "Mounting Hole without connection")) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 5E4A578B)) 
+    (comp 
+      (ref H17) 
+      (value MountingHole) 
+      (footprint MountingHole:MountingHole_2.5mm) 
+      (datasheet ~) 
+      (libsource 
+        (lib Mechanical) 
+        (part MountingHole) 
+        (description "Mounting Hole without connection")) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 5E4A5EFC)) 
+    (comp 
+      (ref H18) 
+      (value MountingHole) 
+      (footprint MountingHole:MountingHole_2.5mm) 
+      (datasheet ~) 
+      (libsource 
+        (lib Mechanical) 
+        (part MountingHole) 
+        (description "Mounting Hole without connection")) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 5E4A6013)) 
+    (comp 
+      (ref H19) 
+      (value MountingHole) 
+      (footprint MountingHole:MountingHole_2.5mm) 
+      (datasheet ~) 
+      (libsource 
+        (lib Mechanical) 
+        (part MountingHole) 
+        (description "Mounting Hole without connection")) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 5E4A61B1)) 
+    (comp 
+      (ref H20) 
+      (value MountingHole) 
+      (footprint MountingHole:MountingHole_2.5mm) 
+      (datasheet ~) 
+      (libsource 
+        (lib Mechanical) 
+        (part MountingHole) 
+        (description "Mounting Hole without connection")) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 5E4A64AF)) 
+    (comp 
+      (ref H26) 
+      (value MountingHole) 
+      (footprint MountingHole:MountingHole_3.7mm) 
+      (datasheet ~) 
+      (libsource 
+        (lib Mechanical) 
+        (part MountingHole) 
+        (description "Mounting Hole without connection")) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 5E4AFC88)) 
+    (comp 
+      (ref H16) 
+      (value "Yellow LED") 
+      (footprint MountingHole:MountingHole_3.2mm_M3_DIN965) 
+      (datasheet ~) 
+      (libsource 
+        (lib Mechanical) 
+        (part MountingHole) 
+        (description "Mounting Hole without connection")) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 61F549E7))) 
+  (libparts 
+    (libpart 
+      (lib Mechanical) 
+      (part MountingHole) 
+      (description "Mounting Hole without connection") 
+      (docs ~) 
+      (footprints 
+        (fp MountingHole*)) 
+      (fields 
+        (field 
+          (name Reference) H) 
+        (field 
+          (name Value) MountingHole))) 
+    (libpart 
+      (lib Mechanical) 
+      (part MountingHole_Pad) 
+      (description "Mounting Hole with connection") 
+      (docs ~) 
+      (footprints 
+        (fp MountingHole*Pad*)) 
+      (fields 
+        (field 
+          (name Reference) H) 
+        (field 
+          (name Value) MountingHole_Pad)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name 1) 
+          (type input))))) 
+  (libraries 
+    (library 
+      (logical Mechanical) 
+      (uri "C:\\Program Files\\KiCad\\share\\kicad\\library/Mechanical.lib"))) 
+  (nets 
+    (net 
+      (code 1) 
+      (name GND) 
+      (node 
+        (ref H1) 
+        (pin 1)) 
+      (node 
+        (ref H2) 
+        (pin 1)) 
+      (node 
+        (ref H3) 
+        (pin 1)) 
+      (node 
+        (ref H4) 
+        (pin 1)))))

@@ -1,0 +1,201 @@
+## Footprint report - date Thu Jun 16 09:45:36 2022
+## Created by Pcbnew version (6.0.1)
+## Unit = mm, Angle = deg.
+
+$BeginDESCRIPTION
+
+$BOARD
+upper_left_corner 47.901191 42.040000
+lower_right_corner 122.898810 84.055000
+$EndBOARD
+
+$MODULE GR1
+footprint panel:small_face
+attribut none
+position 84.800000 57.375000  orientation 0.00
+layer front
+$EndMODULE  GR1
+
+$MODULE H1
+footprint panel:MountingHole_3.2mm_M3_SmPad
+attribut virtual
+position 62.500000 45.175000  orientation 0.00
+layer front
+$PAD "1"
+Shape Circle Layer both
+position  0.000000  0.000000  size  5.000000  5.000000  orientation 0.00
+drill  3.200000
+shape_offset  0.000000  0.000000
+$EndPAD
+$EndMODULE  H1
+
+$MODULE H2
+footprint panel:MountingHole_3.2mm_M3_SmPad
+attribut virtual
+position 108.220000 45.175000  orientation 0.00
+layer front
+$PAD "1"
+Shape Circle Layer both
+position  0.000000  0.000000  size  5.000000  5.000000  orientation 0.00
+drill  3.200000
+shape_offset  0.000000  0.000000
+$EndPAD
+$EndMODULE  H2
+
+$MODULE H3
+footprint panel:MountingHole_3.2mm_M3_SmPad
+attribut virtual
+position 108.220000 78.825000  orientation 0.00
+layer front
+$PAD "1"
+Shape Circle Layer both
+position  0.000000  0.000000  size  5.000000  5.000000  orientation 0.00
+drill  3.200000
+shape_offset  0.000000  0.000000
+$EndPAD
+$EndMODULE  H3
+
+$MODULE H4
+footprint panel:MountingHole_3.2mm_M3_SmPad
+attribut virtual
+position 62.500000 78.825000  orientation 0.00
+layer front
+$PAD "1"
+Shape Circle Layer both
+position  0.000000  0.000000  size  5.000000  5.000000  orientation 0.00
+drill  3.200000
+shape_offset  0.000000  0.000000
+$EndPAD
+$EndMODULE  H4
+
+$MODULE H14
+footprint panel:3mmLED
+attribut virtual
+position 79.290000 66.750000  orientation 180.00
+layer front
+$PAD ""
+Shape Circle Layer both
+position  1.270000  0.000000  size  3.200000  3.200000  orientation 0.00
+drill  3.200000
+shape_offset  0.000000  0.000000
+$EndPAD
+$EndMODULE  H14
+
+$MODULE H15
+footprint panel:3mmLED
+attribut virtual
+position 112.200000 52.750000  orientation 180.00
+layer front
+$PAD ""
+Shape Circle Layer both
+position  1.270000  0.000000  size  3.200000  3.200000  orientation 0.00
+drill  3.200000
+shape_offset  0.000000  0.000000
+$EndPAD
+$EndMODULE  H15
+
+$MODULE H16
+footprint panel:3mmLED
+attribut virtual
+position 64.520000 66.750000  orientation 180.00
+layer front
+$PAD ""
+Shape Circle Layer both
+position  1.270000  0.000000  size  3.200000  3.200000  orientation 0.00
+drill  3.200000
+shape_offset  0.000000  0.000000
+$EndPAD
+$EndMODULE  H16
+
+$MODULE H17
+footprint MountingHole:MountingHole_2.5mm
+attribut virtual
+position 53.000000 53.000000  orientation 0.00
+layer front
+$PAD ""
+Shape Circle Layer both
+position  0.000000  0.000000  size  2.500000  2.500000  orientation 0.00
+drill  2.500000
+shape_offset  0.000000  0.000000
+$EndPAD
+$EndMODULE  H17
+
+$MODULE H18
+footprint MountingHole:MountingHole_2.5mm
+attribut virtual
+position 117.800000 53.000000  orientation 0.00
+layer front
+$PAD ""
+Shape Circle Layer both
+position  0.000000  0.000000  size  2.500000  2.500000  orientation 0.00
+drill  2.500000
+shape_offset  0.000000  0.000000
+$EndPAD
+$EndMODULE  H18
+
+$MODULE H19
+footprint MountingHole:MountingHole_2.5mm
+attribut virtual
+position 117.800000 71.000000  orientation 0.00
+layer front
+$PAD ""
+Shape Circle Layer both
+position  0.000000  0.000000  size  2.500000  2.500000  orientation 0.00
+drill  2.500000
+shape_offset  0.000000  0.000000
+$EndPAD
+$EndMODULE  H19
+
+$MODULE H20
+footprint MountingHole:MountingHole_2.5mm
+attribut virtual
+position 53.000000 71.000000  orientation 0.00
+layer front
+$PAD ""
+Shape Circle Layer both
+position  0.000000  0.000000  size  2.500000  2.500000  orientation 0.00
+drill  2.500000
+shape_offset  0.000000  0.000000
+$EndPAD
+$EndMODULE  H20
+
+$MODULE H21
+footprint panel:3mmLED
+attribut virtual
+position 106.280000 66.750000  orientation 0.00
+layer front
+$PAD ""
+Shape Circle Layer both
+position  1.270000  0.000000  size  3.200000  3.200000  orientation 0.00
+drill  3.200000
+shape_offset  0.000000  0.000000
+$EndPAD
+$EndMODULE  H21
+
+$MODULE H22
+footprint panel:3mmLED
+attribut virtual
+position 91.510000 66.750000  orientation 0.00
+layer front
+$PAD ""
+Shape Circle Layer both
+position  1.270000  0.000000  size  3.200000  3.200000  orientation 0.00
+drill  3.200000
+shape_offset  0.000000  0.000000
+$EndPAD
+$EndMODULE  H22
+
+$MODULE H26
+footprint panel:PushButton3.7mm
+attribut virtual
+position 60.000000 52.500000  orientation 0.00
+layer front
+$PAD ""
+Shape Circle Layer both
+position  3.250000  2.250000  size  3.700000  3.700000  orientation 0.00
+drill  3.700000
+shape_offset  0.000000  0.000000
+$EndPAD
+$EndMODULE  H26
+
+$EndDESCRIPTION

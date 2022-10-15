@@ -63,12 +63,14 @@ main_board/fab/pos/*.csv
 main_board/fab/gerber/*.csv
 
 *.xml
+*.csv
+*.dxf
 
 *.bak
 *.log
 *.sch-bak
-Spankulator-cache.lib
-SpankParts-cache.lib
+*-cache.lib
+_autosave*
 
 excel
 sym-lib-table
