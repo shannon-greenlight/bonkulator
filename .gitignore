@@ -71,6 +71,7 @@ main_board/fab/gerber/*.csv
 *.sch-bak
 *-cache.lib
 _autosave*
+\#auto_saved_files#
 
 excel
 sym-lib-table
@@ -80,7 +81,6 @@ sym-lib-table
 # main_board/bom/digi-key
 # main_board/bom/lcsc
 
-*/#auto_saved_files#
 
 code/arduino_bin
 code/ArduinoLLC.ArduinoIDE_1.8.57.0_x86__mdqgnx93n4wtt
@@ -90,6 +90,8 @@ code/out
 out
 cache
 scripts
+save
 
 manual/*.tmp
+docs
 docs/*.tmp

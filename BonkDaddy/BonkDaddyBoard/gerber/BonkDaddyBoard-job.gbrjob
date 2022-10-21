@@ -5,13 +5,13 @@
       "Application": "Pcbnew",
       "Version": "(6.0.1)"
     },
-    "CreationDate": "2022-09-28T11:42:46-07:00"
+    "CreationDate": "2022-10-21T14:46:05-07:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
       "Name": "BonkDaddyBoard",
       "GUID": "426f6e6b-4461-4646-9479-426f6172642e",
-      "Revision": "1.1"
+      "Revision": "1.2"
     },
     "Size": {
       "X": 70.85,
