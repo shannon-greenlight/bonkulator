@@ -79,7 +79,7 @@
       (mirror false)
       (drillshape 0)
       (scaleselection 1)
-      (outputdirectory "gerber/")
+      (outputdirectory "fab/gerber/")
     )
   )
 
@@ -5451,9 +5451,6 @@
   (gr_line (start 62.7 70.75) (end 88.7 70.75) (layer "Edge.Cuts") (width 0.05) (tstamp 5bcace5d-edd0-4e19-92d0-835e43cf8eb2))
   (gr_line (start 62.7 56.75) (end 62.7 70.75) (layer "Edge.Cuts") (width 0.05) (tstamp bd065eaf-e495-4837-bdb3-129934de1fc7))
   (gr_line (start 88.7 70.75) (end 88.7 56.75) (layer "Edge.Cuts") (width 0.05) (tstamp cb24efdd-07c6-4317-9277-131625b065ac))
-  (gr_text "Greenface Labs\n{dblquote}The Bonkulator{dblquote}\nPanel: v1.1" (at 85.75 162.5) (layer "B.SilkS") (tstamp 00000000-0000-0000-0000-0000603e74a4)
-    (effects (font (size 1.5 1.5) (thickness 0.25)) (justify mirror))
-  )
   (gr_text "Triggers" (at 56 105) (layer "F.SilkS") (tstamp 00000000-0000-0000-0000-00005e4c25ca)
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
