@@ -1,5 +1,5 @@
 # Bonkulator
-multi modulator for eurorack synthesizers
+The Bonkulator is a Eurorack module that fits into a 3U x 14HP slot. It features 8 programmable outputs and 6 programmable inputs. The front-panel user controls consist of a 128×64 pixel 2-color OLED display, a rotary encoder for adjusting parameters and a button for each trigger and output.
 
 # main_board, panel
 These repos contain the materials needed to construct the Bonkulator main board and the front panel.
