@@ -221,7 +221,7 @@ void set_waveform(int output, int waveform)
         {
         case WAVEFORM_SINE:
         case WAVEFORM_INV_SINE:
-            temp = (sin(6.28319 * (float)i / waveform_parts) * 512) + 512;
+            temp = (sin(6.28319 * (float)i / waveform_parts) * DAC_MID) + DAC_MID;
             break;
         case WAVEFORM_RAMP_UP:
         case WAVEFORM_RAMP_DN:

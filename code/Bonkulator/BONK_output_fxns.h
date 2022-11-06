@@ -19,6 +19,7 @@ enum
     OUTPUT_QUANTIZE,
     OUTPUT_IDLE_VALUE,
     OUTPUT_CLOCK,
+    OUTPUT_RANGE,
     NUM_OUTPUT_PARAMS
 };
 
@@ -57,12 +58,12 @@ enum
 
 #define TRIGGER_STATES F("Disabled,Enabled ")
 
-uint16_t _output_mins[] = {0, PERIOD_MIN, 0, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 0, 0, 0, 0, 0, 0};
-uint16_t _output_maxs[] = {NUM_WAVEFORMS - 1, PERIOD_MAX, DELAY_MAX, DELAY_MAX, 32767, 1, 1, 1, 1, CV_RANDOMNESS, CV_RANDOMNESS, 100, 200, 99, 1, DAC_FS, 1};
-uint16_t _output_init_vals[] = {0, 128, 0, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 100, 100, 0, 0, 512, 0};
-String output_labels[] = {"Waveform: ", "Period/Parts: ", "Init Delay: ", "Post Delay: ", "Repeat: ", "T0: ", "T1: ", "T2: ", "T3: ", "CV0: ", "CV1: ", "Scale: ", "Offset: ", "Randomness: ", "Quantize: ", "Idle Value: ", "Clock: "};
-String output_string_params[] = {INIT_WAVEFORMS, "", "", "", "", TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, CV_TYPES, CV_TYPES, "", "", "", "No ,Yes", "", "Internal,External"};
-int16_t output_offsets[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_OFFSET_OFFSET, 0, 0, 0, 0}; // allows negative numbers
+uint16_t _output_mins[] = {0, PERIOD_MIN, 0, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 0, 0, 0, 0, 0, 0, OUTPUT_RANGE_BIPOLAR};
+uint16_t _output_maxs[] = {NUM_WAVEFORMS - 1, PERIOD_MAX, DELAY_MAX, DELAY_MAX, 32767, 1, 1, 1, 1, CV_RANDOMNESS, CV_RANDOMNESS, 100, 200, 99, 1, DAC_FS, 1, OUTPUT_RANGE_UNIPOLAR};
+uint16_t _output_init_vals[] = {0, 128, 0, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 100, 100, 0, 0, DAC_MID, 0, OUTPUT_RANGE_BIPOLAR};
+String output_labels[] = {"Waveform: ", "Period/Parts: ", "Init Delay: ", "Post Delay: ", "Repeat: ", "T0: ", "T1: ", "T2: ", "T3: ", "CV0: ", "CV1: ", "Scale: ", "Offset: ", "Randomness: ", "Quantize: ", "Idle Value: ", "Clock: ", "Range: "};
+String output_string_params[] = {INIT_WAVEFORMS, "", "", "", "", TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, CV_TYPES, CV_TYPES, "", "", "", "No ,Yes", "", "Internal,External", "+/-5V,0-10V"};
+int16_t output_offsets[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_OFFSET_OFFSET, 0, 0, 0, 0, 0}; // allows negative numbers
 
 // Output definitions
 uint16_t _output0_params[NUM_OUTPUT_PARAMS];
@@ -501,6 +502,13 @@ void update_clock()
     }
 }
 
+void output_update_range()
+{
+    int output = selected_output.get();
+    uint16_t range_type = (the_output)().get_param(OUTPUT_RANGE);
+    set_output_range(output, (output_range_type)range_type);
+}
+
 update_fxn output_update_fxns[NUM_OUTPUT_PARAMS] = {
     update_and_graph_waveform,
     update_period,
@@ -518,7 +526,8 @@ update_fxn output_update_fxns[NUM_OUTPUT_PARAMS] = {
     update_waveform,
     nullptr,
     update_idle_value,
-    update_clock};
+    update_clock,
+    output_update_range};
 
 void outputs_begin()
 {
@@ -537,6 +546,14 @@ void outputs_begin()
         selected_output.put(i); // required by update_ fxns
         update_idle_value();
         update_clock();
+        if (output_ranges_installed)
+        {
+            output_update_range();
+        }
+        else
+        {
+            output->maxs[OUTPUT_RANGE] = (uint16_t)OUTPUT_RANGE_BIPOLAR;
+        }
         // update_repeat_count();
         for (int j = 0; j < 4; j++)
         {

@@ -23,11 +23,12 @@ uint16_t randomize_value(int value, int randomness_factor)
   return constrain(value, 0, DAC_FS); // constrain output
 }
 
+// output scale factor * num steps in 1 volt / 12 .. for 12 bits this equals 32. Then negate to get FFE0.
 uint16_t quantize_value(uint16_t value, uint16_t output_num)
 {
   if ((*bonk_outputs[output_num]).get_param(OUTPUT_QUANTIZE))
   {
-    value &= 0xFFF8;
+    value &= 0xFFE0;
   }
   return value;
 }

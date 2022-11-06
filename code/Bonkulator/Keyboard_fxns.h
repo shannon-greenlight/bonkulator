@@ -233,12 +233,14 @@ void process_key()
 		// Serial.println(String(cv_time_inc(512, 128.)));
 		// Serial.println("Data len: " + String(outputs[selected_output.get()].data_len));
 
-		int16_t x1, y1;
-		uint16_t w, h;
+		// set_output_range(0, output_ranges[0] == OUTPUT_RANGE_UNIPOLAR ? OUTPUT_RANGE_BIPOLAR : OUTPUT_RANGE_UNIPOLAR);
 
-		ui.display->getTextBounds(" ", 0, 0, &x1, &y1, &w, &h);
-		Serial.println("Char width: " + String(w));
-		Serial.println("Chars / line: " + String(SCREEN_WIDTH / w));
+		// int16_t x1, y1;
+		// uint16_t w, h;
+
+		// ui.display->getTextBounds(" ", 0, 0, &x1, &y1, &w, &h);
+		// Serial.println("Char width: " + String(w));
+		// Serial.println("Chars / line: " + String(SCREEN_WIDTH / w));
 
 		// printWifiStatus();
 		// Serial.println("Server Status: " + String((server.status())));

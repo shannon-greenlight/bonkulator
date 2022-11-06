@@ -22,12 +22,12 @@
 #define T2_LED 2
 #define T3_LED 3
 
-#define DAC_FS 1023
-#define DAC_MID 512
+#define DAC_FS 4095
+#define DAC_MID 2048
 #define ADC_FS 4095
 #define ADC_FS_OVER_2 2048
 #define ADC_FS_OVER_4 1024
-#define IDEAL_SCALE_CORRECTION 974 // for correcting DAC outputs. .9736 is 5.478 / 5.333 which is desired FS / board FS
+#define IDEAL_SCALE_CORRECTION 976 // for correcting DAC outputs. .9736 is 5.478 / 5.333 which is desired FS / board FS
 
 #define NUM_OUTPUTS 8
 #define WAVEFORM_PARTS 128

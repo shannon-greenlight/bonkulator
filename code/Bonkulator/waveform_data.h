@@ -8,7 +8,7 @@ typedef struct
     unsigned long next_time;
     uint16_t output_value;
     uint16_t idle_value;
-    int16_t randomness_factor; // range: -1023 -> 1023
+    int16_t randomness_factor; // range: 0 - 100 %
     float scale;               // range: 0 - 100, for CV
     int16_t offset;            // range: -4095 -> 4095, for CV
     uint16_t time_inc;         // range: 1ms - 32767ms

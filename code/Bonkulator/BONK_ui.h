@@ -40,12 +40,13 @@ void restore_display()
   terminal_print_status(true);
 }
 
-void gen_params_macro(Greenface_gadget *item, bool print_header = true)
+void gen_params_macro(Greenface_gadget *item, bool print_header = true, String prefix = "")
 {
   if (print_header)
   {
     ui.t.clrScreen();
     ui.terminal_debug("// Macro for: " + item->name);
+    Serial.println(prefix);
   }
   uint8_t param_type;
   for (int i = 0; i < item->num_params; i++)

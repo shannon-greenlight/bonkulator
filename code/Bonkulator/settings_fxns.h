@@ -71,6 +71,7 @@ void ask_init()
     status_string = ask_init_fxn.get_param_as_string(0) + " Reset";
     selected_fxn->display();
     terminal_print_status(true);
+    select_fxn(remembered_fxn.get());
 }
 
 void settings_put_param(int val)
@@ -130,16 +131,6 @@ void adc_cal()
     ui.terminal_debug("Calibrate ADC someday...");
 }
 
-void dac_cal()
-{
-    // ui.terminal_debug("Calibrate DAC someday...");
-    // for (int i = 0; i < NUM_OUTPUTS; i++)
-    // {
-    //     (*bonk_outputs[i]).put_param(512, OUTPUT_IDLE_VALUE);
-    //     // dac_out(i, 512);
-    // }
-}
-
 void settings_activate()
 {
     switch (settings_fxn.param_num)
@@ -175,7 +166,6 @@ void settings_activate()
         case 1:
             selected_fxn = &output_cal_fxn;
             selected_fxn->display();
-            dac_cal();
             break;
         }
         break;

@@ -160,7 +160,7 @@ void user_waveforms_init()
         // user_waveform->string_vars[0].put("User Waverform " + String(i));
         (*user_waveforms[i]).init();
         (*user_waveforms[i]).put_string_var("User Wave " + String(i), USER_WAVEFORMS_NAME);
-        (*user_waveforms_data[i]).fill(511);
+        (*user_waveforms_data[i]).fill(DAC_MID);
     }
 }
 

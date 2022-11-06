@@ -2,10 +2,12 @@
 #include <Greenface_AD5328.h>
 #include <MCP3X21.h>
 #include <Adafruit_ADS1X15.h>
+#include <Adafruit_MCP23X08.h>
 #include "EEPROM_ArrInt.h"
 
 // Adafruit_ADS1115 ads;  /* Use this for the 16-bit version */
 Adafruit_ADS1015 ads; /* Use this for the 12-bit version */
+Adafruit_MCP23X08 mcp;
 
 #define NUM_INPUTS 2
 
@@ -104,6 +106,46 @@ void led_debug(bool state, uint8_t led_index)
 void set_t0_led(bool state)
 {
     digitalWrite(T0_LED, state);
+}
+
+// output range code starts here
+bool output_ranges_installed = true;
+typedef enum _output_range_type
+{
+    OUTPUT_RANGE_BIPOLAR = 0,
+    OUTPUT_RANGE_UNIPOLAR = 1,
+} output_range_type;
+
+// output_range_type output_ranges[NUM_OUTPUTS] = {OUTPUT_RANGE_BIPOLAR, OUTPUT_RANGE_BIPOLAR, OUTPUT_RANGE_BIPOLAR, OUTPUT_RANGE_BIPOLAR, OUTPUT_RANGE_BIPOLAR, OUTPUT_RANGE_BIPOLAR, OUTPUT_RANGE_BIPOLAR, OUTPUT_RANGE_BIPOLAR};
+
+void set_output_range(uint8_t output, output_range_type output_range)
+{
+    if (output_ranges_installed)
+    {
+        // output_ranges[output] = output_range;
+        mcp.digitalWrite(output, output_range);
+    }
+}
+
+void output_ranges_begin()
+{
+    if (!mcp.begin_I2C())
+    {
+        Serial.println("MCP not installed. ");
+        output_ranges_installed = false;
+        // adjust output params here?
+    }
+    else
+    {
+        for (int i = 0; i < NUM_OUTPUTS; i++)
+        {
+            mcp.pinMode(i, OUTPUT);
+        }
+    }
+}
+
+void output_ranges_init()
+{
 }
 
 // for the MCP4921

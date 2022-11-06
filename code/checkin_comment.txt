@@ -137,3 +137,21 @@ Safety
  
 Check-in comment for Bonkulator-338 
 Fixes cv affecting other outputs
+ 
+Check-in comment for Bonkulator-339 
+Begins Output Range addition 
+
+Check-in comment for Bonkulator-340 
+Got basics of output range working!
+ 
+Check-in comment for Bonkulator-341 
+Output ranges now works. Senses older board type and limits setting accordingly.
+ 
+Check-in comment for Bonkulator-342 
+The rest of the output ranges needed to be set to OUTPUT in begin(). 
+
+Check-in comment for Bonkulator-343 
+Fixes for output calibrate fxn and macro
+ 
+Check-in comment for Bonkulator-344 
+DAC now uses all 12 bits!

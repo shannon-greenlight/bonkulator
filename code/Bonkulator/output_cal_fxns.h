@@ -6,16 +6,14 @@
 #define OUTPUT_CAL_STATE 3
 #define OUTPUT_CAL_NUM_PARAMS 4
 
-#define OUTPUT_CAL_OFFSET_CORRECTION -512
-
 uint16_t _output_cal_params[OUTPUT_CAL_NUM_PARAMS];
 uint16_t _output_cal_mins[] = {0, 0, 0, 0};
 uint16_t _output_cal_maxs[] = {NUM_OUTPUTS - 1, DAC_FS, 1000, 1};
-uint16_t _output_cal_init_vals[] = {0, 512, 976, 0};
+uint16_t _output_cal_init_vals[] = {0, DAC_MID, 980, 0};
 uint16_t *output_cal_stuff[] = {_output_cal_params, _output_cal_mins, _output_cal_maxs, _output_cal_init_vals};
 String output_cal_labels[] = {"Output: ", "Offset: ", "Scale: ", "Calibrated: "};
 String output_cal_string_params[] = {"", "", "", "No ,Yes"};
-int16_t output_cal_offsets[] = {0, OUTPUT_CAL_OFFSET_CORRECTION, 0}; // allows negative numbers
+int16_t output_cal_offsets[] = {0, -DAC_MID, 0}; // allows negative numbers
 
 Greenface_gadget output_cal_fxn("Calibrate", output_cal_labels, output_cal_stuff, sizeof(_output_cal_params) / sizeof(_output_cal_params[0]));
 
@@ -37,8 +35,7 @@ int get_raw_output_offset_correction(int output)
 
 int get_output_offset_correction(int output)
 {
-    // Serial.println("Get offset correction: for: " + String(output));
-    return output_offset_corrections.get(output) - OUTPUT_CAL_OFFSET_CORRECTION;
+    return output_offset_corrections.get(output) + DAC_MID;
 }
 
 int get_output_scale_correction(int output)
@@ -95,8 +92,7 @@ void output_cal_update_offset()
     int offset = output_cal_fxn.get_param_w_offset(OUTPUT_CAL_OFFSET);
     // ui.terminal_debug("Offset correction: " + String(offset));
     set_output_offset_correction(offset);
-    // dac_out(output_cal_fxn.get_param_w_offset(OUTPUT_CAL_OUTPUT_NUM), offset);
-    dac_out(output_cal_fxn.get_param(OUTPUT_CAL_OUTPUT_NUM), 512 + offset);
+    dac_out(output_cal_fxn.get_param(OUTPUT_CAL_OUTPUT_NUM), DAC_MID + offset);
 }
 
 void output_cal_update_scale()
@@ -169,10 +165,19 @@ void output_cal_begin()
 
 void output_cal_params_macro()
 {
+    // print out code to get to cal fxn
+    String prefix = "*\r\np7\r\n1\r\n!";
+
     Greenface_gadget *fxn = &output_cal_fxn;
     for (int i = 0; i < NUM_OUTPUTS; i++)
     {
         output_cal_fxn.param_put(i, OUTPUT_CAL_OUTPUT_NUM);
-        gen_params_macro(fxn, i == 0);
+        output_cal_update_params();
+        output_cal_update_offset();
+        output_cal_update_scale();
+        output_cal_update_state();
+        gen_params_macro(fxn, i == 0, prefix);
     }
+    outputs_begin();
+    Serial.println("*");
 }

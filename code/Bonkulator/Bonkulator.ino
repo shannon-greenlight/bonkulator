@@ -141,6 +141,9 @@ void init_parameters()
   input_cal_init();
   output_cal_init();
 
+  selected_output.put(0);
+  remembered_fxn.put(0);
+
   // do this last
   selected_output.write_int(EEPROM_INIT_FLAG, EEPROM_INIT_PATTERN);
   selected_output.write_int(EEPROM_OFFSET_FLAG, Greenface_EEPROM::eeprom_offset);
@@ -165,6 +168,7 @@ void select_fxn(int fxn_index)
     settings_fxn.param_num = param_num;
     timer_fxn = &timer_service_settings;
     status_string = "";
+    outputs_begin();
   }
   else
   {
@@ -177,6 +181,8 @@ void select_fxn(int fxn_index)
 }
 
 // the setup function runs once when you press reset or power the board
+// EEPROM_Int init_test = EEPROM_Int(0, 7); // for testing sensing changes to fram
+
 void setup()
 {
   Wire.begin();
@@ -187,13 +193,19 @@ void setup()
   {
   };
 
+  ee_info.begin(false);
+  ee_info.xfer();
+
+  output_ranges_begin();
+
   timer_fxn = &timer_service_outputs;
   selected_output.begin(true);
   selected_output.xfer();
   remembered_fxn.begin(false);
   remembered_fxn.xfer();
-  ee_info.begin(false);
-  ee_info.xfer();
+
+  // init_test.begin(false);
+  // init_test.xfer();
 
   ui.begin(face1);
 
