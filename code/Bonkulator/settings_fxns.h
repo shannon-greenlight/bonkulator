@@ -39,7 +39,7 @@ uint16_t _ask_init_init_vals[] = {0};
 uint16_t *ask_init_stuff[] = {_ask_init_params, _ask_init_mins, _ask_init_maxs, _ask_init_init_vals};
 String ask_init_labels[] = {"Reset: "};
 String ask_init_string_params[] = {"Parameters  ,Input Corrs ,Output Corrs,All         "};
-bool ask_init_param_active[] = {1};
+bool ask_init_param_active[] = {1, 1, 1, 1};
 
 Greenface_gadget ask_init_fxn("Press Activate to: ", ask_init_labels, ask_init_stuff, sizeof(_ask_init_params) / sizeof(_ask_init_params[0]));
 
@@ -178,9 +178,12 @@ void settings_activate()
 
 void settings_init()
 {
+    uint16_t wifi_save = settings_fxn.get_param(SETTINGS_WIFI);
+    wifi_save = constrain(0, 1, wifi_save);
     settings_fxn.string_vars[0].put("Bonky");
     settings_fxn.init();
     ask_init_fxn.init();
+    settings_fxn.param_put(wifi_save, SETTINGS_WIFI);
 }
 
 void settings_begin()
@@ -194,6 +197,7 @@ void settings_begin()
     settings_fxn.active_params = settings_param_active;
     ask_init_fxn.begin();
     ask_init_fxn.string_params = ask_init_string_params;
+    ask_init_fxn.active_params = ask_init_param_active;
 }
 
 void timer_service_settings()

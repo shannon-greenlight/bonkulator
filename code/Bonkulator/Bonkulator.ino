@@ -136,7 +136,6 @@ void init_parameters()
   init_all_outputs();
   user_waveforms_init();
   settings_init();
-  wifi_init();
 
   input_cal_init();
   output_cal_init();
@@ -154,6 +153,7 @@ void init_all()
   input_corrections_init();
   output_corrections_init();
   init_parameters();
+  wifi_init();
 }
 
 void select_fxn(int fxn_index)

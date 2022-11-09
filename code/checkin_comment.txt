@@ -154,4 +154,10 @@ Check-in comment for Bonkulator-343
 Fixes for output calibrate fxn and macro
  
 Check-in comment for Bonkulator-344 
-DAC now uses all 12 bits!
+DAC now uses all 12 bits! 
+
+Check-in comment for Bonkulator-345
+Updated bonk_cp
+ 
+Check-in comment for Bonkulator-346 
+Now you can reset parameters via web and it doesn't cut the connection.
