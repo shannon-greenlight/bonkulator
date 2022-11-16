@@ -30,7 +30,7 @@ R24 R25 R26 R27 R52 R53 R54 R55 ,8,"332K .1%","Resistor_SMD:R_0805_2012Metric_Pa
 R28 R33 ,2,"30.1K .1%","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","","P332KDACT-ND","C374678","","","","","","","","",""
 R29 R31 R34 R36 ,4,"10K .1%","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","","","C406725","","","","","","","","",""
 R30 R35 ,2,"4.3K","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","","311-43KARCT-ND","C17667","","","","","","","","",""
-R38 R39 R69 R70 R71 R72 R97 R98 R99 R100 ,10,"1K","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","","311-10KARCT-ND","C17513","","","","","","","","",""
+R38 R39 R69 R70 R71 R72 R97 R98 R99 R100 ,10,"2.2K","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","","311-10KARCT-ND","C17520","","","","","","","","",""
 R5 R6 R7 R8 ,4,"300","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","","311-10KARCT-ND","C17617","","","","","","","","",""
 R59 R60 ,2,"680","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","","RMCF0805JT20K0CT-ND","C17798","","","","","","","","",""
 R9 ,1,"200K .1%","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","","P200KDACT-ND","C332260","","","","","","","","",""
