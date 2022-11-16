@@ -136,9 +136,12 @@ void do_server()
   WiFiClient client = server.available(); // listen for incoming clients
 
   if (client)
-  { // if you get a client,
-    // Serial.println("new client"); // print a message out the serial port
-    status_string = ("Do server. Client: " + String(client));
+  { // if you get a client, and not released code
+    if (!IS_RELEASE)
+    {
+      // status_string = ("Do server. Client: " + String(client));
+      Serial.println("new client"); // print a message out the serial port
+    }
     String currentLine = ""; // make a String to hold incoming data from the client
     while (client.connected())
     { // loop while the client's connected
