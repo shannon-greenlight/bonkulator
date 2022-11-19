@@ -161,3 +161,44 @@ Updated bonk_cp
  
 Check-in comment for Bonkulator-346 
 Now you can reset parameters via web and it doesn't cut the connection.
+ 
+Check-in comment for Bonkulator-347 
+Adds debug message to wifi_ui.h 
+
+Check-in comment for Bonkulator-348 
+Fixes to Pulse waveforms
+ 
+Check-in comment for Bonkulator-349
+More fixes to Pulse waveforms
+ 
+Check-in comment for Bonkulator-350 
+Safety 
+
+Check-in comment for Bonkulator-351 
+Fixes pulse.
+ 
+Check-in comment for Bonkulator-352 
+Adds Haystack waveform 
+
+Check-in comment for Bonkulator-353 
+Adds Pyramid waveform
+ 
+Check-in comment for Bonkulator-354 
+Adds Maytag
+ 
+Check-in comment for Bonkulator-355 
+Some cleanup of waveform code
+ 
+Check-in comment for Bonkulator-356 
+Changes Post Delay to Idle Time
+ 
+Check-in comment for Bonkulator-357 
+Changed Period to Active Time
+ 
+Check-in comment for Bonkulator-358 
+Move to using all 16 bits for params.
+Safety check-in 
+
+Check-in comment for Bonkulator-359 
+Tidy up last references to "period"
+

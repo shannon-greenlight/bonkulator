@@ -64,7 +64,7 @@ String list_fxns()
 
 void send_data_to_client(WiFiClient client, char cmd)
 {
-  // ui.terminal_debug("Send data to client: " + String(cmd));
+  // ui.terminal_debug("Send data to client: " + String(selected_fxn->get_param(OUTPUT_WAVEFORM)));
   if (cmd == '[')
     return;
   client.print(toJSON("fxn", selected_fxn->name));
@@ -94,6 +94,8 @@ void send_data_to_client(WiFiClient client, char cmd)
   client.print(toJSON("offset_max", "100"));
   client.print(",");
   client.print(toJSON("offset_min", "-100"));
+  client.print(",");
+  client.print(toJSON("scale_min", "-100"));
   client.print(",");
   client.print(toJSON("scale_max", "100"));
   client.print(",");
@@ -137,7 +139,7 @@ void do_server()
 
   if (client)
   { // if you get a client, and not released code
-    if (!IS_RELEASE)
+    if (!IS_RELEASE && false)
     {
       // status_string = ("Do server. Client: " + String(client));
       Serial.println("new client"); // print a message out the serial port

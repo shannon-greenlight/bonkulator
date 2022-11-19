@@ -42,11 +42,11 @@ int cv_time_inc(int cv, float param)
     return constrain(val, TIME_INC_MIN, TIME_INC_MAX);
 }
 
-int cv_period(int cv, float param, int output)
+int cv_active_time(int cv, float param, int output)
 {
     int val = cv_scale_pow(cv, param);
-    val = constrain(val, PERIOD_MIN, PERIOD_MAX);
-    // outputs[output].period = val;
+    val = constrain(val, ACTIVE_TIME_MIN, MAX_MS);
+    // outputs[output].active_time = val;
     // set_waveform(output, (*bonk_outputs[output]).get_param(OUTPUT_WAVEFORM));
     // update_waveform();
     // ui.terminal_debug("CV: " + String(cv) + " Val: " + String(val) + " Output: " + String(output));
@@ -81,7 +81,7 @@ void cv_set(int cv_num, int output, int16_t cv_val)
 
     if (cv_type > 0)
     {
-        int ui_period;
+        int ui_active_time;
         int16_t *cv_mem;
         switch (cv_num)
         {
@@ -97,12 +97,12 @@ void cv_set(int cv_num, int output, int16_t cv_val)
 
         if (abs(cv_val - *cv_mem) > 2)
         {
-            // Serial.println("Period: " + String(outptr->period));
+            // Serial.println("Active time: " + String(outptr->active_time));
             // Serial.println("CV val: " + String(cv_val) + " mem: " + String(*cv_mem));
             // int16_t toffset;
             static float temp_offset;
             static float temp_scale;
-            static uint16_t temp_period;
+            static uint16_t temp_active_time;
 
             // now set value
             switch (cv_type)
@@ -144,11 +144,11 @@ void cv_set(int cv_num, int output, int16_t cv_val)
                     }
                 }
                 break;
-            case CV_PERIOD:
-                ui_period = (*bonk_outputs[output]).get_param(OUTPUT_PERIOD);
-                if (sole_cv(cv_num, CV_PERIOD, bonk_output))
+            case CV_ACTIVE_TIME:
+                ui_active_time = (*bonk_outputs[output]).get_param(OUTPUT_ACTIVE_TIME);
+                if (sole_cv(cv_num, CV_ACTIVE_TIME, bonk_output))
                 {
-                    outptr->period = cv_period(cv_val, (float)ui_period, output);
+                    outptr->active_time = cv_active_time(cv_val, (float)ui_active_time, output);
                 }
                 else
                 {
@@ -156,10 +156,10 @@ void cv_set(int cv_num, int output, int16_t cv_val)
                     switch (cv_num)
                     {
                     case OUTPUT_CV0:
-                        temp_period = cv_period(cv_val, (float)ui_period, output);
+                        temp_active_time = cv_active_time(cv_val, (float)ui_active_time, output);
                         break;
                     case OUTPUT_CV1:
-                        outptr->period = cv_period(cv_val, (float)temp_period, output);
+                        outptr->active_time = cv_active_time(cv_val, (float)temp_active_time, output);
                         break;
                     }
                 }

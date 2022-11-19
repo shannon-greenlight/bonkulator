@@ -16,7 +16,7 @@ typedef struct
     bool ok_set_idle;
     int16_t cv0_val[NUM_OUTPUTS];
     int16_t cv1_val[NUM_OUTPUTS];
-    uint16_t period; // range 10 -> 32767
+    uint16_t active_time; // range 10 -> 32767
 } OutputData;
 
 uint16_t waveform0_ref[WAVEFORM_PARTS];

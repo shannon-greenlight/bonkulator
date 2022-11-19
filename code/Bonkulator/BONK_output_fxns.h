@@ -3,9 +3,9 @@
 enum
 {
     OUTPUT_WAVEFORM,
-    OUTPUT_PERIOD,
     OUTPUT_INIT_DELAY,
-    OUTPUT_POST_DELAY,
+    OUTPUT_ACTIVE_TIME,
+    OUTPUT_IDLE_TIME,
     OUTPUT_REPEAT,
     OUTPUT_ENABLE_T0,
     OUTPUT_ENABLE_T1,
@@ -25,45 +25,46 @@ enum
 
 // pre-installed waveforms
 #define WAVEFORM_SINE 0
-#define WAVEFORM_INV_SINE 1
-#define WAVEFORM_RAMP_UP 2
-#define WAVEFORM_RAMP_DN 3
+#define WAVEFORM_HAYSTACK 1
+#define WAVEFORM_RAMP 2
+#define WAVEFORM_PYRAMID 3
 #define WAVEFORM_PULSE 4
-#define WAVEFORM_INV_PULSE 5
+#define WAVEFORM_MAYTAG 5
 #define WAVEFORM_TOGGLE 6
 #define NUM_STD_WAVEFORMS 7
 #define NUM_WAVEFORMS 15
 
-#define INIT_STD_WAVEFORMS "Sine,Inv Sine,Ramp Up,Ramp Down,Pulse,Inv Pulse,Toggle"
-#define INIT_WAVEFORMS "Sine,Inv Sine,Ramp Up,Ramp Down,Pulse,Inv Pulse,Toggle,User 0,User 1,User 2,User 3,User 4,User 5,User 6,User 7"
+#define INIT_STD_WAVEFORMS "Sine,Haystack,Ramp,Pyramid,Pulse,Maytag,Toggle"
+#define INIT_WAVEFORMS "Sine,Haystack,Ramp,Pyramid,Pulse,Maytag,Toggle,User 0,User 1,User 2,User 3,User 4,User 5,User 6,User 7"
 
 // used by timer.h
 #define CV_OFF 0
 #define CV_SCALE 1
 #define CV_OFFSET 2
-#define CV_PERIOD 3
+#define CV_ACTIVE_TIME 3
 #define CV_IDLE_VALUE 4
 #define CV_RANDOMNESS 5
 
-#define CV_TYPES "Off   ,Scale ,Offset,Period,Idle Value,Randomness"
+#define CV_TYPES "Off   ,Scale ,Offset,Active Time,Idle Value,Randomness"
 
 #define TIME_INC_MIN 1
 #define TIME_INC_MAX 32000
 
-#define PERIOD_MIN 10
-#define PERIOD_MAX 32767
+#define ACTIVE_TIME_MIN 10
+#define MAX_MS 65535
 #define DELAY_MAX 32767
 
+#define OUTPUT_SCALE_OFFSET -100
 #define OUTPUT_OFFSET_OFFSET -100
 
 #define TRIGGER_STATES F("Disabled,Enabled ")
 
-uint16_t _output_mins[] = {0, PERIOD_MIN, 0, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 0, 0, 0, 0, 0, 0, OUTPUT_RANGE_BIPOLAR};
-uint16_t _output_maxs[] = {NUM_WAVEFORMS - 1, PERIOD_MAX, DELAY_MAX, DELAY_MAX, 32767, 1, 1, 1, 1, CV_RANDOMNESS, CV_RANDOMNESS, 100, 200, 99, 1, DAC_FS, 1, OUTPUT_RANGE_UNIPOLAR};
-uint16_t _output_init_vals[] = {0, 128, 0, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 100, 100, 0, 0, DAC_MID, 0, OUTPUT_RANGE_BIPOLAR};
-String output_labels[] = {"Waveform: ", "Period/Parts: ", "Init Delay: ", "Post Delay: ", "Repeat: ", "T0: ", "T1: ", "T2: ", "T3: ", "CV0: ", "CV1: ", "Scale: ", "Offset: ", "Randomness: ", "Quantize: ", "Idle Value: ", "Clock: ", "Range: "};
+uint16_t _output_mins[] = {0, 0, ACTIVE_TIME_MIN, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 0, 0, 0, 0, 0, 0, OUTPUT_RANGE_BIPOLAR};
+uint16_t _output_maxs[] = {NUM_WAVEFORMS - 1, DELAY_MAX, MAX_MS, DELAY_MAX, 32767, 1, 1, 1, 1, CV_RANDOMNESS, CV_RANDOMNESS, 200, 200, 99, 1, DAC_FS, 1, OUTPUT_RANGE_UNIPOLAR};
+uint16_t _output_init_vals[] = {0, 0, 128, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 200, 100, 0, 0, DAC_MID, 0, OUTPUT_RANGE_BIPOLAR};
+String output_labels[] = {"Waveform: ", "Init Delay: ", "Active Time/Parts: ", "Idle Time: ", "Repeat: ", "T0: ", "T1: ", "T2: ", "T3: ", "CV0: ", "CV1: ", "Scale: ", "Offset: ", "Randomness: ", "Quantize: ", "Idle Value: ", "Clock: ", "Range: "};
 String output_string_params[] = {INIT_WAVEFORMS, "", "", "", "", TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, CV_TYPES, CV_TYPES, "", "", "", "No ,Yes", "", "Internal,External", "+/-5V,0-10V"};
-int16_t output_offsets[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_OFFSET_OFFSET, 0, 0, 0, 0, 0}; // allows negative numbers
+int16_t output_offsets[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_SCALE_OFFSET, OUTPUT_OFFSET_OFFSET, 0, 0, 0, 0, 0}; // allows negative numbers
 
 // Output definitions
 uint16_t _output0_params[NUM_OUTPUT_PARAMS];
@@ -294,15 +295,20 @@ void output_display()
     switch (wave_num)
     {
     case WAVEFORM_TOGGLE:
-        (the_output)().alt_values[OUTPUT_PERIOD] = "N/A";
-        (the_output)().alt_values[OUTPUT_POST_DELAY] = "N/A";
+        (the_output)().alt_values[OUTPUT_ACTIVE_TIME] = "N/A";
+        (the_output)().alt_values[OUTPUT_IDLE_TIME] = "N/A";
         (the_output)().alt_values[OUTPUT_REPEAT] = "N/A";
         break;
+    case WAVEFORM_PULSE:
+        (the_output)().alt_values[OUTPUT_OFFSET] = "N/A";
+        // (the_output)().labels[OUTPUT_ACTIVE_TIME] = "Active Time: ";
+        // (the_output)().labels[OUTPUT_IDLE_TIME] = "Idle Time: ";
+        break;
     default:
-        // update_clock();
-        (the_output)().alt_values[OUTPUT_PERIOD] = "";
-        (the_output)().alt_values[OUTPUT_POST_DELAY] = "";
+        (the_output)().alt_values[OUTPUT_ACTIVE_TIME] = "";
+        (the_output)().alt_values[OUTPUT_IDLE_TIME] = "";
         (the_output)().alt_values[OUTPUT_REPEAT] = "";
+        (the_output)().alt_values[OUTPUT_OFFSET] = "";
         break;
     }
 
@@ -419,9 +425,10 @@ void update_waveform()
     set_waveform(selected_output.get(), wave_num);
 }
 
-void update_period()
+void update_active_time()
 {
-    outputs[selected_output.get()].period = (the_output)().get_param(OUTPUT_PERIOD);
+    ui.terminal_debug("Active time: " + String((the_output)().get_param(OUTPUT_ACTIVE_TIME)));
+    outputs[selected_output.get()].active_time = (the_output)().get_param(OUTPUT_ACTIVE_TIME);
     update_waveform();
 }
 
@@ -486,17 +493,17 @@ void update_clock()
     switch ((the_output)().get_param(OUTPUT_CLOCK))
     {
     case 1:
-        (the_output)().labels[OUTPUT_PERIOD] = "Parts: ";
-        (the_output)().maxs[OUTPUT_PERIOD] = WAVEFORM_PARTS;
+        (the_output)().labels[OUTPUT_ACTIVE_TIME] = "Parts: ";
+        (the_output)().maxs[OUTPUT_ACTIVE_TIME] = WAVEFORM_PARTS;
         (the_output)().alt_values[OUTPUT_INIT_DELAY] = "N/A";
-        (the_output)().alt_values[OUTPUT_POST_DELAY] = "N/A";
+        (the_output)().alt_values[OUTPUT_IDLE_TIME] = "N/A";
         (the_output)().alt_values[OUTPUT_REPEAT] = "N/A";
         break;
     case 0:
-        (the_output)().labels[OUTPUT_PERIOD] = "Period: ";
-        (the_output)().maxs[OUTPUT_PERIOD] = PERIOD_MAX;
+        (the_output)().labels[OUTPUT_ACTIVE_TIME] = "Active Time: ";
+        (the_output)().maxs[OUTPUT_ACTIVE_TIME] = MAX_MS;
         (the_output)().alt_values[OUTPUT_INIT_DELAY] = "";
-        (the_output)().alt_values[OUTPUT_POST_DELAY] = "";
+        (the_output)().alt_values[OUTPUT_IDLE_TIME] = "";
         (the_output)().alt_values[OUTPUT_REPEAT] = "";
         break;
     }
@@ -511,8 +518,8 @@ void output_update_range()
 
 update_fxn output_update_fxns[NUM_OUTPUT_PARAMS] = {
     update_and_graph_waveform,
-    update_period,
     nullptr,
+    update_active_time,
     nullptr,
     nullptr,
     output_update_trigger,
@@ -541,7 +548,7 @@ void outputs_begin()
         output->offsets = output_offsets;
         output->display_fxn = &output_display;
         output->alt_values = alt_values[i];
-        outputs[i].period = output->get_param(OUTPUT_PERIOD);
+        outputs[i].active_time = output->get_param(OUTPUT_ACTIVE_TIME);
 
         selected_output.put(i); // required by update_ fxns
         update_idle_value();

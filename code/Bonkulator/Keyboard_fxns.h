@@ -460,7 +460,7 @@ void process_cmd(String in_str)
 		(the_output)().put_param(int_param, OUTPUT_QUANTIZE);
 		break;
 	case 'S':
-		(the_output)().put_param(int_param, OUTPUT_SCALE);
+		(the_output)().put_param_w_offset(int_param, OUTPUT_SCALE);
 		break;
 	case 'R':
 		(the_output)().put_param(int_param, OUTPUT_RANDOMNESS);

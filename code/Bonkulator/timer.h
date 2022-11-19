@@ -74,7 +74,7 @@ void timer_service_outputs()
     {
       if ((*bonk_outputs[i]).triggered)
       {
-        int delay = (*bonk_outputs[i]).get_param(OUTPUT_POST_DELAY);
+        int delay = (*bonk_outputs[i]).get_param(OUTPUT_IDLE_TIME);
         uint16_t trigger_external = (*bonk_outputs[i]).get_param(OUTPUT_CLOCK) == 1;
         (*bonk_outputs[i]).triggered = !trigger_external;
         bool ok_togo = trigger_external ? true : now >= outptr->next_time;
@@ -82,7 +82,7 @@ void timer_service_outputs()
         {
           if (outptr->current_index == outptr->data_len)
           {
-            // start of delay period
+            // start of delay active_time
             send_idle_value(i);
           }
           else
