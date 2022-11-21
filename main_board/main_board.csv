@@ -2,7 +2,7 @@ Reference, Quantity, Value, Footprint, Datasheet, Digi-Key Part,  LCSC Part #, C
 A1 ,1,"Arduino_Nano_RP2040_Connect","Module:Arduino_Nano","","1050-ABX00053-ND","","","","","","","","","",""
 C1 C2 ,2,"100uF","Capacitor_SMD:CP_Elec_6.3x5.4_Nichicon","http://www.rubycon.co.jp/en/catalog/e_pdfs/aluminum/e_ml.pdf","399-EDH107M016A9GAACT-ND","C2887272","","","","","","","","",""
 C11 C12 C13 C26 C44 C45 C46 C47 C48 C49 C50 C51 ,12,"10nF","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","http://datasheets.avx.com/SR-Series.pdf","311-1136-1-ND","C1710","","","","","","","","",""
-C3 C4 C5 C6 C8 C9 C14 C15 C16 C17 C18 C19 C20 C21 C22 C23 C24 C25 C27 C28 C29 C30 C32 C33 C34 C35 C36 C37 C38 C39 C40 C41 C42 ,33,"100nF","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","http://datasheets.avx.com/SR-Series.pdf","478-10836-1-ND","C49678","","","","","","","","",""
+C3 C4 C5 C6 C8 C9 C14 C15 C16 C17 C18 C19 C20 C21 C22 C23 C24 C25 C27 C28 C29 C30 C32 C33 C34 C35 C36 C37 C38 C39 C40 C41 C42 C52 C53 C54 C55 ,37,"100nF","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","http://datasheets.avx.com/SR-Series.pdf","478-10836-1-ND","C49678","","","","","","","","",""
 C31 ,1,"330nF","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","http://datasheets.avx.com/SR-Series.pdf","311-1888-1-ND","C1740","","","","","","","","",""
 C7 C10 C43 ,3,"1uF","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","http://datasheets.avx.com/SR-Series.pdf","311-1888-1-ND","C28323","","","","","","","","",""
 D1 D2 D3 D4 D5 D6 D7 D8 D13 D14 D15 D16 D17 D18 D39 D40 D41 D42 ,18,"1N5819","Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder","","478-7800-1-ND","C191023","","","","","","","","",""
