@@ -166,7 +166,7 @@ void cv_set(int cv_num, int output, int16_t cv_val)
                 set_waveform(output, (*bonk_outputs[output]).get_param(OUTPUT_WAVEFORM));
                 break;
             case CV_IDLE_VALUE:
-                set_idle_value(cv_val / 4, output);
+                set_idle_value(cv_val, output);
                 break;
             case CV_RANDOMNESS:
                 set_randomness_factor(cv_val * 100.0 / ADC_FS, bonk_output.get_param(OUTPUT_SCALE) / 100.0, output);

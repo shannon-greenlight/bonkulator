@@ -202,3 +202,9 @@ Safety check-in
 Check-in comment for Bonkulator-359 
 Tidy up last references to "period"
 
+Check-in comment for Bonkulator-360 
+Adds WiFi Signal Strength to Terminal Status
+ 
+Check-in comment for Bonkulator-361 
+Fixes status string so that it is stable after keypresses.
+It centers correctly now.
