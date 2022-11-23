@@ -7,10 +7,12 @@
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 Greenface_ui ui(&display, PRODUCT_NAME);
 
+String old_status = "";
 void terminal_print_status(bool force = false)
 {
-  static String old_status = "";
+  // static String old_status = "";
   int pos = TERMINAL_WIDTH / 2 - status_string.length() / 2;
+  pos = pos + pos % 2;
   if (ui.terminal_mirror & (status_string != old_status || force))
   {
     ui.t.setCursor(STATUS_ROW, "1");

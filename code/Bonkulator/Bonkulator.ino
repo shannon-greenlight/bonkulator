@@ -237,13 +237,16 @@ void loop()
 {
   static bool toggle = false;
   static unsigned long cnt = 0;
+  bool debug = false;
   // static unsigned long now;
 
   check_keyboard();
-  // ui.terminal_debug("Keyboard checked");
+  if (debug)
+    ui.terminal_debug("Keyboard checked");
 
   check_serial();
-  // ui.terminal_debug("Serial checked");
+  if (debug)
+    ui.terminal_debug("Serial checked");
 
   if (in_output_fxn())
   {
@@ -262,16 +265,19 @@ void loop()
     status_string = check_input_cal();
   }
 
-  terminal_print_status();
-
-  check_wifi();
-  // ui.terminal_debug("Server checked");
+  check_wifi(&status_string);
+  if (debug)
+    ui.terminal_debug("Server checked");
 
   check_rotary_encoder();
-  // ui.terminal_debug("Encoder checked");
+  if (debug)
+    ui.terminal_debug("Encoder checked");
+
+  terminal_print_status();
 
   ui.check_inactivity_timer(settings_get_inactivity_timeout());
-  // ui.terminal_debug("Inactivity checked");
+  if (debug)
+    ui.terminal_debug("Inactivity checked");
 
   if (cnt++ > 1)
   {

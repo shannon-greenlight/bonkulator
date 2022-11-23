@@ -240,10 +240,22 @@ void do_server()
   }
 }
 
-void check_wifi()
+void check_wifi(String *ss)
 {
   if (wifi_enabled() && wifi_active.get())
   {
     do_server();
+    if (*ss > "")
+    {
+      int wifi_strength = WiFi.RSSI() / 10 + 8;
+      wifi_strength = constrain(wifi_strength, 0, 4);
+      String bars = "";
+      for (int i = 0; i < wifi_strength; i++)
+      {
+        bars += "|";
+      }
+      // status_string += ("Wifi: " + String(WiFi.RSSI()) + "dBm " + String(wifi_strength) + "bars");
+      *ss += ("Wifi: " + bars);
+    }
   }
 }
