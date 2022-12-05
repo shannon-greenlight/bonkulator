@@ -5,70 +5,80 @@
 #define encoder0PinB ROTARY_B_PIN
 
 volatile int encoder0Pos = 0;
+volatile long encodeTime;
 int oldPosition = 0;
+uint8_t wait_time = 102;
 
 void doEncoderA()
 {
-  // look for a low-to-high on channel A
-  if (digitalRead(encoder0PinA) == HIGH)
+  if (millis() > encodeTime + wait_time)
   {
+    // look for a low-to-high on channel A
+    if (digitalRead(encoder0PinA) == HIGH)
+    {
 
-    // check channel B to see which way encoder is turning
-    if (digitalRead(encoder0PinB) == LOW)
-    {
-      encoder0Pos += 1; // CW
+      // check channel B to see which way encoder is turning
+      if (digitalRead(encoder0PinB) == LOW)
+      {
+        encoder0Pos += 1; // CW
+      }
+      else
+      {
+        encoder0Pos += -1; // CCW
+      }
     }
-    else
-    {
-      encoder0Pos += -1; // CCW
-    }
-  }
 
-  else // must be a high-to-low edge on channel A
-  {
-    // check channel B to see which way encoder is turning
-    if (digitalRead(encoder0PinB) == HIGH)
+    else // must be a high-to-low edge on channel A
     {
-      encoder0Pos += 1; // CW
+      // check channel B to see which way encoder is turning
+      if (digitalRead(encoder0PinB) == HIGH)
+      {
+        encoder0Pos += 1; // CW
+      }
+      else
+      {
+        encoder0Pos += -1; // CCW
+      }
     }
-    else
-    {
-      encoder0Pos += -1; // CCW
-    }
+    encodeTime = millis();
+    // Serial.println(encoder0Pos, DEC);
+    // use for debugging - remember to comment out
   }
-  // Serial.println(encoder0Pos, DEC);
-  // use for debugging - remember to comment out
 }
 
 void doEncoderB()
 {
-  // look for a low-to-high on channel B
-  if (digitalRead(encoder0PinB) == HIGH)
+  if (millis() > encodeTime + wait_time)
   {
-
-    // check channel A to see which way encoder is turning
-    if (digitalRead(encoder0PinA) == HIGH)
+    // look for a low-to-high on channel B
+    if (digitalRead(encoder0PinB) == HIGH)
     {
-      encoder0Pos += 1; // CW
+
+      // check channel A to see which way encoder is turning
+      if (digitalRead(encoder0PinA) == HIGH)
+      {
+        encoder0Pos += 1; // CW
+      }
+      else
+      {
+        encoder0Pos += -1; // CCW
+      }
     }
+
+    // Look for a high-to-low on channel B
     else
     {
-      encoder0Pos += -1; // CCW
+      // check channel B to see which way encoder is turning
+      if (digitalRead(encoder0PinA) == LOW)
+      {
+        encoder0Pos += 1; // CW
+      }
+      else
+      {
+        encoder0Pos += -1; // CCW
+      }
     }
-  }
-
-  // Look for a high-to-low on channel B
-  else
-  {
-    // check channel B to see which way encoder is turning
-    if (digitalRead(encoder0PinA) == LOW)
-    {
-      encoder0Pos += 1; // CW
-    }
-    else
-    {
-      encoder0Pos += -1; // CCW
-    }
+    encodeTime = millis();
   }
 }
 
