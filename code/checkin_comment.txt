@@ -207,4 +207,14 @@ Adds WiFi Signal Strength to Terminal Status
  
 Check-in comment for Bonkulator-361 
 Fixes status string so that it is stable after keypresses.
-It centers correctly now.
+It centers correctly now. 
+
+Check-in comment for Bonkulator-362 
+Fixes CV range. Fix for rotary encoder.
+
+ 
+Check-in comment for Bonkulator-363 
+Adds trigger hold_off
+ 
+Check-in comment for Bonkulator-364 
+Fixes for hold-off. Boots and works correctly. (I think!)

@@ -13,6 +13,11 @@ TRIGGER::TRIGGER(int _trig_num)
 {
     trig_num = _trig_num;
     blanking_period = 0;
+    for (int output_num = 0; output_num < NUM_OUTPUTS; output_num++)
+    {
+        blanking_periods[output_num] = 0;
+        hold_offs[output_num] = 0;
+    }
 }
 
 void TRIGGER::start()
@@ -23,18 +28,18 @@ void TRIGGER::start()
 void TRIGGER::trigger()
 {
     start();
-    if (start_time > blanking_period)
+    state = TRIGGER_ACTIVE;
+    // blanking_period = start_time + hold_off;
+    if (in_output_fxn())
     {
-        state = TRIGGER_ACTIVE;
-        blanking_period = start_time + 5;
-        if (in_output_fxn())
+        for (int output_num = 0; output_num < NUM_OUTPUTS; output_num++)
         {
-            for (int output_num = 0; output_num < NUM_OUTPUTS; output_num++)
+            uint16_t hold_off = hold_offs[output_num];
+            // unsigned long blanking_period = blanking_periods[output_num];
+            if (get_output(output_num) && start_time > blanking_periods[output_num])
             {
-                if (get_output(output_num) == 1)
-                {
-                    trigger_output(trig_num, output_num);
-                }
+                trigger_output(trig_num, output_num);
+                blanking_periods[output_num] = start_time + hold_off;
             }
         }
     }
@@ -74,7 +79,12 @@ void TRIGGER::set_output(int output_num, bool val)
     {
         bitClear(outputs, output_num);
     }
-    // Serial.println("Output_num " + String(output_num) + " val: " + String(outputs));
+}
+
+void TRIGGER::set_hold_off(int output_num, uint16_t hold_off)
+{
+    hold_offs[output_num] = hold_off;
+    // Serial.println(" Holdoff: " + String(hold_off));
 }
 
 bool TRIGGER::get_output(int output_num)
