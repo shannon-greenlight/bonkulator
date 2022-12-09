@@ -5,7 +5,7 @@
 #define encoder0PinB ROTARY_B_PIN
 
 volatile int encoder0Pos = 0;
-volatile long encodeTime;
+volatile unsigned long encodeTime;
 int oldPosition = 0;
 uint8_t wait_time = 102;
 
