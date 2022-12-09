@@ -9,8 +9,6 @@
 Adafruit_ADS1015 ads; /* Use this for the 12-bit version */
 Adafruit_MCP23X08 mcp;
 
-#define NUM_INPUTS 2
-
 Greenface_AD5328 output_device(CS_PIN, DOUT_PIN, CLK_PIN, 0);
 // MCP3021 cv0_device(0x4D);
 // MCP3021 cv1_device(0x53);
