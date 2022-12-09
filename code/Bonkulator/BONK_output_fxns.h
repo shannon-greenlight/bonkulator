@@ -20,7 +20,8 @@ enum
     OUTPUT_IDLE_VALUE,
     OUTPUT_CLOCK,
     OUTPUT_RANGE,
-    OUTPUT_HOLD_OFF,
+    OUTPUT_TRIG_CTRL,
+    OUTPUT_TRIG_CTRL_VAL,
     NUM_OUTPUT_PARAMS
 };
 
@@ -60,12 +61,12 @@ enum
 
 #define TRIGGER_STATES F("Disabled,Enabled ")
 
-uint16_t _output_mins[] = {0, 0, ACTIVE_TIME_MIN, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 0, 0, 0, 0, 0, 0, OUTPUT_RANGE_BIPOLAR, 0};
-uint16_t _output_maxs[] = {NUM_WAVEFORMS - 1, DELAY_MAX, MAX_MS, DELAY_MAX, 32767, 1, 1, 1, 1, CV_RANDOMNESS, CV_RANDOMNESS, 200, 200, 99, 1, DAC_FS, 1, OUTPUT_RANGE_UNIPOLAR, MAX_MS};
-uint16_t _output_init_vals[] = {0, 0, 128, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 200, 100, 0, 0, DAC_MID, 0, OUTPUT_RANGE_BIPOLAR, 5};
-String output_labels[] = {"Waveform: ", "Init Delay: ", "Active Time/Parts: ", "Idle Time: ", "Repeat: ", "T0: ", "T1: ", "T2: ", "T3: ", "CV0: ", "CV1: ", "Scale: ", "Offset: ", "Randomness: ", "Quantize: ", "Idle Value: ", "Clock: ", "Range: ", "Trig Hold-Off: "};
-String output_string_params[] = {INIT_WAVEFORMS, "", "", "", "", TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, CV_TYPES, CV_TYPES, "", "", "", "No ,Yes", "", "Internal,External", "+/-5V,0-10V", ""};
-int16_t output_offsets[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_SCALE_OFFSET, OUTPUT_OFFSET_OFFSET, 0, 0, 0, 0, 0, 0}; // allows negative numbers
+uint16_t _output_mins[] = {0, 0, ACTIVE_TIME_MIN, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 0, 0, 0, 0, 0, 0, OUTPUT_RANGE_BIPOLAR, TRIG_HOLDOFF, 0};
+uint16_t _output_maxs[] = {NUM_WAVEFORMS - 1, DELAY_MAX, MAX_MS, DELAY_MAX, 32767, 1, 1, 1, 1, CV_RANDOMNESS, CV_RANDOMNESS, 200, 200, 99, 1, DAC_FS, 1, OUTPUT_RANGE_UNIPOLAR, TRIG_DENSITY, MAX_MS};
+uint16_t _output_init_vals[] = {0, 0, 128, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 200, 100, 0, 0, DAC_MID, 0, OUTPUT_RANGE_BIPOLAR, TRIG_HOLDOFF, 5};
+String output_labels[] = {"Waveform: ", "Init Delay: ", "Active Time/Parts: ", "Idle Time: ", "Repeat: ", "T0: ", "T1: ", "T2: ", "T3: ", "CV0: ", "CV1: ", "Scale: ", "Offset: ", "Randomness: ", "Quantize: ", "Idle Value: ", "Clock: ", "Range: ", "Trig Crtl: ", "Trig Holdoff: "};
+String output_string_params[] = {INIT_WAVEFORMS, "", "", "", "", TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, CV_TYPES, CV_TYPES, "", "", "", "No ,Yes", "", "Internal,External", "+/-5V,0-10V", "Hold_Off,Skip,Density", ""};
+int16_t output_offsets[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_SCALE_OFFSET, OUTPUT_OFFSET_OFFSET, 0, 0, 0, 0, 0, 0, 0}; // allows negative numbers
 
 // Output definitions
 uint16_t _output0_params[NUM_OUTPUT_PARAMS];
@@ -127,9 +128,11 @@ String alt_values0[NUM_OUTPUT_PARAMS] = {
     "",
     "",
     "",
+    "",
 };
 
 String alt_values1[NUM_OUTPUT_PARAMS] = {
+    "",
     "",
     "",
     "",
@@ -165,9 +168,11 @@ String alt_values2[NUM_OUTPUT_PARAMS] = {
     "",
     "",
     "",
+    "",
 };
 
 String alt_values3[NUM_OUTPUT_PARAMS] = {
+    "",
     "",
     "",
     "",
@@ -203,9 +208,11 @@ String alt_values4[NUM_OUTPUT_PARAMS] = {
     "",
     "",
     "",
+    "",
 };
 
 String alt_values5[NUM_OUTPUT_PARAMS] = {
+    "",
     "",
     "",
     "",
@@ -241,9 +248,11 @@ String alt_values6[NUM_OUTPUT_PARAMS] = {
     "",
     "",
     "",
+    "",
 };
 
 String alt_values7[NUM_OUTPUT_PARAMS] = {
+    "",
     "",
     "",
     "",
@@ -393,7 +402,7 @@ void output_update_trigger()
     // Greenface_gadget output = *bonk_outputs[selected_output.get()];
     int trig_num = (the_output)().param_num - OUTPUT_ENABLE_T0;
     int trig_type = (the_output)().get_param();
-    int trig_hold_off = (the_output)().get_param(OUTPUT_HOLD_OFF);
+    // int trig_hold_off = (the_output)().get_param(OUTPUT_TRIG_CTRL_VAL);
     // Serial.println("Selected output: " + String(selected_output.get()) + " trigger: " + String(trig_num) + " trig_holdoff: " + String(trig_hold_off));
     switch (trig_num)
     {
@@ -457,12 +466,35 @@ void set_idle_value(uint16_t val, int output)
     outptr->idle_value = val + get_raw_output_offset_correction(output);
 }
 
-void update_hold_offs()
+void update_trig_ctrl_vals()
 {
     for (int i = 0; i < NUM_TRIGGERS; i++)
     {
-        (*triggers)->set_hold_off(selected_output.get(), (the_output)().get_param(OUTPUT_HOLD_OFF));
+        (*triggers)->set_trig_ctrls(selected_output.get(), (the_output)().get_param(OUTPUT_TRIG_CTRL), (the_output)().get_param(OUTPUT_TRIG_CTRL_VAL));
     }
+}
+
+void update_trig_ctrl()
+{
+    // Serial.println("update_trig_ctrl: " + String((the_output)().get_param(OUTPUT_TRIG_CTRL)));
+    switch ((the_output)().get_param(OUTPUT_TRIG_CTRL))
+    {
+    case TRIG_HOLDOFF:
+        (the_output)().labels[OUTPUT_TRIG_CTRL_VAL] = "Trig Holdoff: ";
+        (the_output)().maxs[OUTPUT_TRIG_CTRL_VAL] = MAX_MS;
+        break;
+    case TRIG_SKIP:
+        (the_output)().labels[OUTPUT_TRIG_CTRL_VAL] = "Trig Skip: ";
+        (the_output)().maxs[OUTPUT_TRIG_CTRL_VAL] = MAX_MS;
+        break;
+    case TRIG_DENSITY:
+        (the_output)().labels[OUTPUT_TRIG_CTRL_VAL] = "Trig Density: ";
+        (the_output)().maxs[OUTPUT_TRIG_CTRL_VAL] = 100; // 100%
+        break;
+    }
+    // now set value in case the max was changed
+    (the_output)().param_put((the_output)().get_param(OUTPUT_TRIG_CTRL_VAL), OUTPUT_TRIG_CTRL_VAL);
+    update_trig_ctrl_vals();
 }
 
 // randomness range 0:100, scale range 0.0:1.0
@@ -545,7 +577,8 @@ update_fxn output_update_fxns[NUM_OUTPUT_PARAMS] = {
     update_idle_value,
     update_clock,
     output_update_range,
-    update_hold_offs};
+    update_trig_ctrl,
+    update_trig_ctrl_vals};
 
 void outputs_begin()
 {
@@ -564,7 +597,7 @@ void outputs_begin()
         selected_output.put(i); // required by update_ fxns
         update_idle_value();
         update_clock();
-        update_hold_offs();
+        update_trig_ctrl_vals();
         if (output_ranges_installed)
         {
             output_update_range();
@@ -583,6 +616,7 @@ void outputs_begin()
         set_waveform(i, output->get_param(OUTPUT_WAVEFORM));
     }
     selected_output.put(output_memory);
+    update_trig_ctrl();
 }
 
 void check_outputs()
