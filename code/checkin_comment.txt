@@ -218,3 +218,16 @@ Adds trigger hold_off
  
 Check-in comment for Bonkulator-364 
 Fixes for hold-off. Boots and works correctly. (I think!)
+ 
+Check-in comment for Bonkulator-365 
+Starting to add trig skip and density.
+ 
+Check-in comment for Bonkulator-366 
+Safety check-in
+ 
+Check-in comment for Bonkulator-367 
+Adds trig skip 
+
+Check-in comment for Bonkulator-368 
+Labels for trig ctrl begin properly now.
+
