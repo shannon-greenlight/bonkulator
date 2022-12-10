@@ -183,7 +183,7 @@ void settings_init()
     settings_fxn.string_vars[0].put("Bonky");
     settings_fxn.init();
     ask_init_fxn.init();
-    settings_fxn.param_put(wifi_save, SETTINGS_WIFI);
+    // settings_fxn.param_put(wifi_save, SETTINGS_WIFI);
 }
 
 void settings_begin()
