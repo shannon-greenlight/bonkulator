@@ -72,7 +72,7 @@ String check_output_triggers()
     {
         if ((*bonk_outputs[i]).get_param(OUTPUT_CLOCK) == 1)
         {
-            t = " EXT";
+            t = " X" + String(bonk_output(i).triggered_by) + "  ";
         }
         else
         {
