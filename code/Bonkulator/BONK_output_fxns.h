@@ -596,7 +596,6 @@ void outputs_begin()
 
         selected_output.put(i); // required by update_ fxns
         update_idle_value();
-        update_clock();
         update_trig_ctrl_vals();
         if (output_ranges_installed)
         {
@@ -616,6 +615,7 @@ void outputs_begin()
         set_waveform(i, output->get_param(OUTPUT_WAVEFORM));
     }
     selected_output.put(output_memory);
+    update_clock();
     update_trig_ctrl();
 }
 
