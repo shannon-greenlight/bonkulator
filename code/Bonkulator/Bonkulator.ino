@@ -129,6 +129,8 @@ uint8_t selected_fxn_num = 0;
 #include "waveform_fxns.h"
 #include "trigger_fxns.h"
 
+// EEPROM_Int init_test = EEPROM_Int(0, 7); // for testing sensing changes to fram
+
 // EEO must come after last EEPROM var is declared
 #define EEO Greenface_EEPROM::eeprom_offset
 void init_parameters()
@@ -181,7 +183,6 @@ void select_fxn(int fxn_index)
 }
 
 // the setup function runs once when you press reset or power the board
-// EEPROM_Int init_test = EEPROM_Int(0, 7); // for testing sensing changes to fram
 
 void setup()
 {
@@ -207,7 +208,8 @@ void setup()
   // init_test.begin(false);
   // init_test.xfer();
 
-  ui.begin(face1);
+  // delay as bit before starting or else CRASH!!!
+  delay(500);
 
   hardware_begin();
   timer_begin();
@@ -217,18 +219,28 @@ void setup()
   input_cal_begin();
   output_cal_begin();
   rotary_encoder_begin();
+  outputs_begin();
+  user_waveforms_begin();
 
+  ui.initDisplay();
+  wifi_begin();
   if (!eeprom_is_initialized())
   {
     Serial.println(F("EEPROM is not initialized!"));
     init_all();
+
+    // re-begin eeprom stuff
+    settings_begin();
+    input_cal_begin();
+    output_cal_begin();
+    outputs_begin();
+    user_waveforms_begin();
+
     selected_output.test();
   }
-  outputs_begin();
-  user_waveforms_begin();
 
-  wifi_begin();
   Serial.println("Howdy!");
+  ui.begin(face1);
   select_fxn(remembered_fxn.get());
 }
 
