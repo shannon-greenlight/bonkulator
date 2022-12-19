@@ -231,3 +231,11 @@ Adds trig skip
 Check-in comment for Bonkulator-368 
 Labels for trig ctrl begin properly now.
 
+Check-in comment for Bonkulator-369 
+Safety
+ 
+Check-in comment for Bonkulator-370 
+More safety
+ 
+Check-in comment for Bonkulator-371 
+Fixes trigger bug. No break in switch.
