@@ -8,6 +8,7 @@
 extern String toJSON(String key, String value);
 extern void trigger_output(byte trig_num, int output_num);
 extern bool in_output_fxn();
+extern void code_red(bool);
 
 TRIGGER::TRIGGER(int _trig_num)
 {
@@ -37,6 +38,7 @@ void TRIGGER::trigger()
             uint8_t trig_ctrl = trig_ctrls[output_num];
             if (get_output(output_num))
             {
+                // trigger_output(trig_num, output_num); // for testing
                 switch (trig_ctrl)
                 {
                 case TRIG_HOLDOFF:
@@ -45,6 +47,7 @@ void TRIGGER::trigger()
                         trigger_output(trig_num, output_num);
                         blanking_periods[output_num] = start_time + ctrl_val;
                     }
+                    break;
                 case TRIG_SKIP:
                     if (counts[output_num]++ > ctrl_val)
                     {
@@ -58,6 +61,9 @@ void TRIGGER::trigger()
                         trigger_output(trig_num, output_num);
                     }
                     break;
+                default:
+                    code_red(true);
+                    // trigger_output(trig_num, output_num);
                 }
             }
         }
@@ -106,7 +112,7 @@ void TRIGGER::set_trig_ctrls(int output_num, uint8_t trig_ctrl, uint16_t ctrl_va
     trig_ctrl_vals[output_num] = ctrl_val;
     start();
     blanking_periods[output_num] = start_time + ctrl_val;
-    // Serial.println(" Holdoff: " + String(ctrl_val));
+    // Serial.println(" set_trig_ctrls: output - " + String(output_num) + " ctrl: " + String(trig_ctrl) + " val: " + String(ctrl_val));
 }
 
 bool TRIGGER::get_output(int output_num)
