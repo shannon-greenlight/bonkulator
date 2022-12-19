@@ -46,7 +46,7 @@ int get_output_scale_correction(int output)
 
 bool get_output_calibrated(int output)
 {
-    // Serial.println("Get output calibrated: for: " + String(output) + " val: " + output_calibrated.get());
+    // Serial.println("Get output calibrated: output: " + String(output) + " val: " + output_calibrated.get());
     return output_calibrated.charAt(output) == 'Y';
 }
 
