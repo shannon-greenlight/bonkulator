@@ -46,8 +46,9 @@ enum
 #define CV_ACTIVE_TIME 3
 #define CV_IDLE_VALUE 4
 #define CV_RANDOMNESS 5
+#define CV_TRIGGER 6
 
-#define CV_TYPES "Off   ,Scale ,Offset,Active Time,Idle Value,Randomness"
+#define CV_TYPES "Off   ,Scale ,Offset,Active Time,Idle Value,Randomness,Trigger"
 
 #define TIME_INC_MIN 1
 #define TIME_INC_MAX 32000
@@ -62,7 +63,7 @@ enum
 #define TRIGGER_STATES F("Disabled,Enabled ")
 
 uint16_t _output_mins[] = {0, 0, ACTIVE_TIME_MIN, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 0, 0, 0, 0, 0, 0, OUTPUT_RANGE_BIPOLAR, TRIG_HOLDOFF, 0};
-uint16_t _output_maxs[] = {NUM_WAVEFORMS - 1, DELAY_MAX, MAX_MS, DELAY_MAX, 32767, 1, 1, 1, 1, CV_RANDOMNESS, CV_RANDOMNESS, 200, 200, 99, 1, DAC_FS, 1, OUTPUT_RANGE_UNIPOLAR, TRIG_DENSITY, MAX_MS};
+uint16_t _output_maxs[] = {NUM_WAVEFORMS - 1, DELAY_MAX, MAX_MS, DELAY_MAX, 32767, 1, 1, 1, 1, CV_TRIGGER, CV_TRIGGER, 200, 200, 99, 1, DAC_FS, 1, OUTPUT_RANGE_UNIPOLAR, TRIG_DENSITY, MAX_MS};
 uint16_t _output_init_vals[] = {0, 0, 128, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 200, 100, 0, 0, DAC_MID, 0, OUTPUT_RANGE_BIPOLAR, TRIG_HOLDOFF, 5};
 String output_labels[] = {"Waveform: ", "Init Delay: ", "Active Time/Parts: ", "Idle Time: ", "Repeat: ", "T0: ", "T1: ", "T2: ", "T3: ", "CV0: ", "CV1: ", "Scale: ", "Offset: ", "Randomness: ", "Quantize: ", "Idle Value: ", "Clock: ", "Range: ", "Trig Crtl: ", "Trig Holdoff: "};
 String output_string_params[] = {INIT_WAVEFORMS, "", "", "", "", TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, CV_TYPES, CV_TYPES, "", "", "", "No ,Yes", "", "Internal,External", "+/-5V,0-10V", "Hold_Off,Skip,Density", ""};
@@ -466,12 +467,19 @@ void set_idle_value(uint16_t val, int output)
     outptr->idle_value = val + get_raw_output_offset_correction(output);
 }
 
+void set_trig_ctrls(TRIGGER *trig)
+{
+    trig->set_trig_ctrls(selected_output.get(), (the_output)().get_param(OUTPUT_TRIG_CTRL), (the_output)().get_param(OUTPUT_TRIG_CTRL_VAL));
+}
+
 void update_trig_ctrl_vals()
 {
     for (int i = 0; i < NUM_TRIGGERS; i++)
     {
-        (*triggers)->set_trig_ctrls(selected_output.get(), (the_output)().get_param(OUTPUT_TRIG_CTRL), (the_output)().get_param(OUTPUT_TRIG_CTRL_VAL));
+        set_trig_ctrls(triggers[i]);
     }
+    set_trig_ctrls(&trig_cv0);
+    set_trig_ctrls(&trig_cv1);
 }
 
 void update_trig_ctrl()
@@ -480,15 +488,15 @@ void update_trig_ctrl()
     switch ((the_output)().get_param(OUTPUT_TRIG_CTRL))
     {
     case TRIG_HOLDOFF:
-        (the_output)().labels[OUTPUT_TRIG_CTRL_VAL] = "Trig Holdoff: ";
+        (the_output)().labels[OUTPUT_TRIG_CTRL_VAL] = F("Trig Holdoff: ");
         (the_output)().maxs[OUTPUT_TRIG_CTRL_VAL] = MAX_MS;
         break;
     case TRIG_SKIP:
-        (the_output)().labels[OUTPUT_TRIG_CTRL_VAL] = "Trig Skip: ";
+        (the_output)().labels[OUTPUT_TRIG_CTRL_VAL] = F("Trig Skip: ");
         (the_output)().maxs[OUTPUT_TRIG_CTRL_VAL] = MAX_MS;
         break;
     case TRIG_DENSITY:
-        (the_output)().labels[OUTPUT_TRIG_CTRL_VAL] = "Trig Density: ";
+        (the_output)().labels[OUTPUT_TRIG_CTRL_VAL] = F("Trig Density: ");
         (the_output)().maxs[OUTPUT_TRIG_CTRL_VAL] = 100; // 100%
         break;
     }
@@ -613,6 +621,9 @@ void outputs_begin()
         }
         output->param_num = 0;
         set_waveform(i, output->get_param(OUTPUT_WAVEFORM));
+        selected_fxn = bonk_outputs[i];
+        update_cv0();
+        update_cv1();
     }
     selected_output.put(output_memory);
     update_clock();

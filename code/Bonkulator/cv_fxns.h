@@ -8,15 +8,43 @@ void update_cv(int cv_num)
     outptr->scale = 1.0;
     update_idle_value();
     update_waveform();
+
+    int cv_type = selected_fxn->get_param(cv_num);
+    // ui.terminal_debug("Update CV: " + String(cv_type));
+    switch (cv_num)
+    {
+    case OUTPUT_CV0:
+        trig_cv0.set_output(selected_output.get(), cv_type == 6);
+        break;
+    case OUTPUT_CV1:
+        trig_cv1.set_output(selected_output.get(), cv_type == 6);
+        break;
+    }
 }
 
 // condition cv from +/- 1650 (3300/2)
-int16_t condition_cv(int16_t cv_val)
+int16_t condition_cv(int16_t cv_val, unsigned int cv_num)
 {
+    float xn;
+    float yn;
+    static float xn0;
+    static float yn0;
+    static float xn1;
+    static float yn1;
+    float *x = cv_num == OUTPUT_CV0 ? &xn0 : &xn1;
+    float *y = cv_num == OUTPUT_CV0 ? &yn0 : &yn1;
+
     cv_val *= 1.2412; // ads1015 full scale = 4.096. System FS = 3.3V, multiply by ratio
-    cv_val = constrain(cv_val, -2048, 2047);
-    cv_val += 2048;
-    return cv_val;
+    xn = cv_val;
+    yn = 0.969 * *y + 0.0155 * xn + 0.0155 * *x;
+    // yn = (xn + xn1) / 2;
+    *x = xn;
+    *y = yn;
+    return cv_val + 2048;
+
+    // cv_val = constrain(cv_val, -2048, 2047);
+    // cv_val += 2048;
+    // return cv_val;
 }
 
 // scales a float value by adjusted linear. Range of adj: param/100 -> param*100, cv of ADC_FS_OVER_2 returns param*1
@@ -71,9 +99,10 @@ bool sole_cv(int cv_num, int cv_type, Greenface_gadget bonk_output)
 void cv_set(int cv_num, int output, int16_t cv_val)
 {
 
-    cv_val = condition_cv(cv_val);
-    // if (cv_num == OUTPUT_CV0)
-    //   ui.terminal_debug("cv_val: " + String(cv_val));
+    cv_val = condition_cv(cv_val, cv_num);
+
+    // if (cv_num == OUTPUT_CV1)
+    //     ui.terminal_debug("cv_val: " + String(cv_val) + " cv_num: " + String(cv_num) + " output: " + String(output));
 
     OutputData *outptr = &outputs[output];
     Greenface_gadget bonk_output = (*bonk_outputs[output]);
@@ -170,6 +199,19 @@ void cv_set(int cv_num, int output, int16_t cv_val)
                 break;
             case CV_RANDOMNESS:
                 set_randomness_factor(cv_val * 100.0 / ADC_FS, bonk_output.get_param(OUTPUT_SCALE) / 100.0, output);
+                break;
+            case CV_TRIGGER:
+                switch (cv_num)
+                {
+                case OUTPUT_CV0:
+                    trig_cv0.trigger();
+                    break;
+                case OUTPUT_CV1:
+                    trig_cv1.trigger();
+                    break;
+                }
+                // trigger_output(4, output);
+                // ui.terminal_debug("CV Trigger: " + String(bonk_output.triggered) + " ms " + String(millis()));
                 break;
             }
         }

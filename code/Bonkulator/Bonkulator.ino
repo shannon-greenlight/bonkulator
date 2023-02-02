@@ -103,6 +103,8 @@ TRIGGER trig0(0);
 TRIGGER trig1(1);
 TRIGGER trig2(2);
 TRIGGER trig3(3);
+TRIGGER trig_cv0(4);
+TRIGGER trig_cv1(5);
 TRIGGER *selected_trigger;
 #define NUM_TRIGGERS 4
 TRIGGER *triggers[NUM_TRIGGERS] = {&trig0, &trig1, &trig2, &trig3};

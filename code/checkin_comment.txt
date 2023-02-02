@@ -239,3 +239,18 @@ More safety
  
 Check-in comment for Bonkulator-371 
 Fixes trigger bug. No break in switch.
+ 
+Check-in comment for Bonkulator-372 
+Various 
+
+Check-in comment for Bonkulator-373
+Adds CV Trigger
+ 
+ 
+Check-in comment for Bonkulator-374 
+ 
+Check-in comment for Bonkulator-375 
+Fixes to CV trigger 
+
+Check-in comment for Bonkulator-376 
+Factors out trigger ctrl update fxn.
