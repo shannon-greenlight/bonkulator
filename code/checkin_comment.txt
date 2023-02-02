@@ -253,4 +253,7 @@ Check-in comment for Bonkulator-375
 Fixes to CV trigger 
 
 Check-in comment for Bonkulator-376 
-Factors out trigger ctrl update fxn.
+Factors out trigger ctrl update fxn. 
+
+Check-in comment for Bonkulator-377 
+Fixes Settings bug

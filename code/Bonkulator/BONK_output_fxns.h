@@ -591,6 +591,7 @@ update_fxn output_update_fxns[NUM_OUTPUT_PARAMS] = {
 void outputs_begin()
 {
     int output_memory = selected_output.get();
+    Greenface_gadget *selected_fxn_memory = selected_fxn;
     for (int i = 0; i < NUM_OUTPUTS; i++)
     {
         Greenface_gadget *output = bonk_outputs[i];
@@ -625,6 +626,7 @@ void outputs_begin()
         update_cv0();
         update_cv1();
     }
+    selected_fxn = selected_fxn_memory;
     selected_output.put(output_memory);
     update_clock();
     update_trig_ctrl();
