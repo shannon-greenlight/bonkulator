@@ -356,6 +356,12 @@ String output_get_fs()
     return String(fs_volts * 2);
 }
 
+String output_get_fs_offset()
+{
+    uint16_t range = (the_output)().get_param(OUTPUT_RANGE);
+    return String(range);
+}
+
 String list_outputs()
 {
     String out = "";
@@ -398,28 +404,32 @@ void add_waveform()
     output_string_params[OUTPUT_WAVEFORM] += ",User Wave 0";
 }
 
-void output_update_trigger()
+void output_update_trigger(int output)
 {
-    // Greenface_gadget output = *bonk_outputs[selected_output.get()];
-    int trig_num = (the_output)().param_num - OUTPUT_ENABLE_T0;
-    int trig_type = (the_output)().get_param();
-    // int trig_hold_off = (the_output)().get_param(OUTPUT_TRIG_CTRL_VAL);
-    // Serial.println("Selected output: " + String(selected_output.get()) + " trigger: " + String(trig_num) + " trig_holdoff: " + String(trig_hold_off));
+    int trig_num = bonk_outputs[output]->param_num - OUTPUT_ENABLE_T0;
+    int trig_type = bonk_outputs[output]->get_param();
+    int trig_hold_off = bonk_outputs[output]->get_param(OUTPUT_TRIG_CTRL_VAL);
+    // ui.terminal_debug("Selected output: " + String(output) + " trig num: " + String(trig_num) + " trig_type: " + String(trig_type));
     switch (trig_num)
     {
     case 0:
-        trig0.set_output(selected_output.get(), trig_type);
+        trig0.set_output(output, trig_type);
         break;
     case 1:
-        trig1.set_output(selected_output.get(), trig_type);
+        trig1.set_output(output, trig_type);
         break;
     case 2:
-        trig2.set_output(selected_output.get(), trig_type);
+        trig2.set_output(output, trig_type);
         break;
     case 3:
-        trig3.set_output(selected_output.get(), trig_type);
+        trig3.set_output(output, trig_type);
         break;
     }
+}
+
+void update_trigger()
+{
+    output_update_trigger(selected_output.get());
 }
 
 void update_user_waveform_names(String names)
@@ -461,10 +471,11 @@ void update_cv1()
     update_cv(OUTPUT_CV1);
 }
 
-void set_idle_value(uint16_t val, int output)
+void set_idle_value(int val, int output)
 {
     OutputData *outptr = &outputs[output];
-    outptr->idle_value = val + get_raw_output_offset_correction(output);
+    // Serial.println("set_idle_value: " + String(val - get_raw_output_offset_correction(output)));
+    outptr->idle_value = max(0, val - get_raw_output_offset_correction(output));
 }
 
 void set_trig_ctrls(TRIGGER *trig)
@@ -572,10 +583,10 @@ update_fxn output_update_fxns[NUM_OUTPUT_PARAMS] = {
     update_active_time,
     nullptr,
     nullptr,
-    output_update_trigger,
-    output_update_trigger,
-    output_update_trigger,
-    output_update_trigger,
+    update_trigger,
+    update_trigger,
+    update_trigger,
+    update_trigger,
     update_cv0,
     update_cv1,
     update_waveform,
@@ -618,7 +629,7 @@ void outputs_begin()
         for (int j = 0; j < 4; j++)
         {
             output->param_num = OUTPUT_ENABLE_T0 + j;
-            output_update_trigger();
+            update_trigger();
         }
         output->param_num = 0;
         set_waveform(i, output->get_param(OUTPUT_WAVEFORM));

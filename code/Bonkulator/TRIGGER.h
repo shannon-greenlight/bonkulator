@@ -25,6 +25,7 @@ public:
     void trigger();
     void clear();
     void disable_all();
+    void trigger_report();
     // void do_cmd(char cmd);
     void set_output(int output_num, bool val);
     void set_trig_ctrls(int output_num, uint8_t trig_ctrl, uint16_t trig_ctrl_val);

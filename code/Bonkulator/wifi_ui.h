@@ -91,6 +91,8 @@ void send_data_to_client(WiFiClient client, char cmd)
 
   client.print(toJSON("fs_volts", output_get_fs()));
   client.print(",");
+  client.print(toJSON("fs_offset", output_get_fs_offset()));
+  client.print(",");
   client.print(toJSON("offset_max", "100"));
   client.print(",");
   client.print(toJSON("offset_min", "-100"));

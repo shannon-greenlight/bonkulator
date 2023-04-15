@@ -129,8 +129,8 @@ void trigger_report()
 {
     ui.t.clrDown("15");
     ui.terminal_printRow("Trigger Report", "16");
-    Serial.println(F("Output\tT0\tT1\tT2\tT3\tTRIG"));
-    ui.t.printChars(48, "-");
+    Serial.println(F("Output\tT0\tT1\tT2\tT3\tTriggered"));
+    ui.t.printChars(50, "-");
     Serial.print("\r\n");
     // Serial.println(F("----------------------------------"));
     for (int i = 0; i < NUM_OUTPUTS; i++)
@@ -146,6 +146,14 @@ void trigger_report()
         Serial.print(String((*bonk_outputs[i]).get_param(OUTPUT_ENABLE_T3)));
         Serial.print("\t");
         Serial.println(String((*bonk_outputs[i]).triggered));
+    }
+    Serial.println();
+    Serial.println("Trigger Outputs");
+    ui.t.printChars(16, "-");
+    Serial.println();
+    for (int i = 0; i < NUM_TRIGGERS; i++)
+    {
+        (*triggers[i]).trigger_report();
     }
 }
 

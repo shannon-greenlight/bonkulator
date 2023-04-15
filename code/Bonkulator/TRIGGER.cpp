@@ -83,6 +83,11 @@ void TRIGGER::disable_all()
     // Serial.println("Disabling triggers for TRIG: " + String(trig_num));
 }
 
+void TRIGGER::trigger_report()
+{
+    Serial.println("Trigger " + String(trig_num) + ": " + String(outputs));
+}
+
 String TRIGGER::params_toJSON()
 {
     String out = "";

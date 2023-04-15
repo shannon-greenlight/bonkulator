@@ -29,7 +29,7 @@ EEPROM_String output_calibrated(NUM_OUTPUTS);
 
 int get_raw_output_offset_correction(int output)
 {
-    // Serial.println("Get raw offset correction: for: " + String(output));
+    // ui.terminal_debug("Get raw offset correction: for: " + String(output) + " val: " + String(_output_offset_corrections[output]));
     return _output_offset_corrections[output];
 }
 

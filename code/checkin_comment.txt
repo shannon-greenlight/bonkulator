@@ -257,3 +257,22 @@ Factors out trigger ctrl update fxn.
 
 Check-in comment for Bonkulator-377 
 Fixes Settings bug
+ 
+Check-in comment for Bonkulator-378 
+Fixes remote trigger commands. Retains debug comments.
+
+ 
+Check-in comment for Bonkulator-379 
+Cleanup of trigger code. More to come.
+
+ 
+Check-in comment for Bonkulator-380 
+Safety checkin.
+
+ 
+Check-in comment for Bonkulator-381 
+Finished trigger code cleanup.
+ 
+Check-in comment for Bonkulator-382 
+Fixes some bugs in uniploar operation. Has changes to web app.
+

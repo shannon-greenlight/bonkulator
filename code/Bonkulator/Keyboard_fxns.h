@@ -217,9 +217,18 @@ void calc_keypress()
 void process_key()
 {
 	// ui.terminal_debug("Process key: " + String(keypress));
+	unsigned int test[10];
 	switch (keypress)
 	{
 	case '~':
+		for (int i = 0; i < 10; i++)
+		{
+			test[i] = micros();
+		}
+		for (int i = 0; i < 10; i++)
+		{
+			Serial.println(test[i]);
+		}
 		// hardware_begin();
 		// output_device.begin(AD5328_LDAC_PASSTHRU, AD5328_VDD_NONE, AD5328_BUFFERED_NONE, AD5328_GAIN_NONE);
 		// digitalWrite(T3_LED, HIGH);
@@ -312,6 +321,13 @@ void process_key()
 	esc_mode = keypress == 27 || keypress == '[';
 }
 
+void keyboard_update_trigger(int val, int output, int selected_trig_num)
+{
+	bonk_outputs[output]->param_put(val, selected_trig_num);
+	bonk_outputs[output]->param_num = selected_trig_num;
+	output_update_trigger(output);
+}
+
 void process_cmd(String in_str)
 {
 	// Serial.println("Process cmd: " + in_str);
@@ -350,37 +366,28 @@ void process_cmd(String in_str)
 		break;
 	case 't':
 		// select trigger
-		// ui.terminal_debug("process_cmd: " + in_str.substring(1, 2));
-		select_trigger(in_str.substring(1, 2).toInt());
-		selected_fxn->printParams();
+		select_trigger(dig1);
+		// selected_fxn->printParams();
 		if (in_str.charAt(2) == '!')
 		{
 			selected_trigger->trigger();
 		}
 		break;
 	case 'T':
+		// ui.terminal_debug("Modify Trigger! Output: " + String(dig2) + " Trigger: " + String(selected_trig_num));
 		switch (dig1)
 		{
 		case 0:
 			// ui.terminal_debug("Disable Trigger! Output: " + String(dig2));
-			select_fxn(dig2);
-			(the_output)().param_put(0, selected_trig_num);
-			output_update_trigger();
-			select_fxn(selected_output_temp);
+			keyboard_update_trigger(0, dig2, selected_trig_num);
 			break;
 		case 1:
-			// ui.terminal_debug("Enable Trigger! Output: " + String(dig2));
-			select_fxn(dig2);
-			(the_output)().param_put(1, selected_trig_num);
-			output_update_trigger();
-			select_fxn(selected_output_temp);
+			// Serial.println("Enable Trigger! Output: " + String(dig2));
+			keyboard_update_trigger(1, dig2, selected_trig_num);
 			break;
 		case 2:
 			// ui.terminal_debug("Toggle Trigger! Output: " + String(dig2));
-			select_fxn(dig2);
-			(the_output)().param_put((the_output)().get_param(selected_trig_num) == 1 ? 0 : 1, selected_trig_num);
-			output_update_trigger();
-			select_fxn(selected_output_temp);
+			keyboard_update_trigger((bonk_outputs[dig2]->get_param(selected_trig_num) == 1) ? 0 : 1, dig2, selected_trig_num);
 			break;
 		case 3:
 			// ui.terminal_debug("Disable All Triggers!");
@@ -473,7 +480,6 @@ void process_cmd(String in_str)
 		printWifiStatus();
 		break;
 	case '$':
-		// String sval = urlDecode(in_str.substring(1));
 		selected_fxn->put_string_var(urlDecode(in_str.substring(1)));
 		break;
 	case '/':
