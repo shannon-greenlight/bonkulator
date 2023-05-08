@@ -60,14 +60,18 @@ enum
 #define OUTPUT_SCALE_OFFSET -100
 #define OUTPUT_OFFSET_OFFSET -100
 
+#define OUTPUT_IDLE_VALUE_MAX 10666
+#define OUTPUT_IDLE_VALUE_INIT 5333
+#define OUTPUT_IDLE_VALUE_OFFSET -5333
+
 #define TRIGGER_STATES F("Disabled,Enabled ")
 
 uint16_t _output_mins[] = {0, 0, ACTIVE_TIME_MIN, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 0, 0, 0, 0, 0, 0, OUTPUT_RANGE_BIPOLAR, TRIG_HOLDOFF, 0};
-uint16_t _output_maxs[] = {NUM_WAVEFORMS - 1, DELAY_MAX, MAX_MS, DELAY_MAX, 32767, 1, 1, 1, 1, CV_TRIGGER, CV_TRIGGER, 200, 200, 99, 1, DAC_FS, 1, OUTPUT_RANGE_UNIPOLAR, TRIG_DENSITY, MAX_MS};
-uint16_t _output_init_vals[] = {0, 0, 128, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 200, 100, 0, 0, DAC_MID, 0, OUTPUT_RANGE_BIPOLAR, TRIG_HOLDOFF, 5};
+uint16_t _output_maxs[] = {NUM_WAVEFORMS - 1, DELAY_MAX, MAX_MS, DELAY_MAX, 32767, 1, 1, 1, 1, CV_TRIGGER, CV_TRIGGER, 200, 200, 99, 1, OUTPUT_IDLE_VALUE_MAX, 1, OUTPUT_RANGE_UNIPOLAR, TRIG_DENSITY, MAX_MS};
+uint16_t _output_init_vals[] = {0, 0, 128, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 200, 100, 0, 0, OUTPUT_IDLE_VALUE_INIT, 0, OUTPUT_RANGE_BIPOLAR, TRIG_HOLDOFF, 5};
 String output_labels[] = {"Waveform: ", "Init Delay: ", "Active Time/Parts: ", "Idle Time: ", "Repeat: ", "T0: ", "T1: ", "T2: ", "T3: ", "CV0: ", "CV1: ", "Scale: ", "Offset: ", "Randomness: ", "Quantize: ", "Idle Value: ", "Clock: ", "Range: ", "Trig Crtl: ", "Trig Holdoff: "};
 String output_string_params[] = {INIT_WAVEFORMS, "", "", "", "", TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, CV_TYPES, CV_TYPES, "", "", "", "No ,Yes", "", "Internal,External", "+/-5V,0-10V", "Hold_Off,Skip,Density", ""};
-int16_t output_offsets[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_SCALE_OFFSET, OUTPUT_OFFSET_OFFSET, 0, 0, 0, 0, 0, 0, 0}; // allows negative numbers
+int8_t decimal_places[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0}; // allows fixed point numbers
 
 // Output definitions
 uint16_t _output0_params[NUM_OUTPUT_PARAMS];
@@ -284,6 +288,27 @@ String *alt_values[NUM_OUTPUTS] =
         alt_values7,
 };
 
+int16_t output_offsets0[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_SCALE_OFFSET, OUTPUT_OFFSET_OFFSET, 0, 0, OUTPUT_IDLE_VALUE_OFFSET, 0, 0, 0, 0}; // allows negative numbers
+int16_t output_offsets1[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_SCALE_OFFSET, OUTPUT_OFFSET_OFFSET, 0, 0, OUTPUT_IDLE_VALUE_OFFSET, 0, 0, 0, 0}; // allows negative numbers
+int16_t output_offsets2[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_SCALE_OFFSET, OUTPUT_OFFSET_OFFSET, 0, 0, OUTPUT_IDLE_VALUE_OFFSET, 0, 0, 0, 0}; // allows negative numbers
+int16_t output_offsets3[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_SCALE_OFFSET, OUTPUT_OFFSET_OFFSET, 0, 0, OUTPUT_IDLE_VALUE_OFFSET, 0, 0, 0, 0}; // allows negative numbers
+int16_t output_offsets4[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_SCALE_OFFSET, OUTPUT_OFFSET_OFFSET, 0, 0, OUTPUT_IDLE_VALUE_OFFSET, 0, 0, 0, 0}; // allows negative numbers
+int16_t output_offsets5[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_SCALE_OFFSET, OUTPUT_OFFSET_OFFSET, 0, 0, OUTPUT_IDLE_VALUE_OFFSET, 0, 0, 0, 0}; // allows negative numbers
+int16_t output_offsets6[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_SCALE_OFFSET, OUTPUT_OFFSET_OFFSET, 0, 0, OUTPUT_IDLE_VALUE_OFFSET, 0, 0, 0, 0}; // allows negative numbers
+int16_t output_offsets7[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, OUTPUT_SCALE_OFFSET, OUTPUT_OFFSET_OFFSET, 0, 0, OUTPUT_IDLE_VALUE_OFFSET, 0, 0, 0, 0}; // allows negative numbers
+
+int16_t *output_offsets[NUM_OUTPUTS] =
+    {
+        output_offsets0,
+        output_offsets1,
+        output_offsets2,
+        output_offsets3,
+        output_offsets4,
+        output_offsets5,
+        output_offsets6,
+        output_offsets7,
+};
+
 void update_clock();
 
 Greenface_gadget bonk_output(int output_num)
@@ -323,11 +348,13 @@ void output_display()
         break;
     }
 
+    // (the_output)().offsets[OUTPUT_IDLE_VALUE] = (the_output)().get_param(OUTPUT_RANGE) == OUTPUT_RANGE_UNIPOLAR ? 0 : OUTPUT_IDLE_VALUE_OFFSET;
     (the_output)().default_display();
-    String text = (the_output)().name;
 
+    String text = (the_output)().name;
     if (!get_output_calibrated(selected_output.get()))
         text += "*";
+
     ui.printLine(text, 0, 2);
 }
 
@@ -350,6 +377,7 @@ void init_all_outputs()
 String output_get_fs()
 {
     float ideal_fs = 128.0 / 24.0; // 5.33333V
+    // float ideal_fs = 5.478; // 3.3*3.32 / 2
     uint16_t scale_correction = get_output_scale_correction(selected_output.get());
     uint16_t ideal_dac = (scale_correction / 1000.0) * DAC_FS; // should produce ideal fs
     float fs_volts = (DAC_FS - DAC_MID) * ideal_fs / (ideal_dac - DAC_MID);
@@ -471,13 +499,6 @@ void update_cv1()
     update_cv(OUTPUT_CV1);
 }
 
-void set_idle_value(int val, int output)
-{
-    OutputData *outptr = &outputs[output];
-    // Serial.println("set_idle_value: " + String(val - get_raw_output_offset_correction(output)));
-    outptr->idle_value = max(0, val - get_raw_output_offset_correction(output));
-}
-
 void set_trig_ctrls(TRIGGER *trig)
 {
     trig->set_trig_ctrls(selected_output.get(), (the_output)().get_param(OUTPUT_TRIG_CTRL), (the_output)().get_param(OUTPUT_TRIG_CTRL_VAL));
@@ -532,19 +553,39 @@ void update_randomness_factor()
     set_randomness_factor(randomness, scale_factor, output);
 }
 
+void set_idle_value(int val, int output)
+{
+    OutputData *outptr = &outputs[output];
+    int unipolar = (the_output)().get_param(OUTPUT_RANGE);
+    if (unipolar)
+    {
+        outptr->idle_value = max(0, val + get_raw_output_offset_correction(output));
+    }
+    else
+    {
+        outptr->idle_value = max(0, val + get_raw_output_offset_correction(output));
+    }
+    double scale_correction = get_output_scale_correction(output) / 1000.0;
+    // outptr->idle_value =  scale_correction;
+
+    // String unipolar_s = unipolar > 0 ? " unipolar" : " bipolar";
+    // Serial.println("set_idle_value: " + String(outptr->idle_value) + " raw: " + String(val) + " scale: " + String(scale_correction));
+}
+
 void send_idle_value(int output_num)
 {
     dac_out(output_num, outputs[output_num].idle_value);
-    // dac_out(output_num, (*bonk_outputs[output_num]).get_param(OUTPUT_IDLE_VALUE) + get_raw_output_offset_correction(output_num));
 }
 
 void update_idle_value()
 {
-    // ui.terminal_debug("update_idle_value: " + String((the_output)().triggered));
     int output = selected_output.get();
-    set_idle_value((*bonk_outputs[output]).get_param(OUTPUT_IDLE_VALUE), output);
-    // OutputData *outptr = &outputs[output];
-    // outptr->idle_value = (*bonk_outputs[output]).get_param(OUTPUT_IDLE_VALUE) + get_raw_output_offset_correction(output);
+    int val = (*bonk_outputs[output]).get_param(OUTPUT_IDLE_VALUE);
+    // float portion = (float)val / (float)OUTPUT_IDLE_VALUE_MAX;
+    float portion = (float)val / 10956.0;
+    int dac_val = int((float)DAC_FS * portion);
+    // ui.terminal_debug("update_idle_value: " + String(val) + " dac_val: " + String(dac_val) + " portion: " + String(portion));
+    set_idle_value(dac_val, output);
     if (!(the_output)().triggered)
         send_idle_value(output);
 }
@@ -575,6 +616,7 @@ void output_update_range()
     int output = selected_output.get();
     uint16_t range_type = (the_output)().get_param(OUTPUT_RANGE);
     set_output_range(output, (output_range_type)range_type);
+    (the_output)().offsets[OUTPUT_IDLE_VALUE] = (the_output)().get_param(OUTPUT_RANGE) == OUTPUT_RANGE_UNIPOLAR ? 0 : OUTPUT_IDLE_VALUE_OFFSET;
 }
 
 update_fxn output_update_fxns[NUM_OUTPUT_PARAMS] = {
@@ -609,7 +651,8 @@ void outputs_begin()
         output->begin();
         output->string_params = output_string_params;
         output->update_fxns = output_update_fxns;
-        output->offsets = output_offsets;
+        output->offsets = output_offsets[i];
+        output->decimal_places = decimal_places;
         output->display_fxn = &output_display;
         output->alt_values = alt_values[i];
         outputs[i].active_time = output->get_param(OUTPUT_ACTIVE_TIME);

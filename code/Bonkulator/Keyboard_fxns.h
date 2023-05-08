@@ -221,14 +221,20 @@ void process_key()
 	switch (keypress)
 	{
 	case '~':
-		for (int i = 0; i < 10; i++)
+		ui.terminal_debug("Idle Value Offsets");
+		for (int i = 0; i < NUM_OUTPUTS; i++)
 		{
-			test[i] = micros();
+			Serial.println(String(i) + ": " + bonk_outputs[i]->offsets[19]);
 		}
-		for (int i = 0; i < 10; i++)
-		{
-			Serial.println(test[i]);
-		}
+
+		// for (int i = 0; i < 10; i++)
+		// {
+		// 	test[i] = micros();
+		// }
+		// for (int i = 0; i < 10; i++)
+		// {
+		// 	Serial.println(test[i]);
+		// }
 		// hardware_begin();
 		// output_device.begin(AD5328_LDAC_PASSTHRU, AD5328_VDD_NONE, AD5328_BUFFERED_NONE, AD5328_GAIN_NONE);
 		// digitalWrite(T3_LED, HIGH);
@@ -334,6 +340,7 @@ void process_cmd(String in_str)
 	// ui.terminal_debug("Process cmd: " + in_str);
 
 	char cmd = in_str.charAt(0);
+	float float_param = in_str.substring(1).toFloat();
 	int int_param = in_str.substring(1).toInt();
 	int dig1 = in_str.substring(1, 2).toInt();
 	int dig2 = in_str.substring(2, 3).toInt();
@@ -473,7 +480,8 @@ void process_cmd(String in_str)
 		(the_output)().put_param(int_param, OUTPUT_RANDOMNESS);
 		break;
 	case 'V':
-		(the_output)().put_param(int_param, OUTPUT_IDLE_VALUE);
+		(the_output)().put_param_w_offset(int_param, OUTPUT_IDLE_VALUE);
+		// (the_output)().put_param_w_offset(int(float_param * 1000), OUTPUT_IDLE_VALUE);
 		break;
 	case 'W':
 		ui.clearTerminal();
