@@ -40,7 +40,7 @@ private:
     uint16_t trig_ctrl_vals[8];        // 8 outputs
     unsigned long blanking_periods[8]; // 8 outputs
     unsigned long counts[8];           // 8 outputs
-    long start_time;
+    unsigned long start_time;
     long blanking_period = 0;
 };
 
