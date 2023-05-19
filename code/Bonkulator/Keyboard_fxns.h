@@ -217,15 +217,20 @@ void calc_keypress()
 void process_key()
 {
 	// ui.terminal_debug("Process key: " + String(keypress));
-	unsigned int test[10];
+	// unsigned int test[10];
 	switch (keypress)
 	{
 	case '~':
-		ui.terminal_debug("Idle Value Offsets");
+		ui.terminal_debug("String Vars");
 		for (int i = 0; i < NUM_OUTPUTS; i++)
 		{
-			Serial.println(String(i) + ": " + bonk_outputs[i]->offsets[19]);
+			Serial.println(String(i) + ": " + bonk_outputs[i]->string_params[OUTPUT_WAVEFORM]);
 		}
+		// ui.terminal_debug("Idle Value Offsets");
+		// for (int i = 0; i < NUM_OUTPUTS; i++)
+		// {
+		// 	Serial.println(String(i) + ": " + bonk_outputs[i]->offsets[19]);
+		// }
 
 		// for (int i = 0; i < 10; i++)
 		// {
@@ -340,7 +345,6 @@ void process_cmd(String in_str)
 	// ui.terminal_debug("Process cmd: " + in_str);
 
 	char cmd = in_str.charAt(0);
-	float float_param = in_str.substring(1).toFloat();
 	int int_param = in_str.substring(1).toInt();
 	int dig1 = in_str.substring(1, 2).toInt();
 	int dig2 = in_str.substring(2, 3).toInt();
@@ -354,6 +358,9 @@ void process_cmd(String in_str)
 	case '[':
 		esc_mode = true;
 		cmd = in_str.charAt(1);
+		break;
+	case '=':
+		dac_out(selected_output_temp, int_param);
 		break;
 	case ':':
 		selected_fxn->put_dig_num(int_param);
