@@ -60,11 +60,13 @@ enum
 #define OUTPUT_SCALE_OFFSET -100
 #define OUTPUT_OFFSET_OFFSET -100
 
-#define OUTPUT_IDLE_VALUE_MAX 10666
-#define OUTPUT_IDLE_VALUE_INIT 5333
-#define OUTPUT_IDLE_VALUE_OFFSET -5333
+#define OUTPUT_IDLE_VALUE_MAX 10956
+#define OUTPUT_IDLE_VALUE_INIT 5478
+#define OUTPUT_IDLE_VALUE_OFFSET -5478
 
 #define TRIGGER_STATES F("Disabled,Enabled ")
+void output_update_range();
+void update_idle_value();
 
 uint16_t _output_mins[] = {0, 0, ACTIVE_TIME_MIN, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 0, 0, 0, 0, 0, 0, OUTPUT_RANGE_BIPOLAR, TRIG_HOLDOFF, 0};
 uint16_t _output_maxs[] = {NUM_WAVEFORMS - 1, DELAY_MAX, MAX_MS, DELAY_MAX, 32767, 1, 1, 1, 1, CV_TRIGGER, CV_TRIGGER, 200, 200, 99, 1, OUTPUT_IDLE_VALUE_MAX, 1, OUTPUT_RANGE_UNIPOLAR, TRIG_DENSITY, MAX_MS};
@@ -348,7 +350,9 @@ void output_display()
         break;
     }
 
-    // (the_output)().offsets[OUTPUT_IDLE_VALUE] = (the_output)().get_param(OUTPUT_RANGE) == OUTPUT_RANGE_UNIPOLAR ? 0 : OUTPUT_IDLE_VALUE_OFFSET;
+    output_update_range();
+    update_idle_value();
+
     (the_output)().default_display();
 
     String text = (the_output)().name;
@@ -376,12 +380,13 @@ void init_all_outputs()
 
 String output_get_fs()
 {
-    float ideal_fs = 128.0 / 24.0; // 5.33333V
-    // float ideal_fs = 5.478; // 3.3*3.32 / 2
-    uint16_t scale_correction = get_output_scale_correction(selected_output.get());
-    uint16_t ideal_dac = (scale_correction / 1000.0) * DAC_FS; // should produce ideal fs
-    float fs_volts = (DAC_FS - DAC_MID) * ideal_fs / (ideal_dac - DAC_MID);
-    return String(fs_volts * 2);
+    // float ideal_fs = 128.0 / 24.0; // 5.33333V
+    // // float ideal_fs = 5.478; // 3.3*3.32 / 2
+    // uint16_t scale_correction = get_output_scale_correction(selected_output.get());
+    // uint16_t ideal_dac = (scale_correction / 1000.0) * DAC_FS; // should produce ideal fs
+    // float fs_volts = (DAC_FS - DAC_MID) * ideal_fs / (ideal_dac - DAC_MID);
+    // return String(fs_volts * 2);
+    return String(OUTPUT_IDLE_VALUE_MAX);
 }
 
 String output_get_fs_offset()
@@ -436,7 +441,7 @@ void output_update_trigger(int output)
 {
     int trig_num = bonk_outputs[output]->param_num - OUTPUT_ENABLE_T0;
     int trig_type = bonk_outputs[output]->get_param();
-    int trig_hold_off = bonk_outputs[output]->get_param(OUTPUT_TRIG_CTRL_VAL);
+    // int trig_hold_off = bonk_outputs[output]->get_param(OUTPUT_TRIG_CTRL_VAL);
     // ui.terminal_debug("Selected output: " + String(output) + " trig num: " + String(trig_num) + " trig_type: " + String(trig_type));
     switch (trig_num)
     {
@@ -556,20 +561,9 @@ void update_randomness_factor()
 void set_idle_value(int val, int output)
 {
     OutputData *outptr = &outputs[output];
-    int unipolar = (the_output)().get_param(OUTPUT_RANGE);
-    if (unipolar)
-    {
-        outptr->idle_value = max(0, val + get_raw_output_offset_correction(output));
-    }
-    else
-    {
-        outptr->idle_value = max(0, val + get_raw_output_offset_correction(output));
-    }
+    outptr->idle_value = max(0, val + get_raw_output_offset_correction(output));
     double scale_correction = get_output_scale_correction(output) / 1000.0;
-    // outptr->idle_value =  scale_correction;
-
-    // String unipolar_s = unipolar > 0 ? " unipolar" : " bipolar";
-    // Serial.println("set_idle_value: " + String(outptr->idle_value) + " raw: " + String(val) + " scale: " + String(scale_correction));
+    outptr->idle_value *= scale_correction;
 }
 
 void send_idle_value(int output_num)
@@ -581,8 +575,7 @@ void update_idle_value()
 {
     int output = selected_output.get();
     int val = (*bonk_outputs[output]).get_param(OUTPUT_IDLE_VALUE);
-    // float portion = (float)val / (float)OUTPUT_IDLE_VALUE_MAX;
-    float portion = (float)val / 10956.0;
+    float portion = (float)val / (float)OUTPUT_IDLE_VALUE_MAX;
     int dac_val = int((float)DAC_FS * portion);
     // ui.terminal_debug("update_idle_value: " + String(val) + " dac_val: " + String(dac_val) + " portion: " + String(portion));
     set_idle_value(dac_val, output);
