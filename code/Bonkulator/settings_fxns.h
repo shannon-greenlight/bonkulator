@@ -16,7 +16,7 @@ uint16_t _settings_maxs[] = {0, 0, 1, 1, 9999, 7, 1, 1};
 uint16_t _settings_init_vals[] = {0, 0, 1, 0, 15, 0, 0, 0};
 uint16_t *settings_stuff[] = {_settings_params, _settings_mins, _settings_maxs, _settings_init_vals};
 String settings_labels[] = {"Version: ", "Name: ", "Encoder Type: ", "WiFi: ", "Screen Saver: ", "Waveforms: ", "Reset: ", "Calibrate: "};
-String settings_string_params[] = {VERSION_NUM, "$~", "Normal ,Reverse", "Disabled,Enabled ", "", "Wave 0,Wave 1,Wave 2,Wave 3,Wave 4,Wave 5,Wave 6,Wave 7", ACTIVATE_STRING, "Inputs,Outputs"};
+String settings_string_params[] = {VERSION_NUM, "$~", "Normal ,Reverse", "Disabled,Enabled ", "", "User 0,User 1,User 2,User 3,User 4,User 5,User 6,User 7", ACTIVATE_STRING, "Inputs,Outputs"};
 bool settings_param_active[] = {0, 0, 0, 1, 0, 1, 1, 1};
 
 // void (*func_ptr[3])() = {fun1, fun2, fun3};
