@@ -15,6 +15,8 @@
 #define USER_WAVEFORMS_START_PLUS_CHANGE 2
 #define USER_WAVEFORMS_START_MINUS_CHANGE 3
 
+#define USER_WAVEFORMS_NAME_MAXLEN 10
+
 volatile uint8_t user_waveform_num;         // for recording
 volatile uint8_t user_waveforms_record_inc; // msecs per sample
 volatile uint16_t user_waveforms_record_index;
@@ -45,49 +47,49 @@ bool user_waveforms_param_active[] = {0, 0, 1, 1, 0};
 uint16_t _user_waveform0_params[NUM_USER_WAVEFORMS_PARAMS];
 uint16_t *user_waveform0_stuff[] = {_user_waveform0_params, _user_waveforms_mins, _user_waveforms_maxs, _user_waveforms_init_vals};
 Greenface_gadget user_waveform0("User 0", user_waveforms_labels, user_waveform0_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]));
-EEPROM_String user_waveform0_name(20);
+EEPROM_String user_waveform0_name(USER_WAVEFORMS_NAME_MAXLEN);
 EEPROM_String user_waveform0_string_vars[] = {user_waveform0_name};
 
 uint16_t _user_waveform1_params[NUM_USER_WAVEFORMS_PARAMS];
 uint16_t *user_waveform1_stuff[] = {_user_waveform1_params, _user_waveforms_mins, _user_waveforms_maxs, _user_waveforms_init_vals};
 Greenface_gadget user_waveform1("User 1", user_waveforms_labels, user_waveform1_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]));
-EEPROM_String user_waveform1_name(20);
+EEPROM_String user_waveform1_name(USER_WAVEFORMS_NAME_MAXLEN);
 EEPROM_String user_waveform1_string_vars[] = {user_waveform1_name};
 
 uint16_t _user_waveform2_params[NUM_USER_WAVEFORMS_PARAMS];
 uint16_t *user_waveform2_stuff[] = {_user_waveform2_params, _user_waveforms_mins, _user_waveforms_maxs, _user_waveforms_init_vals};
 Greenface_gadget user_waveform2("User 2", user_waveforms_labels, user_waveform2_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]));
-EEPROM_String user_waveform2_name(20);
+EEPROM_String user_waveform2_name(USER_WAVEFORMS_NAME_MAXLEN);
 EEPROM_String user_waveform2_string_vars[] = {user_waveform2_name};
 
 uint16_t _user_waveform3_params[NUM_USER_WAVEFORMS_PARAMS];
 uint16_t *user_waveform3_stuff[] = {_user_waveform3_params, _user_waveforms_mins, _user_waveforms_maxs, _user_waveforms_init_vals};
 Greenface_gadget user_waveform3("User 3", user_waveforms_labels, user_waveform3_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]));
-EEPROM_String user_waveform3_name(20);
+EEPROM_String user_waveform3_name(USER_WAVEFORMS_NAME_MAXLEN);
 EEPROM_String user_waveform3_string_vars[] = {user_waveform3_name};
 
 uint16_t _user_waveform4_params[NUM_USER_WAVEFORMS_PARAMS];
 uint16_t *user_waveform4_stuff[] = {_user_waveform4_params, _user_waveforms_mins, _user_waveforms_maxs, _user_waveforms_init_vals};
 Greenface_gadget user_waveform4("User 4", user_waveforms_labels, user_waveform4_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]));
-EEPROM_String user_waveform4_name(20);
+EEPROM_String user_waveform4_name(USER_WAVEFORMS_NAME_MAXLEN);
 EEPROM_String user_waveform4_string_vars[] = {user_waveform4_name};
 
 uint16_t _user_waveform5_params[NUM_USER_WAVEFORMS_PARAMS];
 uint16_t *user_waveform5_stuff[] = {_user_waveform5_params, _user_waveforms_mins, _user_waveforms_maxs, _user_waveforms_init_vals};
 Greenface_gadget user_waveform5("User 5", user_waveforms_labels, user_waveform5_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]));
-EEPROM_String user_waveform5_name(20);
+EEPROM_String user_waveform5_name(USER_WAVEFORMS_NAME_MAXLEN);
 EEPROM_String user_waveform5_string_vars[] = {user_waveform5_name};
 
 uint16_t _user_waveform6_params[NUM_USER_WAVEFORMS_PARAMS];
 uint16_t *user_waveform6_stuff[] = {_user_waveform6_params, _user_waveforms_mins, _user_waveforms_maxs, _user_waveforms_init_vals};
 Greenface_gadget user_waveform6("User 6", user_waveforms_labels, user_waveform6_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]));
-EEPROM_String user_waveform6_name(20);
+EEPROM_String user_waveform6_name(USER_WAVEFORMS_NAME_MAXLEN);
 EEPROM_String user_waveform6_string_vars[] = {user_waveform6_name};
 
 uint16_t _user_waveform7_params[NUM_USER_WAVEFORMS_PARAMS];
 uint16_t *user_waveform7_stuff[] = {_user_waveform7_params, _user_waveforms_mins, _user_waveforms_maxs, _user_waveforms_init_vals};
 Greenface_gadget user_waveform7("User 7", user_waveforms_labels, user_waveform7_stuff, sizeof(_user_waveform0_params) / sizeof(_user_waveform0_params[0]));
-EEPROM_String user_waveform7_name(20);
+EEPROM_String user_waveform7_name(USER_WAVEFORMS_NAME_MAXLEN);
 EEPROM_String user_waveform7_string_vars[] = {user_waveform7_name};
 
 Greenface_gadget *user_waveforms[NUM_USER_WAVEFORMS] = {
@@ -159,7 +161,7 @@ void user_waveforms_init()
     {
         // user_waveform->string_vars[0].put("User Waverform " + String(i));
         (*user_waveforms[i]).init();
-        (*user_waveforms[i]).put_string_var("User Wave " + String(i), USER_WAVEFORMS_NAME);
+        (*user_waveforms[i]).put_string_var("User " + String(i), USER_WAVEFORMS_NAME);
         (*user_waveforms_data[i]).fill(DAC_MID);
     }
 }
@@ -248,7 +250,7 @@ void user_waveforms_begin()
         (*user_waveforms_data[i]).begin(false);
         (*user_waveforms_data[i]).xfer();
     }
-    user_waveforms_record_inc = false;
+    user_waveforms_record_inc = 0;
     user_waveforms_update_name();
     outputs_begin(); // do it again to init user waveforms properly
 }
@@ -325,6 +327,7 @@ String check_user_recording()
     static int idle_reading;
     if (selected_fxn->param_num == USER_WAVEFORMS_RECORD)
     {
+        user_waveforms_record_inc = selected_fxn->get_param(USER_WAVEFORMS_RECORD);
         switch (user_waveforms_recording_state)
         {
         case RECORDING_IDLE:
