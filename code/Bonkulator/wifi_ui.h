@@ -77,16 +77,20 @@ void send_data_to_client(WiFiClient client, char cmd)
   client.print(",");
   client.print(toJSON("cmd", String(cmd)));
   client.print(",");
+
   uint8_t digit_num = selected_fxn->digit_num;
-  if (selected_fxn->get_min_w_offset() < 0)
+  if (selected_fxn->get_min_w_offset() < 0 && digit_num > 0)
   {
     digit_num--;
   }
   client.print(toJSON("digit_num", String(digit_num)));
   client.print(",");
+
   client.print(toJSON("param_num", String(selected_fxn->param_num)));
   client.print(",");
   client.print(toJSON("param_active", String(selected_fxn->get_param_active())));
+  client.print(",");
+  client.print(toJSON("dp", (selected_fxn->decimal_places) ? String(selected_fxn->decimal_places[selected_fxn->param_num]) : "0"));
   client.print(",");
 
   client.print(toJSON("fs_volts", output_get_fs()));
