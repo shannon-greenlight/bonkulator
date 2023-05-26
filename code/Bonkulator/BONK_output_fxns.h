@@ -482,7 +482,7 @@ void update_waveform()
 
 void update_active_time()
 {
-    ui.terminal_debug("Active time: " + String((the_output)().get_param(OUTPUT_ACTIVE_TIME)));
+    // ui.terminal_debug("Active time: " + String((the_output)().get_param(OUTPUT_ACTIVE_TIME)));
     outputs[selected_output.get()].active_time = (the_output)().get_param(OUTPUT_ACTIVE_TIME);
     update_waveform();
 }
@@ -562,8 +562,6 @@ void set_idle_value(int val, int output)
 {
     OutputData *outptr = &outputs[output];
     outptr->idle_value = max(0, val + get_raw_output_offset_correction(output));
-    double scale_correction = get_output_scale_correction(output) / 1000.0;
-    outptr->idle_value *= scale_correction;
 }
 
 void send_idle_value(int output_num)
@@ -571,14 +569,17 @@ void send_idle_value(int output_num)
     dac_out(output_num, outputs[output_num].idle_value);
 }
 
+int scale_dac(int val)
+{
+    float portion = (float)val / (float)OUTPUT_IDLE_VALUE_MAX;
+    return int((float)DAC_FS * portion);
+}
+
 void update_idle_value()
 {
     int output = selected_output.get();
     int val = (*bonk_outputs[output]).get_param(OUTPUT_IDLE_VALUE);
-    float portion = (float)val / (float)OUTPUT_IDLE_VALUE_MAX;
-    int dac_val = int((float)DAC_FS * portion);
-    // ui.terminal_debug("update_idle_value: " + String(val) + " dac_val: " + String(dac_val) + " portion: " + String(portion));
-    set_idle_value(dac_val, output);
+    set_idle_value(scale_dac(val), output);
     if (!(the_output)().triggered)
         send_idle_value(output);
 }
