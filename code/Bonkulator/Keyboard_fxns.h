@@ -221,11 +221,18 @@ void process_key()
 	switch (keypress)
 	{
 	case '~':
-		ui.terminal_debug("String Vars");
-		for (int i = 0; i < NUM_OUTPUTS; i++)
+		ui.terminal_debug("Quantize Report");
+		for (uint16_t i = 1000; i < 2000; i++)
 		{
-			Serial.println(String(i) + ": " + bonk_outputs[i]->string_params[OUTPUT_WAVEFORM]);
+			Serial.println(String(quantize_value(i, 7)));
 		}
+		// dump_waveform(selected_output.get(), false);
+		// dump_waveform(selected_output.get(), true);
+		// ui.terminal_debug("String Vars");
+		// for (int i = 0; i < NUM_OUTPUTS; i++)
+		// {
+		// 	Serial.println(String(i) + ": " + bonk_outputs[i]->string_params[OUTPUT_WAVEFORM]);
+		// }
 		// ui.terminal_debug("Idle Value Offsets");
 		// for (int i = 0; i < NUM_OUTPUTS; i++)
 		// {
