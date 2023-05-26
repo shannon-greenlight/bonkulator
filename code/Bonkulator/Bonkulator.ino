@@ -58,6 +58,7 @@ void update_cv(int cv_num);
 // timer
 FunctionPointer timer_fxn;
 void timer_debug();
+uint16_t quantize_value(uint16_t value, uint16_t output_num);
 
 // waveforms
 void apply_params_to_waveform(int output);
@@ -269,6 +270,8 @@ void loop()
     // status_string = "Delta: " + String(millis() - now);
     // status_string = "ADC0: " + String(adc0) + " ADC1: " + String(adc1);
     check_outputs();
+    if (debug)
+      ui.terminal_debug("Outputs checked");
   }
   else if (in_user_waveform_fxn())
   {
