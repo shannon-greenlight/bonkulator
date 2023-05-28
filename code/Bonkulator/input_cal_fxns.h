@@ -169,11 +169,11 @@ String check_input_cal()
         // float reading = 3.23 * val / 1000.0;
         float reading = IN_FS_VOLTS * val / 1650;
         // return "Input: " + String(input) + " Reading: " + String(reading) + " Value: " + String(val) + " raw: " + String(raw);
-        return "Input: " + String(input) + " Reading: " + String(reading);
+        return "Input: " + String(input) + " Reading: " + String(reading) + " ";
     }
     else
     {
-        return "Apply 0V to set Offset, 4V to set Scale";
+        return "Apply 0V to set Offset, 4V to set Scale. ";
     }
 }
 
