@@ -68,9 +68,7 @@ void ask_init()
     }
     outputs_begin();
     user_waveforms_begin();
-    status_string = ask_init_fxn.get_param_as_string(0) + " Reset";
     selected_fxn->display();
-    terminal_print_status(true);
     select_fxn(remembered_fxn.get());
 }
 

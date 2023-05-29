@@ -32,8 +32,8 @@ boolean key_held_down = false;
 int16_t adc0;
 int16_t adc1;
 String wifi_ui_message = "";
+int wifi_RSSI;
 boolean in_wifi();
-String status_string;
 uint16_t calculated_time_inc = 0;
 
 // fxns defined in this file
@@ -172,7 +172,6 @@ void select_fxn(int fxn_index)
     clear_all_triggers();
     settings_fxn.param_num = param_num;
     timer_fxn = &timer_service_settings;
-    status_string = "";
     outputs_begin();
   }
   else
@@ -250,6 +249,7 @@ void setup()
 // the loop function runs over and over again forever
 void loop()
 {
+  String status_string;
   static bool toggle = false;
   static unsigned long cnt = 0;
   bool debug = false;
@@ -282,7 +282,8 @@ void loop()
     status_string = check_input_cal();
   }
 
-  check_wifi(&status_string);
+  status_string += check_wifi();
+
   if (debug)
     ui.terminal_debug("Server checked");
 
@@ -290,7 +291,7 @@ void loop()
   if (debug)
     ui.terminal_debug("Encoder checked");
 
-  terminal_print_status();
+  terminal_print_status(status_string);
 
   ui.check_inactivity_timer(settings_get_inactivity_timeout());
   if (debug)
@@ -303,5 +304,6 @@ void loop()
     analogWrite(LEDG, val);
     cnt = 0;
   }
-  // ui.terminal_debug("Count checked");
+  if (debug)
+    ui.terminal_debug("Count checked");
 }

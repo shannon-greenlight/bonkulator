@@ -241,27 +241,43 @@ void do_server()
   static int cnt = 0;
   if (wifi_status == WL_CONNECTED && cnt++ > 10)
   {
-    ui.printWiFiBars(WiFi.RSSI());
+    wifi_RSSI = WiFi.RSSI();
+    ui.printWiFiBars(wifi_RSSI);
     cnt = 0;
   }
 }
 
-void check_wifi(String *ss)
+String get_wifi_bars()
 {
+  int wifi_strength = wifi_RSSI / 10 + 8;
+  wifi_strength = constrain(wifi_strength, 0, 4);
+  // ui.terminal_debug("WiFi Strngth: " + String(wifi_strength));
+  String bars = "";
+  for (int i = 0; i < wifi_strength; i++)
+  {
+    bars += "|";
+  }
+  for (int i = wifi_strength; i <= 4; i++)
+  {
+    bars += " ";
+  }
+  return ("Wifi: " + bars);
+}
+
+String check_wifi()
+{
+  static int cnt = 5; // ask too frequently and crash may occur
   if (wifi_enabled() && wifi_active.get())
   {
-    do_server();
-    if (*ss > "")
+    if (cnt-- == 0)
     {
-      int wifi_strength = WiFi.RSSI() / 10 + 8;
-      wifi_strength = constrain(wifi_strength, 0, 4);
-      String bars = "";
-      for (int i = 0; i < wifi_strength; i++)
-      {
-        bars += "|";
-      }
-      // status_string += ("Wifi: " + String(WiFi.RSSI()) + "dBm " + String(wifi_strength) + "bars");
-      *ss += ("Wifi: " + bars);
+      do_server();
+      cnt = 5;
     }
+    return get_wifi_bars();
+  }
+  else
+  {
+    return "";
   }
 }

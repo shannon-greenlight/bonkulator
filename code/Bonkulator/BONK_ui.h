@@ -8,18 +8,22 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 Greenface_ui ui(&display, PRODUCT_NAME);
 
 String old_status = "";
-void terminal_print_status(bool force = false)
+void terminal_print_status(String status_string, bool force = false)
 {
   // static String old_status = "";
-  int pos = TERMINAL_WIDTH / 2 - status_string.length() / 2;
-  pos = pos + pos % 2;
-  if (ui.terminal_mirror & (status_string != old_status || force))
+  // ui.terminal_debug("Status string: <" + status_string + ">");
+  if (status_string.length() > 0)
   {
-    ui.t.setCursor(STATUS_ROW, "1");
-    ui.t.clrToEOL();
-    ui.t.setCursor(STATUS_ROW, String(pos));
-    ui.t.print(status_string);
-    old_status = status_string;
+    int pos = TERMINAL_WIDTH / 2 - status_string.length() / 2;
+    pos = pos + pos % 2;
+    if (ui.terminal_mirror & (status_string != old_status || force))
+    {
+      // ui.t.setCursor(STATUS_ROW, "1");
+      // ui.t.clrToEOL();
+      ui.t.setCursor(STATUS_ROW, String(pos));
+      ui.t.print(status_string);
+      old_status = status_string;
+    }
   }
 }
 
@@ -39,7 +43,7 @@ void restore_display()
   ui.all_on();
   ui.reset_inactivity_timer();
   selected_fxn->display();
-  terminal_print_status(true);
+  terminal_print_status(old_status, true);
 }
 
 void gen_params_macro(Greenface_gadget *item, bool print_header = true, String prefix = "")
