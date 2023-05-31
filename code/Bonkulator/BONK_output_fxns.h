@@ -378,6 +378,11 @@ void init_all_outputs()
     }
 }
 
+bool output_is_bipolar(uint8_t output)
+{
+    return (*bonk_outputs[output]).get_param(OUTPUT_RANGE) == OUTPUT_RANGE_BIPOLAR;
+}
+
 String output_get_fs()
 {
     // float ideal_fs = 128.0 / 24.0; // 5.33333V
@@ -561,7 +566,7 @@ void update_randomness_factor()
 void set_idle_value(int val, int output)
 {
     OutputData *outptr = &outputs[output];
-    outptr->idle_value = max(0, val + get_raw_output_offset_correction(output));
+    outptr->idle_value = max(0, val);
 }
 
 void send_idle_value(int output_num)
@@ -569,17 +574,30 @@ void send_idle_value(int output_num)
     dac_out(output_num, outputs[output_num].idle_value);
 }
 
-int scale_dac(int val)
+int scale_dac(float volts, int output)
 {
-    float portion = (float)val / (float)OUTPUT_IDLE_VALUE_MAX;
-    return int((float)DAC_FS * portion);
+    float fs = (float)OUTPUT_IDLE_VALUE_MAX / 1000.0;
+    if (output_is_bipolar(output))
+    {
+        volts += fs / 2.0;
+    }
+    float portion = volts / fs;
+    int dac_val = int((float)DAC_FS * portion);
+    dac_val += get_raw_output_offset_correction(output);
+    // ui.terminal_debug("DAC: " + String(dac_val) + " is_bipolar: " + String(output_is_bipolar(output)) + " volts: " + String(volts));
+    return dac_val;
+}
+
+void dac_vdc(float volts, int output)
+{
+    dac_out(output, scale_dac(volts, output));
 }
 
 void update_idle_value()
 {
     int output = selected_output.get();
-    int val = (*bonk_outputs[output]).get_param(OUTPUT_IDLE_VALUE);
-    set_idle_value(scale_dac(val), output);
+    float val = (float)(*bonk_outputs[output]).get_param_w_offset(OUTPUT_IDLE_VALUE) / 1000.0;
+    set_idle_value(scale_dac(val, output), output);
     if (!(the_output)().triggered)
         send_idle_value(output);
 }
