@@ -61,6 +61,7 @@ enum
 #define OUTPUT_OFFSET_OFFSET -100
 
 #define OUTPUT_IDLE_VALUE_MAX 10956
+// #define OUTPUT_IDLE_VALUE_MAX 10666
 #define OUTPUT_IDLE_VALUE_INIT 5478
 #define OUTPUT_IDLE_VALUE_OFFSET -5478
 
@@ -583,6 +584,7 @@ int scale_dac(float volts, int output)
     }
     float portion = volts / fs;
     int dac_val = int((float)DAC_FS * portion);
+    // dac_val *= (get_output_scale_correction(output) / 1000.0);
     dac_val += get_raw_output_offset_correction(output);
     // ui.terminal_debug("DAC: " + String(dac_val) + " is_bipolar: " + String(output_is_bipolar(output)) + " volts: " + String(volts));
     return dac_val;
