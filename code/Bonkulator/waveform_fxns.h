@@ -1,4 +1,6 @@
 // waveform fxns
+#include <Wire.h>
+
 void dump_waveform(int output, bool dump_ref)
 {
     byte data_len = outputs[output].data_len;
@@ -39,48 +41,16 @@ void dump_waveform(int output, bool dump_ref)
 //   }
 // }
 
-void correct_ref_waveform(int output)
-{
-    // int output = selected_output.get();
-
-    // uint16_t *waveform_data = outputs[output].waveform_data;
-    uint16_t *waveform_ref = waveform_reference[output];
-    byte data_len = outputs[output].data_len;
-
-    float scale_factor = output_scale_corrections.get(output) / 1000.;
-    int offset_factor = output_offset_corrections.get(output);
-    // int offset_adjust = DAC_MID - DAC_MID * scale_factor;
-
-    // Serial.println("Scale: " + String(output_scale_corrections.get(output)));
-    // Serial.println("Scale Factor: " + String(scale_factor));
-    // Serial.println("Offset Factor: " + String(offset_factor));
-    // Serial.println("Offset Adjust: " + String(offset_adjust));
-    // Serial.println("Offset output: " + String(output));
-    // Serial.println();
-    // return;
-
-    int temp;
-
-    for (int i = 0; i < data_len; i++)
-    {
-        temp = ((waveform_ref[i] - DAC_MID) * scale_factor) + .5 + DAC_MID;
-        temp += offset_factor;
-        // temp += offset_adjust;
-
-        temp = constrain(temp, 0, DAC_FS); // constrain output
-        // temp = max(0, temp);      // constrain output
-        // temp = min(DAC_FS, temp); // constrain output
-        waveform_ref[i] = temp;
-    }
-}
-
 void apply_params_to_waveform(int output)
 {
     // int output = selected_output.get();
     float scale = (the_output)().get_param_w_offset(OUTPUT_SCALE);
-    int offset = (the_output)().get_param(OUTPUT_OFFSET);
+    int offset = (the_output)().get_param_w_offset(OUTPUT_OFFSET);
     int randomness = (the_output)().get_param(OUTPUT_RANDOMNESS);
     int wave_type = (the_output)().get_param(OUTPUT_WAVEFORM);
+
+    float scale_correction = output_scale_corrections.get(output) / 1000.;
+    int offset_correction = output_offset_corrections.get(output);
 
     uint16_t *waveform_data = outputs[output].waveform_data;
     uint16_t *waveform_ref = waveform_reference[output];
@@ -101,7 +71,8 @@ void apply_params_to_waveform(int output)
         break;
     default:
         scale_factor = scale / 100;
-        offset_factor = ((offset + OUTPUT_OFFSET_OFFSET) / 100.0) * (DAC_FS + 1);
+        // offset_factor = ((offset + OUTPUT_OFFSET_OFFSET) / 100.0) * (DAC_FS + 1);
+        offset_factor = (offset / 100.0) * (DAC_FS + 1);
         offset_adjust = DAC_FS * (100 - scale) / 200;
         // set_randomness_factor(randomness, scale_factor, output);
         break;
@@ -112,15 +83,17 @@ void apply_params_to_waveform(int output)
     // ui.terminal_debug("Apply params -- Offset factor: " + String(offset_factor) + " offset: " + String(offset));
     // ui.terminal_debug("Apply params -- Randomness factor: " + String(randomness_factor) + " int: " + String((int)randomness_factor));
     // ui.terminal_debug("Apply params -- Scale factor: " + String(scale_factor) + " scale: " + String((int)scale));
-    // ui.terminal_debug("Apply params -- Output: " + String(output) + " scale: " + String((int)scale));
+    // ui.terminal_debug("Apply params -- Output: " + String(output) + " offset corr: " + String(offset_correction));
 
     int temp;
 
     for (int i = 0; i < data_len; i++)
     {
         temp = waveform_ref[i] * scale_factor;
+        temp *= scale_correction;
         temp += offset_factor;
         temp += offset_adjust;
+        temp += offset_correction;
         waveform_data[i] = constrain(temp, 0, DAC_FS);
     }
 }
@@ -238,7 +211,7 @@ void set_waveform(int output, int waveform)
         switch (waveform)
         {
         case WAVEFORM_SINE:
-            temp = (sin(6.28319 * (float)i / waveform_parts) * DAC_MID) + DAC_MID;
+            temp = (sin((6.28319 * (float)i / waveform_parts)) * DAC_MID) + DAC_MID;
             break;
         case WAVEFORM_HAYSTACK:
             temp = (sin(3.14159 * (float)i / waveform_parts) * DAC_FS);
@@ -265,8 +238,6 @@ void set_waveform(int output, int waveform)
         waveform_data[i] = waveform_ref[i] = temp;
         // Serial.println(temp);
     }
-    // dump_waveform(selected_output.get(), true);
-    correct_ref_waveform(output);
     // dump_waveform(selected_output.get(), true);
     apply_params_to_waveform(output);
     // graph_waveform(selected_output.get());
