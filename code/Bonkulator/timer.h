@@ -29,6 +29,10 @@ uint16_t quantize_value(uint16_t value, uint16_t output_num)
   if ((*bonk_outputs[output_num]).get_param(OUTPUT_QUANTIZE))
   {
     value &= 0xFFE0;
+    // double quant = 31.1473; // 1/12 / (10.956V / 4095)
+    // double quant = 83.3; // ?? heuristicly derived
+    // uint16_t temp = round(value / quant);
+    // value = round(temp * quant);
   }
   return value;
 }
