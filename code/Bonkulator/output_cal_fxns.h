@@ -1,19 +1,24 @@
 #include <Wire.h>
 
-#define OUTPUT_CAL_OUTPUT_NUM 0
-#define OUTPUT_CAL_OFFSET 1
-#define OUTPUT_CAL_SCALE 2
-#define OUTPUT_CAL_STATE 3
-#define OUTPUT_CAL_NUM_PARAMS 4
+enum
+{
+    OUTPUT_CAL_OUTPUT_NUM,
+    OUTPUT_CAL_OFFSET,
+    OUTPUT_CAL_SCALE,
+    OUTPUT_CAL_STATE,
+    OUTPUT_CAL_NUM_PARAMS
+};
+
+#define OUTPUT_CAL_RANGE OUTPUT_RANGE_BIPOLAR
 
 uint16_t _output_cal_params[OUTPUT_CAL_NUM_PARAMS];
 uint16_t _output_cal_mins[] = {0, 0, 0, 0};
-uint16_t _output_cal_maxs[] = {NUM_OUTPUTS - 1, DAC_FS, 1000, 1};
-uint16_t _output_cal_init_vals[] = {0, DAC_MID, 980, 0};
+uint16_t _output_cal_maxs[] = {NUM_OUTPUTS - 1, DAC_FS, 2000, 1};
+uint16_t _output_cal_init_vals[] = {0, DAC_MID, IDEAL_SCALE_CORRECTION, 0};
 uint16_t *output_cal_stuff[] = {_output_cal_params, _output_cal_mins, _output_cal_maxs, _output_cal_init_vals};
 String output_cal_labels[] = {"Output: ", "Offset: ", "Scale: ", "Calibrated: "};
 String output_cal_string_params[] = {"", "", "", "No ,Yes"};
-int16_t output_cal_offsets[] = {0, -DAC_MID, 0}; // allows negative numbers
+int16_t output_cal_offsets[] = {0, -DAC_MID, 0, 0}; // allows negative numbers
 
 Greenface_gadget output_cal_fxn("Calibrate", output_cal_labels, output_cal_stuff, sizeof(_output_cal_params) / sizeof(_output_cal_params[0]));
 
@@ -50,6 +55,7 @@ bool get_output_calibrated(int output)
     return output_calibrated.charAt(output) == 'Y';
 }
 
+// transfer values from EEPROM to parameter fields
 void get_output_corrections()
 {
     int output = output_cal_fxn.get_param(OUTPUT_CAL_OUTPUT_NUM);
@@ -81,12 +87,6 @@ void set_output_calibrated(int val)
     output_calibrated.putCharAt(val == 1 ? 'Y' : 'N', output);
 }
 
-void output_cal_update_params()
-{
-    // ui.terminal_debug("Update params: ");
-    get_output_corrections(); // sets params for selected output from EEPROM
-}
-
 void output_cal_update_offset()
 {
     int offset = output_cal_fxn.get_param_w_offset(OUTPUT_CAL_OFFSET);
@@ -98,20 +98,25 @@ void output_cal_update_offset()
 void output_cal_update_scale()
 {
     int scale = output_cal_fxn.get_param(OUTPUT_CAL_SCALE);
-    int offset = output_cal_fxn.get_param_w_offset(OUTPUT_CAL_OFFSET);
-    int dac_val = ((DAC_FS - DAC_MID) * scale / 1000.0) + DAC_MID;
-    dac_val += offset;
-    dac_out(output_cal_fxn.get_param(OUTPUT_CAL_OUTPUT_NUM), dac_val);
+    float mult = float(scale) / 1000.0;
+    dac_vdc(5.123 * mult, output_cal_fxn.get_param(OUTPUT_CAL_OUTPUT_NUM)); // adjust for output = 5.00VDC
     // ui.terminal_debug("Scale correction: " + String(scale) + " DAC: " + String(dac_val));
     set_output_scale_correction(scale);
 }
 
 void output_cal_update_state()
 {
-    // (*bonk_outputs[output_cal_fxn.get_param(OUTPUT_CAL_OUTPUT_NUM)]).put_param(0, OUTPUT_IDLE_VALUE);
     int state = output_cal_fxn.get_param(OUTPUT_CAL_STATE);
     // ui.terminal_debug("Output calibrated: " + String(state));
     set_output_calibrated(state);
+}
+
+void output_cal_update_params()
+{
+    // ui.terminal_debug("Update params: ");
+    set_output_range(output_cal_fxn.get_param(OUTPUT_CAL_OUTPUT_NUM), OUTPUT_CAL_RANGE);
+    get_output_corrections(); // sets params for selected output from EEPROM
+    output_cal_fxn.default_display();
 }
 
 update_fxn output_cal_update_fxns[OUTPUT_CAL_NUM_PARAMS] = {output_cal_update_params, output_cal_update_offset, output_cal_update_scale, output_cal_update_state};
@@ -119,6 +124,9 @@ update_fxn output_cal_update_fxns[OUTPUT_CAL_NUM_PARAMS] = {output_cal_update_pa
 void output_cal_display()
 {
     // ui.terminal_debug("output_cal_display param_num: " + String(output_cal_fxn.param_num));
+    // force bipolar output
+    set_output_range(output_cal_fxn.get_param(OUTPUT_CAL_OUTPUT_NUM), OUTPUT_CAL_RANGE);
+    output_cal_fxn.default_display();
     switch (output_cal_fxn.param_num)
     {
     case OUTPUT_CAL_OFFSET:
