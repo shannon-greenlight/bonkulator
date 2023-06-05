@@ -276,3 +276,63 @@ Finished trigger code cleanup.
 Check-in comment for Bonkulator-382 
 Fixes some bugs in uniploar operation. Has changes to web app.
 
+ 
+Check-in comment for Bonkulator-383 
+Fixes bipolar operation! Now it works for both. 
+
+Check-in comment for Bonkulator-384
+Start to add fixed point params.
+ 
+Check-in comment for Bonkulator-385
+Safety 
+ 
+Check-in comment for Bonkulator-386 
+Fixed point mostly works.
+ 
+Check-in comment for Bonkulator-387 
+Set idle value works. Need remote support still.
+ 
+Check-in comment for Bonkulator-388 
+Remote 'V' takes float as argument now.
+ 
+Check-in comment for Bonkulator-389 
+Fixes bugs in adjust_param
+ 
+Check-in comment for Bonkulator-390 
+Safety
+ 
+Check-in comment for Bonkulator-391 
+Fixes to range issues.
+ 
+Check-in comment for Bonkulator-392 
+Looks like Idle Value works. More testing, cleanup needed.
+ 
+Check-in comment for Bonkulator-393 
+Fixes to string var entry
+ 
+Check-in comment for Bonkulator-394 
+Fixes to output cal routines.
+ 
+Check-in comment for Bonkulator-395 
+Removes scale adjustment from output cal.
+ 
+Check-in comment for Bonkulator-396 
+Work on wifi status. Safety checkin.
+ 
+Check-in comment for Bonkulator-397 
+More on status...
+ 
+Check-in comment for Bonkulator-398 
+Fixes output scaling and offset. Still needs cleanup and testing.
+ 
+Check-in comment for Bonkulator-399 
+Cleanup.
+ 
+Check-in comment for Bonkulator-400 
+Adds dac_vdc.
+ 
+Check-in comment for Bonkulator-401 
+Cleanup. Consolidates dac_out routines.
+ 
+Check-in comment for Bonkulator-402 
+Fixes scale in output cal.
