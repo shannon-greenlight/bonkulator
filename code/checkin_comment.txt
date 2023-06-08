@@ -336,3 +336,6 @@ Cleanup. Consolidates dac_out routines.
  
 Check-in comment for Bonkulator-402 
 Fixes scale in output cal.
+ 
+Check-in comment for Bonkulator-403 
+Safety.
