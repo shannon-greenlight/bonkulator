@@ -1,0 +1,1044 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>C:\Users\shann\Dropbox\moog\bonkulator\BonkDaddy\BonkDaddyBoard\BonkDaddyBoard.kicad_sch</source>
+    <date>10/23/2022 7:20:19 AM</date>
+    <tool>Eeschema (6.0.1)</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev>1.1</rev>
+        <date/>
+        <source>BonkDaddyBoard.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C1">
+      <value>.1uF</value>
+      <footprint>Capacitor_THT:C_Rect_L7.0mm_W2.0mm_P5.00mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">399-9877-2-ND</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <property name="Digi-Key Part" value="399-9877-2-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>35fe7dbc-3fc9-49db-b8cc-ebba8603d8d1</tstamps>
+    </comp>
+    <comp ref="C2">
+      <value>10uF</value>
+      <footprint>Capacitor_THT:CP_Radial_D5.0mm_P2.00mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">P980-ND</field>
+      </fields>
+      <libsource lib="Device" part="C_Polarized_Small_US" description="Polarized capacitor, small US symbol"/>
+      <property name="Digi-Key Part" value="P980-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b759961c-4100-4a8c-b7fb-4f45da6d1c77</tstamps>
+    </comp>
+    <comp ref="C3">
+      <value>10uF</value>
+      <footprint>Capacitor_THT:CP_Radial_D5.0mm_P2.00mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">P980-ND</field>
+      </fields>
+      <libsource lib="Device" part="C_Polarized_Small_US" description="Polarized capacitor, small US symbol"/>
+      <property name="Digi-Key Part" value="P980-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>70ea926b-e0d3-4519-9c88-4365cec0e83a</tstamps>
+    </comp>
+    <comp ref="D1">
+      <value>RED LED</value>
+      <footprint>LED_THT:LED_D3.0mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">732-5005-ND</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Digi-Key Part" value="732-5005-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-000062013501</tstamps>
+    </comp>
+    <comp ref="D2">
+      <value>GREEN LED</value>
+      <footprint>LED_THT:LED_D3.0mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">732-5008-ND</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Digi-Key Part" value="732-5008-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-0000620806d0</tstamps>
+    </comp>
+    <comp ref="D3">
+      <value>YELLOW LED</value>
+      <footprint>LED_THT:LED_D3.0mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">732-5010-ND</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Digi-Key Part" value="732-5010-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-000061f47879</tstamps>
+    </comp>
+    <comp ref="D4">
+      <value>GREEN LED</value>
+      <footprint>LED_THT:LED_D3.0mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">732-5008-ND</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Digi-Key Part" value="732-5008-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>72a13574-a2da-4443-8753-5ca6e18ec09e</tstamps>
+    </comp>
+    <comp ref="D5">
+      <value>BLUE LED</value>
+      <footprint>LED_THT:LED_D3.0mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">160-1035-ND</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Digi-Key Part" value="160-1035-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>71fcba15-199a-4f03-b704-54f28fcc7429</tstamps>
+    </comp>
+    <comp ref="J1">
+      <value>EXP</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical</footprint>
+      <fields>
+        <field name="Digi-Key Part">S2011EC-05-ND</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_02x05_Odd_Even" description="Generic connector, double row, 02x05, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Digi-Key Part" value="S2011EC-05-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-000062835217</tstamps>
+    </comp>
+    <comp ref="J2">
+      <value>USB_B_Micro</value>
+      <footprint>Connector_USB:USB_Micro-B_Wuerth_614105150721_Vertical</footprint>
+      <fields>
+        <field name="Digi-Key Part">2073-USB3131-30-0230-ACT-ND</field>
+      </fields>
+      <libsource lib="Connector" part="USB_B_Micro" description="USB Micro Type B connector"/>
+      <property name="Digi-Key Part" value="2073-USB3131-30-0230-ACT-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-0000627fe20b</tstamps>
+    </comp>
+    <comp ref="J3">
+      <value>USB_A</value>
+      <footprint>sputterizer:USB_A_Amphenol_UE27AE54100_Vertical</footprint>
+      <datasheet> ~</datasheet>
+      <fields>
+        <field name="Digi-Key Part">UE27AE54100-ND</field>
+      </fields>
+      <libsource lib="Connector" part="USB_A" description="USB Type A connector"/>
+      <property name="Digi-Key Part" value="UE27AE54100-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-0000627ff605</tstamps>
+    </comp>
+    <comp ref="N1">
+      <value>Nut</value>
+      <footprint>MountingHole:MountingHole_2.5mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">36-4687-ND</field>
+      </fields>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Digi-Key Part" value="36-4687-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ee0db001-a260-4bb0-9760-80d825663ed6</tstamps>
+    </comp>
+    <comp ref="N2">
+      <value>Nut</value>
+      <footprint>MountingHole:MountingHole_2.5mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">36-4687-ND</field>
+      </fields>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Digi-Key Part" value="36-4687-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3d16661b-cf32-40ab-9be0-09766053e429</tstamps>
+    </comp>
+    <comp ref="N3">
+      <value>Nut</value>
+      <footprint>MountingHole:MountingHole_2.5mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">36-4687-ND</field>
+      </fields>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Digi-Key Part" value="36-4687-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>127c3c71-d5fc-45cc-8e37-74a96911534b</tstamps>
+    </comp>
+    <comp ref="N4">
+      <value>Nut</value>
+      <footprint>MountingHole:MountingHole_2.5mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">36-4687-ND</field>
+      </fields>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Digi-Key Part" value="36-4687-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>54261af0-88fa-405c-9e1a-61101d99c793</tstamps>
+    </comp>
+    <comp ref="Q3">
+      <value>2N7000</value>
+      <footprint>Package_TO_SOT_THT:TO-92_Inline_Wide</footprint>
+      <datasheet>https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF</datasheet>
+      <fields>
+        <field name="Digi-Key Part">2N7000BU-ND</field>
+      </fields>
+      <libsource lib="Transistor_FET" part="2N7000" description="0.2A Id, 200V Vds, N-Channel MOSFET, 2.6V Logic Level, TO-92"/>
+      <property name="Digi-Key Part" value="2N7000BU-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>92e94261-a13c-475b-b01e-c511c8f7e9b0</tstamps>
+    </comp>
+    <comp ref="Q4">
+      <value>2N3906</value>
+      <footprint>Package_TO_SOT_THT:TO-92_Inline_Wide</footprint>
+      <datasheet>https://www.onsemi.com/pub/Collateral/2N3906-D.PDF</datasheet>
+      <fields>
+        <field name="Digi-Key Part">2N3906TFCT-ND</field>
+      </fields>
+      <libsource lib="Transistor_BJT" part="2N3906" description="-0.2A Ic, -40V Vce, Small Signal PNP Transistor, TO-92"/>
+      <property name="Digi-Key Part" value="2N3906TFCT-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>21f9fd69-9bb1-463a-96ef-e2ad5cdcaa6c</tstamps>
+    </comp>
+    <comp ref="R1">
+      <value>100</value>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
+      <fields>
+        <field name="Digi-Key Part">CF14JT100RCT-ND</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value="CF14JT100RCT-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-0000620129e0</tstamps>
+    </comp>
+    <comp ref="R2">
+      <value>75</value>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
+      <fields>
+        <field name="Digi-Key Part">CF14JT75R0CT-ND</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value="CF14JT75R0CT-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>41f436e7-03a8-4549-9f37-c52e09f9d2c3</tstamps>
+    </comp>
+    <comp ref="R3">
+      <value>1K</value>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P2.54mm_Vertical</footprint>
+      <fields>
+        <field name="Digi-Key Part">738-CFF14JT1K00CT-ND</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value="738-CFF14JT1K00CT-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-0000620806b7</tstamps>
+    </comp>
+    <comp ref="R4">
+      <value>68</value>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
+      <fields>
+        <field name="Digi-Key Part">CF14JT68R0CT-ND</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value="CF14JT68R0CT-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-000061f47872</tstamps>
+    </comp>
+    <comp ref="R5">
+      <value>47</value>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
+      <fields>
+        <field name="Digi-Key Part">CF14JT47R0CT-ND</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value="CF14JT47R0CT-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>cdfc1ccc-d3fa-4803-b85b-3b7c24c0855b</tstamps>
+    </comp>
+    <comp ref="R6">
+      <value>10K</value>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
+      <fields>
+        <field name="Digi-Key Part">CF14JT10K0CT-ND</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value="CF14JT10K0CT-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d2010513-d039-43c6-bd57-c1f921d695f9</tstamps>
+    </comp>
+    <comp ref="R7">
+      <value>43K</value>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
+      <fields>
+        <field name="Digi-Key Part">CF14JT43K0CT-ND</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value="CF14JT43K0CT-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>455ab60b-7725-47c1-8bea-8bb2de9c3df5</tstamps>
+    </comp>
+    <comp ref="R8">
+      <value>43K</value>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
+      <fields>
+        <field name="Digi-Key Part">CF14JT43K0CT-ND</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value="CF14JT43K0CT-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>cb20dedd-c678-4d7e-b310-0959ee8ccdca</tstamps>
+    </comp>
+    <comp ref="R9">
+      <value>10K</value>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
+      <fields>
+        <field name="Digi-Key Part">CF14JT10K0CT-ND</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value="CF14JT10K0CT-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>73c4cd56-fccd-4694-b5c7-de65ffb51867</tstamps>
+    </comp>
+    <comp ref="SC1">
+      <value>Screw</value>
+      <footprint>MountingHole:MountingHole_2.5mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">145-50M025045G004-ND</field>
+      </fields>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Digi-Key Part" value="145-50M025045G004-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>522bab06-3ea9-4848-88a4-b67236655f35</tstamps>
+    </comp>
+    <comp ref="SC2">
+      <value>Screw</value>
+      <footprint>MountingHole:MountingHole_2.5mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">145-50M025045G004-ND</field>
+      </fields>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Digi-Key Part" value="145-50M025045G004-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>86032ddd-7570-485b-9376-d0e105bf06ec</tstamps>
+    </comp>
+    <comp ref="SC3">
+      <value>Screw</value>
+      <footprint>MountingHole:MountingHole_2.5mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">145-50M025045G004-ND</field>
+      </fields>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Digi-Key Part" value="145-50M025045G004-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4d1be4ad-3821-4287-a273-8dd10047ce97</tstamps>
+    </comp>
+    <comp ref="SC4">
+      <value>Screw</value>
+      <footprint>MountingHole:MountingHole_2.5mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">145-50M025045G004-ND</field>
+      </fields>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Digi-Key Part" value="145-50M025045G004-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6845a309-db3e-4e17-a0f0-400f3cb35aab</tstamps>
+    </comp>
+    <comp ref="SK1">
+      <value>A_14-LC-TT</value>
+      <datasheet>http://www.assmann-wsw.com/fileadmin/datasheets/ASS_0810_CO.pdf</datasheet>
+      <fields>
+        <field name="Digi-Key Part">AE9989-ND</field>
+      </fields>
+      <libsource lib="dk_Sockets-for-ICs-Transistors" part="A_14-LC-TT" description=""/>
+      <property name="Digi-Key Part" value="AE9989-ND"/>
+      <property name="LCSC Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3ea3262f-1e94-4b97-a7f5-6f04b8bebda2</tstamps>
+    </comp>
+    <comp ref="SO1">
+      <value>Stand-off</value>
+      <footprint>MountingHole:MountingHole_2.5mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">1772-2756-ND</field>
+      </fields>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Digi-Key Part" value="1772-2756-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>05b8e448-83f7-4667-9fe5-21f9b2349a6f</tstamps>
+    </comp>
+    <comp ref="SO2">
+      <value>Stand-off</value>
+      <footprint>MountingHole:MountingHole_2.5mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">1772-2756-ND</field>
+      </fields>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Digi-Key Part" value="1772-2756-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ae864eda-9561-4db7-8090-72f056bb8ff5</tstamps>
+    </comp>
+    <comp ref="SO3">
+      <value>Stand-off</value>
+      <footprint>MountingHole:MountingHole_2.5mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">1772-2756-ND</field>
+      </fields>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Digi-Key Part" value="1772-2756-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0fa4873a-9fa2-4d26-a711-2814d686a71e</tstamps>
+    </comp>
+    <comp ref="SO4">
+      <value>Stand-off</value>
+      <footprint>MountingHole:MountingHole_2.5mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">1772-2756-ND</field>
+      </fields>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Digi-Key Part" value="1772-2756-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f2eedf3e-7697-4ac4-8c74-3712e180c8a0</tstamps>
+    </comp>
+    <comp ref="SW1">
+      <value>Reset</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">450-1940-ND</field>
+      </fields>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <property name="Digi-Key Part" value="450-1940-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-000061f6ab8e</tstamps>
+    </comp>
+    <comp ref="U1">
+      <value>74AHC04</value>
+      <footprint>Package_DIP:DIP-14_W7.62mm_Socket</footprint>
+      <datasheet>https://assets.nexperia.com/documents/data-sheet/74AHC_AHCT04.pdf</datasheet>
+      <fields>
+        <field name="Digi-Key Part">296-12772-5-ND</field>
+      </fields>
+      <libsource lib="74xx" part="74AHC04" description="Hex Inverter"/>
+      <property name="Digi-Key Part" value="296-12772-5-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ea9cf402-e51c-4fcf-a009-76e25cb2f1f2 69aafbb6-4ae6-4fde-a0a6-6a6085edd348 a398f49e-0ef5-4dfa-a329-f840b4b4a6aa 2f5b70d5-9b1e-458a-bd75-9adfa7136cf9 baf19081-cc2c-47d3-83f1-757779abf3c6 d1ae5c19-670f-4dfa-becd-0f0f5c91556c 0be3c57e-a58a-4deb-8f89-3f9987e28bed</tstamps>
+    </comp>
+    <comp ref="W1">
+      <value>Washer</value>
+      <footprint>MountingHole:MountingHole_2.5mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">RPC3448-ND</field>
+      </fields>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Digi-Key Part" value="RPC3448-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f72a1b3e-b5f0-4361-8bf5-d34608b346ed</tstamps>
+    </comp>
+    <comp ref="W2">
+      <value>Washer</value>
+      <footprint>MountingHole:MountingHole_2.5mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">RPC3448-ND</field>
+      </fields>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Digi-Key Part" value="RPC3448-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a24a090f-a19b-4345-89a1-b478987210ab</tstamps>
+    </comp>
+    <comp ref="W3">
+      <value>Washer</value>
+      <footprint>MountingHole:MountingHole_2.5mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">RPC3448-ND</field>
+      </fields>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Digi-Key Part" value="RPC3448-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3d0da6bc-da24-4f99-992d-29aa12a1ac93</tstamps>
+    </comp>
+    <comp ref="W4">
+      <value>Washer</value>
+      <footprint>MountingHole:MountingHole_2.5mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">RPC3448-ND</field>
+      </fields>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Digi-Key Part" value="RPC3448-ND"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>de67ac69-c923-43b1-9be3-62989037860b</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="74xx" part="74AHC04">
+      <description>Hex Inverter</description>
+      <docs>https://assets.nexperia.com/documents/data-sheet/74AHC_AHCT04.pdf</docs>
+      <footprints>
+        <fp>DIP*W7.62mm*</fp>
+        <fp>SSOP?14*</fp>
+        <fp>TSSOP?14*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">74AHC04</field>
+        <field name="Datasheet">https://assets.nexperia.com/documents/data-sheet/74AHC_AHCT04.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="input"/>
+        <pin num="2" name="" type="output"/>
+        <pin num="3" name="" type="input"/>
+        <pin num="4" name="" type="output"/>
+        <pin num="5" name="" type="input"/>
+        <pin num="6" name="" type="output"/>
+        <pin num="7" name="GND" type="power_in"/>
+        <pin num="8" name="" type="output"/>
+        <pin num="9" name="" type="input"/>
+        <pin num="10" name="" type="output"/>
+        <pin num="11" name="" type="input"/>
+        <pin num="12" name="" type="output"/>
+        <pin num="13" name="" type="input"/>
+        <pin num="14" name="VCC" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="USB_A">
+      <description>USB Type A connector</description>
+      <docs> ~</docs>
+      <footprints>
+        <fp>USB*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">USB_A</field>
+        <field name="Datasheet"> ~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VBUS" type="power_in"/>
+        <pin num="2" name="D-" type="bidirectional"/>
+        <pin num="3" name="D+" type="bidirectional"/>
+        <pin num="4" name="GND" type="power_in"/>
+        <pin num="5" name="Shield" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="USB_B_Micro">
+      <description>USB Micro Type B connector</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>USB*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">USB_B_Micro</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VBUS" type="power_out"/>
+        <pin num="2" name="D-" type="bidirectional"/>
+        <pin num="3" name="D+" type="bidirectional"/>
+        <pin num="4" name="ID" type="passive"/>
+        <pin num="5" name="GND" type="power_out"/>
+        <pin num="6" name="Shield" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_02x05_Odd_Even">
+      <description>Generic connector, double row, 02x05, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_2x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_02x05_Odd_Even</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+        <pin num="7" name="Pin_7" type="passive"/>
+        <pin num="8" name="Pin_8" type="passive"/>
+        <pin num="9" name="Pin_9" type="passive"/>
+        <pin num="10" name="Pin_10" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C_Polarized_Small_US">
+      <description>Polarized capacitor, small US symbol</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>CP_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C_Polarized_Small_US</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C_Small">
+      <description>Unpolarized capacitor, small symbol</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C_Small</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="LED">
+      <description>Light emitting diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>LED*</fp>
+        <fp>LED_SMD:*</fp>
+        <fp>LED_THT:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R_Small_US">
+      <description>Resistor, small US symbol</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R_Small_US</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Mechanical" part="MountingHole">
+      <description>Mounting Hole without connection</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>MountingHole*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">H</field>
+        <field name="Value">MountingHole</field>
+        <field name="Datasheet">~</field>
+      </fields>
+    </libpart>
+    <libpart lib="Switch" part="SW_Push">
+      <description>Push button switch, generic, two pins</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SW_Push</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Transistor_BJT" part="2N3906">
+      <description>-0.2A Ic, -40V Vce, Small Signal PNP Transistor, TO-92</description>
+      <docs>https://www.onsemi.com/pub/Collateral/2N3906-D.PDF</docs>
+      <footprints>
+        <fp>TO?92*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">2N3906</field>
+        <field name="Footprint">Package_TO_SOT_THT:TO-92_Inline</field>
+        <field name="Datasheet">https://www.onsemi.com/pub/Collateral/2N3906-D.PDF</field>
+      </fields>
+      <pins>
+        <pin num="1" name="E" type="passive"/>
+        <pin num="2" name="B" type="input"/>
+        <pin num="3" name="C" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Transistor_FET" part="2N7000">
+      <description>0.2A Id, 200V Vds, N-Channel MOSFET, 2.6V Logic Level, TO-92</description>
+      <docs>https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF</docs>
+      <footprints>
+        <fp>TO?92*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">2N7000</field>
+        <field name="Footprint">Package_TO_SOT_THT:TO-92_Inline</field>
+        <field name="Datasheet">https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF</field>
+      </fields>
+      <pins>
+        <pin num="1" name="S" type="passive"/>
+        <pin num="2" name="G" type="input"/>
+        <pin num="3" name="D" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="dk_Sockets-for-ICs-Transistors" part="A_14-LC-TT">
+      <docs>http://www.assmann-wsw.com/fileadmin/datasheets/ASS_0810_CO.pdf</docs>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">dk_Sockets-for-ICs-Transistors_A_14-LC-TT</field>
+        <field name="Footprint">digikey-footprints:Socket_DIP-14_7.62mm_Conn</field>
+        <field name="Datasheet">http://www.assmann-wsw.com/fileadmin/datasheets/ASS_0810_CO.pdf</field>
+        <field name="Digi-Key_PN">AE9989-ND</field>
+        <field name="MPN">A 14-LC-TT</field>
+        <field name="Category">Connectors, Interconnects</field>
+        <field name="Family">Sockets for ICs, Transistors</field>
+        <field name="DK_Datasheet_Link">http://www.assmann-wsw.com/fileadmin/datasheets/ASS_0810_CO.pdf</field>
+        <field name="DK_Detail_Page">/product-detail/en/assmann-wsw-components/A-14-LC-TT/AE9989-ND/821743</field>
+        <field name="Description">CONN IC DIP SOCKET 14POS TIN</field>
+        <field name="Manufacturer">Assmann WSW Components</field>
+        <field name="Status">Active</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+        <pin num="3" name="" type="passive"/>
+        <pin num="4" name="" type="passive"/>
+        <pin num="5" name="" type="passive"/>
+        <pin num="6" name="" type="passive"/>
+        <pin num="7" name="" type="passive"/>
+        <pin num="8" name="" type="passive"/>
+        <pin num="9" name="" type="passive"/>
+        <pin num="10" name="" type="passive"/>
+        <pin num="11" name="" type="passive"/>
+        <pin num="12" name="" type="passive"/>
+        <pin num="13" name="" type="passive"/>
+        <pin num="14" name="" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="74xx">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/74xx.kicad_sym</uri>
+    </library>
+    <library logical="Connector">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Connector.kicad_sym</uri>
+    </library>
+    <library logical="Connector_Generic">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Connector_Generic.kicad_sym</uri>
+    </library>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Device.kicad_sym</uri>
+    </library>
+    <library logical="Mechanical">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Mechanical.kicad_sym</uri>
+    </library>
+    <library logical="Switch">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Switch.kicad_sym</uri>
+    </library>
+    <library logical="Transistor_BJT">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Transistor_BJT.kicad_sym</uri>
+    </library>
+    <library logical="Transistor_FET">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Transistor_FET.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="+3V3">
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="C2" pin="1" pintype="passive"/>
+      <node ref="D1" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="D3" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="D4" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="D5" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="J1" pin="9" pinfunction="Pin_9" pintype="passive"/>
+      <node ref="U1" pin="14" pinfunction="VCC" pintype="power_in"/>
+    </net>
+    <net code="2" name="+12V">
+      <node ref="C3" pin="1" pintype="passive"/>
+      <node ref="J1" pin="5" pinfunction="Pin_5" pintype="passive"/>
+      <node ref="R7" pin="2" pintype="passive"/>
+    </net>
+    <net code="3" name="GND">
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="C2" pin="2" pintype="passive"/>
+      <node ref="C3" pin="2" pintype="passive"/>
+      <node ref="J1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J1" pin="8" pinfunction="Pin_8" pintype="passive"/>
+      <node ref="J2" pin="5" pinfunction="GND" pintype="power_out"/>
+      <node ref="J3" pin="4" pinfunction="GND" pintype="power_in"/>
+      <node ref="Q3" pin="1" pinfunction="S" pintype="passive"/>
+      <node ref="R3" pin="1" pintype="passive"/>
+      <node ref="R6" pin="1" pintype="passive"/>
+      <node ref="SW1" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="U1" pin="11" pintype="input"/>
+      <node ref="U1" pin="13" pintype="input"/>
+      <node ref="U1" pin="7" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="4" name="Net-(D1-Pad1)">
+      <node ref="D1" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="R1" pin="2" pintype="passive"/>
+    </net>
+    <net code="5" name="Net-(D2-Pad1)">
+      <node ref="D2" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="R3" pin="2" pintype="passive"/>
+    </net>
+    <net code="6" name="Net-(D2-Pad2)">
+      <node ref="D2" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="J3" pin="1" pinfunction="VBUS" pintype="power_in"/>
+      <node ref="Q4" pin="3" pinfunction="C" pintype="passive"/>
+    </net>
+    <net code="7" name="Net-(D3-Pad1)">
+      <node ref="D3" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="R4" pin="2" pintype="passive"/>
+    </net>
+    <net code="8" name="Net-(D4-Pad1)">
+      <node ref="D4" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="R2" pin="2" pintype="passive"/>
+    </net>
+    <net code="9" name="Net-(D5-Pad1)">
+      <node ref="D5" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="R5" pin="2" pintype="passive"/>
+    </net>
+    <net code="10" name="Net-(J1-Pad1)">
+      <node ref="J1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="SW1" pin="1" pinfunction="1" pintype="passive"/>
+    </net>
+    <net code="11" name="Net-(J1-Pad3)">
+      <node ref="J1" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="U1" pin="3" pintype="input"/>
+    </net>
+    <net code="12" name="Net-(J1-Pad4)">
+      <node ref="J1" pin="4" pinfunction="Pin_4" pintype="passive"/>
+      <node ref="U1" pin="5" pintype="input"/>
+    </net>
+    <net code="13" name="Net-(J1-Pad7)">
+      <node ref="J1" pin="7" pinfunction="Pin_7" pintype="passive"/>
+      <node ref="U1" pin="1" pintype="input"/>
+    </net>
+    <net code="14" name="Net-(J1-Pad10)">
+      <node ref="J1" pin="10" pinfunction="Pin_10" pintype="passive"/>
+      <node ref="U1" pin="9" pintype="input"/>
+    </net>
+    <net code="15" name="Net-(J2-Pad1)">
+      <node ref="J2" pin="1" pinfunction="VBUS" pintype="power_out"/>
+      <node ref="Q4" pin="1" pinfunction="E" pintype="passive"/>
+      <node ref="R8" pin="2" pintype="passive"/>
+    </net>
+    <net code="16" name="Net-(J2-Pad2)">
+      <node ref="J2" pin="2" pinfunction="D-" pintype="bidirectional"/>
+      <node ref="J3" pin="2" pinfunction="D-" pintype="bidirectional"/>
+    </net>
+    <net code="17" name="Net-(J2-Pad3)">
+      <node ref="J2" pin="3" pinfunction="D+" pintype="bidirectional"/>
+      <node ref="J3" pin="3" pinfunction="D+" pintype="bidirectional"/>
+    </net>
+    <net code="18" name="Net-(J2-Pad6)">
+      <node ref="J2" pin="6" pinfunction="Shield" pintype="passive"/>
+      <node ref="J3" pin="5" pinfunction="Shield" pintype="passive"/>
+    </net>
+    <net code="19" name="Net-(Q3-Pad2)">
+      <node ref="Q3" pin="2" pinfunction="G" pintype="input"/>
+      <node ref="R6" pin="2" pintype="passive"/>
+      <node ref="R7" pin="1" pintype="passive"/>
+    </net>
+    <net code="20" name="Net-(Q3-Pad3)">
+      <node ref="Q3" pin="3" pinfunction="D" pintype="passive"/>
+      <node ref="R9" pin="1" pintype="passive"/>
+    </net>
+    <net code="21" name="Net-(Q4-Pad2)">
+      <node ref="Q4" pin="2" pinfunction="B" pintype="input"/>
+      <node ref="R8" pin="1" pintype="passive"/>
+      <node ref="R9" pin="2" pintype="passive"/>
+    </net>
+    <net code="22" name="Net-(R1-Pad1)">
+      <node ref="R1" pin="1" pintype="passive"/>
+      <node ref="U1" pin="2" pintype="output"/>
+    </net>
+    <net code="23" name="Net-(R2-Pad1)">
+      <node ref="R2" pin="1" pintype="passive"/>
+      <node ref="U1" pin="6" pintype="output"/>
+    </net>
+    <net code="24" name="Net-(R4-Pad1)">
+      <node ref="R4" pin="1" pintype="passive"/>
+      <node ref="U1" pin="8" pintype="output"/>
+    </net>
+    <net code="25" name="Net-(R5-Pad1)">
+      <node ref="R5" pin="1" pintype="passive"/>
+      <node ref="U1" pin="4" pintype="output"/>
+    </net>
+    <net code="26" name="unconnected-(J1-Pad6)">
+      <node ref="J1" pin="6" pinfunction="Pin_6" pintype="passive"/>
+    </net>
+    <net code="27" name="unconnected-(J2-Pad4)">
+      <node ref="J2" pin="4" pinfunction="ID" pintype="passive"/>
+    </net>
+    <net code="28" name="unconnected-(SK1-Pad1)">
+      <node ref="SK1" pin="1" pintype="passive"/>
+    </net>
+    <net code="29" name="unconnected-(SK1-Pad2)">
+      <node ref="SK1" pin="2" pintype="passive"/>
+    </net>
+    <net code="30" name="unconnected-(SK1-Pad3)">
+      <node ref="SK1" pin="3" pintype="passive"/>
+    </net>
+    <net code="31" name="unconnected-(SK1-Pad4)">
+      <node ref="SK1" pin="4" pintype="passive"/>
+    </net>
+    <net code="32" name="unconnected-(SK1-Pad5)">
+      <node ref="SK1" pin="5" pintype="passive"/>
+    </net>
+    <net code="33" name="unconnected-(SK1-Pad6)">
+      <node ref="SK1" pin="6" pintype="passive"/>
+    </net>
+    <net code="34" name="unconnected-(SK1-Pad7)">
+      <node ref="SK1" pin="7" pintype="passive"/>
+    </net>
+    <net code="35" name="unconnected-(SK1-Pad8)">
+      <node ref="SK1" pin="8" pintype="passive"/>
+    </net>
+    <net code="36" name="unconnected-(SK1-Pad9)">
+      <node ref="SK1" pin="9" pintype="passive"/>
+    </net>
+    <net code="37" name="unconnected-(SK1-Pad10)">
+      <node ref="SK1" pin="10" pintype="passive"/>
+    </net>
+    <net code="38" name="unconnected-(SK1-Pad11)">
+      <node ref="SK1" pin="11" pintype="passive"/>
+    </net>
+    <net code="39" name="unconnected-(SK1-Pad12)">
+      <node ref="SK1" pin="12" pintype="passive"/>
+    </net>
+    <net code="40" name="unconnected-(SK1-Pad13)">
+      <node ref="SK1" pin="13" pintype="passive"/>
+    </net>
+    <net code="41" name="unconnected-(SK1-Pad14)">
+      <node ref="SK1" pin="14" pintype="passive"/>
+    </net>
+    <net code="42" name="unconnected-(U1-Pad10)">
+      <node ref="U1" pin="10" pintype="output"/>
+    </net>
+    <net code="43" name="unconnected-(U1-Pad12)">
+      <node ref="U1" pin="12" pintype="output"/>
+    </net>
+  </nets>
+</export>
