@@ -32,7 +32,7 @@ public:
     bool get_output(int output_num);
     String params_toJSON();
     String get_state();
-    trigger_state state;
+    trigger_state state; // Only used by check_user_recording(). Todo: resolve this issue
 
 private:
     uint32_t outputs;                  // up to 32 outputs. 8 for now

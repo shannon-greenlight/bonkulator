@@ -74,7 +74,7 @@ void TRIGGER::trigger()
 void TRIGGER::clear()
 {
     state = TRIGGER_IDLE;
-    // Serial.println("Clearing trigger: " + String(trig_num));
+    // ui.terminal_debug("Clearing trigger: " + String(trig_num));
 }
 
 void TRIGGER::disable_all()
