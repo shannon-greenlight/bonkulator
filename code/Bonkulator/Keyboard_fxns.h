@@ -381,9 +381,8 @@ void process_cmd(String in_str)
 		selected_fxn->printParams();
 		break;
 	case 'c':
-		// clear trigger
-		select_trigger(int_param);
-		selected_trigger->clear();
+		clear_trigger(int_param, selected_trigger->trig_num);
+		// ui.terminal_debug("Clearing trigger for output: " + String(int_param));
 		break;
 	case 't':
 		// select trigger
@@ -441,6 +440,9 @@ void process_cmd(String in_str)
 			trigger_report();
 			break;
 		}
+		break;
+	case 'U':
+		settings_put_usb_direct(int_param);
 		break;
 	case 'J':
 		switch (int_param)
@@ -584,6 +586,7 @@ void check_serial()
 	static String in_str = ""; // for serial input
 	static boolean cmd_available = false;
 	static bool entering_string = false; // or entering a number or comment
+	char cmd;
 
 	if (Serial.available() > 0)
 	{
@@ -629,6 +632,7 @@ void check_serial()
 		{
 			if (cmd_available)
 			{
+				cmd = in_str[0];
 				process_cmd(in_str);
 				in_str = "";
 				keypress = 0;
@@ -636,9 +640,15 @@ void check_serial()
 			}
 			else
 			{
+				cmd = keypress;
 				process_key();
 				reset_keyboard();
 				in_str = "";
+			}
+			if (usb_direct_enabled())
+			{
+				// ui.t.println("Howdy!");
+				send_data_to_USB(cmd);
 			}
 		}
 	}

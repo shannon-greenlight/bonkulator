@@ -73,3 +73,84 @@ void gen_params_macro(Greenface_gadget *item, bool print_header = true, String p
     }
   }
 }
+
+void send_data_to_USB(char cmd)
+{
+  ui.t.print("{");
+  // ui.terminal_debug("Send data to ui.t: " + String(selected_fxn->get_param(OUTPUT_WAVEFORM)));
+  if (cmd == '[')
+    return;
+  ui.t.print(toJSON("fxn", selected_fxn->name));
+  ui.t.print(",");
+  ui.t.print(toJSON("fxn_num", String(remembered_fxn.get())));
+  ui.t.print(",");
+  if (cmd == ' ' || cmd == 'f' || cmd == '+' || cmd == '-' || cmd == 'U')
+    ui.t.print(list_fxns());
+  ui.t.print(toJSON("device_name", settings_get_device_name()));
+  ui.t.print(",");
+  ui.t.print(toJSON("cmd", String(cmd)));
+  ui.t.print(",");
+
+  uint8_t digit_num = selected_fxn->digit_num;
+  if (selected_fxn->get_min_w_offset() < 0 && digit_num > 0)
+  {
+    digit_num--;
+  }
+  ui.t.print(toJSON("digit_num", String(digit_num)));
+  ui.t.print(",");
+
+  ui.t.print(toJSON("param_num", String(selected_fxn->param_num)));
+  ui.t.print(",");
+  ui.t.print(toJSON("param_active", String(selected_fxn->get_param_active())));
+  ui.t.print(",");
+  ui.t.print(toJSON("dp", (selected_fxn->decimal_places) ? String(selected_fxn->decimal_places[selected_fxn->param_num]) : "0"));
+  ui.t.print(",");
+
+  ui.t.print(toJSON("fs_volts", output_get_fs()));
+  ui.t.print(",");
+  ui.t.print(toJSON("fs_offset", output_get_fs_offset()));
+  ui.t.print(",");
+  ui.t.print(toJSON("offset_max", "100"));
+  ui.t.print(",");
+  ui.t.print(toJSON("offset_min", "-100"));
+  ui.t.print(",");
+  ui.t.print(toJSON("scale_min", "-100"));
+  ui.t.print(",");
+  ui.t.print(toJSON("scale_max", "100"));
+  ui.t.print(",");
+  ui.t.print(toJSON("dac_fs", String(DAC_FS)));
+  ui.t.print(",");
+  ui.t.print(toJSON("adc_fs", String(ADC_FS)));
+  ui.t.print(",");
+
+  if (selected_fxn_num != SETTINGS_FXN || in_user_waveforms())
+  {
+    set_wifi_message();
+    ui.t.print(toJSON("message", wifi_ui_message));
+    ui.t.print(",");
+  }
+  wifi_ui_message = "";
+
+  ui.t.print("\"triggers\" : [");
+  for (int trig_num = 0; trig_num < NUM_TRIGGERS; trig_num++)
+  {
+    if (trig_num > 0)
+    {
+      ui.t.print(",");
+    }
+    // ui.terminal_debug((*triggers[trig_num]).params_toJSON());
+    ui.t.print((*triggers[trig_num]).params_toJSON());
+  }
+  ui.t.print("],");
+
+  ui.t.print("\"params\" : [");
+  ui.t.print(selected_fxn->params_toJSON());
+  ui.t.print("]");
+  ui.t.print("}");
+
+  // The HTTP response ends with another blank line:
+  // ui.t.println("");
+
+  // This terminates serialport message
+  ui.t.println("\r\n\r\n");
+}

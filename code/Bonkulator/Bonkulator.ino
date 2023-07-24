@@ -41,12 +41,15 @@ void init_all();
 void select_fxn(int fxn_index);
 
 // settings
+bool in_user_waveforms();
 bool in_ask_init();
 void ask_init();
 String settings_get_device_name();
 uint16_t settings_get_encoder_type();
 int settings_get_inactivity_timeout();
 bool wifi_enabled(void);
+bool usb_direct_enabled();
+void settings_put_usb_direct(int val);
 void timer_service_settings();
 void init_parameters();
 
@@ -85,6 +88,7 @@ bool check_any_triggers();
 void clear_all_triggers();
 void trigger_output(byte trig_num, int output_num);
 void trigger_report();
+void clear_trigger(int output_num, int trig_num);
 
 // interface to modules
 #include "EEPROM_fxns.h"
@@ -93,6 +97,12 @@ void trigger_report();
 #include "Rotary_Encoder_fxns.h"
 #include <Greenface_gadget.h>
 #include "WIFI_Util.h"
+
+// WiFi, USB
+String params_toJSON();
+String list_fxns();
+String output_get_fs();
+String output_get_fs_offset();
 
 EEPROM_Int selected_output = EEPROM_Int(0, 7); // the output we are working on
 EEPROM_Int remembered_fxn = EEPROM_Int(0, 8);  // 0-7=OutputX, 8=Settings

@@ -339,3 +339,15 @@ Fixes scale in output cal.
  
 Check-in comment for Bonkulator-403 
 Safety.
+ 
+Check-in comment for Bonkulator-404 
+Adds init support for usb_direct mode.
+ 
+Check-in comment for Bonkulator-405 
+Created USB Direct mode in settings.
+ 
+Check-in comment for Bonkulator-406 
+Fixes to USB Direct
+ 
+Check-in comment for Bonkulator-407 
+Fixes for sending waveform messages.

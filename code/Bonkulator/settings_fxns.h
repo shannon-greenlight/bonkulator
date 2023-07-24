@@ -1,23 +1,27 @@
 #include <Wire.h>
 
-#define SETTINGS_VER 0
-#define SETTINGS_NAME 1
-#define SETTINGS_ENCODER 2
-#define SETTINGS_WIFI 3
-#define SETTINGS_SCREEN 4
-#define SETTINGS_USER_WAVEFORMS 5
-#define SETTINGS_RESET 6
-#define SETTINGS_CAL 7
-#define SETTINGS_NUM_PARAMS 8
+enum
+{
+    SETTINGS_VER,
+    SETTINGS_NAME,
+    SETTINGS_ENCODER,
+    SETTINGS_WIFI,
+    SETTINGS_USB_DIRECT,
+    SETTINGS_SCREEN,
+    SETTINGS_USER_WAVEFORMS,
+    SETTINGS_RESET,
+    SETTINGS_CAL,
+    SETTINGS_NUM_PARAMS
+};
 
 uint16_t _settings_params[SETTINGS_NUM_PARAMS];
-uint16_t _settings_mins[] = {0, 0, 0, 0, 1, 0, 0, 0};
-uint16_t _settings_maxs[] = {0, 0, 1, 1, 9999, 7, 1, 1};
-uint16_t _settings_init_vals[] = {0, 0, 1, 0, 15, 0, 0, 0};
+uint16_t _settings_mins[] = {0, 0, 0, 0, 0, 1, 0, 0, 0};
+uint16_t _settings_maxs[] = {0, 0, 1, 1, 1, 9999, 7, 1, 1};
+uint16_t _settings_init_vals[] = {0, 0, 1, 0, 0, 15, 0, 0, 0};
 uint16_t *settings_stuff[] = {_settings_params, _settings_mins, _settings_maxs, _settings_init_vals};
-String settings_labels[] = {"Version: ", "Name: ", "Encoder Type: ", "WiFi: ", "Screen Saver: ", "Waveforms: ", "Reset: ", "Calibrate: "};
-String settings_string_params[] = {VERSION_NUM, "$~", "Normal ,Reverse", "Disabled,Enabled ", "", "User 0,User 1,User 2,User 3,User 4,User 5,User 6,User 7", ACTIVATE_STRING, "Inputs,Outputs"};
-bool settings_param_active[] = {0, 0, 0, 1, 0, 1, 1, 1};
+String settings_labels[] = {"Version: ", "Name: ", "Encoder Type: ", "WiFi: ", "USB Direct: ", "Screen Saver : ", " Waveforms : ", " Reset : ", " Calibrate : "};
+String settings_string_params[] = {VERSION_NUM, "$~", "Normal ,Reverse", "Disabled,Enabled ", "Disabled,Enabled ", "", "User 0,User 1,User 2,User 3,User 4,User 5,User 6,User 7", ACTIVATE_STRING, "Inputs,Outputs"};
+bool settings_param_active[] = {0, 0, 0, 1, 0, 0, 1, 1, 1};
 
 // void (*func_ptr[3])() = {fun1, fun2, fun3};
 
@@ -48,6 +52,11 @@ bool in_ask_init()
     return selected_fxn == &ask_init_fxn;
 }
 
+bool in_user_waveforms()
+{
+    return (selected_fxn_num == SETTINGS_FXN && settings_fxn.param_num == SETTINGS_USER_WAVEFORMS);
+}
+
 void ask_init()
 {
     int init_type = ask_init_fxn.get_param(0);
@@ -72,6 +81,17 @@ void ask_init()
     select_fxn(remembered_fxn.get());
 }
 
+void set_usb_direct()
+{
+    ui.terminal_mirror = settings_fxn.get_param(SETTINGS_USB_DIRECT) ? false : true;
+}
+
+void settings_put_usb_direct(int val)
+{
+    settings_fxn.param_put(val, SETTINGS_USB_DIRECT);
+    set_usb_direct();
+}
+
 void settings_put_param(int val)
 {
     settings_fxn.put_param(val);
@@ -82,6 +102,9 @@ void settings_put_param(int val)
         break;
     case SETTINGS_SCREEN:
         restore_display();
+        break;
+    case SETTINGS_USB_DIRECT:
+        set_usb_direct();
         break;
     }
 }
@@ -97,6 +120,10 @@ void settings_adjust_param(int encoder_val, unsigned long delta)
     case SETTINGS_SCREEN:
         settings_fxn.adjust_param(encoder_val, delta);
         restore_display();
+        break;
+    case SETTINGS_USB_DIRECT:
+        settings_fxn.adjust_param(encoder_val, delta);
+        set_usb_direct();
         break;
     default:
         settings_fxn.adjust_param(encoder_val, delta);
@@ -116,6 +143,11 @@ uint16_t settings_get_encoder_type()
 bool wifi_enabled()
 {
     return settings_fxn.get_param(SETTINGS_WIFI);
+}
+
+bool usb_direct_enabled()
+{
+    return settings_fxn.get_param(SETTINGS_USB_DIRECT);
 }
 
 int settings_get_inactivity_timeout()

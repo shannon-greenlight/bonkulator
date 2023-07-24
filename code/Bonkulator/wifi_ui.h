@@ -64,6 +64,7 @@ String list_fxns()
 
 void send_data_to_client(WiFiClient client, char cmd)
 {
+  client.print("{");
   // ui.terminal_debug("Send data to client: " + String(selected_fxn->get_param(OUTPUT_WAVEFORM)));
   if (cmd == '[')
     return;
@@ -133,6 +134,10 @@ void send_data_to_client(WiFiClient client, char cmd)
   client.print("\"params\" : [");
   client.print(selected_fxn->params_toJSON());
   client.print("]");
+  client.print("}");
+
+  // The HTTP response ends with another blank line:
+  client.println();
 }
 
 void do_server()
@@ -173,12 +178,7 @@ void do_server()
             client.println("Access-Control-Allow-Methods: *");
             client.println();
 
-            client.print("{");
             send_data_to_client(client, cmd);
-            client.print("}");
-
-            // The HTTP response ends with another blank line:
-            client.println();
             // break out of the while loop:
             break;
           }
