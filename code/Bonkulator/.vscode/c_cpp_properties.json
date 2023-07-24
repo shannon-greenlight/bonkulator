@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                    "${workspaceFolder}/**",
+                    "${default}",
+                    "C:\\Users\\shann\\Dropbox\\moog\\Arduino-Libs\\**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ]
+        }
+    ],
+    "version": 4
+}
