@@ -33,6 +33,6 @@
 #define NUM_OUTPUTS 8
 #define WAVEFORM_PARTS 128
 
-#define ACTIVATE_STRING "Press Activate"
+#define ACTIVATE_STRING "Push Activate"
 
 #endif
