@@ -648,6 +648,7 @@ void check_serial()
 			if (usb_direct_enabled())
 			{
 				// ui.t.println("Howdy!");
+				cmd = (cmd == '\n') ? ' ' : cmd;
 				send_data_to_USB(cmd);
 			}
 		}
