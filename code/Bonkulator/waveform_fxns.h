@@ -131,7 +131,8 @@ void set_wifi_message()
             wifi_ui_message += ", ";
 
         value = waveform_data[index];
-        value = randomize_value(value, outptr->randomness_factor);
+        if (!in_user_waveforms())
+            value = randomize_value(value, outptr->randomness_factor);
         value = quantize_value(value, selected_output.get());
         wifi_ui_message += String(value);
 
