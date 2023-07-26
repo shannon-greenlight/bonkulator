@@ -351,3 +351,6 @@ Fixes to USB Direct
  
 Check-in comment for Bonkulator-407 
 Fixes for sending waveform messages.
+ 
+Check-in comment for Bonkulator-408 
+Changes Press Activate to Push Activate so it fits.
