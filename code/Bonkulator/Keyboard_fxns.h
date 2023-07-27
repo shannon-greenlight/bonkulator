@@ -221,11 +221,12 @@ void process_key()
 	switch (keypress)
 	{
 	case '~':
-		ui.terminal_debug("Quantize Report");
-		for (uint16_t i = 1000; i < 2000; i++)
-		{
-			Serial.println(String(quantize_value(i, 7)));
-		}
+		user_waveforms_init();
+		// ui.terminal_debug("Quantize Report");
+		// for (uint16_t i = 1000; i < 2000; i++)
+		// {
+		// 	Serial.println(String(quantize_value(i, 7)));
+		// }
 		// dump_waveform(selected_output.get(), false);
 		// dump_waveform(selected_output.get(), true);
 		// ui.terminal_debug("String Vars");

@@ -69,6 +69,7 @@ void dump_waveform(int output_num, bool dump_ref);
 void graph_waveform(int output_num);
 void set_waveform(int, int);
 void set_wifi_message();
+int calc_wave_value(int i, int waveform, uint16_t waveform_parts);
 
 // Output Calibration / Corrections
 void output_corrections_init();

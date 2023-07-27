@@ -188,6 +188,36 @@ uint16_t get_time_inc(int output)
     // return (*bonk_outputs[output]).get_param(OUTPUT_TIME_INC);
 }
 
+int calc_wave_value(int i, int waveform, uint16_t waveform_parts)
+{
+    int temp;
+    int pyramid_index;
+    switch (waveform)
+    {
+    case WAVEFORM_SINE:
+        temp = (sin((6.28319 * (float)i / waveform_parts)) * DAC_MID) + DAC_MID;
+        break;
+    case WAVEFORM_HAYSTACK:
+        temp = (sin(3.14159 * (float)i / waveform_parts) * DAC_FS);
+        break;
+    case WAVEFORM_RAMP:
+        temp = i * (DAC_FS + 1) / waveform_parts;
+        break;
+    case WAVEFORM_PYRAMID:
+        pyramid_index = (i < waveform_parts / 2) ? i : waveform_parts - i;
+        temp = 2 * pyramid_index * (DAC_FS + 1) / waveform_parts;
+        break;
+    case WAVEFORM_PULSE:
+    case WAVEFORM_TOGGLE:
+        temp = DAC_FS;
+        break;
+    case WAVEFORM_MAYTAG:
+        temp = random(0, DAC_FS);
+        break;
+    }
+    return temp;
+}
+
 void set_waveform(int output, int waveform)
 {
     // temp fix
@@ -206,37 +236,45 @@ void set_waveform(int output, int waveform)
 
     // ui.terminal_debug("Set Waveform output: " + String(output) + " waveform: " + String(waveform));
     // ui.terminal_debug("Set Waveform user_inc_factor: " + String(user_inc_factor) + " parts: " + String(waveform_parts) + " userlen: " + String(user_waveform.length()));
-    int pyramid_index;
+    // int pyramid_index;
     for (int i = 0; i < waveform_parts; i++)
     {
-        switch (waveform)
+        if (waveform > WAVEFORM_MAYTAG) // is this a user wave?
         {
-        case WAVEFORM_SINE:
-            temp = (sin((6.28319 * (float)i / waveform_parts)) * DAC_MID) + DAC_MID;
-            break;
-        case WAVEFORM_HAYSTACK:
-            temp = (sin(3.14159 * (float)i / waveform_parts) * DAC_FS);
-            break;
-        case WAVEFORM_RAMP:
-            temp = i * (DAC_FS + 1) / waveform_parts;
-            break;
-        case WAVEFORM_PYRAMID:
-            pyramid_index = (i < waveform_parts / 2) ? i : waveform_parts - i;
-            temp = 2 * pyramid_index * (DAC_FS + 1) / waveform_parts;
-            break;
-        case WAVEFORM_PULSE:
-        case WAVEFORM_TOGGLE:
-            temp = DAC_FS;
-            break;
-        case WAVEFORM_MAYTAG:
-            temp = random(0, DAC_FS);
-            break;
-        default:
-            temp = user_waveform.get(user_inc_factor * i);
-            break;
+            waveform_data[i] = waveform_ref[i] = user_waveform.get(user_inc_factor * i);
         }
+        else
+        {
+            waveform_data[i] = waveform_ref[i] = calc_wave_value(i, waveform, waveform_parts);
+        }
+        // switch (waveform)
+        // {
+        // case WAVEFORM_SINE:
+        //     temp = (sin((6.28319 * (float)i / waveform_parts)) * DAC_MID) + DAC_MID;
+        //     break;
+        // case WAVEFORM_HAYSTACK:
+        //     temp = (sin(3.14159 * (float)i / waveform_parts) * DAC_FS);
+        //     break;
+        // case WAVEFORM_RAMP:
+        //     temp = i * (DAC_FS + 1) / waveform_parts;
+        //     break;
+        // case WAVEFORM_PYRAMID:
+        //     pyramid_index = (i < waveform_parts / 2) ? i : waveform_parts - i;
+        //     temp = 2 * pyramid_index * (DAC_FS + 1) / waveform_parts;
+        //     break;
+        // case WAVEFORM_PULSE:
+        // case WAVEFORM_TOGGLE:
+        //     temp = DAC_FS;
+        //     break;
+        // case WAVEFORM_MAYTAG:
+        //     temp = random(0, DAC_FS);
+        //     break;
+        // default:
+        //     temp = user_waveform.get(user_inc_factor * i);
+        //     break;
+        // }
 
-        waveform_data[i] = waveform_ref[i] = temp;
+        // waveform_data[i] = waveform_ref[i] = temp;
         // Serial.println(temp);
     }
     // dump_waveform(selected_output.get(), true);

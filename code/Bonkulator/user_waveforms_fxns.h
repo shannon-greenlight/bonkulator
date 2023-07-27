@@ -1,12 +1,23 @@
 #include <Greenface_gadget.h>
 #include <EEPROM_Arr16.h>
 
-#define USER_WAVEFORMS_NAME 0
-#define USER_WAVEFORMS_INDEX 1
-#define USER_WAVEFORMS_VALUE 2
-#define USER_WAVEFORMS_RECORD 3
-#define USER_WAVEFORMS_START 4
-#define NUM_USER_WAVEFORMS_PARAMS 5
+// #define USER_WAVEFORMS_NAME 0
+// #define USER_WAVEFORMS_INDEX 1
+// #define USER_WAVEFORMS_VALUE 2
+// #define USER_WAVEFORMS_RECORD 3
+// #define USER_WAVEFORMS_START 4
+// #define NUM_USER_WAVEFORMS_PARAMS 5
+
+enum
+{
+    USER_WAVEFORMS_NAME,
+    USER_WAVEFORMS_INDEX,
+    USER_WAVEFORMS_VALUE,
+    USER_WAVEFORMS_RECORD,
+    USER_WAVEFORMS_START,
+    USER_WAVEFORMS_INIT_WAVE,
+    NUM_USER_WAVEFORMS_PARAMS
+};
 
 #define NUM_USER_WAVEFORMS 8
 
@@ -16,6 +27,20 @@
 #define USER_WAVEFORMS_START_MINUS_CHANGE 3
 
 #define USER_WAVEFORMS_NAME_MAXLEN 10
+
+#define INIT_WAVEFORMS "Sine,Haystack,Ramp,Pyramid,Line,Maytag"
+enum
+{
+    INIT_WAVE_SINE,
+    INIT_WAVE_HAYSTACK,
+    INIT_WAVE_RAMP,
+    INIT_WAVE_PYRAMID,
+    INIT_WAVE_LINE,
+    INIT_WAVE_MAYTAG,
+    NUM_INIT_WAVEFORMS,
+};
+
+// #define NUM_INIT_WAVEFORMS 6
 
 volatile uint8_t user_waveform_num;         // for recording
 volatile uint8_t user_waveforms_record_inc; // msecs per sample
@@ -36,11 +61,11 @@ const int record_threshold = 20;
 
 // volatile bool user_waveforms_recording = false;
 
-uint16_t _user_waveforms_mins[] = {0, 0, 1, 1, 0};
-uint16_t _user_waveforms_maxs[] = {0, 127, DAC_FS, 1000, 3};
-uint16_t _user_waveforms_init_vals[] = {0, 0, DAC_FS / 2, 8, 0};
-String user_waveforms_labels[] = {"Name: ", "Index: ", "Value: ", "Sample time(ms): ", "Record on: "};
-String user_waveforms_string_params[] = {"$~", "", "", "", "Immediate,Trigger,+Change,-Change"};
+uint16_t _user_waveforms_mins[] = {0, 0, 1, 1, 0, 0};
+uint16_t _user_waveforms_maxs[] = {0, 127, DAC_FS, 1000, 3, NUM_INIT_WAVEFORMS - 1};
+uint16_t _user_waveforms_init_vals[] = {0, 0, DAC_FS / 2, 8, 0, INIT_WAVE_LINE};
+String user_waveforms_labels[] = {"Name: ", "Index: ", "Value: ", "Sample time(ms): ", "Record on: ", "Init Wave: "};
+String user_waveforms_string_params[] = {"$~", "", "", "", "Immediate,Trigger,+Change,-Change", INIT_WAVEFORMS};
 bool user_waveforms_param_active[] = {0, 0, 1, 1, 0};
 
 // User Wave definitions
@@ -161,6 +186,7 @@ void user_waveforms_init()
     {
         // user_waveform->string_vars[0].put("User Waverform " + String(i));
         (*user_waveforms[i]).init();
+        // (*user_waveforms[i]).param_put(INIT_WAVE_LINE, USER_WAVEFORMS_INIT_WAVE);
         (*user_waveforms[i]).put_string_var("User " + String(i), USER_WAVEFORMS_NAME);
         (*user_waveforms_data[i]).fill(DAC_MID);
     }
@@ -231,7 +257,25 @@ void user_waveforms_update_start()
     user_waveforms_recording_state = RECORDING_IDLE;
 }
 
-update_fxn user_waveforms_update_fxns[NUM_USER_WAVEFORMS_PARAMS] = {user_waveforms_update_name, user_waveforms_update_index, user_waveforms_update_value, nullptr, user_waveforms_update_start};
+void user_waveforms_update_init_wave()
+{
+    int waveform_num = get_user_waveform_num();
+    int init_wave_num = user_waveforms[waveform_num]->get_param(USER_WAVEFORMS_INIT_WAVE);
+    // ui.terminal_debug("Init wave: " + String(init_wave_num));
+    for (int i = 0; i < WAVEFORM_PARTS; i++)
+    {
+        if (init_wave_num == INIT_WAVE_LINE)
+        {
+            (*user_waveforms_data[waveform_num]).put(DAC_MID, i);
+        }
+        else
+        {
+            (*user_waveforms_data[waveform_num]).put(calc_wave_value(i, init_wave_num, WAVEFORM_PARTS), i);
+        }
+    }
+}
+
+update_fxn user_waveforms_update_fxns[NUM_USER_WAVEFORMS_PARAMS] = {user_waveforms_update_name, user_waveforms_update_index, user_waveforms_update_value, nullptr, user_waveforms_update_start, user_waveforms_update_init_wave};
 
 void user_waveforms_begin()
 {
