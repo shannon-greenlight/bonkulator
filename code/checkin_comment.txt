@@ -354,3 +354,18 @@ Fixes for sending waveform messages.
  
 Check-in comment for Bonkulator-408 
 Changes Press Activate to Push Activate so it fits.
+ 
+Check-in comment for Bonkulator-409 
+Fixes to styling
+ 
+Check-in comment for Bonkulator-410 
+Doesn't randomize wave message in user waveforms.
+ 
+Check-in comment for Bonkulator-411 
+Adds init_user_wave
+ 
+Check-in comment for Bonkulator-412 
+New list of init waves includes Line. No Pulse or Toggle.
+ 
+Check-in comment for Bonkulator-413 
+Fixes to init user wave
