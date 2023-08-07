@@ -6098,7 +6098,7 @@
     (property "Digi-Key Part" "S2011EC-05-ND" (id 4) (at 152.4 87.63 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC Part #" "C115170" (id 5) (at 152.4 87.63 0)
+    (property "LCSC Part #" "C492422" (id 5) (at 152.4 87.63 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid d934bb7e-7a09-43c3-b73e-393270becab6))
@@ -6131,7 +6131,7 @@
     (property "Digi-Key Part" "S2011EC-05-ND" (id 4) (at 92.075 153.67 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC Part #" "C115170" (id 5) (at 92.075 153.67 0)
+    (property "LCSC Part #" "C492422" (id 5) (at 92.075 153.67 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 7d2401d4-6970-4d0d-8b3f-77ad88b8c505))
@@ -8395,19 +8395,19 @@
       (reference "U12") (unit 3) (value "TL072CDR") (footprint "Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.29x3mm")
     )
     (path "/b200c1d4-b772-4a0d-a7bc-c10bcb241496/da91d24c-235c-487e-8a89-c861581e141b"
-      (reference "U13") (unit 1) (value "DG412xY") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
+      (reference "U13") (unit 1) (value "DG412DY-E3") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
     )
     (path "/b200c1d4-b772-4a0d-a7bc-c10bcb241496/4d86a335-e2f3-43e1-bfbb-9bbbf85afd83"
-      (reference "U13") (unit 2) (value "DG412xY") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
+      (reference "U13") (unit 2) (value "DG412DY-E3") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
     )
     (path "/b200c1d4-b772-4a0d-a7bc-c10bcb241496/4c813f4a-7d60-4bf9-a697-cffeff5134b5"
-      (reference "U13") (unit 3) (value "DG412xY") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
+      (reference "U13") (unit 3) (value "DG412DY-E3") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
     )
     (path "/b200c1d4-b772-4a0d-a7bc-c10bcb241496/87c697e6-3b77-4484-9517-8dc7c9b0f1d4"
-      (reference "U13") (unit 4) (value "DG412xY") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
+      (reference "U13") (unit 4) (value "DG412DY-E3") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
     )
     (path "/b200c1d4-b772-4a0d-a7bc-c10bcb241496/2c3bee7b-576b-4f00-aba9-231f47c1ce9c"
-      (reference "U13") (unit 5) (value "DG412xY") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
+      (reference "U13") (unit 5) (value "DG412DY-E3") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
     )
     (path "/eae55a42-d110-46e1-b06f-560b3d6a7f91/a5b41785-6602-47dd-88c9-fe5b8067460e"
       (reference "U14") (unit 1) (value "TL072CDR") (footprint "Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.29x3mm")
@@ -8455,19 +8455,19 @@
       (reference "U21") (unit 1) (value "MCP23008-xSS") (footprint "Package_SO:SSOP-20_5.3x7.2mm_P0.65mm")
     )
     (path "/b200c1d4-b772-4a0d-a7bc-c10bcb241496/014b02a6-58b3-4f97-b161-484c3f4529db"
-      (reference "U24") (unit 1) (value "DG412xY") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
+      (reference "U24") (unit 1) (value "DG412DY-E3") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
     )
     (path "/b200c1d4-b772-4a0d-a7bc-c10bcb241496/9f9d1f6f-7507-4bd1-b7c3-1eb7cae036e5"
-      (reference "U24") (unit 2) (value "DG412xY") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
+      (reference "U24") (unit 2) (value "DG412DY-E3") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
     )
     (path "/b200c1d4-b772-4a0d-a7bc-c10bcb241496/0ef053cc-6cbc-480a-97da-ffd86eed29bd"
-      (reference "U24") (unit 3) (value "DG412xY") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
+      (reference "U24") (unit 3) (value "DG412DY-E3") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
     )
     (path "/b200c1d4-b772-4a0d-a7bc-c10bcb241496/f9466c72-e334-45f8-ab36-33d7247619a7"
-      (reference "U24") (unit 4) (value "DG412xY") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
+      (reference "U24") (unit 4) (value "DG412DY-E3") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
     )
     (path "/b200c1d4-b772-4a0d-a7bc-c10bcb241496/56818c14-9875-4852-83e7-b24bf77170c1"
-      (reference "U24") (unit 5) (value "DG412xY") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
+      (reference "U24") (unit 5) (value "DG412DY-E3") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
     )
   )
 )

@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>C:\Users\shann\Dropbox\moog\bonkulator\main_board\main_board.kicad_sch</source>
-    <date>6/6/2023 5:42:42 PM</date>
+    <date>8/5/2023 12:08:23 PM</date>
     <tool>Eeschema (6.0.1)</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -588,11 +588,11 @@
       <footprint>Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical</footprint>
       <fields>
         <field name="Digi-Key Part">S2011EC-05-ND</field>
-        <field name="LCSC Part #">C115170</field>
+        <field name="LCSC Part #">C492422</field>
       </fields>
       <libsource lib="Connector_Generic" part="Conn_02x05_Odd_Even" description="Generic connector, double row, 02x05, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <property name="Digi-Key Part" value="S2011EC-05-ND"/>
-      <property name="LCSC Part #" value="C115170"/>
+      <property name="LCSC Part #" value="C492422"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="main_board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
@@ -603,11 +603,11 @@
       <footprint>Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical</footprint>
       <fields>
         <field name="Digi-Key Part">S2011EC-05-ND</field>
-        <field name="LCSC Part #">C115170</field>
+        <field name="LCSC Part #">C492422</field>
       </fields>
       <libsource lib="Connector_Generic" part="Conn_02x05_Odd_Even" description="Generic connector, double row, 02x05, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <property name="Digi-Key Part" value="S2011EC-05-ND"/>
-      <property name="LCSC Part #" value="C115170"/>
+      <property name="LCSC Part #" value="C492422"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="main_board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
@@ -956,30 +956,28 @@
       <tstamps>2b7ee275-4119-4d62-aff7-b79c44be3631</tstamps>
     </comp>
     <comp ref="R79">
-      <value>100K</value>
+      <value>56K</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
-        <field name="Digi-Key Part">311-68KARCT-ND</field>
-        <field name="LCSC Part #">C17801</field>
+        <field name="LCSC Part #">C23206</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="311-68KARCT-ND"/>
-      <property name="LCSC Part #" value="C17801"/>
+      <property name="Digi-Key Part" value=""/>
+      <property name="LCSC Part #" value="C23206"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="main_board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>7c8f5d15-1b86-40e0-8d68-33e7f4b85b8b</tstamps>
     </comp>
     <comp ref="R80">
-      <value>100K</value>
+      <value>56K</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
-        <field name="Digi-Key Part">311-68KARCT-ND</field>
-        <field name="LCSC Part #">C17801</field>
+        <field name="LCSC Part #">C23206</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="311-68KARCT-ND"/>
-      <property name="LCSC Part #" value="C17801"/>
+      <property name="Digi-Key Part" value=""/>
+      <property name="LCSC Part #" value="C23206"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="main_board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
@@ -2968,14 +2966,14 @@
       <tstamps>f04f29c1-60b4-4e3a-8f5f-bf07d1865fd4 aba66d71-d441-4ec2-9617-09f7b09e335c 9fb33b02-ccfa-4e81-a7cc-d5ffb43bd9e4</tstamps>
     </comp>
     <comp ref="U13">
-      <value>DG412xY</value>
+      <value>DG412DY-E3</value>
       <footprint>Package_SO:SOIC-16_3.9x9.9mm_P1.27mm</footprint>
       <datasheet>https://datasheets.maximintegrated.com/en/ds/DG411-DG413.pdf</datasheet>
       <fields>
-        <field name="LCSC Part #">C143730</field>
+        <field name="LCSC Part #">C45218</field>
       </fields>
       <libsource lib="Analog_Switch" part="DG412xY" description="Quad SPST Monolithic CMOS Analog Switches, normally OFF, 17Ohm Ron, SOIC-16"/>
-      <property name="LCSC Part #" value="C143730"/>
+      <property name="LCSC Part #" value="C45218"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
       <sheetpath names="/Outputs/" tstamps="/b200c1d4-b772-4a0d-a7bc-c10bcb241496/"/>
@@ -3012,14 +3010,14 @@
       <tstamps>1db5f034-b657-4f21-94d3-fc53524d4bad</tstamps>
     </comp>
     <comp ref="U24">
-      <value>DG412xY</value>
+      <value>DG412DY-E3</value>
       <footprint>Package_SO:SOIC-16_3.9x9.9mm_P1.27mm</footprint>
       <datasheet>https://datasheets.maximintegrated.com/en/ds/DG411-DG413.pdf</datasheet>
       <fields>
-        <field name="LCSC Part #">C143730</field>
+        <field name="LCSC Part #">C45218</field>
       </fields>
       <libsource lib="Analog_Switch" part="DG412xY" description="Quad SPST Monolithic CMOS Analog Switches, normally OFF, 17Ohm Ron, SOIC-16"/>
-      <property name="LCSC Part #" value="C143730"/>
+      <property name="LCSC Part #" value="C45218"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
       <sheetpath names="/Outputs/" tstamps="/b200c1d4-b772-4a0d-a7bc-c10bcb241496/"/>
