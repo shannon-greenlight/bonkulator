@@ -98,6 +98,17 @@ void apply_params_to_waveform(int output)
     }
 }
 
+void recv_user_waveform(String in_str)
+{
+    // set index
+    int waveform_num = get_user_waveform_num();
+    (*user_waveforms[waveform_num]).param_put((csv_elem(in_str, ',', 0)).substring(1).toInt(), USER_WAVEFORMS_INDEX);
+    for (int i = 0; i < WAVEFORM_PARTS; i++)
+    {
+        user_waveforms_put_val(waveform_num, (csv_elem(in_str, ',', i + 1)).toInt(), i);
+    }
+}
+
 void set_wifi_message()
 {
     // OutputData *outptr;
@@ -127,7 +138,7 @@ void set_wifi_message()
 
     for (int i = 0; i < WAVEFORM_PARTS; i++)
     {
-        if (i > 0)
+        if (i > 0 && i != WAVEFORM_PARTS)
             wifi_ui_message += ", ";
 
         value = waveform_data[index];
@@ -136,7 +147,7 @@ void set_wifi_message()
         value = quantize_value(value, selected_output.get());
         wifi_ui_message += String(value);
 
-        if (i + 1 > (index + 1) * index_inc)
+        if (i + 1 >= (index + 1) * index_inc)
         {
             index++;
         }
@@ -234,8 +245,8 @@ void set_waveform(int output, int waveform)
     outputs[output].data_len = waveform_parts;
     float user_inc_factor = (WAVEFORM_PARTS / (float)waveform_parts);
 
-    // ui.terminal_debug("Set Waveform output: " + String(output) + " waveform: " + String(waveform));
-    // ui.terminal_debug("Set Waveform user_inc_factor: " + String(user_inc_factor) + " parts: " + String(waveform_parts) + " userlen: " + String(user_waveform.length()));
+    // Serial.println("Set Waveform output: " + String(output) + " waveform: " + String(waveform));
+    // Serial.println("Set Waveform user_inc_factor: " + String(user_inc_factor) + " parts: " + String(waveform_parts) + " userlen: " + String(user_waveform.length()) + " active time: " + String(outputs[output].active_time));
     // int pyramid_index;
     for (int i = 0; i < waveform_parts; i++)
     {
