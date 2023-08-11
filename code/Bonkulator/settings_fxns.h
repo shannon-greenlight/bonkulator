@@ -57,6 +57,11 @@ bool in_user_waveforms()
     return (selected_fxn_num == SETTINGS_FXN && settings_fxn.param_num == SETTINGS_USER_WAVEFORMS);
 }
 
+// bool in_wifi()
+// {
+//     return (selected_fxn_num == SETTINGS_FXN && settings_fxn.param_num == SETTINGS_WIFI);
+// }
+
 void ask_init()
 {
     int init_type = ask_init_fxn.get_param(0);
