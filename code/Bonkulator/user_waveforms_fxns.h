@@ -215,6 +215,7 @@ int get_user_waveform_num()
 
 void graph_user_waveform(int waveform_num)
 {
+    // ui.terminal_debug("graph user waveform: " + String(waveform_num));
     // ui.graph_waveform(_user_waveforms_data[waveform_num], user_waveforms[waveform_num]->get_param(USER_WAVEFORMS_PARTS));
     ui.graph_waveform(_user_waveforms_data[waveform_num], WAVEFORM_PARTS, DAC_FS);
     ui.drawXHash(user_waveforms[waveform_num]->get_param(USER_WAVEFORMS_INDEX), ui.fit_data(user_waveforms[waveform_num]->get_param(USER_WAVEFORMS_VALUE), DAC_FS));
@@ -232,11 +233,15 @@ void user_waveforms_update_index()
     graph_user_waveform(get_user_waveform_num());
 }
 
+void user_waveforms_put_val(int waveform_num, uint16_t val, int index)
+{
+    (*user_waveforms_data[waveform_num]).put(val, index);
+}
+
 void user_waveforms_update_value()
 {
     int waveform_num = get_user_waveform_num();
-    (*user_waveforms_data[waveform_num]).put(user_waveforms[waveform_num]->get_param(USER_WAVEFORMS_VALUE), user_waveforms[waveform_num]->get_param(USER_WAVEFORMS_INDEX));
-    // _user_waveforms_data[user_waveforms[waveform_num]->get_param(USER_WAVEFORMS_INDEX)] = user_waveforms[waveform_num]->get_param(USER_WAVEFORMS_VALUE);
+    user_waveforms_put_val(waveform_num, user_waveforms[waveform_num]->get_param(USER_WAVEFORMS_VALUE), user_waveforms[waveform_num]->get_param(USER_WAVEFORMS_INDEX));
     graph_user_waveform(waveform_num);
 }
 
@@ -266,11 +271,11 @@ void user_waveforms_update_init_wave()
     {
         if (init_wave_num == INIT_WAVE_LINE)
         {
-            (*user_waveforms_data[waveform_num]).put(DAC_MID, i);
+            user_waveforms_put_val(waveform_num, DAC_MID, i);
         }
         else
         {
-            (*user_waveforms_data[waveform_num]).put(calc_wave_value(i, init_wave_num, WAVEFORM_PARTS), i);
+            user_waveforms_put_val(waveform_num, calc_wave_value(i, init_wave_num, WAVEFORM_PARTS), i);
         }
     }
 }
@@ -296,7 +301,7 @@ void user_waveforms_begin()
     }
     user_waveforms_record_inc = 0;
     user_waveforms_update_name();
-    outputs_begin(); // do it again to init user waveforms properly
+    // outputs_begin(); // do it again to init user waveforms properly
 }
 
 void timer_service_user_waveforms_record()
