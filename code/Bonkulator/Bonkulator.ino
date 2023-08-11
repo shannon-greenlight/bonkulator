@@ -17,6 +17,7 @@ typedef void (*update_fxn)(void);
 #define SETTINGS_FXN 8
 #define NUM_FXNS 9
 
+#include <Wire.h>
 // Load Greenface libraries
 #include "secrets\arduino_secrets.h"
 #include "version_num.h"
@@ -70,6 +71,7 @@ void graph_waveform(int output_num);
 void set_waveform(int, int);
 void set_wifi_message();
 int calc_wave_value(int i, int waveform, uint16_t waveform_parts);
+void recv_user_waveform(String in_str);
 
 // Output Calibration / Corrections
 void output_corrections_init();
@@ -104,6 +106,7 @@ String params_toJSON();
 String list_fxns();
 String output_get_fs();
 String output_get_fs_offset();
+void wifi_toJSON();
 
 EEPROM_Int selected_output = EEPROM_Int(0, 7); // the output we are working on
 EEPROM_Int remembered_fxn = EEPROM_Int(0, 8);  // 0-7=OutputX, 8=Settings
@@ -183,7 +186,7 @@ void select_fxn(int fxn_index)
     clear_all_triggers();
     settings_fxn.param_num = param_num;
     timer_fxn = &timer_service_settings;
-    outputs_begin();
+    // outputs_begin();
   }
   else
   {
@@ -249,11 +252,12 @@ void setup()
     outputs_begin();
     user_waveforms_begin();
 
-    selected_output.test();
+    // selected_output.test();
   }
 
   Serial.println("Howdy!");
   ui.begin(face1);
+  settings_put_usb_direct(0);
   select_fxn(remembered_fxn.get());
 }
 
