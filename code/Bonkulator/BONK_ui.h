@@ -131,6 +131,13 @@ void send_data_to_USB(char cmd)
   }
   wifi_ui_message = "";
 
+  if (in_wifi())
+  {
+    wifi_toJSON();
+    // ui.t.print(toJSON("message", "A cool message..."));
+    // ui.t.print(",");
+  }
+
   ui.t.print("\"triggers\" : [");
   for (int trig_num = 0; trig_num < NUM_TRIGGERS; trig_num++)
   {
@@ -144,7 +151,8 @@ void send_data_to_USB(char cmd)
   ui.t.print("],");
 
   ui.t.print("\"params\" : [");
-  ui.t.print(selected_fxn->params_toJSON());
+  if (!in_wifi())
+    ui.t.print(selected_fxn->params_toJSON());
   ui.t.print("]");
   ui.t.print("}");
 
