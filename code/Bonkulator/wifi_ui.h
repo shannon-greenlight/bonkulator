@@ -195,7 +195,7 @@ void do_server()
               String in_str = "";
               int i = 0;
               char inchar = currentLine[i + 6];
-              while (inchar != ' ' && i < 20)
+              while (inchar != ' ' && i < 20000)
               {
                 in_str += inchar;
                 i++;
