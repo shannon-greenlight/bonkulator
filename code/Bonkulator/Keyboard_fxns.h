@@ -394,6 +394,11 @@ void process_cmd(String in_str)
 			selected_trigger->trigger();
 		}
 		break;
+	case 'w':
+		// ui.terminal_debug("Wave data: " + csv_elem(in_str, ',', 0));
+		// ui.terminal_debug("Wave data: " + in_str);
+		recv_user_waveform(in_str);
+		break;
 	case 'T':
 		// ui.terminal_debug("Modify Trigger! Output: " + String(dig2) + " Trigger: " + String(selected_trig_num));
 		switch (dig1)
