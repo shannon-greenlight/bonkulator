@@ -68,6 +68,7 @@ enum
 #define TRIGGER_STATES F("Disabled,Enabled ")
 void output_update_range();
 void update_idle_value();
+void update_waveform();
 
 uint16_t _output_mins[] = {0, 0, ACTIVE_TIME_MIN, 0, 0, 0, 0, 0, 0, CV_OFF, CV_OFF, 0, 0, 0, 0, 0, 0, OUTPUT_RANGE_BIPOLAR, TRIG_HOLDOFF, 0};
 uint16_t _output_maxs[] = {NUM_WAVEFORMS - 1, DELAY_MAX, MAX_MS, DELAY_MAX, 32767, 1, 1, 1, 1, CV_TRIGGER, CV_TRIGGER, 200, 200, 99, 1, OUTPUT_IDLE_VALUE_MAX, 1, OUTPUT_RANGE_UNIPOLAR, TRIG_DENSITY, MAX_MS};
@@ -324,9 +325,44 @@ Greenface_gadget the_output()
     return *bonk_outputs[selected_output.get()];
 }
 
+void clear_alt_values()
+{
+    for (int i = 0; i < NUM_OUTPUT_PARAMS; i++)
+    {
+        (the_output)().alt_values[i] = "";
+    }
+}
+
+void set_cv_alt_values(int cv, String label)
+{
+    // CV_TYPES;
+    int param = -1;
+    switch (cv)
+    {
+    case 1:
+        param = OUTPUT_SCALE;
+        break;
+    case 2:
+        param = OUTPUT_OFFSET;
+        break;
+    case 3:
+        param = OUTPUT_ACTIVE_TIME;
+        break;
+    case 4:
+        param = OUTPUT_IDLE_VALUE;
+        break;
+    case 5:
+        param = OUTPUT_RANDOMNESS;
+        break;
+    }
+    if (param != -1)
+        (the_output)().alt_values[param] = label;
+}
+
 void output_display()
 {
     update_clock();
+    update_waveform();
     (the_output)().labels[OUTPUT_CV0] = get_input_calibrated(0) ? "CV0: " : "CV0* ";
     (the_output)().labels[OUTPUT_CV1] = get_input_calibrated(1) ? "CV1: " : "CV1* ";
 
@@ -344,12 +380,12 @@ void output_display()
         // (the_output)().labels[OUTPUT_IDLE_TIME] = "Idle Time: ";
         break;
     default:
-        (the_output)().alt_values[OUTPUT_ACTIVE_TIME] = "";
-        (the_output)().alt_values[OUTPUT_IDLE_TIME] = "";
-        (the_output)().alt_values[OUTPUT_REPEAT] = "";
-        (the_output)().alt_values[OUTPUT_OFFSET] = "";
+        clear_alt_values();
         break;
     }
+
+    set_cv_alt_values((the_output)().get_param(OUTPUT_CV0), "CV0");
+    set_cv_alt_values((the_output)().get_param(OUTPUT_CV1), "CV1");
 
     output_update_range();
     update_idle_value();
@@ -495,7 +531,7 @@ void update_active_time()
 
 void update_and_graph_waveform()
 {
-    update_waveform();
+    // update_waveform();
     output_display();
     graph_waveform(selected_output.get());
 }
