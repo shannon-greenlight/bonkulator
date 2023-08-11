@@ -7,7 +7,7 @@ void update_cv(int cv_num)
     outptr->offset = 0;
     outptr->scale = 1.0;
     update_idle_value();
-    update_waveform();
+    // update_waveform(); done by output_display()
 
     int cv_type = selected_fxn->get_param(cv_num);
     // ui.terminal_debug("Update CV: " + String(cv_type));
@@ -20,6 +20,7 @@ void update_cv(int cv_num)
         trig_cv1.set_output(selected_output.get(), cv_type == 6);
         break;
     }
+    output_display();
 }
 
 // condition cv from +/- 1650 (3300/2)
