@@ -600,9 +600,10 @@ void check_serial()
 		bool is_esc_char = esc_mode && (c == 'A' || c == 'B' || c == 'C' || c == 'D');
 		// Serial.println(in_str + " .. " + String(c));
 		// ui.terminal_debug(String(int(c)) + " esc: " + String(esc_mode));
-		if (c == '$' || c == '-' || c == '+' || c == '/')
+		if ((c == '$' || c == '-' || c == '+' || c == '/') && selected_fxn->param_is_stringvar())
 		{
 			entering_string = true;
+			selected_fxn->set_cursor_to_param();
 		}
 		if (!entering_string && (in_str.length() < 2 || is_esc_char) && (c == 'i' || c == 127 || c == '~' || c == '*' || c == '!' || c == 'u' || c == 'd' || c == 'z' || c == 'Z' || is_esc_char))
 		{
@@ -619,6 +620,10 @@ void check_serial()
 			}
 			else
 			{
+				if (entering_string && c != '$')
+				{
+					ui.terminal_print(c); // echo string to terminal
+				}
 				if (c == 27 || c == '[')
 				{
 					esc_mode = true;
