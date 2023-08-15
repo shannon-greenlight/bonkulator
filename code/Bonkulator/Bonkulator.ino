@@ -306,7 +306,12 @@ void loop()
   if (debug)
     ui.terminal_debug("Encoder checked");
 
-  terminal_print_status(status_string);
+  if (!in_settings())
+  {
+    // terminal status interferes with entering strings
+    // this is only done in settings IFAIK
+    terminal_print_status(status_string);
+  }
 
   ui.check_inactivity_timer(settings_get_inactivity_timeout());
   if (debug)
