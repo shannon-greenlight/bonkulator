@@ -29,7 +29,7 @@ void TRIGGER::start()
 void TRIGGER::trigger()
 {
     start();
-    state = TRIGGER_ACTIVE;
+    state = (state == TRIGGER_ACTIVE) ? TRIGGER_IDLE : TRIGGER_ACTIVE;
     if (in_output_fxn())
     {
         for (int output_num = 0; output_num < NUM_OUTPUTS; output_num++)
@@ -94,6 +94,8 @@ String TRIGGER::params_toJSON()
     out += "{ ";
     out += toJSON("trig_num", String(trig_num));
     out += ", ";
+    out += toJSON("state", String(state));
+    out += ", ";
     out += toJSON("outputs", String(outputs));
     out += " }";
     return out;
@@ -108,6 +110,14 @@ void TRIGGER::set_output(int output_num, bool val)
     else
     {
         bitClear(outputs, output_num);
+    }
+    if (state == TRIGGER_ACTIVE)
+    {
+        trigger_output(trig_num, output_num);
+    }
+    if (outputs == 0)
+    {
+        clear();
     }
 }
 

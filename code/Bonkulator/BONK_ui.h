@@ -74,8 +74,34 @@ void gen_params_macro(Greenface_gadget *item, bool print_header = true, String p
   }
 }
 
+bool sending_to_USB;
+void send_status_to_USB()
+{
+  if (!sending_to_USB)
+  {
+    sending_to_USB = true;
+    ui.t.print("{");
+    ui.t.print(toJSON("status", "trigger"));
+    ui.t.print(",");
+    ui.t.print(toJSON("t0", trig0.state == TRIGGER_ACTIVE ? "ON" : "OFF"));
+    ui.t.print(",");
+    ui.t.print(toJSON("t1", trig1.state == TRIGGER_ACTIVE ? "ON" : "OFF"));
+    ui.t.print(",");
+    ui.t.print(toJSON("t2", trig2.state == TRIGGER_ACTIVE ? "ON" : "OFF"));
+    ui.t.print(",");
+    ui.t.print(toJSON("t3", trig3.state == TRIGGER_ACTIVE ? "ON" : "OFF"));
+    ui.t.print("}");
+    // This terminates serialport message
+    ui.t.println("\r\n\r\n");
+    sending_to_USB = false;
+  }
+}
+
 void send_data_to_USB(char cmd)
 {
+  if (sending_to_USB)
+    return;
+  sending_to_USB = true;
   ui.t.print("{");
   // ui.terminal_debug("Send data to ui.t: " + String(selected_fxn->get_param(OUTPUT_WAVEFORM)));
   if (cmd == '[')
@@ -161,4 +187,5 @@ void send_data_to_USB(char cmd)
 
   // This terminates serialport message
   ui.t.println("\r\n\r\n");
+  sending_to_USB = false;
 }

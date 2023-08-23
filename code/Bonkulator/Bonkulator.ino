@@ -269,6 +269,10 @@ void loop()
   static unsigned long cnt = 0;
   bool debug = false;
   // static unsigned long now;
+  static trigger_state t0_memory;
+  static trigger_state t1_memory;
+  static trigger_state t2_memory;
+  static trigger_state t3_memory;
 
   check_keyboard();
   if (debug)
@@ -282,6 +286,32 @@ void loop()
   {
     // now = millis();
     status_string = check_output_triggers();
+    // ui.terminal_debug("Trig0: " + String(trig0.state));
+
+    if (trig0.state != t0_memory)
+    {
+      send_status_to_USB();
+      t0_memory = trig0.state;
+    }
+
+    if (trig1.state != t1_memory)
+    {
+      send_status_to_USB();
+      t1_memory = trig1.state;
+    }
+
+    if (trig2.state != t2_memory)
+    {
+      send_status_to_USB();
+      t2_memory = trig2.state;
+    }
+
+    if (trig3.state != t3_memory)
+    {
+      send_status_to_USB();
+      t3_memory = trig3.state;
+    }
+
     // status_string = "Delta: " + String(millis() - now);
     // status_string = "ADC0: " + String(adc0) + " ADC1: " + String(adc1);
     check_outputs();

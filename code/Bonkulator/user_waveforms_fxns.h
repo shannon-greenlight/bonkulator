@@ -387,6 +387,7 @@ String check_user_recording()
             if (check_any_triggers())
             {
                 user_waveforms_start_recording();
+                // clear_all_triggers();
             }
             return "Waiting for Trigger... ";
             break;
