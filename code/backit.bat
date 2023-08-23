@@ -40,7 +40,7 @@ copy *.bat %backup_path%
 copy *.exe %backup_path%
 copy *.uf2 %backup_path%
 copy checkin_comment.txt %backup_path%
-copy "C:\Users\shann\Dropbox\My Web Sites\GreenfaceLabs\htdocs\wp-content\themes\gfl_theme\bonk_cp.php" %backup_path%
+copy "C:\Users\shann\Dropbox\My Web Sites\GreenfaceLabs\htdocs\wp-content\themes\gfl_theme\bonk_cp_2.php" %backup_path%
 
 set /A backup_number=backup_number+1
 
