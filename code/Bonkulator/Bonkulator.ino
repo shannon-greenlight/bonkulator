@@ -53,6 +53,7 @@ bool usb_direct_enabled();
 void settings_put_usb_direct(int val);
 void timer_service_settings();
 void init_parameters();
+bool settings_get_fs_fixed();
 
 // cv fxns
 void cv_set(int cv_num, int output, int16_t cv_val);
@@ -206,6 +207,7 @@ void setup()
   SPI.begin();
   Serial.begin(115200);
 
+  pinMode(KEYBOARD_COLUMN_0, INPUT_PULLUP);
   while (digitalRead(KEYBOARD_COLUMN_0) && !IS_RELEASE)
   {
   };

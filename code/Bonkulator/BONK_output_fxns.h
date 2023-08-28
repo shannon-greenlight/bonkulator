@@ -60,8 +60,8 @@ enum
 #define OUTPUT_SCALE_OFFSET -100
 #define OUTPUT_OFFSET_OFFSET -100
 
-#define OUTPUT_IDLE_VALUE_MAX 10956
-// #define OUTPUT_IDLE_VALUE_MAX 10666
+#define OLD_OUTPUT_IDLE_VALUE_MAX 10956
+#define OUTPUT_IDLE_VALUE_MAX 10666
 #define OUTPUT_IDLE_VALUE_INIT 5478
 #define OUTPUT_IDLE_VALUE_OFFSET -5478
 
@@ -437,7 +437,8 @@ String output_get_fs()
     // uint16_t ideal_dac = (scale_correction / 1000.0) * DAC_FS; // should produce ideal fs
     // float fs_volts = (DAC_FS - DAC_MID) * ideal_fs / (ideal_dac - DAC_MID);
     // return String(fs_volts * 2);
-    return String(OUTPUT_IDLE_VALUE_MAX);
+    int idle_max = settings_get_fs_fixed() ? OLD_OUTPUT_IDLE_VALUE_MAX : OUTPUT_IDLE_VALUE_MAX;
+    return String(idle_max);
 }
 
 String output_get_fs_offset()
@@ -622,16 +623,20 @@ void send_idle_value(int output_num)
 
 int scale_dac(float volts, int output)
 {
-    float fs = (float)OUTPUT_IDLE_VALUE_MAX / 1000.0;
+    int idle_max = settings_get_fs_fixed() ? OLD_OUTPUT_IDLE_VALUE_MAX : OUTPUT_IDLE_VALUE_MAX;
+    float fs = (float)idle_max / 1000.0;
     if (output_is_bipolar(output))
     {
         volts += fs / 2.0;
     }
     float portion = volts / fs;
     int dac_val = int((float)DAC_FS * portion);
-    // dac_val *= (get_output_scale_correction(output) / 1000.0);
+    // if (settings_get_fs_fixed())
+    // {
+    //     dac_val *= (get_output_scale_correction(output) / 1000.0);
+    // }
     dac_val += get_raw_output_offset_correction(output);
-    // ui.terminal_debug("DAC: " + String(dac_val) + " is_bipolar: " + String(output_is_bipolar(output)) + " volts: " + String(volts));
+    ui.terminal_debug("DAC: " + String(dac_val) + " is_bipolar: " + String(output_is_bipolar(output)) + " volts: " + String(volts));
     return dac_val;
 }
 
@@ -704,6 +709,10 @@ void outputs_begin()
 {
     int output_memory = selected_output.get();
     Greenface_gadget *selected_fxn_memory = selected_fxn;
+    if (settings_get_fs_fixed())
+    {
+        _output_maxs[OUTPUT_IDLE_VALUE] = OLD_OUTPUT_IDLE_VALUE_MAX;
+    }
     for (int i = 0; i < NUM_OUTPUTS; i++)
     {
         Greenface_gadget *output = bonk_outputs[i];

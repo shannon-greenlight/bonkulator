@@ -112,6 +112,7 @@ void recv_user_waveform(String in_str)
 void set_wifi_message()
 {
     // OutputData *outptr;
+    // uint16_t *waveform_ref = waveform_reference[selected_output.get()];
     uint16_t *waveform_data;
     byte data_len;
     OutputData *outptr = &outputs[selected_output.get()];
@@ -119,6 +120,7 @@ void set_wifi_message()
     if (in_output_fxn())
     {
         waveform_data = outptr->waveform_data;
+        // waveform_data = waveform_ref;
         data_len = outptr->data_len;
     }
     else if (in_user_waveform_fxn())
@@ -131,6 +133,8 @@ void set_wifi_message()
         return;
     }
 
+    int offset_correction = output_offset_corrections.get(selected_output.get());
+    ui.terminal_debug("offset_correction: " + String(offset_correction));
     int index = 0; // index into source waveform data
     float index_inc = WAVEFORM_PARTS / float(data_len);
     uint16_t value;
@@ -141,7 +145,7 @@ void set_wifi_message()
         if (i > 0 && i != WAVEFORM_PARTS)
             wifi_ui_message += ", ";
 
-        value = waveform_data[index];
+        value = waveform_data[index] - offset_correction;
         if (!in_user_waveforms())
             value = randomize_value(value, outptr->randomness_factor);
         value = quantize_value(value, selected_output.get());

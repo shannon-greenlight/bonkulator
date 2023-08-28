@@ -27,7 +27,8 @@
 #define ADC_FS 4095
 #define ADC_FS_OVER_2 2048
 #define ADC_FS_OVER_4 1024
-#define IDEAL_SCALE_CORRECTION 976 // for correcting DAC outputs. .9736 is 5.478 / 5.333 which is desired FS / board FS
+// #define IDEAL_SCALE_CORRECTION 976 // for correcting DAC outputs. .9736 is 5.478 / 5.333 which is desired FS / board FS
+#define IDEAL_SCALE_CORRECTION 1000 // for correcting DAC outputs.
 
 #define NUM_INPUTS 2
 #define NUM_OUTPUTS 8

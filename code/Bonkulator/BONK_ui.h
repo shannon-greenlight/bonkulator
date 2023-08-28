@@ -77,7 +77,7 @@ void gen_params_macro(Greenface_gadget *item, bool print_header = true, String p
 bool sending_to_USB;
 void send_status_to_USB()
 {
-  if (!sending_to_USB)
+  if (!sending_to_USB && usb_direct_enabled())
   {
     sending_to_USB = true;
     ui.t.print("{");

@@ -13,11 +13,11 @@ enum
 
 uint16_t _output_cal_params[OUTPUT_CAL_NUM_PARAMS];
 uint16_t _output_cal_mins[] = {0, 0, 0, 0};
-uint16_t _output_cal_maxs[] = {NUM_OUTPUTS - 1, DAC_FS, 2000, 1};
-uint16_t _output_cal_init_vals[] = {0, DAC_MID, IDEAL_SCALE_CORRECTION, 0};
+uint16_t _output_cal_maxs[] = {NUM_OUTPUTS - 1, DAC_FS, 0, 1};
+uint16_t _output_cal_init_vals[] = {0, DAC_MID, 0, 0};
 uint16_t *output_cal_stuff[] = {_output_cal_params, _output_cal_mins, _output_cal_maxs, _output_cal_init_vals};
 String output_cal_labels[] = {"Output: ", "Offset: ", "Scale: ", "Calibrated: "};
-String output_cal_string_params[] = {"", "", "", "No ,Yes"};
+String output_cal_string_params[] = {"", "", "N/A", "No ,Yes"};
 int16_t output_cal_offsets[] = {0, -DAC_MID, 0, 0}; // allows negative numbers
 
 Greenface_gadget output_cal_fxn("Calibrate", output_cal_labels, output_cal_stuff, sizeof(_output_cal_params) / sizeof(_output_cal_params[0]));
@@ -100,7 +100,7 @@ void output_cal_update_scale()
     int scale = output_cal_fxn.get_param(OUTPUT_CAL_SCALE);
     float mult = float(scale) / 1000.0;
     dac_vdc(5.123 * mult, output_cal_fxn.get_param(OUTPUT_CAL_OUTPUT_NUM)); // adjust for output = 5.00VDC
-    // ui.terminal_debug("Scale correction: " + String(scale) + " DAC: " + String(dac_val));
+    // ui.terminal_debug("Scale correction: " + String(scale) + " DAC: " + String(5.123 * mult));
     set_output_scale_correction(scale);
 }
 

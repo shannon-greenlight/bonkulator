@@ -11,17 +11,19 @@ enum
     SETTINGS_USER_WAVEFORMS,
     SETTINGS_RESET,
     SETTINGS_CAL,
+    SETTINGS_BOARD_GENERATION,
     SETTINGS_NUM_PARAMS
 };
 
 uint16_t _settings_params[SETTINGS_NUM_PARAMS];
-uint16_t _settings_mins[] = {0, 0, 0, 0, 0, 1, 0, 0, 0};
-uint16_t _settings_maxs[] = {0, 0, 1, 1, 1, 9999, 7, 1, 1};
-uint16_t _settings_init_vals[] = {0, 0, 1, 0, 0, 15, 0, 0, 0};
+uint16_t _settings_mins[] = {0, 0, 0, 0, 0, 1, 0, 0, 0, 10};
+uint16_t _settings_maxs[] = {0, 0, 1, 1, 1, 9999, 7, 1, 1, 50};
+uint16_t _settings_init_vals[] = {0, 0, 1, 0, 0, 15, 0, 0, 0, 42};
 uint16_t *settings_stuff[] = {_settings_params, _settings_mins, _settings_maxs, _settings_init_vals};
-String settings_labels[] = {"Version: ", "Name: ", "Encoder Type: ", "WiFi: ", "USB Direct: ", "Screen Saver: ", "Waveforms: ", "Reset: ", "Calibrate: "};
-String settings_string_params[] = {VERSION_NUM, "$~", "Normal ,Reverse", "Disabled,Enabled ", "Disabled,Enabled ", "", "User 0,User 1,User 2,User 3,User 4,User 5,User 6,User 7", ACTIVATE_STRING, "Inputs,Outputs"};
-bool settings_param_active[] = {0, 0, 0, 1, 0, 0, 1, 1, 1};
+String settings_labels[] = {"Version: ", "Name: ", "Encoder Type: ", "WiFi: ", "USB Direct: ", "Screen Saver: ", "Waveforms: ", "Reset: ", "Calibrate: ", "Board Revision: "};
+String settings_string_params[] = {VERSION_NUM, "$~", "Normal ,Reverse", "Disabled,Enabled ", "Disabled,Enabled ", "", "User 0,User 1,User 2,User 3,User 4,User 5,User 6,User 7", ACTIVATE_STRING, "Inputs,Outputs", ""};
+bool settings_param_active[] = {0, 0, 0, 1, 0, 0, 1, 1, 1, 0};
+int8_t settings_decimal_places[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1}; // allows fixed point numbers
 
 // void (*func_ptr[3])() = {fun1, fun2, fun3};
 
@@ -135,6 +137,12 @@ void settings_adjust_param(int encoder_val, unsigned long delta)
     }
 }
 
+// returns true for old style boards without output fs adjust pot
+bool settings_get_fs_fixed()
+{
+    return settings_fxn.get_param(SETTINGS_BOARD_GENERATION) < 42;
+}
+
 String settings_get_device_name()
 {
     return settings_fxn.get_param_as_string_var(SETTINGS_NAME);
@@ -230,6 +238,7 @@ void settings_begin()
     settings_fxn.string_params = settings_string_params;
     settings_fxn.update_fxns = settings_update_fxns;
     settings_fxn.active_params = settings_param_active;
+    settings_fxn.decimal_places = settings_decimal_places;
     ask_init_fxn.begin();
     ask_init_fxn.string_params = ask_init_string_params;
     ask_init_fxn.active_params = ask_init_param_active;

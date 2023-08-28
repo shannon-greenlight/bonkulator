@@ -369,3 +369,69 @@ New list of init waves includes Line. No Pulse or Toggle.
  
 Check-in comment for Bonkulator-413 
 Fixes to init user wave
+ 
+Check-in comment for Bonkulator-414 
+Fixes to user waveform double zero entry, data too long
+ 
+Check-in comment for Bonkulator-415 
+Sets index on recv_waveform()
+ 
+Check-in comment for Bonkulator-416 
+Insures updated user waveform gets used
+ 
+Check-in comment for Bonkulator-417 
+Adding recent changes to USB mode to WiFi
+ 
+Check-in comment for Bonkulator-418 
+Fixes failure to store drawn waveforms.
+ 
+Check-in comment for Bonkulator-419 
+Improves recent fix.
+ 
+Check-in comment for Bonkulator-420 
+Created fxn to set user wave value.
+ 
+Check-in comment for Bonkulator-421 
+Cleanup of user wave code. Removes redundant outputs_begin()
+ 
+Check-in comment for Bonkulator-422 
+Safety.
+ 
+Check-in comment for Bonkulator-423 
+Labels params affected by CV.
+ 
+Check-in comment for Bonkulator-424 
+Fixes set_cv_alt_values()
+ 
+Check-in comment for Bonkulator-425 
+Support for both cv set to same param.
+ 
+Check-in comment for Bonkulator-426 
+Safety.
+ 
+Check-in comment for Bonkulator-427 
+Adds terminal diaplay when entering strings
+ 
+Check-in comment for Bonkulator-428 
+Entering $ no longer affects non-string vars.
+ 
+Check-in comment for Bonkulator-429 
+Release
+ 
+Check-in comment for Bonkulator-430 
+Adds bonk_cp2.php from website.
+ 
+Check-in comment for Bonkulator-431 
+Start adding send_status support.
+ 
+Check-in comment for Bonkulator-432 
+More on send status.
+ 
+Check-in comment for Bonkulator-433 
+Sets trigger correctly when setting output. trig enables.
+ 
+Check-in comment for Bonkulator-434 
+Adds support for new board type.
+ 
+Check-in comment for Bonkulator-435 
+Output scaling not done now.
