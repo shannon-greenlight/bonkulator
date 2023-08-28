@@ -5,13 +5,13 @@
       "Application": "Pcbnew",
       "Version": "(6.0.1)"
     },
-    "CreationDate": "2023-08-05T09:00:22-07:00"
+    "CreationDate": "2023-08-27T17:20:04-07:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
       "Name": "main_board",
       "GUID": "6d61696e-5f62-46f6-9172-642e6b696361",
-      "Revision": "4.2"
+      "Revision": "5.0"
     },
     "Size": {
       "X": 70.85,
@@ -24,8 +24,8 @@
   "DesignRules": [
     {
       "Layers": "Outer",
-      "PadToPad": 0.0,
-      "PadToTrack": 0.0,
+      "PadToPad": 0.127,
+      "PadToTrack": 0.127,
       "TrackToTrack": 0.127,
       "MinLineWidth": 0.12,
       "TrackToRegion": 0.508,
