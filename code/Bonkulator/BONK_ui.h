@@ -110,7 +110,7 @@ void send_data_to_USB(char cmd)
   ui.t.print(",");
   ui.t.print(toJSON("fxn_num", String(remembered_fxn.get())));
   ui.t.print(",");
-  if (cmd == ' ' || cmd == 'f' || cmd == '+' || cmd == '-' || cmd == 'U')
+  if (true || cmd == ' ' || cmd == 'f' || cmd == '+' || cmd == '-' || cmd == 'U')
     ui.t.print(list_fxns());
   ui.t.print(toJSON("device_name", settings_get_device_name()));
   ui.t.print(",");
