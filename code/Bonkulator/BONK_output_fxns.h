@@ -368,6 +368,14 @@ void set_cv_alt_values(int cv, String label)
     }
 }
 
+String output_get_name(int output_num)
+{
+    String text = (*bonk_outputs[output_num]).name;
+    if (!get_output_calibrated(output_num))
+        text += "*";
+    return text;
+}
+
 void output_display()
 {
     update_clock();
@@ -401,10 +409,7 @@ void output_display()
 
     (the_output)().default_display();
 
-    String text = (the_output)().name;
-    if (!get_output_calibrated(selected_output.get()))
-        text += "*";
-
+    String text = output_get_name(selected_output.get());
     ui.printLine(text, 0, 2);
 }
 
@@ -456,7 +461,7 @@ String list_outputs()
         {
             out += ", ";
         }
-        out += enquote((*bonk_outputs[i]).name);
+        out += enquote(output_get_name(i));
     }
     return out;
 }
