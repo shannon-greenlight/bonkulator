@@ -17,11 +17,11 @@ enum
 
 uint16_t _settings_params[SETTINGS_NUM_PARAMS];
 uint16_t _settings_mins[] = {0, 0, 0, 0, 0, 1, 0, 0, 0, 10};
-uint16_t _settings_maxs[] = {0, 0, 1, 1, 1, 9999, 7, 1, 1, 50};
+uint16_t _settings_maxs[] = {0, 0, 1, 2, 1, 9999, 7, 1, 1, 50};
 uint16_t _settings_init_vals[] = {0, 0, 1, 0, 0, 15, 0, 0, 0, 42};
 uint16_t *settings_stuff[] = {_settings_params, _settings_mins, _settings_maxs, _settings_init_vals};
 String settings_labels[] = {"Version: ", "Name: ", "Encoder Type: ", "WiFi: ", "USB Direct: ", "Screen Saver: ", "Waveforms: ", "Reset: ", "Calibrate: ", "Board Revision: "};
-String settings_string_params[] = {VERSION_NUM, "$~", "Normal ,Reverse", "Disabled,Enabled ", "Disabled,Enabled ", "", "User 0,User 1,User 2,User 3,User 4,User 5,User 6,User 7", ACTIVATE_STRING, "Inputs,Outputs", ""};
+String settings_string_params[] = {VERSION_NUM, "$~", "Normal ,Reverse", "Disabled,Enabled,Reset ", "Disabled,Enabled ", "", "User 0,User 1,User 2,User 3,User 4,User 5,User 6,User 7", ACTIVATE_STRING, "Inputs,Outputs", ""};
 bool settings_param_active[] = {0, 0, 0, 1, 0, 0, 1, 1, 1, 0};
 int8_t settings_decimal_places[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1}; // allows fixed point numbers
 
@@ -176,10 +176,21 @@ void adc_cal()
 
 void settings_activate()
 {
+    int mode;
     switch (settings_fxn.param_num)
     {
     case SETTINGS_WIFI:
         selected_fxn = &wifi_fxn;
+        mode = settings_fxn.get_param(SETTINGS_WIFI);
+        if (mode == 2)
+        {
+            select_wifi_screen = 0;
+            system_message = "WiFi Reset";
+        }
+        // else
+        // {
+        //     wifi_display();
+        // }
         // selected_fxn->display();
         wifi_display();
         // wifi_activate();
