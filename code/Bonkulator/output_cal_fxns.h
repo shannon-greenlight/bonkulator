@@ -31,6 +31,10 @@ EEPROM_ArrInt output_offset_corrections(_output_offset_corrections, NUM_OUTPUTS)
 EEPROM_String output_calibrated(NUM_OUTPUTS);
 
 // void (*func_ptr[3])() = {fun1, fun2, fun3};
+bool in_output_cal_fxn()
+{
+    return selected_fxn == &output_cal_fxn;
+}
 
 int get_raw_output_offset_correction(int output)
 {
@@ -75,7 +79,7 @@ void set_output_offset_correction(int val)
 void set_output_scale_correction(int val)
 {
     int output = output_cal_fxn.get_param(OUTPUT_CAL_OUTPUT_NUM);
-    // Serial.println("Set scale correction: " + String(val) + " for: " + String(output));
+    // ui.terminal_debug("Set scale correction: " + String(val) + " for: " + String(output));
     output_scale_corrections.put(val, output);
     update_waveform();
 }
@@ -98,6 +102,9 @@ void output_cal_update_offset()
 void output_cal_update_scale()
 {
     int scale = output_cal_fxn.get_param(OUTPUT_CAL_SCALE);
+
+    scale = 1000;
+
     float mult = float(scale) / 1000.0;
     dac_vdc(5.123 * mult, output_cal_fxn.get_param(OUTPUT_CAL_OUTPUT_NUM)); // adjust for output = 5.00VDC
     // ui.terminal_debug("Scale correction: " + String(scale) + " DAC: " + String(5.123 * mult));
@@ -174,7 +181,7 @@ void output_cal_begin()
 void output_cal_params_macro()
 {
     // print out code to get to cal fxn
-    String prefix = "*\r\np7\r\n1\r\n!";
+    String prefix = "*\r\np8\r\n1\r\n!";
 
     Greenface_gadget *fxn = &output_cal_fxn;
     for (int i = 0; i < NUM_OUTPUTS; i++)
@@ -188,4 +195,10 @@ void output_cal_params_macro()
     }
     outputs_begin();
     Serial.println("*");
+}
+
+String check_output_cal()
+{
+    system_message = "Adjust offset to measure 0.0VDC at Output: " + String(output_cal_fxn.get_param(OUTPUT_CAL_OUTPUT_NUM));
+    return system_message;
 }

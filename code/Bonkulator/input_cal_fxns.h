@@ -160,19 +160,29 @@ bool in_input_cal_fxn()
 
 String check_input_cal()
 {
+    static float reading_memory = -100000.;
     int param_num = input_cal_fxn.param_num;
+    system_message = "Apply 0V to set Offset, 4V to set Scale.<br>";
+    int input = input_cal_fxn.get_param(INPUT_CAL_INPUT_NUM);
+    int val = adc_read(input);
+    // int raw = adc_read_raw(input);
+    // float reading = 3.23 * val / 1000.0;
+    float reading = IN_FS_VOLTS * val / 1650;
+    // return "Input: " + String(input) + " Reading: " + String(reading) + " Value: " + String(val) + " raw: " + String(raw);
+    system_message += "<h2>" + String(reading) + " VDC</h2> ";
+    if (abs(reading - reading_memory) > .01)
+        send_data_to_USB('/');
+    reading_memory = reading;
     if (param_num == INPUT_CAL_OFFSET || param_num == INPUT_CAL_SCALE)
     {
-        int input = input_cal_fxn.get_param(INPUT_CAL_INPUT_NUM);
-        int val = adc_read(input);
-        // int raw = adc_read_raw(input);
-        // float reading = 3.23 * val / 1000.0;
-        float reading = IN_FS_VOLTS * val / 1650;
-        // return "Input: " + String(input) + " Reading: " + String(reading) + " Value: " + String(val) + " raw: " + String(raw);
-        return "Input: " + String(input) + " Reading: " + String(reading) + " ";
+        // return "Input: " + String(input) + "Reading: " + String(reading) + " ";
+        return " Reading: " + String(reading) + " VDC  ";
     }
     else
     {
+        // if (abs(20.0 - reading_memory) > .01)
+        //     send_data_to_USB('/');
+        // reading_memory = 20.0;
         return "Apply 0V to set Offset, 4V to set Scale. ";
     }
 }
