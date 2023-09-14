@@ -143,13 +143,13 @@ void set_wifi_message()
     for (int i = 0; i < WAVEFORM_PARTS; i++)
     {
         if (i > 0 && i != WAVEFORM_PARTS)
-            wifi_ui_message += ", ";
+            waveform_values += ", ";
 
         value = waveform_data[index] - offset_correction;
         if (!in_user_waveforms())
             value = randomize_value(value, outptr->randomness_factor);
         value = quantize_value(value, selected_output.get());
-        wifi_ui_message += String(value);
+        waveform_values += String(value);
 
         if (i + 1 >= (index + 1) * index_inc)
         {
