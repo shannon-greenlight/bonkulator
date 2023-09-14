@@ -68,72 +68,12 @@ void send_data_to_client(WiFiClient client, char cmd)
   // ui.terminal_debug("Send data to client: " + String(selected_fxn->get_param(OUTPUT_WAVEFORM)));
   if (cmd == '[')
     return;
-  client.print(toJSON("fxn", selected_fxn->name));
-  client.print(",");
-  client.print(toJSON("fxn_num", String(remembered_fxn.get())));
-  client.print(",");
-  if (cmd == ' ' || cmd == 'f' || cmd == '+' || cmd == '-')
-    client.print(list_fxns());
-  client.print(toJSON("device_name", settings_get_device_name()));
-  client.print(",");
-  client.print(toJSON("cmd", String(cmd)));
-  client.print(",");
 
-  uint8_t digit_num = selected_fxn->digit_num;
-  if (selected_fxn->get_min_w_offset() < 0 && digit_num > 0)
-  {
-    digit_num--;
-  }
-  client.print(toJSON("digit_num", String(digit_num)));
-  client.print(",");
+  client.print(globals_toJSON(cmd));
+  client.print(messages_toJSON());
+  client.print(triggers_toJSON());
+  client.print(fxn_params_toJSON());
 
-  client.print(toJSON("param_num", String(selected_fxn->param_num)));
-  client.print(",");
-  client.print(toJSON("param_active", String(selected_fxn->get_param_active())));
-  client.print(",");
-  client.print(toJSON("dp", (selected_fxn->decimal_places) ? String(selected_fxn->decimal_places[selected_fxn->param_num]) : "0"));
-  client.print(",");
-
-  client.print(toJSON("fs_volts", output_get_fs()));
-  client.print(",");
-  client.print(toJSON("fs_offset", output_get_fs_offset()));
-  client.print(",");
-  client.print(toJSON("offset_max", "100"));
-  client.print(",");
-  client.print(toJSON("offset_min", "-100"));
-  client.print(",");
-  client.print(toJSON("scale_min", "-100"));
-  client.print(",");
-  client.print(toJSON("scale_max", "100"));
-  client.print(",");
-  client.print(toJSON("dac_fs", String(DAC_FS)));
-  client.print(",");
-  client.print(toJSON("adc_fs", String(ADC_FS)));
-  client.print(",");
-
-  if (selected_fxn != &settings_fxn)
-  {
-    set_wifi_message();
-    client.print(toJSON("message", wifi_ui_message));
-    client.print(",");
-  }
-  wifi_ui_message = "";
-
-  client.print("\"triggers\" : [");
-  for (int trig_num = 0; trig_num < NUM_TRIGGERS; trig_num++)
-  {
-    if (trig_num > 0)
-    {
-      client.print(",");
-    }
-    // ui.terminal_debug((*triggers[trig_num]).params_toJSON());
-    client.print((*triggers[trig_num]).params_toJSON());
-  }
-  client.print("],");
-
-  client.print("\"params\" : [");
-  client.print(selected_fxn->params_toJSON());
-  client.print("]");
   client.print("}");
 
   // The HTTP response ends with another blank line:
