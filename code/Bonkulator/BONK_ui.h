@@ -97,93 +97,118 @@ void send_status_to_USB()
   }
 }
 
-void send_data_to_USB(char cmd)
+String globals_toJSON(char cmd)
 {
-  if (sending_to_USB)
-    return;
-  sending_to_USB = true;
-  ui.t.print("{");
-  // ui.terminal_debug("Send data to ui.t: " + String(selected_fxn->get_param(OUTPUT_WAVEFORM)));
-  if (cmd == '[')
-    return;
-  ui.t.print(toJSON("fxn", selected_fxn->name));
-  ui.t.print(",");
-  ui.t.print(toJSON("fxn_num", String(remembered_fxn.get())));
-  ui.t.print(",");
+  String out = "";
+  out += (toJSON("fxn", selected_fxn->name));
+  out += (",");
+  out += (toJSON("fxn_num", String(remembered_fxn.get())));
+  out += (",");
   if (true || cmd == ' ' || cmd == 'f' || cmd == '+' || cmd == '-' || cmd == 'U')
-    ui.t.print(list_fxns());
-  ui.t.print(toJSON("device_name", settings_get_device_name()));
-  ui.t.print(",");
-  ui.t.print(toJSON("cmd", String(cmd)));
-  ui.t.print(",");
+    out += (list_fxns());
+  out += (toJSON("device_name", settings_get_device_name()));
+  out += (",");
+  out += (toJSON("cmd", String(cmd)));
+  out += (",");
 
   uint8_t digit_num = selected_fxn->digit_num;
   if (selected_fxn->get_min_w_offset() < 0 && digit_num > 0)
   {
     digit_num--;
   }
-  ui.t.print(toJSON("digit_num", String(digit_num)));
-  ui.t.print(",");
+  out += (toJSON("digit_num", String(digit_num)));
+  out += (",");
 
-  ui.t.print(toJSON("param_num", String(selected_fxn->param_num)));
-  ui.t.print(",");
-  ui.t.print(toJSON("param_active", String(selected_fxn->get_param_active())));
-  ui.t.print(",");
-  ui.t.print(toJSON("dp", (selected_fxn->decimal_places) ? String(selected_fxn->decimal_places[selected_fxn->param_num]) : "0"));
-  ui.t.print(",");
+  out += (toJSON("param_num", String(selected_fxn->param_num)));
+  out += (",");
+  out += (toJSON("param_active", String(selected_fxn->get_param_active())));
+  out += (",");
+  out += (toJSON("dp", (selected_fxn->decimal_places) ? String(selected_fxn->decimal_places[selected_fxn->param_num]) : "0"));
+  out += (",");
 
-  ui.t.print(toJSON("fs_volts", output_get_fs()));
-  ui.t.print(",");
-  ui.t.print(toJSON("fs_offset", output_get_fs_offset()));
-  ui.t.print(",");
-  ui.t.print(toJSON("offset_max", "100"));
-  ui.t.print(",");
-  ui.t.print(toJSON("offset_min", "-100"));
-  ui.t.print(",");
-  ui.t.print(toJSON("scale_min", "-100"));
-  ui.t.print(",");
-  ui.t.print(toJSON("scale_max", "100"));
-  ui.t.print(",");
-  ui.t.print(toJSON("dac_fs", String(DAC_FS)));
-  ui.t.print(",");
-  ui.t.print(toJSON("adc_fs", String(ADC_FS)));
-  ui.t.print(",");
+  out += (toJSON("fs_volts", output_get_fs()));
+  out += (",");
+  out += (toJSON("fs_offset", output_get_fs_offset()));
+  out += (",");
+  out += (toJSON("offset_max", "100"));
+  out += (",");
+  out += (toJSON("offset_min", "-100"));
+  out += (",");
+  out += (toJSON("scale_min", "-100"));
+  out += (",");
+  out += (toJSON("scale_max", "100"));
+  out += (",");
+  out += (toJSON("dac_fs", String(DAC_FS)));
+  out += (",");
+  out += (toJSON("adc_fs", String(ADC_FS)));
+  out += (",");
+  return out;
+}
 
+String messages_toJSON()
+{
+  String out = "";
   if (selected_fxn_num != SETTINGS_FXN || in_user_waveforms())
   {
     set_wifi_message();
-    ui.t.print(toJSON("message", wifi_ui_message));
-    ui.t.print(",");
+    out += (toJSON("message", waveform_values));
+    out += (",");
   }
-  wifi_ui_message = "";
+  waveform_values = "";
+
+  out += (toJSON("system_message", system_message));
+  out += (",");
+  system_message = "";
 
   if (in_wifi())
   {
-    wifi_toJSON();
-    // ui.t.print(toJSON("message", "A cool message..."));
-    // ui.t.print(",");
+    out += (wifi_toJSON());
   }
+  return out;
+}
 
-  ui.t.print("\"triggers\" : [");
+String triggers_toJSON()
+{
+  String out = "";
+  out += ("\"triggers\" : [");
   for (int trig_num = 0; trig_num < NUM_TRIGGERS; trig_num++)
   {
     if (trig_num > 0)
     {
-      ui.t.print(",");
+      out += (",");
     }
     // ui.terminal_debug((*triggers[trig_num]).params_toJSON());
-    ui.t.print((*triggers[trig_num]).params_toJSON());
+    out += ((*triggers[trig_num]).params_toJSON());
   }
-  ui.t.print("],");
+  out += ("],");
+  return out;
+}
 
-  ui.t.print("\"params\" : [");
-  if (!in_wifi())
-    ui.t.print(selected_fxn->params_toJSON());
-  ui.t.print("]");
+String fxn_params_toJSON()
+{
+  String out = "";
+  out += ("\"params\" : [");
+  if (!in_wifi() || sending_to_USB)
+    out += (selected_fxn->params_toJSON());
+  out += ("]");
+  return out;
+}
+
+void send_data_to_USB(char cmd)
+{
+  if (sending_to_USB || !usb_direct_enabled())
+    return;
+  sending_to_USB = true;
+  ui.t.print("{");
+  // ui.terminal_debug("Send data to ui.t: " + String(selected_fxn->get_param(OUTPUT_WAVEFORM)));
+  if (cmd == '[')
+    return;
+  ui.t.print(globals_toJSON(cmd));
+  ui.t.print(messages_toJSON());
+  ui.t.print(triggers_toJSON());
+  ui.t.print(fxn_params_toJSON());
+
   ui.t.print("}");
-
-  // The HTTP response ends with another blank line:
-  // ui.t.println("");
 
   // This terminates serialport message
   ui.t.println("\r\n\r\n");
