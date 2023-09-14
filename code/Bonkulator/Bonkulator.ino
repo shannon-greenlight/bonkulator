@@ -32,7 +32,8 @@ String version_num = VERSION_NUM;
 boolean key_held_down = false;
 int16_t adc0;
 int16_t adc1;
-String wifi_ui_message = "";
+String waveform_values = "";
+String system_message;
 int wifi_RSSI;
 boolean in_wifi();
 uint16_t calculated_time_inc = 0;
@@ -42,6 +43,7 @@ void init_all();
 void select_fxn(int fxn_index);
 
 // settings
+bool in_output_cal_fxn();
 bool in_user_waveforms();
 bool in_ask_init();
 void ask_init();
@@ -54,6 +56,7 @@ void settings_put_usb_direct(int val);
 void timer_service_settings();
 void init_parameters();
 bool settings_get_fs_fixed();
+void send_data_to_USB(char cmd);
 
 // cv fxns
 void cv_set(int cv_num, int output, int16_t cv_val);
@@ -107,7 +110,7 @@ String params_toJSON();
 String list_fxns();
 String output_get_fs();
 String output_get_fs_offset();
-void wifi_toJSON();
+String wifi_toJSON();
 
 EEPROM_Int selected_output = EEPROM_Int(0, 7); // the output we are working on
 EEPROM_Int remembered_fxn = EEPROM_Int(0, 8);  // 0-7=OutputX, 8=Settings
@@ -180,6 +183,7 @@ void select_fxn(int fxn_index)
 {
   fxn_index = constrain(fxn_index, OUTPUT_0_FXN, SETTINGS_FXN);
   selected_fxn_num = fxn_index;
+  system_message = "";
   if (fxn_index == SETTINGS_FXN)
   {
     int param_num = settings_fxn.param_num;
@@ -327,6 +331,10 @@ void loop()
   else if (in_input_cal_fxn())
   {
     status_string = check_input_cal();
+  }
+  else if (in_output_cal_fxn())
+  {
+    status_string = check_output_cal();
   }
 
   status_string += check_wifi();
