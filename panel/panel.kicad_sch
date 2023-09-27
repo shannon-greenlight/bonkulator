@@ -773,7 +773,7 @@
   )
 
   (symbol (lib_id "Graphic:Logo_Open_Hardware_Small") (at 231.775 83.185 0) (unit 1)
-    (in_bom yes) (on_board yes)
+    (in_bom yes) (on_board no)
     (uuid 307d06a5-a22d-4946-8b80-4f092fd73e46)
     (property "Reference" "GR2" (id 0) (at 231.775 76.2 0))
     (property "Value" "Logo_Open_Hardware_Small" (id 1) (at 231.775 88.9 0)
@@ -1603,11 +1603,11 @@
   )
 
   (symbol (lib_id "greenface-symbols:small_logo") (at 231.14 70.485 0) (unit 1)
-    (in_bom yes) (on_board yes) (fields_autoplaced)
+    (in_bom yes) (on_board no) (fields_autoplaced)
     (uuid e52387aa-9a3c-4f08-b265-477019aca115)
     (property "Reference" "GR3" (id 0) (at 231.14 65.3755 0))
     (property "Value" "small_logo" (id 1) (at 231.14 68.1506 0))
-    (property "Footprint" "Symbol:KiCad-Logo_5mm_SilkScreen" (id 2) (at 231.14 70.485 0)
+    (property "Footprint" "panel:bamboo_bonk2" (id 2) (at 231.14 70.485 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (id 3) (at 231.14 70.485 0)
@@ -1732,7 +1732,7 @@
       (reference "GR2") (unit 1) (value "Logo_Open_Hardware_Small") (footprint "Symbol:OSHW-Logo_5.7x6mm_SilkScreen")
     )
     (path "/e52387aa-9a3c-4f08-b265-477019aca115"
-      (reference "GR3") (unit 1) (value "small_logo") (footprint "Symbol:KiCad-Logo_5mm_SilkScreen")
+      (reference "GR3") (unit 1) (value "small_logo") (footprint "panel:bamboo_bonk2")
     )
     (path "/495b9f3e-72d4-4443-8d1b-2b95612acb36"
       (reference "H1") (unit 1) (value "MountingHole_Pad") (footprint "panel:MountingHole_3.2mm_M3_SmPad")
