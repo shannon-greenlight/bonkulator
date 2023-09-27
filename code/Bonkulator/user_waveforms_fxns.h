@@ -28,7 +28,7 @@ enum
 
 #define USER_WAVEFORMS_NAME_MAXLEN 10
 
-#define INIT_WAVEFORMS "Sine,Haystack,Ramp,Pyramid,Line,Maytag"
+#define INIT_USER_WAVEFORMS "Sine,Haystack,Ramp,Pyramid,Line,Maytag"
 enum
 {
     INIT_WAVE_SINE,
@@ -65,7 +65,7 @@ uint16_t _user_waveforms_mins[] = {0, 0, 1, 1, 0, 0};
 uint16_t _user_waveforms_maxs[] = {0, 127, DAC_FS, 1000, 3, NUM_INIT_WAVEFORMS - 1};
 uint16_t _user_waveforms_init_vals[] = {0, 0, DAC_FS / 2, 8, 0, INIT_WAVE_LINE};
 String user_waveforms_labels[] = {"Name: ", "Index: ", "Value: ", "Sample time(ms): ", "Record on: ", "Init Wave: "};
-String user_waveforms_string_params[] = {"$~", "", "", "", "Immediate,Trigger,+Change,-Change", INIT_WAVEFORMS};
+String user_waveforms_string_params[] = {"$~", "", "", "", "Immediate,Trigger,+Change,-Change", INIT_USER_WAVEFORMS};
 bool user_waveforms_param_active[] = {0, 0, 1, 1, 0};
 
 // User Wave definitions
