@@ -205,7 +205,7 @@ uint16_t get_time_inc(int output)
 
 int calc_wave_value(int i, int waveform, uint16_t waveform_parts)
 {
-    int temp;
+    int temp = 0;
     int pyramid_index;
     switch (waveform)
     {
@@ -238,7 +238,6 @@ void set_waveform(int output, int waveform)
     // temp fix
     // waveform = min(5, waveform);
 
-    int temp;
     uint16_t *waveform_ref = waveform_reference[output];
     uint16_t *waveform_data = outputs[output].waveform_data;
     uint16_t waveform_parts = get_waveform_parts(output); // also sets time_inc
