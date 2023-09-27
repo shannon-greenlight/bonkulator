@@ -435,3 +435,33 @@ Adds support for new board type.
  
 Check-in comment for Bonkulator-435 
 Output scaling not done now.
+ 
+Check-in comment for Bonkulator-436 
+Prints * to remote apps when outputs not calibrated.
+ 
+Check-in comment for Bonkulator-437 
+Adds system message. Start with input cal.
+ 
+Check-in comment for Bonkulator-438 
+Safety.
+ 
+Check-in comment for Bonkulator-439 
+Improves input cal.
+ 
+Check-in comment for Bonkulator-440 
+Adds USB system message for output cal.
+ 
+Check-in comment for Bonkulator-441 
+Makes WiFi work with system message.
+ 
+Check-in comment for Bonkulator-442 
+WiFi to JSON now returns a string.
+ 
+Check-in comment for Bonkulator-443 
+Consolidating send to USB and to WiFi. Part done.
+ 
+Check-in comment for Bonkulator-444 
+USB part of consolidation done.
+ 
+Check-in comment for Bonkulator-445 
+WiFi part done.
