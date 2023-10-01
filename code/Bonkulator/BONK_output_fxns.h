@@ -357,7 +357,7 @@ void set_cv_alt_values(int cv, String label)
     }
     if (param != -1)
     {
-        if ((the_output)().alt_values[param] > "")
+        if ((the_output)().alt_values[param] > "" && (the_output)().alt_values[param] != label)
         {
             (the_output)().alt_values[param] += ("/" + label);
         }
@@ -401,6 +401,7 @@ void output_display()
         break;
     }
 
+    clear_alt_values();
     set_cv_alt_values((the_output)().get_param(OUTPUT_CV0), "CV0");
     set_cv_alt_values((the_output)().get_param(OUTPUT_CV1), "CV1");
 
