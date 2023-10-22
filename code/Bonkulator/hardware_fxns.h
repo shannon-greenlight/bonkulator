@@ -18,7 +18,6 @@ void hardware_begin()
     pinMode(DOUT_PIN, OUTPUT);
     pinMode(CLK_PIN, OUTPUT);
     pinMode(CS_PIN, OUTPUT);
-    pinMode(A0, OUTPUT);
 
     pinMode(T0_LED, OUTPUT);
     pinMode(T1_LED, OUTPUT);

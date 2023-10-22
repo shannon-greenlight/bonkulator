@@ -27,6 +27,9 @@ typedef void (*update_fxn)(void);
 // interrupt variables
 volatile uint32_t Timer0Count = 0;
 
+// for compatibility with Spankulator in gadget code
+int user_entering_param = 1;
+
 // variables
 String version_num = VERSION_NUM;
 boolean key_held_down = false;
@@ -211,7 +214,8 @@ void setup()
   SPI.begin();
   Serial.begin(115200);
 
-  pinMode(KEYBOARD_COLUMN_0, INPUT_PULLUP);
+  // pinMode(KEYBOARD_COLUMN_0, INPUT_PULLUP);
+  keyboard_begin();
   while (digitalRead(KEYBOARD_COLUMN_0) && !IS_RELEASE)
   {
   };
@@ -236,7 +240,7 @@ void setup()
   hardware_begin();
   timer_begin();
   triggers_begin();
-  keyboard_begin();
+  // keyboard_begin();
   settings_begin();
   input_cal_begin();
   output_cal_begin();
@@ -279,6 +283,8 @@ void loop()
   static trigger_state t1_memory;
   static trigger_state t2_memory;
   static trigger_state t3_memory;
+
+  // ui.terminal_debug("A2: " + String(analogRead(A2)));
 
   check_keyboard();
   if (debug)
