@@ -118,6 +118,7 @@ void settings_put_param(int val)
 
 void settings_adjust_param(int encoder_val, unsigned long delta)
 {
+    // ui.terminal_debug(settings_fxn.name + " - param num: " + String(settings_fxn.param_num));
     switch (settings_fxn.param_num)
     {
     case SETTINGS_ENCODER:
