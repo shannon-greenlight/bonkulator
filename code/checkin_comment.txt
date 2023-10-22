@@ -467,3 +467,6 @@ Check-in comment for Bonkulator-445
 WiFi part done.
  
 Check-in comment for Bonkulator-446 
+ 
+Check-in comment for Bonkulator-447 
+Fixes Trigger LED code.
