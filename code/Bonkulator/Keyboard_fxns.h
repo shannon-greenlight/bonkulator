@@ -46,7 +46,8 @@ void reset_keyboard()
 uint8_t crunch_key()
 {
 	uint8_t keys_row;
-	keys_row = !digitalRead(KEYBOARD_COLUMN_0);
+	// keys_row = !digitalRead(KEYBOARD_COLUMN_0);
+	keys_row = analogRead(KEYBOARD_COLUMN_0) < 100 ? 1 : 0; // crazy fix for input not going low enough
 	keys_row |= !digitalRead(KEYBOARD_COLUMN_1) << 1;
 	keys_row |= !digitalRead(KEYBOARD_COLUMN_2) << 2;
 	keys_row |= !digitalRead(KEYBOARD_COLUMN_3) << 3;
@@ -679,10 +680,10 @@ void keyboard_begin()
 {
 	pinMode(KEYBOARD_ROW_1, OUTPUT);
 	pinMode(KEYBOARD_ROW_2, OUTPUT);
-	pinMode(KEYBOARD_COLUMN_0, INPUT_PULLUP);
-	pinMode(KEYBOARD_COLUMN_1, INPUT_PULLUP);
-	pinMode(KEYBOARD_COLUMN_2, INPUT_PULLUP);
-	pinMode(KEYBOARD_COLUMN_3, INPUT_PULLUP);
+	pinMode(KEYBOARD_COLUMN_0, INPUT);
+	pinMode(KEYBOARD_COLUMN_1, INPUT);
+	pinMode(KEYBOARD_COLUMN_2, INPUT);
+	pinMode(KEYBOARD_COLUMN_3, INPUT);
 	reset_keyboard();
 	delay(200);
 	attachInterrupt(digitalPinToInterrupt(SELECT_BUTTON_PIN), select_button_down, FALLING);
