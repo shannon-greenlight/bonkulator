@@ -480,6 +480,7 @@ bool any_output_triggered()
 
 void reset_outputs(int trig_num)
 {
+    (*triggers[trig_num]).state = TRIGGER_IDLE;
     for (int i = 0; i < NUM_OUTPUTS; i++)
     {
         if ((*bonk_outputs[i]).get_param(OUTPUT_ENABLE_T0 + trig_num))

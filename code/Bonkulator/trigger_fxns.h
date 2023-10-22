@@ -123,7 +123,8 @@ void trigger_output(byte trig_num, int output_num)
     }
     // set led
     // digitalWrite(trig_num, (*bonk_outputs[output_num]).triggered);
-    digitalWrite(trig_num, (*triggers[trig_num]).state);
+    // digitalWrite(trig_num, (*triggers[trig_num]).state);
+    digitalWrite(trig_num, HIGH);
 }
 
 void trigger_report()
