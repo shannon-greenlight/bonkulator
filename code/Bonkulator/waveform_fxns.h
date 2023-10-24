@@ -145,7 +145,8 @@ void set_wifi_message()
         if (i > 0 && i != WAVEFORM_PARTS)
             waveform_values += ", ";
 
-        value = waveform_data[index] - offset_correction;
+        // value = waveform_data[index] - offset_correction;
+        value = waveform_data[index];
         if (!in_user_waveforms())
             value = randomize_value(value, outptr->randomness_factor);
         value = quantize_value(value, selected_output.get());
