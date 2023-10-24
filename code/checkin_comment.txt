@@ -470,3 +470,7 @@ Check-in comment for Bonkulator-446
  
 Check-in comment for Bonkulator-447 
 Fixes Trigger LED code.
+ 
+Check-in comment for Bonkulator-448 
+Fixes hardware issue where A2 signal doesn't go all the wat to ground.
+Now we don't send waveform data to apps with offset correction. Not needed and caused display bug.
