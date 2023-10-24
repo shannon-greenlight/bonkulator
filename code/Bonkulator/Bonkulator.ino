@@ -284,8 +284,6 @@ void loop()
   static trigger_state t2_memory;
   static trigger_state t3_memory;
 
-  // ui.terminal_debug("A2: " + String(analogRead(A2)));
-
   check_keyboard();
   if (debug)
     ui.terminal_debug("Keyboard checked");
