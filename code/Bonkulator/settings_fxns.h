@@ -12,22 +12,23 @@ enum
     SETTINGS_RESET,
     SETTINGS_CAL,
     SETTINGS_BOARD_GENERATION,
+    SETTINGS_BOUNCE,
     SETTINGS_NUM_PARAMS
 };
 
 uint16_t _settings_params[SETTINGS_NUM_PARAMS];
-uint16_t _settings_mins[] = {0, 0, 0, 0, 0, 1, 0, 0, 0, 10};
-uint16_t _settings_maxs[] = {0, 0, 1, 2, 1, 9999, 7, 1, 1, 50};
-uint16_t _settings_init_vals[] = {0, 0, 1, 0, 0, 15, 0, 0, 0, 42};
+uint16_t _settings_mins[] = {0, 0, 0, 0, 0, 1, 0, 0, 0, 10, 0};
+uint16_t _settings_maxs[] = {0, 0, 1, 2, 1, 9999, 7, 1, 1, 50, 1};
+uint16_t _settings_init_vals[] = {0, 0, 1, 0, 0, 15, 0, 0, 0, 42, 0};
 uint16_t *settings_stuff[] = {_settings_params, _settings_mins, _settings_maxs, _settings_init_vals};
-String settings_labels[] = {"Version: ", "Name: ", "Encoder Type: ", "WiFi: ", "USB Direct: ", "Screen Saver: ", "Waveforms: ", "Reset: ", "Calibrate: ", "Board Revision: "};
-String settings_string_params[] = {VERSION_NUM, "$~", "Normal ,Reverse", "Disabled,Enabled,Reset ", "Disabled,Enabled ", "", "User 0,User 1,User 2,User 3,User 4,User 5,User 6,User 7", ACTIVATE_STRING, "Inputs,Outputs", ""};
-bool settings_param_active[] = {0, 0, 0, 1, 0, 0, 1, 1, 1, 0};
-int8_t settings_decimal_places[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1}; // allows fixed point numbers
+String settings_labels[] = {"Version: ", "Name: ", "Encoder Type: ", "WiFi: ", "USB Direct: ", "Screen Saver: ", "Waveforms: ", "Reset: ", "Calibrate: ", "Board Revision: ", "Bounce: "};
+String settings_string_params[] = {VERSION_NUM, "$~", "Normal ,Reverse", "Disabled,Enabled,Reset ", "Disabled,Enabled ", "", "User 0,User 1,User 2,User 3,User 4,User 5,User 6,User 7", ACTIVATE_STRING, "Inputs,Outputs", "", ""};
+bool settings_param_active[] = {0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1};
+int8_t settings_decimal_places[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0}; // allows fixed point numbers
 
 // void (*func_ptr[3])() = {fun1, fun2, fun3};
 
-update_fxn settings_update_fxns[SETTINGS_NUM_PARAMS] = {nullptr, nullptr, set_encoder, nullptr, nullptr, nullptr, nullptr, nullptr};
+update_fxn settings_update_fxns[SETTINGS_NUM_PARAMS] = {nullptr, nullptr, set_encoder, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
 
 EEPROM_String settings_device_name(20);
 EEPROM_String settings_string_vars[] = {settings_device_name};
@@ -223,6 +224,19 @@ void settings_activate()
             selected_fxn->display();
             break;
         }
+        break;
+
+    case SETTINGS_BOUNCE:
+        switch (settings_fxn.get_param(SETTINGS_BOUNCE))
+        {
+        case 0:
+            selected_fxn = &bounce0_fxn;
+            break;
+        case 1:
+            selected_fxn = &bounce1_fxn;
+            break;
+        }
+        selected_fxn->display();
         break;
 
     default:
