@@ -149,3 +149,22 @@ void bounce_begin()
     // bounce_fxn.update_fxns = bounce_update_fxns;
     // bounce_fxn.display_fxn = &bounce_display;
 }
+
+String check_bounce()
+{
+    if (bounce_triggered && millis() > bounce_next_time)
+    {
+        // ui.terminal_debug("enabled: " + String(bounce_debug) + " trig_num: " + String(trig2.trig_num));
+        // ui.terminal_debug("Bounce Triggered by Trig: " + String(bounce_triggered_by) + " Reading: " + String(bounce_reading));
+        // float reading = IN_FS_VOLTS * bounce_reading / 1650;
+        float reading = scale_adc(bounce_reading);
+        bounce_triggered = selected_fxn->get_param(BOUNCE_REPEAT);
+        bounce_next_time = millis() + selected_fxn->get_param(BOUNCE_SAMPLE_TIME);
+        if (bounce_triggered)
+        {
+            trigger_bounce(bounce_triggered_by[bounce_input()], TRIGGER_ACTIVE);
+        }
+        return "  CV" + String(bounce_input()) + " Reading: " + String(reading) + "    Triggered by: T" + String(bounce_triggered_by[bounce_input()]) + "  ";
+    }
+    return "";
+}
