@@ -156,7 +156,6 @@ bool in_input_cal_fxn()
 }
 
 // 1.65V * 3.01, A/D FS * circuit gain
-#define IN_FS_VOLTS 4.9665
 
 String check_input_cal()
 {
@@ -167,7 +166,8 @@ String check_input_cal()
     int val = adc_read(input);
     // int raw = adc_read_raw(input);
     // float reading = 3.23 * val / 1000.0;
-    float reading = IN_FS_VOLTS * val / 1650;
+    // float reading = IN_FS_VOLTS * val / 1650;
+    float reading = scale_adc(val);
     // return "Input: " + String(input) + " Reading: " + String(reading) + " Value: " + String(val) + " raw: " + String(raw);
     system_message += "<h2>" + String(reading) + " VDC</h2> ";
     if (abs(reading - reading_memory) > .01)
