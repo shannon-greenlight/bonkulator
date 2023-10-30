@@ -474,3 +474,66 @@ Fixes Trigger LED code.
 Check-in comment for Bonkulator-448 
 Fixes hardware issue where A2 signal doesn't go all the wat to ground.
 Now we don't send waveform data to apps with offset correction. Not needed and caused display bug.
+ 
+Check-in comment for Bonkulator-449 
+Start work on Bounce.
+ 
+Check-in comment for Bonkulator-450 
+Adds Trigger, CV, Repeat to Bounce params
+ 
+Check-in comment for Bonkulator-451 
+Structure is in.
+ 
+Check-in comment for Bonkulator-452 
+Safety
+ 
+Check-in comment for Bonkulator-453 
+Got trigger talking to bounce.
+ 
+Check-in comment for Bonkulator-454 
+Adds trigger control to bounce.
+ 
+Check-in comment for Bonkulator-455 
+Adds bounce update fxns.
+ 
+Check-in comment for Bonkulator-456 
+Start changes to Trigger.h
+ 
+Check-in comment for Bonkulator-457 
+Safety.
+ 
+Check-in comment for Bonkulator-458 
+Changes name: output to channel in trigger.
+ 
+Check-in comment for Bonkulator-459 
+More on Bounce.
+ 
+Check-in comment for Bonkulator-460 
+Bounce fxn now array of 2.
+ 
+Check-in comment for Bonkulator-461 
+Deals with Bounce labels.
+ 
+Check-in comment for Bonkulator-462 
+Bounce takes meas now.
+ 
+Check-in comment for Bonkulator-463 
+Bounce does repeat now.
+ 
+Check-in comment for Bonkulator-464 
+Bounce displays reading on status line.
+ 
+Check-in comment for Bonkulator-465 
+Adds scale_adc()
+ 
+Check-in comment for Bonkulator-466 
+Adds Bounce triggered_by
+ 
+Check-in comment for Bonkulator-467 
+More on bounce. Creates scale_adc()
+ 
+Check-in comment for Bonkulator-468 
+Safety.
+ 
+Check-in comment for Bonkulator-469 
+Adds trig ctrl to bounce.
