@@ -5,6 +5,8 @@
 #include <Adafruit_MCP23X08.h>
 #include "EEPROM_ArrInt.h"
 
+#define IN_FS_VOLTS 4.9665
+
 // Adafruit_ADS1115 ads;  /* Use this for the 16-bit version */
 Adafruit_ADS1015 ads; /* Use this for the 12-bit version */
 Adafruit_MCP23X08 mcp;
@@ -26,10 +28,10 @@ void hardware_begin()
 
     // TODO: Input pullup is broken!!!
     // https://forum.arduino.cc/t/interrupt-on-digital-pin-does-not-work-on-nano-rp2040-connect/960900/2
-    // pinMode(T0_PIN, INPUT_PULLUP);
-    // pinMode(T1_PIN, INPUT_PULLUP);
-    // pinMode(T2_PIN, INPUT_PULLUP);
-    // pinMode(T3_PIN, INPUT_PULLUP);
+    // pinMode(T0_PIN, INPUT_PULLDOWN);
+    // pinMode(T1_PIN, INPUT_PULLDOWN);
+    // pinMode(T2_PIN, INPUT_PULLDOWN);
+    // pinMode(T3_PIN, INPUT_PULLDOWN);
 
     analogWriteResolution(10);
     output_device.begin(AD5328_LDAC_PASSTHRU, AD5328_VDD_BOTH, AD5328_BUFFERED_BOTH, AD5328_GAIN_NONE);
@@ -70,6 +72,11 @@ int adc_read(int adc_num)
     adc += get_raw_input_offset_correction(adc_num);
     adc *= get_input_scale_correction(adc_num) / 1000.0;
     return adc;
+}
+
+float scale_adc(int adc)
+{
+    return IN_FS_VOLTS * adc / 1650;
 }
 
 void dac_out(byte dac, int val)
