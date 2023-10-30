@@ -14,10 +14,10 @@ void update_cv(int cv_num)
     switch (cv_num)
     {
     case OUTPUT_CV0:
-        trig_cv0.set_output(selected_output.get(), cv_type == 6);
+        trig_cv0.set_channel(selected_output.get(), cv_type == 6);
         break;
     case OUTPUT_CV1:
-        trig_cv1.set_output(selected_output.get(), cv_type == 6);
+        trig_cv1.set_channel(selected_output.get(), cv_type == 6);
         break;
     }
     output_display();
