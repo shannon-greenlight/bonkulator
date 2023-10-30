@@ -505,16 +505,16 @@ void output_update_trigger(int output)
     switch (trig_num)
     {
     case 0:
-        trig0.set_output(output, trig_type);
+        trig0.set_channel(output, trig_type);
         break;
     case 1:
-        trig1.set_output(output, trig_type);
+        trig1.set_channel(output, trig_type);
         break;
     case 2:
-        trig2.set_output(output, trig_type);
+        trig2.set_channel(output, trig_type);
         break;
     case 3:
-        trig3.set_output(output, trig_type);
+        trig3.set_channel(output, trig_type);
         break;
     }
 }
@@ -794,7 +794,7 @@ void check_outputs()
             }
             if (this_trig_enabled && (*bonk_outputs[output]).triggered)
             {
-                // Serial.println((*bonk_outputs[output]).name + " triggered by: " + String(trig));
+                // ui.terminal_debug((*bonk_outputs[output]).name + " triggered by: " + String(trig));
                 in_use = true;
             }
         }
