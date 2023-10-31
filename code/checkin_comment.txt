@@ -537,3 +537,46 @@ Safety.
  
 Check-in comment for Bonkulator-469 
 Adds trig ctrl to bounce.
+ 
+Check-in comment for Bonkulator-470 
+Creates check_bounce()
+ 
+Check-in comment for Bonkulator-471 
+Adds dac_out to bounce.
+ 
+Check-in comment for Bonkulator-472 
+Safety.
+ 
+Check-in comment for Bonkulator-473 
+Bounce output close to target.
+ 
+Check-in comment for Bonkulator-474 
+Safety.
+ 
+Check-in comment for Bonkulator-475 
+Bounce scale and offset now are bipolar!
+ 
+Check-in comment for Bonkulator-476 
+Bounce offset added. Almost accurate.
+ 
+Check-in comment for Bonkulator-477 
+Adds CV, but are we going to support it?
+ 
+Check-in comment for Bonkulator-478 
+Removes CV from Bounce.
+ 
+Check-in comment for Bonkulator-479 
+Testing backup
+ 
+Check-in comment for Bonkulator-480 
+Again.
+ 
+Check-in comment for Bonkulator-481 
+Trying xcopy.
+ 
+Check-in comment for Bonkulator-482 
+Trying robocopy for backing bonk_cp 
+
+Check-in comment for Bonkulator-483 
+Calibrated bounce output 0 for another board.
+
