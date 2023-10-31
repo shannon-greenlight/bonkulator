@@ -35,12 +35,12 @@ call "C:\Program Files\Notepad++\notepad++" -n999999 checkin_comment.txt
 robocopy Bonkulator %backup_path%\Bonkulator\ /e 
 rem xcopy /i /exclude:excluded_from_backup.txt Bonkulator %backup_path%\Bonkulator /e
 xcopy /i /exclude:excluded_from_backup.txt Updater %backup_path%\updater /e
+robocopy "C:\Users\shann\Dropbox\My Web Sites\GreenfaceLabs\htdocs\wp-content\themes\gfl_theme\bonk_cp" %backup_path%\bonk_cp /e
 
 copy *.bat %backup_path%
 copy *.exe %backup_path%
 copy *.uf2 %backup_path%
 copy checkin_comment.txt %backup_path%
-copy "C:\Users\shann\Dropbox\My Web Sites\GreenfaceLabs\htdocs\wp-content\themes\gfl_theme\bonk_cp_2.php" %backup_path%
 
 set /A backup_number=backup_number+1
 
