@@ -41,7 +41,7 @@ int16_t condition_cv(int16_t cv_val, unsigned int cv_num)
     // yn = (xn + xn1) / 2;
     *x = xn;
     *y = yn;
-    return cv_val + 2048;
+    return cv_val + DAC_MID;
 
     // cv_val = constrain(cv_val, -2048, 2047);
     // cv_val += 2048;
