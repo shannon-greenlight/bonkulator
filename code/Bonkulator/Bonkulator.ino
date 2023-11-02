@@ -295,10 +295,17 @@ void loop()
   if (debug)
     ui.terminal_debug("Serial checked");
 
-  if (in_output_fxn())
+  if (in_output_fxn() || in_bounce_fxn())
   {
     // now = millis();
-    status_string = check_output_triggers();
+    if (in_output_fxn())
+    {
+      status_string = check_output_triggers();
+    }
+    else
+    {
+      check_bounce_triggers();
+    }
     // ui.terminal_debug("Trig0: " + String(trig0.state));
 
     if (trig0.state != t0_memory)
@@ -327,7 +334,19 @@ void loop()
 
     // status_string = "Delta: " + String(millis() - now);
     // status_string = "ADC0: " + String(adc0) + " ADC1: " + String(adc1);
-    check_outputs();
+    if (in_output_fxn())
+    {
+      check_outputs();
+    }
+    else
+    {
+      // check_bounce_triggers();
+      String temp_status_string = check_bounce();
+      if (temp_status_string != "")
+      {
+        status_string = temp_status_string;
+      }
+    }
     if (debug)
       ui.terminal_debug("Outputs checked");
   }
