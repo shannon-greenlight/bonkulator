@@ -341,11 +341,23 @@ void process_key()
 	esc_mode = keypress == 27 || keypress == '[';
 }
 
-void keyboard_update_trigger(int val, int output, int selected_trig_num)
+void keyboard_update_trigger(int val, int channel, int selected_trig_num)
 {
-	bonk_outputs[output]->param_put(val, selected_trig_num);
-	bonk_outputs[output]->param_num = selected_trig_num;
-	output_update_trigger(output);
+	Greenface_gadget *remember_fxn = selected_fxn;
+	if (channel < 8)
+	{
+		bonk_outputs[channel]->param_put(val, selected_trig_num);
+		bonk_outputs[channel]->param_num = selected_trig_num;
+		output_update_trigger(channel);
+	}
+	else
+	{
+		bounce_inputs[channel - 8]->param_put(val, selected_trig_num);
+		bounce_inputs[channel - 8]->param_num = selected_trig_num;
+		selected_fxn = bounce_inputs[channel - 8];
+		bounce_update_trigger();
+		selected_fxn = remember_fxn;
+	}
 }
 
 void process_cmd(String in_str)
@@ -357,7 +369,7 @@ void process_cmd(String in_str)
 	int int_param = in_str.substring(1).toInt();
 	int dig1 = in_str.substring(1, 2).toInt();
 	int dig2 = in_str.substring(2, 3).toInt();
-	int selected_trig_num = OUTPUT_ENABLE_T0 + selected_trigger->trig_num;
+	int selected_trig_num = (in_output_fxn() ? OUTPUT_ENABLE_T0 : BOUNCE_ENABLE_T0) + selected_trigger->trig_num;
 	int selected_output_temp = selected_output.get();
 
 	// ui.terminal_debug("Process cmd: " + in_str + " int_param: " + String(in_str.substring(0).toInt()) + " cmd: " + String(cmd));
@@ -414,7 +426,14 @@ void process_cmd(String in_str)
 			break;
 		case 2:
 			// ui.terminal_debug("Toggle Trigger! Output: " + String(dig2));
-			keyboard_update_trigger((bonk_outputs[dig2]->get_param(selected_trig_num) == 1) ? 0 : 1, dig2, selected_trig_num);
+			if (in_output_fxn())
+			{
+				keyboard_update_trigger((bonk_outputs[dig2]->get_param(selected_trig_num) == 1) ? 0 : 1, dig2, selected_trig_num);
+			}
+			else
+			{
+				keyboard_update_trigger((bounce_inputs[dig2 - 8]->get_param(selected_trig_num) == 1) ? 0 : 1, dig2, selected_trig_num);
+			}
 			break;
 		case 3:
 			// ui.terminal_debug("Disable All Triggers!");
@@ -662,6 +681,7 @@ void check_serial()
 				// ui.t.println("Howdy!");
 				cmd = (cmd == '\n') ? ' ' : cmd;
 				send_data_to_USB(cmd);
+				system_message = "";
 			}
 		}
 	}
