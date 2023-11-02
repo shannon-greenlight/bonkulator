@@ -33,7 +33,14 @@ void select_trigger(int int_param)
         selected_trigger = &trig3;
         break;
     }
-    selected_fxn->put_param_num(selected_trigger->trig_num + OUTPUT_ENABLE_T0);
+    if (in_output_fxn())
+    {
+        selected_fxn->put_param_num(selected_trigger->trig_num + OUTPUT_ENABLE_T0);
+    }
+    else
+    {
+        selected_fxn->put_param_num(selected_trigger->trig_num + BOUNCE_ENABLE_T0);
+    }
     // selected_fxn->printParams();
 }
 
@@ -148,6 +155,26 @@ void trigger_report()
         Serial.print(String((*bonk_outputs[i]).get_param(OUTPUT_ENABLE_T3)));
         Serial.print("\t");
         Serial.println(String((*bonk_outputs[i]).triggered));
+    }
+    Serial.println();
+    Serial.println(F("Input\tT0\tT1\tT2\tT3"));
+    ui.t.printChars(50, "-");
+    Serial.print("\r\n");
+    // Serial.println(F("----------------------------------"));
+    for (int i = 0; i < NUM_INPUTS; i++)
+    {
+        Serial.print(String(i));
+        Serial.print("\t");
+        Serial.print(String((*bounce_inputs[i]).get_param(BOUNCE_ENABLE_T0)));
+        Serial.print("\t");
+        Serial.print(String((*bounce_inputs[i]).get_param(BOUNCE_ENABLE_T1)));
+        Serial.print("\t");
+        Serial.print(String((*bounce_inputs[i]).get_param(BOUNCE_ENABLE_T2)));
+        Serial.print("\t");
+        Serial.print(String((*bounce_inputs[i]).get_param(BOUNCE_ENABLE_T3)));
+        Serial.println();
+        // Serial.print("\t");
+        // Serial.println(String((*bonk_outputs[i]).triggered));
     }
     Serial.println();
     Serial.println("Trigger Outputs");
