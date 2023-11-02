@@ -7,7 +7,7 @@
 
 extern String toJSON(String key, String value);
 extern void trigger_output(byte trig_num, int output_num);
-extern void trigger_bounce(byte trig_num, trigger_state input_num);
+extern void trigger_bounce(byte trig_num, int input_num);
 extern bool in_output_fxn();
 extern bool in_bounce_fxn();
 extern void code_red(bool);
@@ -79,28 +79,28 @@ void TRIGGER::trigger()
             // bounce_debug = (*bounce_inputs[i]).get_param(2 + trig_num);
             uint8_t trig_ctrl = (*bounce_inputs[i]).get_param(11); // BOUNCE_TRIG_CTRL
             uint8_t ctrl_val = (*bounce_inputs[i]).get_param(12);  // BOUNCE_TRIG_CTRL_VAL
-            if ((*bounce_inputs[i]).get_param(2 + trig_num))       // 2 + trig_num  2 = BOUNCE_ENABLE_T0
+            if (get_channel(i + 8))                                // 2 + trig_num  2 = BOUNCE_ENABLE_T0
             {
                 switch (trig_ctrl)
                 {
                 case TRIG_HOLDOFF:
                     if (start_time > blanking_periods[i + 8])
                     {
-                        trigger_bounce(trig_num, state);
+                        trigger_bounce(trig_num, i);
                         blanking_periods[i] = start_time + ctrl_val;
                     }
                     break;
                 case TRIG_SKIP:
                     if (counts[i + 8]++ > ctrl_val)
                     {
-                        trigger_bounce(trig_num, state);
+                        trigger_bounce(trig_num, i);
                         counts[i + 8] = 0;
                     }
                     break;
                 case TRIG_DENSITY:
                     if (random(0, 100) > 100 - ctrl_val)
                     {
-                        trigger_bounce(trig_num, state);
+                        trigger_bounce(trig_num, i);
                     }
                     break;
                 default:
