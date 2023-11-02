@@ -158,7 +158,7 @@ String messages_toJSON()
 
   out += (toJSON("system_message", system_message));
   out += (",");
-  system_message = "";
+  // system_message = "";
 
   if (in_wifi())
   {
