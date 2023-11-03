@@ -22,18 +22,19 @@ uint16_t _bounce_mins[] = {0, 0, 0, 0, 0, 0, 0, 0, 100, TRIG_HOLDOFF, 0};
 uint16_t _bounce_maxs[] = {7, 1, 1, 1, 1, 1, 200, 200, 32767, TRIG_DENSITY, MAX_MS};
 uint16_t _bounce_init_vals[] = {0, 0, 0, 0, 0, 0, 200, 100, 100, TRIG_HOLDOFF, 5};
 String bounce_string_params[] = {"", "No, Yes", TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, TRIGGER_STATES, "", "", "", "Hold_Off,Skip,Density", ""};
+String bounce_labels[] = {"Output: ", "Repeat: ", "T0: ", "T1: ", "T2: ", "T3: ", "Scale: ", "Offset: ", "SampleTime: ", "Trig Crtl: ", "Trig Holdoff: "};
 // int16_t bounce_offsets[] = {0, BOUNCE_OFFSET_CORRECTION, 0}; // allows negative numbers
 // bool bounce_param_active[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
 uint16_t _bounce0_params[BOUNCE_NUM_PARAMS];
 uint16_t *bounce0_stuff[] = {_bounce0_params, _bounce_mins, _bounce_maxs, _bounce_init_vals};
-String bounce0_labels[] = {"Output: ", "Repeat: ", "T0: ", "T1: ", "T2: ", "T3: ", "Scale: ", "Offset: ", "Sample Time: ", "Trig Crtl: ", "Trig Holdoff: "};
-Greenface_gadget bounce0_fxn("Bounce 0", bounce0_labels, bounce0_stuff, sizeof(_bounce0_params) / sizeof(_bounce0_params[0]));
+// String bounce0_labels[] = {"Output: ", "Repeat: ", "T0: ", "T1: ", "T2: ", "T3: ", "Scale: ", "Offset: ", "SampleTime: ", "Trig Crtl: ", "Trig Holdoff: "};
+Greenface_gadget bounce0_fxn("Bounce 0", bounce_labels, bounce0_stuff, sizeof(_bounce0_params) / sizeof(_bounce0_params[0]));
 
 uint16_t _bounce1_params[BOUNCE_NUM_PARAMS];
 uint16_t *bounce1_stuff[] = {_bounce1_params, _bounce_mins, _bounce_maxs, _bounce_init_vals};
-String bounce1_labels[] = {"Output: ", "Repeat: ", "T0: ", "T1: ", "T2: ", "T3: ", "Scale: ", "Offset: ", "Sample Time: ", "Trig Crtl: ", "Trig Holdoff: "};
-Greenface_gadget bounce1_fxn("Bounce 1", bounce1_labels, bounce1_stuff, sizeof(_bounce1_params) / sizeof(_bounce1_params[0]));
+// String bounce1_labels[] = {"Output: ", "Repeat: ", "T0: ", "T1: ", "T2: ", "T3: ", "Scale: ", "Offset: ", "SampleTime: ", "Trig Crtl: ", "Trig Holdoff: "};
+Greenface_gadget bounce1_fxn("Bounce 1", bounce_labels, bounce1_stuff, sizeof(_bounce1_params) / sizeof(_bounce1_params[0]));
 
 int16_t intput_offsets0[] = {0, 0, 0, 0, 0, 0, OUTPUT_SCALE_OFFSET, OUTPUT_OFFSET_OFFSET, 0, 0, 0}; // allows negative numbers
 int16_t intput_offsets1[] = {0, 0, 0, 0, 0, 0, OUTPUT_SCALE_OFFSET, OUTPUT_OFFSET_OFFSET, 0, 0, 0}; // allows negative numbers
@@ -220,7 +221,7 @@ void check_bounce_triggers()
             }
             if (this_trig_enabled && ((*bounce_inputs[input]).triggered))
             {
-                ui.terminal_debug((*bounce_inputs[input]).name + " triggered by: " + String(trig));
+                // ui.terminal_debug((*bounce_inputs[input]).name + " triggered by: " + String(trig));
                 in_use = true;
             }
         }
@@ -280,9 +281,12 @@ String check_bounce()
         float reading = scale_adc(bounce_reading);
         // uint16_t dac_val = (bounce_reading * output_scale + 1660) * 1.234;
         uint16_t dac_val = (bounce_reading * output_scale * 1.16) + DAC_MID + output_offset + bounce_offset_correction;
-        ui.terminal_debug(" Reading: " + String(bounce_reading) + " DAC val: " + String(dac_val) + " Offset: " + String(output_offset) + " corr: " + bounce_offset_correction);
+        // ui.terminal_debug(" Reading: " + String(bounce_reading) + " DAC val: " + String(dac_val) + " Offset: " + String(output_offset) + " corr: " + bounce_offset_correction);
         system_message = " Reading: " + String(reading) + "V<br>Triggered by: T" + String(bounce_triggered_by[the_bounce_input]);
         send_data_to_USB(' ');
+        ui.fill(0, ui.lines[0]);
+        ui.terminal_clrDown("7");
+        ui.printLine(" " + String(reading) + " VDC", ui.lines[1], 2);
         dac_out(output_num, dac_val);
         bounce_next_time = millis() + selected_fxn->get_param(BOUNCE_SAMPLE_TIME);
         bounce_triggered = (*bounce_inputs[the_bounce_input]).triggered = false;
