@@ -91,6 +91,18 @@ void adjust_param(int encoder_val)
     }
 }
 
+void put_param_indexed(int int_param, int *index_array)
+{
+    if (in_output_fxn())
+    {
+        (the_output)().put_param_w_offset(int_param, index_array[0]);
+    }
+    else
+    {
+        selected_fxn->put_param_w_offset(int_param, index_array[1]);
+    }
+}
+
 void check_rotary_encoder()
 {
     if (encoder_is_adjusting())

@@ -372,6 +372,10 @@ void process_cmd(String in_str)
 	int selected_trig_num = (in_output_fxn() ? OUTPUT_ENABLE_T0 : BOUNCE_ENABLE_T0) + selected_trigger->trig_num;
 	int selected_output_temp = selected_output.get();
 
+	int scale_indicies[] = {OUTPUT_SCALE, BOUNCE_SCALE};
+	int offset_indicies[] = {OUTPUT_OFFSET, BOUNCE_OFFSET};
+	int time_indicies[] = {OUTPUT_ACTIVE_TIME, BOUNCE_SAMPLE_TIME};
+
 	// ui.terminal_debug("Process cmd: " + in_str + " int_param: " + String(in_str.substring(0).toInt()) + " cmd: " + String(cmd));
 
 	switch (cmd)
@@ -510,13 +514,16 @@ void process_cmd(String in_str)
 		Serial.println("Time_inc: " + String(outputs[dig1].time_inc));
 		break;
 	case 'O':
-		(the_output)().put_param_w_offset(int_param, OUTPUT_OFFSET);
+		put_param_indexed(int_param, offset_indicies);
+		break;
+	case 'S':
+		put_param_indexed(int_param, scale_indicies);
+		break;
+	case 's':
+		put_param_indexed(int_param, time_indicies);
 		break;
 	case 'Q':
 		(the_output)().put_param(int_param, OUTPUT_QUANTIZE);
-		break;
-	case 'S':
-		(the_output)().put_param_w_offset(int_param, OUTPUT_SCALE);
 		break;
 	case 'R':
 		(the_output)().put_param(int_param, OUTPUT_RANDOMNESS);

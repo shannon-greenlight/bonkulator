@@ -130,6 +130,10 @@ String globals_toJSON(char cmd)
   out += (",");
   out += (toJSON("fs_offset", output_get_fs_offset()));
   out += (",");
+  out += (toJSON("bounce_max", "32767"));
+  out += (",");
+  out += (toJSON("bounce_min", "100"));
+  out += (",");
   out += (toJSON("offset_max", "100"));
   out += (",");
   out += (toJSON("offset_min", "-100"));
