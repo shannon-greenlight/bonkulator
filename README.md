@@ -1,7 +1,9 @@
 # Bonkulator
+
 The Bonkulator is a Eurorack module that fits into a 3U x 14HP slot. It features 8 programmable outputs and 6 programmable inputs. The front-panel user controls consist of a 128×64 pixel 2-color OLED display, a rotary encoder for adjusting parameters and a button for each trigger and output.
 
 # main_board, panel
+
 Main Board in the release is on hold. New release coming soon! The current files haven't been made into a board yet. A release will be created after the boards have been built and tested.
 
 These repos contain the materials needed to construct the Bonkulator main board and the front panel.
@@ -11,24 +13,26 @@ The gerber files work with JLCPC and will most likely work with other board manu
 Assembly instructions are in main_board\fab\bonkulator_assembly.docx.
 
 When using the JLCPCB assembly service, the BOM is split into 3 parts.
+
 - bom/lcsc/bonkulator_bom.xlsx : The parts to be assembled by JLCPCB
 - bom/digi-key/bonkulator_bom.xlsx : The remaining parts to be assembled by user
 - bom/other/other_bom.xlsx : The parts that must be bought from sources other than JLCPCB and Digi-Key
 
 Also, when an assembly service is used, a component position file is required. This file's path is: fab/Bonkulator_cpl.xlsx
 
-notes: 	The bom and cpl files are auto-generated from the csv BOM files produced by KiCAD. You will need to refresh the data when changes to the schematic that affect the BOM or changes to the board layout occur.
-		If they exist, the extra parts and additional data fields that appear on the schematic help to produce the different BOM files. They must be maintained for these BOMs to come out right.
+notes: The bom and cpl files are auto-generated from the csv BOM files produced by KiCAD. You will need to refresh the data when changes to the schematic that affect the BOM or changes to the board layout occur.
+If they exist, the extra parts and additional data fields that appear on the schematic help to produce the different BOM files. They must be maintained for these BOMs to come out right.
 
 # code
-This repository contains the elements needed to build code for the Bonkulator. 
+
+This repository contains the elements needed to build code for the Bonkulator.
 The code is for the Arduino RP2040 Connect and is found in the code/Bonkulator folder. Make sure to get the required libraries from the Arduino-Libs repo.
 
 The build files are for Windows. They are simple .bat files but depend on having a working Arduino development system in the code/arduino_bin folder.
-Certain variables must be edited to adapt these files to a particular installation. 
+Certain variables must be edited to adapt these files to a particular installation.
 
 Here is a list of the batch files and folders:
- 
+
 - make.bat ... compiles the code
 - make_n_load.bat ... calls make.bat then uploads the code to the Bonkulator
 - load_recent.bat ... loads most recent compile
@@ -36,7 +40,13 @@ Here is a list of the batch files and folders:
 - release.bat ... used to update release number in the code and create release binary zip
 - out ... this folder must be created. It holds compile output
 
+The Arduino libraries from the Arduino-Libs repo must be included. Put them in the 'code' folder in a folder named 'libraries'.
+Copy the entire contents of the folder, not the folder itself.
+
+Please use the latest version of the Arduino IDE to compile and load code if you are using a Mac.
+
 # BonkDaddy
+
 The Bonk Daddy is an addition to the Bonkulator that provides these benefits:
 
 - Front Panel USB access
