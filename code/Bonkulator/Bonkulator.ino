@@ -60,6 +60,7 @@ void timer_service_settings();
 void init_parameters();
 bool settings_get_fs_fixed();
 void send_data_to_USB(char cmd);
+uint16_t settings_get_bounce();
 
 // cv fxns
 void cv_set(int cv_num, int output, int16_t cv_val);

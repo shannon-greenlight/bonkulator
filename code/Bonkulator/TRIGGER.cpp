@@ -13,6 +13,7 @@ extern bool in_bounce_fxn();
 extern void code_red(bool);
 extern class Greenface_gadget *bounce_inputs[];
 extern int bounce_debug;
+extern uint16_t settings_get_bounce();
 
 TRIGGER::TRIGGER(int _trig_num)
 {
@@ -77,9 +78,9 @@ void TRIGGER::trigger()
         for (int i = 0; i < 2; i++)
         {
             // bounce_debug = (*bounce_inputs[i]).get_param(2 + trig_num);
-            uint8_t trig_ctrl = (*bounce_inputs[i]).get_param(11); // BOUNCE_TRIG_CTRL
-            uint8_t ctrl_val = (*bounce_inputs[i]).get_param(12);  // BOUNCE_TRIG_CTRL_VAL
-            if (get_channel(i + 8))                                // 2 + trig_num  2 = BOUNCE_ENABLE_T0
+            uint8_t trig_ctrl = (*bounce_inputs[i]).get_param(11);  // BOUNCE_TRIG_CTRL
+            uint8_t ctrl_val = (*bounce_inputs[i]).get_param(12);   // BOUNCE_TRIG_CTRL_VAL
+            if (get_channel(i + 8) && (settings_get_bounce() == i)) // 2 + trig_num  2 = BOUNCE_ENABLE_T0
             {
                 switch (trig_ctrl)
                 {

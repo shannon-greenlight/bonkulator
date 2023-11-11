@@ -176,6 +176,11 @@ void adc_cal()
     ui.terminal_debug("Calibrate ADC someday...");
 }
 
+uint16_t settings_get_bounce()
+{
+    return settings_fxn.get_param(SETTINGS_BOUNCE);
+}
+
 void settings_activate()
 {
     int mode;

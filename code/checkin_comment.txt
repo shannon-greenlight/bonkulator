@@ -580,3 +580,53 @@ Trying robocopy for backing bonk_cp
 Check-in comment for Bonkulator-483 
 Calibrated bounce output 0 for another board.
 
+ 
+Check-in comment for Bonkulator-484 
+Support for bounce in desktop app.
+ 
+Check-in comment for Bonkulator-485 
+Safety.
+ 
+Check-in comment for Bonkulator-486 
+Fixes keyboard_update_trigger for bounce.
+ 
+Check-in comment for Bonkulator-487 
+Safety 
+
+Check-in comment for Bonkulator-488
+Fixes bounce trigger. Still doesn't show state in app.
+
+ 
+Check-in comment for Bonkulator-489 
+Makes bounce trigger show state in app.
+Triggers bounce more like output is triggered. 
+ 
+Check-in comment for Bonkulator-490 
+Safety 
+
+Check-in comment for Bonkulator-491 
+Bounce repeats, but doesn't measure properly.
+
+Check-in comment for Bonkulator-492 
+Looks like bounce trigger is working.
+ 
+Check-in comment for Bonkulator-493 
+Now, it really is working. (works for repeat = no now)
+ 
+Check-in comment for Bonkulator-494 
+Adds printing of measurement on display
+ 
+Check-in comment for Bonkulator-495 
+Adds support for bounce to keyboard O and S.
+ 
+Check-in comment for Bonkulator-496 
+Adds put_param_indexed
+ 
+Check-in comment for Bonkulator-497 
+Support for Bounce sliders in App
+ 
+Check-in comment for Bonkulator-498 
+Adds Bounce min to App data.
+ 
+Check-in comment for Bonkulator-499 
+Web app supports bounce.

@@ -219,9 +219,11 @@ void check_bounce_triggers()
                 this_trig_enabled = (*bounce_inputs[input]).get_param(BOUNCE_ENABLE_T3);
                 break;
             }
+
             if (this_trig_enabled && ((*bounce_inputs[input]).triggered))
             {
                 // ui.terminal_debug((*bounce_inputs[input]).name + " triggered by: " + String(trig));
+                bounce_reading = adc_read(input);
                 in_use = true;
             }
         }
@@ -263,7 +265,7 @@ void trigger_bounce(byte trig_num, int input_num)
     // bounce_triggered = true;
 
     bounce_triggered_by[input_num] = trig_num;
-    bounce_reading = adc_read(input_num);
+    // bounce_reading = adc_read(input_num);
     digitalWrite(trig_num, HIGH);
 }
 
