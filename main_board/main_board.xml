@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>C:\Users\shann\Dropbox\moog\bonkulator\main_board\main_board.kicad_sch</source>
-    <date>8/23/2023 7:54:26 PM</date>
+    <date>11/10/2023 5:07:00 PM</date>
     <tool>Eeschema (6.0.1)</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -65,6 +65,24 @@
         <rev/>
         <date/>
         <source>output_monitors.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="5" name="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>triggers.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
         <comment number="3" value=""/>
@@ -203,190 +221,6 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamps>62d35947-b042-4d93-a89f-e932d6c133c2</tstamps>
     </comp>
-    <comp ref="C52">
-      <value>100nF</value>
-      <footprint>Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder</footprint>
-      <datasheet>http://datasheets.avx.com/SR-Series.pdf</datasheet>
-      <fields>
-        <field name="Digi-Key Part">478-10836-1-ND</field>
-        <field name="LCSC Part #">C49678</field>
-      </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
-      <property name="Digi-Key Part" value="478-10836-1-ND"/>
-      <property name="LCSC Part #" value="C49678"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>432a66af-bb76-45ad-96ac-e447dbb5882c</tstamps>
-    </comp>
-    <comp ref="C53">
-      <value>100nF</value>
-      <footprint>Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder</footprint>
-      <datasheet>http://datasheets.avx.com/SR-Series.pdf</datasheet>
-      <fields>
-        <field name="Digi-Key Part">478-10836-1-ND</field>
-        <field name="LCSC Part #">C49678</field>
-      </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
-      <property name="Digi-Key Part" value="478-10836-1-ND"/>
-      <property name="LCSC Part #" value="C49678"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>70e23889-2cca-4fb9-8482-8679a6274e14</tstamps>
-    </comp>
-    <comp ref="C54">
-      <value>100nF</value>
-      <footprint>Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder</footprint>
-      <datasheet>http://datasheets.avx.com/SR-Series.pdf</datasheet>
-      <fields>
-        <field name="Digi-Key Part">478-10836-1-ND</field>
-        <field name="LCSC Part #">C49678</field>
-      </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
-      <property name="Digi-Key Part" value="478-10836-1-ND"/>
-      <property name="LCSC Part #" value="C49678"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>0b22c3a0-50e1-437b-8c04-827ec9c1413b</tstamps>
-    </comp>
-    <comp ref="C55">
-      <value>100nF</value>
-      <footprint>Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder</footprint>
-      <datasheet>http://datasheets.avx.com/SR-Series.pdf</datasheet>
-      <fields>
-        <field name="Digi-Key Part">478-10836-1-ND</field>
-        <field name="LCSC Part #">C49678</field>
-      </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
-      <property name="Digi-Key Part" value="478-10836-1-ND"/>
-      <property name="LCSC Part #" value="C49678"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>9c36225d-13ad-48f4-843b-fd785a2f7ef3</tstamps>
-    </comp>
-    <comp ref="D1">
-      <value>1N5819</value>
-      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
-      <fields>
-        <field name="Digi-Key Part">478-7800-1-ND</field>
-        <field name="LCSC Part #">C191023</field>
-      </fields>
-      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
-      <property name="Digi-Key Part" value="478-7800-1-ND"/>
-      <property name="LCSC Part #" value="C191023"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>ef44cd41-9176-4afc-8366-a8b6d1f80429</tstamps>
-    </comp>
-    <comp ref="D2">
-      <value>1N5819</value>
-      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
-      <fields>
-        <field name="Digi-Key Part">478-7800-1-ND</field>
-        <field name="LCSC Part #">C191023</field>
-      </fields>
-      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
-      <property name="Digi-Key Part" value="478-7800-1-ND"/>
-      <property name="LCSC Part #" value="C191023"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>ad3fce77-3c78-4bb4-b83e-79a5e7bf7127</tstamps>
-    </comp>
-    <comp ref="D3">
-      <value>1N5819</value>
-      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
-      <fields>
-        <field name="Digi-Key Part">478-7800-1-ND</field>
-        <field name="LCSC Part #">C191023</field>
-      </fields>
-      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
-      <property name="Digi-Key Part" value="478-7800-1-ND"/>
-      <property name="LCSC Part #" value="C191023"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>43cbfe4d-679b-4e78-932b-d12370276296</tstamps>
-    </comp>
-    <comp ref="D4">
-      <value>1N5819</value>
-      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
-      <fields>
-        <field name="Digi-Key Part">478-7800-1-ND</field>
-        <field name="LCSC Part #">C191023</field>
-      </fields>
-      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
-      <property name="Digi-Key Part" value="478-7800-1-ND"/>
-      <property name="LCSC Part #" value="C191023"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>e5d4479f-a49e-4ee2-bd5a-9f28ebab23c4</tstamps>
-    </comp>
-    <comp ref="D5">
-      <value>1N5819</value>
-      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
-      <fields>
-        <field name="Digi-Key Part">478-7800-1-ND</field>
-        <field name="LCSC Part #">C191023</field>
-      </fields>
-      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
-      <property name="Digi-Key Part" value="478-7800-1-ND"/>
-      <property name="LCSC Part #" value="C191023"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>963e95a8-12d8-44dc-8e0c-2ef8cb8a5786</tstamps>
-    </comp>
-    <comp ref="D6">
-      <value>1N5819</value>
-      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
-      <fields>
-        <field name="Digi-Key Part">478-7800-1-ND</field>
-        <field name="LCSC Part #">C191023</field>
-      </fields>
-      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
-      <property name="Digi-Key Part" value="478-7800-1-ND"/>
-      <property name="LCSC Part #" value="C191023"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>577210ee-b4dd-4874-89b0-f14e6bf18e8b</tstamps>
-    </comp>
-    <comp ref="D7">
-      <value>1N5819</value>
-      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
-      <fields>
-        <field name="Digi-Key Part">478-7800-1-ND</field>
-        <field name="LCSC Part #">C191023</field>
-      </fields>
-      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
-      <property name="Digi-Key Part" value="478-7800-1-ND"/>
-      <property name="LCSC Part #" value="C191023"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>b42fac66-1c92-48d7-9800-f0b7bcd02e6e</tstamps>
-    </comp>
-    <comp ref="D8">
-      <value>1N5819</value>
-      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
-      <fields>
-        <field name="Digi-Key Part">478-7800-1-ND</field>
-        <field name="LCSC Part #">C191023</field>
-      </fields>
-      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
-      <property name="Digi-Key Part" value="478-7800-1-ND"/>
-      <property name="LCSC Part #" value="C191023"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>8d948117-c650-425f-a3ad-98bee63b1460</tstamps>
-    </comp>
     <comp ref="D9">
       <value>BLUE LED</value>
       <footprint>LED_THT:LED_D3.0mm</footprint>
@@ -474,84 +308,34 @@
       <tstamps>4d71617f-f5da-43ad-9344-edc8da91c3c4</tstamps>
     </comp>
     <comp ref="D45">
-      <value>6.2V</value>
-      <footprint>Diode_SMD:D_SOD-323</footprint>
-      <datasheet>https://assets.nexperia.com/documents/data-sheet/BZX384_SERIES.pdf</datasheet>
+      <value>1N5819</value>
+      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
       <fields>
-        <field name="LCSC Part #">C131806</field>
+        <field name="Digi-Key Part">478-7800-1-ND</field>
+        <field name="LCSC Part #">C191023</field>
       </fields>
-      <libsource lib="Diode" part="BZX384-xxx" description="300mW Zener Diode, SOD-323"/>
-      <property name="LCSC Part #" value="C131806"/>
+      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
+      <property name="Digi-Key Part" value="478-7800-1-ND"/>
+      <property name="LCSC Part #" value="C191023"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="main_board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9d31b3d1-dfcf-4d06-b1f7-50e9d900ea9a</tstamps>
+      <tstamps>00824726-46cf-4724-8df2-66866c033c1a</tstamps>
     </comp>
     <comp ref="D46">
-      <value>6.2V</value>
-      <footprint>Diode_SMD:D_SOD-323</footprint>
-      <datasheet>https://assets.nexperia.com/documents/data-sheet/BZX384_SERIES.pdf</datasheet>
+      <value>1N5819</value>
+      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
       <fields>
-        <field name="LCSC Part #">C131806</field>
+        <field name="Digi-Key Part">478-7800-1-ND</field>
+        <field name="LCSC Part #">C191023</field>
       </fields>
-      <libsource lib="Diode" part="BZX384-xxx" description="300mW Zener Diode, SOD-323"/>
-      <property name="LCSC Part #" value="C131806"/>
+      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
+      <property name="Digi-Key Part" value="478-7800-1-ND"/>
+      <property name="LCSC Part #" value="C191023"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="main_board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>3609f2a2-f55d-4c37-a5bd-67b83355d937</tstamps>
-    </comp>
-    <comp ref="J1">
-      <value>3.5mm Jack</value>
-      <footprint>sputterizer:Molex-0472570001</footprint>
-      <fields>
-        <field name="Digi-Key Part">WM17366-ND</field>
-      </fields>
-      <libsource lib="greenface-symbols" part="Molex_47257" description=""/>
-      <property name="Digi-Key Part" value="WM17366-ND"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>ac5c7459-ee8a-4cac-a7ca-82779d6addf6</tstamps>
-    </comp>
-    <comp ref="J2">
-      <value>3.5mm Jack</value>
-      <footprint>sputterizer:Molex-0472570001</footprint>
-      <fields>
-        <field name="Digi-Key Part">WM17366-ND</field>
-      </fields>
-      <libsource lib="greenface-symbols" part="Molex_47257" description=""/>
-      <property name="Digi-Key Part" value="WM17366-ND"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>708c8a54-b27e-40d0-b92e-5fa1b9d56222</tstamps>
-    </comp>
-    <comp ref="J3">
-      <value>3.5mm Jack</value>
-      <footprint>sputterizer:Molex-0472570001</footprint>
-      <fields>
-        <field name="Digi-Key Part">WM17366-ND</field>
-      </fields>
-      <libsource lib="greenface-symbols" part="Molex_47257" description=""/>
-      <property name="Digi-Key Part" value="WM17366-ND"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>9be3d878-d73d-425c-b67c-71143abf9ede</tstamps>
-    </comp>
-    <comp ref="J4">
-      <value>3.5mm Jack</value>
-      <footprint>sputterizer:Molex-0472570001</footprint>
-      <fields>
-        <field name="Digi-Key Part">WM17366-ND</field>
-      </fields>
-      <libsource lib="greenface-symbols" part="Molex_47257" description=""/>
-      <property name="Digi-Key Part" value="WM17366-ND"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>af7bc690-74cb-4950-b690-11a3bac363dc</tstamps>
+      <tstamps>99088bcf-c35e-4b1d-8c57-2b0ba0a19ac2</tstamps>
     </comp>
     <comp ref="J5">
       <value>Display Header</value>
@@ -762,94 +546,6 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamps>0af282e2-dc4e-4550-9b99-294b5fcae9f1</tstamps>
     </comp>
-    <comp ref="Q9">
-      <value>SI2301</value>
-      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
-      <datasheet>http://www.vishay.com/docs/63924/si2371eds.pdf</datasheet>
-      <fields>
-        <field name="LCSC Part #">C10487</field>
-      </fields>
-      <libsource lib="Transistor_FET" part="Si2371EDS" description="-3.6A Id, -30V Vds, P-Channel MOSFET, SOT-23"/>
-      <property name="LCSC Part #" value="C10487"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>860ecb21-a58c-4243-95d7-1c46b65ea57c</tstamps>
-    </comp>
-    <comp ref="Q10">
-      <value>SI2302</value>
-      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
-      <datasheet>https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF</datasheet>
-      <fields>
-        <field name="LCSC Part #">C2891732</field>
-      </fields>
-      <libsource lib="Transistor_FET" part="2N7002" description="0.115A Id, 60V Vds, N-Channel MOSFET, SOT-23"/>
-      <property name="LCSC Part #" value="C2891732"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>55490165-17b5-4a3e-993c-91225ad23ac9</tstamps>
-    </comp>
-    <comp ref="R1">
-      <value>10K</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
-      <fields>
-        <field name="Digi-Key Part">13-RC0805JR-1010KLCT-ND</field>
-        <field name="LCSC Part #">C17414</field>
-      </fields>
-      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="13-RC0805JR-1010KLCT-ND"/>
-      <property name="LCSC Part #" value="C17414"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>6b2641a4-c9e8-4226-a7d4-85fa9ccbd43d</tstamps>
-    </comp>
-    <comp ref="R2">
-      <value>10K</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
-      <fields>
-        <field name="Digi-Key Part">13-RC0805JR-1010KLCT-ND</field>
-        <field name="LCSC Part #">C17414</field>
-      </fields>
-      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="13-RC0805JR-1010KLCT-ND"/>
-      <property name="LCSC Part #" value="C17414"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>ee6b2489-418c-453f-8d6b-5d45542ee4d9</tstamps>
-    </comp>
-    <comp ref="R3">
-      <value>10K</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
-      <fields>
-        <field name="Digi-Key Part">13-RC0805JR-1010KLCT-ND</field>
-        <field name="LCSC Part #">C17414</field>
-      </fields>
-      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="13-RC0805JR-1010KLCT-ND"/>
-      <property name="LCSC Part #" value="C17414"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>c188b995-66f3-46ba-af45-095ed64fd177</tstamps>
-    </comp>
-    <comp ref="R4">
-      <value>10K</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
-      <fields>
-        <field name="Digi-Key Part">13-RC0805JR-1010KLCT-ND</field>
-        <field name="LCSC Part #">C17414</field>
-      </fields>
-      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="13-RC0805JR-1010KLCT-ND"/>
-      <property name="LCSC Part #" value="C17414"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>5dbdb489-0c37-477b-b679-ed35f99e3e3d</tstamps>
-    </comp>
     <comp ref="R5">
       <value>300</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
@@ -954,34 +650,6 @@
       <property name="Sheetfile" value="main_board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>2b7ee275-4119-4d62-aff7-b79c44be3631</tstamps>
-    </comp>
-    <comp ref="R79">
-      <value>56K</value>
-      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
-      <fields>
-        <field name="LCSC Part #">C23206</field>
-      </fields>
-      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value=""/>
-      <property name="LCSC Part #" value="C23206"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>7c8f5d15-1b86-40e0-8d68-33e7f4b85b8b</tstamps>
-    </comp>
-    <comp ref="R80">
-      <value>56K</value>
-      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
-      <fields>
-        <field name="LCSC Part #">C23206</field>
-      </fields>
-      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value=""/>
-      <property name="LCSC Part #" value="C23206"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>2daeaf2d-eada-4fbb-a8ad-5155baa304ef</tstamps>
     </comp>
     <comp ref="R125">
       <value>10K</value>
@@ -1225,58 +893,6 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamps>fcb5e26e-47d7-401a-9c29-9acbccbce112</tstamps>
     </comp>
-    <comp ref="SW1">
-      <value>Push Button</value>
-      <footprint>Button_Switch_THT:SW_PUSH_6mm</footprint>
-      <fields>
-        <field name="Digi-Key Part">450-1643-ND</field>
-      </fields>
-      <libsource lib="Switch" part="SW_SPST" description="Single Pole Single Throw (SPST) switch"/>
-      <property name="Digi-Key Part" value="450-1643-ND"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>6153acf8-8b87-4b84-95cb-288b5a7c2df5</tstamps>
-    </comp>
-    <comp ref="SW2">
-      <value>Push Button</value>
-      <footprint>Button_Switch_THT:SW_PUSH_6mm</footprint>
-      <fields>
-        <field name="Digi-Key Part">450-1643-ND</field>
-      </fields>
-      <libsource lib="Switch" part="SW_SPST" description="Single Pole Single Throw (SPST) switch"/>
-      <property name="Digi-Key Part" value="450-1643-ND"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>008da69d-be8e-4e55-9bc9-171d1d3ca09a</tstamps>
-    </comp>
-    <comp ref="SW3">
-      <value>Push Button</value>
-      <footprint>Button_Switch_THT:SW_PUSH_6mm</footprint>
-      <fields>
-        <field name="Digi-Key Part">450-1643-ND</field>
-      </fields>
-      <libsource lib="Switch" part="SW_SPST" description="Single Pole Single Throw (SPST) switch"/>
-      <property name="Digi-Key Part" value="450-1643-ND"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>8eed4ca9-c809-44ad-9df9-0138af025630</tstamps>
-    </comp>
-    <comp ref="SW4">
-      <value>Push Button</value>
-      <footprint>Button_Switch_THT:SW_PUSH_6mm</footprint>
-      <fields>
-        <field name="Digi-Key Part">450-1643-ND</field>
-      </fields>
-      <libsource lib="Switch" part="SW_SPST" description="Single Pole Single Throw (SPST) switch"/>
-      <property name="Digi-Key Part" value="450-1643-ND"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="main_board.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>c9fa9b28-c216-40a9-968b-14c2eb18451f</tstamps>
-    </comp>
     <comp ref="SW5">
       <value>Adj</value>
       <footprint>digikey-footprints:Rotary_Encoder_Switched_PEC11R</footprint>
@@ -1506,7 +1122,7 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="main_board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>341fb2ee-c6cb-437e-923e-62421aeea002</tstamps>
+      <tstamps>341fb2ee-c6cb-437e-923e-62421aeea003</tstamps>
     </comp>
     <comp ref="C3">
       <value>100nF</value>
@@ -1765,16 +1381,16 @@
       <tstamps>bac2a7e7-a64e-4ffa-845b-cb48d91f6ab2</tstamps>
     </comp>
     <comp ref="C31">
-      <value>330nF</value>
+      <value>1uF</value>
       <footprint>Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder</footprint>
       <datasheet>http://datasheets.avx.com/SR-Series.pdf</datasheet>
       <fields>
         <field name="Digi-Key Part">311-1888-1-ND</field>
-        <field name="LCSC Part #">C1740</field>
+        <field name="LCSC Part #">C28323</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
       <property name="Digi-Key Part" value="311-1888-1-ND"/>
-      <property name="LCSC Part #" value="C1740"/>
+      <property name="LCSC Part #" value="C28323"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
       <sheetpath names="/Outputs/" tstamps="/b200c1d4-b772-4a0d-a7bc-c10bcb241496/"/>
@@ -2762,11 +2378,11 @@
       <value>1K</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
-        <field name="LCSC Part #">C21190</field>
+        <field name="LCSC Part #">C2653986</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
       <property name="Digi-Key Part" value=""/>
-      <property name="LCSC Part #" value="C21190"/>
+      <property name="LCSC Part #" value="C2653986"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
       <sheetpath names="/Outputs/" tstamps="/b200c1d4-b772-4a0d-a7bc-c10bcb241496/"/>
@@ -2802,15 +2418,15 @@
       <tstamps>abe08390-5561-4b2e-a5d5-c318ff29148e</tstamps>
     </comp>
     <comp ref="R141">
-      <value>20K</value>
+      <value>10K</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
-        <field name="Digi-Key Part">RMCF0805JT20K0CT-ND</field>
-        <field name="LCSC Part #">C4328</field>
+        <field name="Digi-Key Part">13-RC0805JR-1010KLCT-ND</field>
+        <field name="LCSC Part #">C17414</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="RMCF0805JT20K0CT-ND"/>
-      <property name="LCSC Part #" value="C4328"/>
+      <property name="Digi-Key Part" value="13-RC0805JR-1010KLCT-ND"/>
+      <property name="LCSC Part #" value="C17414"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
       <sheetpath names="/Outputs/" tstamps="/b200c1d4-b772-4a0d-a7bc-c10bcb241496/"/>
@@ -2848,12 +2464,12 @@
     </comp>
     <comp ref="RV9">
       <value>10K</value>
-      <footprint>Potentiometer_SMD:Potentiometer_Bourns_3314G_Vertical</footprint>
+      <footprint>Potentiometer_SMD:Potentiometer_Bourns_3224W_Vertical</footprint>
       <fields>
-        <field name="LCSC Part #">C780220</field>
+        <field name="LCSC Part #">C81348</field>
       </fields>
       <libsource lib="Device" part="R_Potentiometer_Trim_US" description="Trim-potentiometer, US symbol"/>
-      <property name="LCSC Part #" value="C780220"/>
+      <property name="LCSC Part #" value="C81348"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
       <sheetpath names="/Outputs/" tstamps="/b200c1d4-b772-4a0d-a7bc-c10bcb241496/"/>
@@ -2948,7 +2564,7 @@
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
       <sheetpath names="/Outputs/" tstamps="/b200c1d4-b772-4a0d-a7bc-c10bcb241496/"/>
-      <tstamps>9bda8d6b-5b59-451b-84d4-aad690820b9f 783235e5-b915-4c37-b400-074425597354 679b1f30-0268-41b2-b2c9-910570a7ce75</tstamps>
+      <tstamps>783235e5-b915-4c37-b400-074425597354 9bda8d6b-5b59-451b-84d4-aad690820b9f 679b1f30-0268-41b2-b2c9-910570a7ce75</tstamps>
     </comp>
     <comp ref="U9">
       <value>TL072CDR</value>
@@ -3017,7 +2633,7 @@
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
       <sheetpath names="/Outputs/" tstamps="/b200c1d4-b772-4a0d-a7bc-c10bcb241496/"/>
-      <tstamps>56818c14-9875-4852-83e7-b24bf77170c1 9f9d1f6f-7507-4bd1-b7c3-1eb7cae036e5 f9466c72-e334-45f8-ab36-33d7247619a7 0ef053cc-6cbc-480a-97da-ffd86eed29bd 014b02a6-58b3-4f97-b161-484c3f4529db</tstamps>
+      <tstamps>56818c14-9875-4852-83e7-b24bf77170c1 9f9d1f6f-7507-4bd1-b7c3-1eb7cae036e5 0ef053cc-6cbc-480a-97da-ffd86eed29bd f9466c72-e334-45f8-ab36-33d7247619a7 014b02a6-58b3-4f97-b161-484c3f4529db</tstamps>
     </comp>
     <comp ref="C13">
       <value>10nF</value>
@@ -4407,6 +4023,410 @@
       <sheetpath names="/Output Monitors/" tstamps="/eae55a42-d110-46e1-b06f-560b3d6a7f91/"/>
       <tstamps>f830bcd1-bd58-489f-a51a-00a07fc7d5b6 7de971fa-2bed-4895-b65c-450e9d07881e 0c922ac4-1580-4eb0-bcbf-631b30437dd4</tstamps>
     </comp>
+    <comp ref="C52">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder</footprint>
+      <datasheet>http://datasheets.avx.com/SR-Series.pdf</datasheet>
+      <fields>
+        <field name="Digi-Key Part">478-10836-1-ND</field>
+        <field name="LCSC Part #">C49678</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <property name="Digi-Key Part" value="478-10836-1-ND"/>
+      <property name="LCSC Part #" value="C49678"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>fb13ec19-7777-41d1-828f-54cbf270c4f0</tstamps>
+    </comp>
+    <comp ref="C53">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder</footprint>
+      <datasheet>http://datasheets.avx.com/SR-Series.pdf</datasheet>
+      <fields>
+        <field name="Digi-Key Part">478-10836-1-ND</field>
+        <field name="LCSC Part #">C49678</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <property name="Digi-Key Part" value="478-10836-1-ND"/>
+      <property name="LCSC Part #" value="C49678"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>e541492a-df7c-4f85-a3ad-a0a7bf1e249c</tstamps>
+    </comp>
+    <comp ref="C54">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder</footprint>
+      <datasheet>http://datasheets.avx.com/SR-Series.pdf</datasheet>
+      <fields>
+        <field name="Digi-Key Part">478-10836-1-ND</field>
+        <field name="LCSC Part #">C49678</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <property name="Digi-Key Part" value="478-10836-1-ND"/>
+      <property name="LCSC Part #" value="C49678"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>45db8752-fd8b-43d5-a54d-c8110ccb5def</tstamps>
+    </comp>
+    <comp ref="C55">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder</footprint>
+      <datasheet>http://datasheets.avx.com/SR-Series.pdf</datasheet>
+      <fields>
+        <field name="Digi-Key Part">478-10836-1-ND</field>
+        <field name="LCSC Part #">C49678</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <property name="Digi-Key Part" value="478-10836-1-ND"/>
+      <property name="LCSC Part #" value="C49678"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>5a9d41cc-37a8-4e5f-ba73-b4c11ad4017c</tstamps>
+    </comp>
+    <comp ref="D1">
+      <value>1N5819</value>
+      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
+      <fields>
+        <field name="Digi-Key Part">478-7800-1-ND</field>
+        <field name="LCSC Part #">C191023</field>
+      </fields>
+      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
+      <property name="Digi-Key Part" value="478-7800-1-ND"/>
+      <property name="LCSC Part #" value="C191023"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>31a669b3-47bd-4f3c-9828-ffe131f98ad6</tstamps>
+    </comp>
+    <comp ref="D2">
+      <value>1N5819</value>
+      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
+      <fields>
+        <field name="Digi-Key Part">478-7800-1-ND</field>
+        <field name="LCSC Part #">C191023</field>
+      </fields>
+      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
+      <property name="Digi-Key Part" value="478-7800-1-ND"/>
+      <property name="LCSC Part #" value="C191023"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>c78ab01c-b541-4035-a65a-ed4df47875a4</tstamps>
+    </comp>
+    <comp ref="D3">
+      <value>1N5819</value>
+      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
+      <fields>
+        <field name="Digi-Key Part">478-7800-1-ND</field>
+        <field name="LCSC Part #">C191023</field>
+      </fields>
+      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
+      <property name="Digi-Key Part" value="478-7800-1-ND"/>
+      <property name="LCSC Part #" value="C191023"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>3d42cc39-a014-4cdc-8a10-3e500e972f4f</tstamps>
+    </comp>
+    <comp ref="D4">
+      <value>1N5819</value>
+      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
+      <fields>
+        <field name="Digi-Key Part">478-7800-1-ND</field>
+        <field name="LCSC Part #">C191023</field>
+      </fields>
+      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
+      <property name="Digi-Key Part" value="478-7800-1-ND"/>
+      <property name="LCSC Part #" value="C191023"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>5aadafdc-46dd-431e-9c6e-e80ebe7b0a26</tstamps>
+    </comp>
+    <comp ref="D5">
+      <value>1N5819</value>
+      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
+      <fields>
+        <field name="Digi-Key Part">478-7800-1-ND</field>
+        <field name="LCSC Part #">C191023</field>
+      </fields>
+      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
+      <property name="Digi-Key Part" value="478-7800-1-ND"/>
+      <property name="LCSC Part #" value="C191023"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>30c589db-3c48-4b5a-a62a-c99f6d53a4f3</tstamps>
+    </comp>
+    <comp ref="D6">
+      <value>1N5819</value>
+      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
+      <fields>
+        <field name="Digi-Key Part">478-7800-1-ND</field>
+        <field name="LCSC Part #">C191023</field>
+      </fields>
+      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
+      <property name="Digi-Key Part" value="478-7800-1-ND"/>
+      <property name="LCSC Part #" value="C191023"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>fa1126d1-1ede-4617-b64f-de86b7496daa</tstamps>
+    </comp>
+    <comp ref="D7">
+      <value>1N5819</value>
+      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
+      <fields>
+        <field name="Digi-Key Part">478-7800-1-ND</field>
+        <field name="LCSC Part #">C191023</field>
+      </fields>
+      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
+      <property name="Digi-Key Part" value="478-7800-1-ND"/>
+      <property name="LCSC Part #" value="C191023"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>d0ec14f0-cd45-420d-8dbc-bb9342bd2c8a</tstamps>
+    </comp>
+    <comp ref="D8">
+      <value>1N5819</value>
+      <footprint>Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
+      <fields>
+        <field name="Digi-Key Part">478-7800-1-ND</field>
+        <field name="LCSC Part #">C191023</field>
+      </fields>
+      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
+      <property name="Digi-Key Part" value="478-7800-1-ND"/>
+      <property name="LCSC Part #" value="C191023"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>0167a497-b84b-4165-a765-054124da8a97</tstamps>
+    </comp>
+    <comp ref="J1">
+      <value>3.5mm Jack</value>
+      <footprint>sputterizer:Molex-0472570001</footprint>
+      <fields>
+        <field name="Digi-Key Part">WM17366-ND</field>
+      </fields>
+      <libsource lib="greenface-symbols" part="Molex_47257" description=""/>
+      <property name="Digi-Key Part" value="WM17366-ND"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>f572accc-c719-48ce-a6b9-1254ff3d0e9d</tstamps>
+    </comp>
+    <comp ref="J2">
+      <value>3.5mm Jack</value>
+      <footprint>sputterizer:Molex-0472570001</footprint>
+      <fields>
+        <field name="Digi-Key Part">WM17366-ND</field>
+      </fields>
+      <libsource lib="greenface-symbols" part="Molex_47257" description=""/>
+      <property name="Digi-Key Part" value="WM17366-ND"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>fbfe5418-a826-4361-8966-92a4cdb6cf3f</tstamps>
+    </comp>
+    <comp ref="J3">
+      <value>3.5mm Jack</value>
+      <footprint>sputterizer:Molex-0472570001</footprint>
+      <fields>
+        <field name="Digi-Key Part">WM17366-ND</field>
+      </fields>
+      <libsource lib="greenface-symbols" part="Molex_47257" description=""/>
+      <property name="Digi-Key Part" value="WM17366-ND"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>83608930-9ccd-4196-9ee9-d26d76908cd6</tstamps>
+    </comp>
+    <comp ref="J4">
+      <value>3.5mm Jack</value>
+      <footprint>sputterizer:Molex-0472570001</footprint>
+      <fields>
+        <field name="Digi-Key Part">WM17366-ND</field>
+      </fields>
+      <libsource lib="greenface-symbols" part="Molex_47257" description=""/>
+      <property name="Digi-Key Part" value="WM17366-ND"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>3478a57b-1813-4c37-ab49-749ce4bb71d8</tstamps>
+    </comp>
+    <comp ref="R1">
+      <value>10K</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
+      <fields>
+        <field name="Digi-Key Part">13-RC0805JR-1010KLCT-ND</field>
+        <field name="LCSC Part #">C17414</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value="13-RC0805JR-1010KLCT-ND"/>
+      <property name="LCSC Part #" value="C17414"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>3ec944ce-48fc-41b3-b85a-3b7cd68013ed</tstamps>
+    </comp>
+    <comp ref="R2">
+      <value>10K</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
+      <fields>
+        <field name="Digi-Key Part">13-RC0805JR-1010KLCT-ND</field>
+        <field name="LCSC Part #">C17414</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value="13-RC0805JR-1010KLCT-ND"/>
+      <property name="LCSC Part #" value="C17414"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>4acfa969-b72f-4614-b89a-9fa3025f2c02</tstamps>
+    </comp>
+    <comp ref="R3">
+      <value>10K</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
+      <fields>
+        <field name="Digi-Key Part">13-RC0805JR-1010KLCT-ND</field>
+        <field name="LCSC Part #">C17414</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value="13-RC0805JR-1010KLCT-ND"/>
+      <property name="LCSC Part #" value="C17414"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>63eeb6fd-87ce-46c4-b3c6-7b9668070619</tstamps>
+    </comp>
+    <comp ref="R4">
+      <value>10K</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
+      <fields>
+        <field name="Digi-Key Part">13-RC0805JR-1010KLCT-ND</field>
+        <field name="LCSC Part #">C17414</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value="13-RC0805JR-1010KLCT-ND"/>
+      <property name="LCSC Part #" value="C17414"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>bef82b29-0b6a-437c-9173-d8f58afeea84</tstamps>
+    </comp>
+    <comp ref="R79">
+      <value>1K</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="LCSC Part #">C2653986</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value=""/>
+      <property name="LCSC Part #" value="C2653986"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>14a4d470-1fd7-4c44-b257-d8f287f3900f</tstamps>
+    </comp>
+    <comp ref="R80">
+      <value>1K</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="LCSC Part #">C2653986</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value=""/>
+      <property name="LCSC Part #" value="C2653986"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>c7fd4973-a5c4-4ab1-8184-95e048bb7ddc</tstamps>
+    </comp>
+    <comp ref="R81">
+      <value>1K</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="LCSC Part #">C2653986</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value=""/>
+      <property name="LCSC Part #" value="C2653986"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>27a4c65d-0cf3-4513-97ec-29f94cecd8bf</tstamps>
+    </comp>
+    <comp ref="R82">
+      <value>1K</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="LCSC Part #">C2653986</field>
+      </fields>
+      <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
+      <property name="Digi-Key Part" value=""/>
+      <property name="LCSC Part #" value="C2653986"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>20facf32-650a-4d57-bdea-c66ea3f46e45</tstamps>
+    </comp>
+    <comp ref="SW1">
+      <value>Push Button</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">450-1643-ND</field>
+      </fields>
+      <libsource lib="Switch" part="SW_SPST" description="Single Pole Single Throw (SPST) switch"/>
+      <property name="Digi-Key Part" value="450-1643-ND"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>6cef4ef4-614e-4673-96f1-258c345a798f</tstamps>
+    </comp>
+    <comp ref="SW2">
+      <value>Push Button</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">450-1643-ND</field>
+      </fields>
+      <libsource lib="Switch" part="SW_SPST" description="Single Pole Single Throw (SPST) switch"/>
+      <property name="Digi-Key Part" value="450-1643-ND"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>68dbf960-1134-4e71-badc-a2b7b564a74b</tstamps>
+    </comp>
+    <comp ref="SW3">
+      <value>Push Button</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">450-1643-ND</field>
+      </fields>
+      <libsource lib="Switch" part="SW_SPST" description="Single Pole Single Throw (SPST) switch"/>
+      <property name="Digi-Key Part" value="450-1643-ND"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>5faca2a0-26f4-425e-b532-33cdde990c04</tstamps>
+    </comp>
+    <comp ref="SW4">
+      <value>Push Button</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm</footprint>
+      <fields>
+        <field name="Digi-Key Part">450-1643-ND</field>
+      </fields>
+      <libsource lib="Switch" part="SW_SPST" description="Single Pole Single Throw (SPST) switch"/>
+      <property name="Digi-Key Part" value="450-1643-ND"/>
+      <property name="Sheetname" value="Triggers"/>
+      <property name="Sheetfile" value="triggers.kicad_sch"/>
+      <sheetpath names="/Triggers/" tstamps="/364dc009-247e-48f3-bbc1-ab1997e57aa0/"/>
+      <tstamps>5acc81ca-556c-4969-b01c-85a8c45e3748</tstamps>
+    </comp>
   </components>
   <libparts>
     <libpart lib="Amplifier_Operational" part="TL072">
@@ -4698,23 +4718,6 @@
         <pin num="2" name="A" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Diode" part="BZX384-xxx">
-      <description>300mW Zener Diode, SOD-323</description>
-      <docs>https://assets.nexperia.com/documents/data-sheet/BZX384_SERIES.pdf</docs>
-      <footprints>
-        <fp>D*SOD*323*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">D</field>
-        <field name="Value">BZX384-xxx</field>
-        <field name="Footprint">Diode_SMD:D_SOD-323</field>
-        <field name="Datasheet">https://assets.nexperia.com/documents/data-sheet/BZX384_SERIES.pdf</field>
-      </fields>
-      <pins>
-        <pin num="1" name="K" type="passive"/>
-        <pin num="2" name="A" type="passive"/>
-      </pins>
-    </libpart>
     <libpart lib="Interface_Expansion" part="MCP23008-xSS">
       <description>8-bit I/O expander, I2C, interrupts, SSOP-20</description>
       <docs>http://ww1.microchip.com/downloads/en/DeviceDoc/MCP23008-MCP23S08-Data-Sheet-20001919F.pdf</docs>
@@ -4814,42 +4817,6 @@
         <pin num="1" name="B" type="input"/>
         <pin num="2" name="E" type="passive"/>
         <pin num="3" name="C" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Transistor_FET" part="2N7002">
-      <description>0.115A Id, 60V Vds, N-Channel MOSFET, SOT-23</description>
-      <docs>https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF</docs>
-      <footprints>
-        <fp>SOT?23*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">Q</field>
-        <field name="Value">2N7002</field>
-        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
-        <field name="Datasheet">https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF</field>
-      </fields>
-      <pins>
-        <pin num="1" name="G" type="input"/>
-        <pin num="2" name="S" type="passive"/>
-        <pin num="3" name="D" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Transistor_FET" part="Si2371EDS">
-      <description>-3.6A Id, -30V Vds, P-Channel MOSFET, SOT-23</description>
-      <docs>http://www.vishay.com/docs/63924/si2371eds.pdf</docs>
-      <footprints>
-        <fp>SOT?23*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">Q</field>
-        <field name="Value">Si2371EDS</field>
-        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
-        <field name="Datasheet">http://www.vishay.com/docs/63924/si2371eds.pdf</field>
-      </fields>
-      <pins>
-        <pin num="1" name="G" type="input"/>
-        <pin num="2" name="S" type="passive"/>
-        <pin num="3" name="D" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="dk_Rectangular-Connectors-Headers-Male-Pins" part="0022232041">
@@ -5054,9 +5021,6 @@
     <library logical="Transistor_BJT">
       <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Transistor_BJT.kicad_sym</uri>
     </library>
-    <library logical="Transistor_FET">
-      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Transistor_FET.kicad_sym</uri>
-    </library>
     <library logical="greenface">
       <uri>C:/Users/shann/Dropbox/KiCAD/greenface-symbols.kicad_sym</uri>
     </library>
@@ -5129,7 +5093,6 @@
       <node ref="J19" pin="1" pinfunction="Pin_1" pintype="passive"/>
       <node ref="J7" pin="5" pinfunction="Pin_5" pintype="passive"/>
       <node ref="Q1" pin="3" pinfunction="C" pintype="passive"/>
-      <node ref="Q9" pin="2" pinfunction="S" pintype="passive"/>
       <node ref="R141" pin="2" pintype="passive"/>
       <node ref="R59" pin="1" pintype="passive"/>
       <node ref="U1" pin="8" pinfunction="V+" pintype="power_in"/>
@@ -5195,7 +5158,6 @@
       <node ref="D42" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D46" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="J7" pin="6" pinfunction="Pin_6" pintype="passive"/>
-      <node ref="Q10" pin="3" pinfunction="D" pintype="passive"/>
       <node ref="R60" pin="1" pintype="passive"/>
       <node ref="U1" pin="4" pinfunction="V-" pintype="power_in"/>
       <node ref="U10" pin="4" pinfunction="V-" pintype="power_in"/>
@@ -5467,9 +5429,7 @@
       <node ref="R71" pin="1" pintype="passive"/>
       <node ref="R72" pin="1" pintype="passive"/>
       <node ref="R78" pin="2" pintype="passive"/>
-      <node ref="R79" pin="2" pintype="passive"/>
       <node ref="R8" pin="1" pintype="passive"/>
-      <node ref="R80" pin="1" pintype="passive"/>
       <node ref="R97" pin="1" pintype="passive"/>
       <node ref="R98" pin="1" pintype="passive"/>
       <node ref="R99" pin="1" pintype="passive"/>
@@ -5597,408 +5557,414 @@
       <node ref="R75" pin="2" pintype="passive"/>
       <node ref="U24" pin="14" pintype="passive"/>
     </net>
-    <net code="50" name="Net-(D9-Pad1)">
+    <net code="50" name="Net-(C52-Pad1)">
+      <node ref="C52" pin="1" pintype="passive"/>
+      <node ref="R79" pin="2" pintype="passive"/>
+    </net>
+    <net code="51" name="Net-(C53-Pad1)">
+      <node ref="C53" pin="1" pintype="passive"/>
+      <node ref="R80" pin="2" pintype="passive"/>
+    </net>
+    <net code="52" name="Net-(C54-Pad1)">
+      <node ref="C54" pin="1" pintype="passive"/>
+      <node ref="R81" pin="2" pintype="passive"/>
+    </net>
+    <net code="53" name="Net-(C55-Pad1)">
+      <node ref="C55" pin="1" pintype="passive"/>
+      <node ref="R82" pin="2" pintype="passive"/>
+    </net>
+    <net code="54" name="Net-(D9-Pad1)">
       <node ref="D9" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R5" pin="2" pintype="passive"/>
     </net>
-    <net code="51" name="Net-(D10-Pad1)">
+    <net code="55" name="Net-(D10-Pad1)">
       <node ref="D10" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R6" pin="2" pintype="passive"/>
     </net>
-    <net code="52" name="Net-(D11-Pad1)">
+    <net code="56" name="Net-(D11-Pad1)">
       <node ref="D11" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R7" pin="2" pintype="passive"/>
     </net>
-    <net code="53" name="Net-(D12-Pad1)">
+    <net code="57" name="Net-(D12-Pad1)">
       <node ref="D12" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R8" pin="2" pintype="passive"/>
     </net>
-    <net code="54" name="Net-(D13-Pad2)">
+    <net code="58" name="Net-(D13-Pad2)">
       <node ref="D13" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="D46" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="J6" pin="10" pinfunction="Pin_10" pintype="passive"/>
       <node ref="J6" pin="9" pinfunction="Pin_9" pintype="passive"/>
-      <node ref="Q9" pin="3" pinfunction="D" pintype="passive"/>
     </net>
-    <net code="55" name="Net-(D14-Pad1)">
+    <net code="59" name="Net-(D14-Pad1)">
       <node ref="D14" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="D45" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="J6" pin="1" pinfunction="Pin_1" pintype="passive"/>
       <node ref="J6" pin="2" pinfunction="Pin_2" pintype="passive"/>
-      <node ref="Q10" pin="2" pinfunction="S" pintype="passive"/>
     </net>
-    <net code="56" name="Net-(D19-Pad1)">
+    <net code="60" name="Net-(D19-Pad1)">
       <node ref="D19" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D37" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="U19" pin="1" pintype="output"/>
     </net>
-    <net code="57" name="Net-(D19-Pad2)">
+    <net code="61" name="Net-(D19-Pad2)">
       <node ref="D19" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D37" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R38" pin="2" pintype="passive"/>
       <node ref="U19" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="58" name="Net-(D20-Pad1)">
+    <net code="62" name="Net-(D20-Pad1)">
       <node ref="D20" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D38" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="U19" pin="7" pintype="output"/>
     </net>
-    <net code="59" name="Net-(D20-Pad2)">
+    <net code="63" name="Net-(D20-Pad2)">
       <node ref="D20" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D38" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R39" pin="2" pintype="passive"/>
       <node ref="U19" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="60" name="Net-(D21-Pad1)">
+    <net code="64" name="Net-(D21-Pad1)">
       <node ref="D21" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D25" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="U4" pin="1" pintype="output"/>
     </net>
-    <net code="61" name="Net-(D21-Pad2)">
+    <net code="65" name="Net-(D21-Pad2)">
       <node ref="D21" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D25" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R69" pin="2" pintype="passive"/>
       <node ref="U4" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="62" name="Net-(D22-Pad1)">
+    <net code="66" name="Net-(D22-Pad1)">
       <node ref="D22" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D26" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="U4" pin="7" pintype="output"/>
     </net>
-    <net code="63" name="Net-(D22-Pad2)">
+    <net code="67" name="Net-(D22-Pad2)">
       <node ref="D22" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D26" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R70" pin="2" pintype="passive"/>
       <node ref="U4" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="64" name="Net-(D23-Pad1)">
+    <net code="68" name="Net-(D23-Pad1)">
       <node ref="D23" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D27" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="U14" pin="1" pintype="output"/>
     </net>
-    <net code="65" name="Net-(D23-Pad2)">
+    <net code="69" name="Net-(D23-Pad2)">
       <node ref="D23" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D27" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R71" pin="2" pintype="passive"/>
       <node ref="U14" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="66" name="Net-(D24-Pad1)">
+    <net code="70" name="Net-(D24-Pad1)">
       <node ref="D24" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D28" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="U14" pin="7" pintype="output"/>
     </net>
-    <net code="67" name="Net-(D24-Pad2)">
+    <net code="71" name="Net-(D24-Pad2)">
       <node ref="D24" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D28" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R72" pin="2" pintype="passive"/>
       <node ref="U14" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="68" name="Net-(D29-Pad1)">
+    <net code="72" name="Net-(D29-Pad1)">
       <node ref="D29" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D33" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="U17" pin="1" pintype="output"/>
     </net>
-    <net code="69" name="Net-(D29-Pad2)">
+    <net code="73" name="Net-(D29-Pad2)">
       <node ref="D29" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D33" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R97" pin="2" pintype="passive"/>
       <node ref="U17" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="70" name="Net-(D30-Pad1)">
+    <net code="74" name="Net-(D30-Pad1)">
       <node ref="D30" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D34" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="U17" pin="7" pintype="output"/>
     </net>
-    <net code="71" name="Net-(D30-Pad2)">
+    <net code="75" name="Net-(D30-Pad2)">
       <node ref="D30" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D34" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R98" pin="2" pintype="passive"/>
       <node ref="U17" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="72" name="Net-(D31-Pad1)">
+    <net code="76" name="Net-(D31-Pad1)">
       <node ref="D31" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D35" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="U18" pin="1" pintype="output"/>
     </net>
-    <net code="73" name="Net-(D31-Pad2)">
+    <net code="77" name="Net-(D31-Pad2)">
       <node ref="D31" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D35" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R99" pin="2" pintype="passive"/>
       <node ref="U18" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="74" name="Net-(D32-Pad1)">
+    <net code="78" name="Net-(D32-Pad1)">
       <node ref="D32" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D36" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="U18" pin="7" pintype="output"/>
     </net>
-    <net code="75" name="Net-(D32-Pad2)">
+    <net code="79" name="Net-(D32-Pad2)">
       <node ref="D32" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D36" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R100" pin="2" pintype="passive"/>
       <node ref="U18" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="76" name="Net-(D39-Pad2)">
+    <net code="80" name="Net-(D39-Pad2)">
       <node ref="D39" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D40" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R56" pin="2" pintype="passive"/>
       <node ref="U19" pin="3" pinfunction="+" pintype="input"/>
     </net>
-    <net code="77" name="Net-(D41-Pad2)">
+    <net code="81" name="Net-(D41-Pad2)">
       <node ref="D41" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D42" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R57" pin="2" pintype="passive"/>
       <node ref="U19" pin="5" pinfunction="+" pintype="input"/>
     </net>
-    <net code="78" name="Net-(D45-Pad2)">
-      <node ref="D45" pin="2" pinfunction="A" pintype="passive"/>
-      <node ref="Q9" pin="1" pinfunction="G" pintype="input"/>
-      <node ref="R79" pin="1" pintype="passive"/>
-    </net>
-    <net code="79" name="Net-(D46-Pad1)">
-      <node ref="D46" pin="1" pinfunction="K" pintype="passive"/>
-      <node ref="Q10" pin="1" pinfunction="G" pintype="input"/>
-      <node ref="R80" pin="2" pintype="passive"/>
-    </net>
-    <net code="80" name="Net-(J1-Pad2)">
+    <net code="82" name="Net-(J1-Pad2)">
       <node ref="J1" pin="2" pinfunction="T" pintype="passive"/>
       <node ref="R1" pin="2" pintype="passive"/>
     </net>
-    <net code="81" name="Net-(J2-Pad2)">
+    <net code="83" name="Net-(J2-Pad2)">
       <node ref="J2" pin="2" pinfunction="T" pintype="passive"/>
       <node ref="R3" pin="2" pintype="passive"/>
     </net>
-    <net code="82" name="Net-(J3-Pad2)">
+    <net code="84" name="Net-(J3-Pad2)">
       <node ref="J3" pin="2" pinfunction="T" pintype="passive"/>
       <node ref="R2" pin="2" pintype="passive"/>
     </net>
-    <net code="83" name="Net-(J4-Pad2)">
+    <net code="85" name="Net-(J4-Pad2)">
       <node ref="J4" pin="2" pinfunction="T" pintype="passive"/>
       <node ref="R4" pin="2" pintype="passive"/>
     </net>
-    <net code="84" name="Net-(J16-Pad2)">
+    <net code="86" name="Net-(J16-Pad2)">
       <node ref="J16" pin="2" pinfunction="T" pintype="passive"/>
       <node ref="R28" pin="2" pintype="passive"/>
       <node ref="R56" pin="1" pintype="passive"/>
     </net>
-    <net code="85" name="Net-(J17-Pad2)">
+    <net code="87" name="Net-(J17-Pad2)">
       <node ref="J17" pin="2" pinfunction="T" pintype="passive"/>
       <node ref="R33" pin="2" pintype="passive"/>
       <node ref="R57" pin="1" pintype="passive"/>
     </net>
-    <net code="86" name="Net-(J19-Pad3)">
+    <net code="88" name="Net-(J19-Pad3)">
       <node ref="J19" pin="3" pinfunction="Pin_3" pintype="passive"/>
       <node ref="J20" pin="2" pinfunction="Pin_2" pintype="passive"/>
     </net>
-    <net code="87" name="Net-(R10-Pad1)">
+    <net code="89" name="Net-(R10-Pad1)">
       <node ref="R10" pin="1" pintype="passive"/>
       <node ref="U5" pin="5" pinfunction="+" pintype="input"/>
     </net>
-    <net code="88" name="Net-(R12-Pad1)">
+    <net code="90" name="Net-(R12-Pad1)">
       <node ref="R12" pin="1" pintype="passive"/>
       <node ref="R13" pin="1" pintype="passive"/>
       <node ref="R24" pin="2" pintype="passive"/>
       <node ref="R61" pin="1" pintype="passive"/>
       <node ref="U1" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="89" name="Net-(R14-Pad1)">
+    <net code="91" name="Net-(R14-Pad1)">
       <node ref="R14" pin="1" pintype="passive"/>
       <node ref="R15" pin="1" pintype="passive"/>
       <node ref="R25" pin="2" pintype="passive"/>
       <node ref="R62" pin="1" pintype="passive"/>
       <node ref="U1" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="90" name="Net-(R16-Pad1)">
+    <net code="92" name="Net-(R16-Pad1)">
       <node ref="R16" pin="1" pintype="passive"/>
       <node ref="R17" pin="1" pintype="passive"/>
       <node ref="R26" pin="2" pintype="passive"/>
       <node ref="R63" pin="1" pintype="passive"/>
       <node ref="U2" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="91" name="Net-(R18-Pad1)">
+    <net code="93" name="Net-(R18-Pad1)">
       <node ref="R18" pin="1" pintype="passive"/>
       <node ref="R19" pin="1" pintype="passive"/>
       <node ref="R27" pin="2" pintype="passive"/>
       <node ref="R64" pin="1" pintype="passive"/>
       <node ref="U2" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="92" name="Net-(R20-Pad1)">
+    <net code="94" name="Net-(R20-Pad1)">
       <node ref="R20" pin="1" pintype="passive"/>
       <node ref="U1" pin="3" pinfunction="+" pintype="input"/>
     </net>
-    <net code="93" name="Net-(R21-Pad1)">
+    <net code="95" name="Net-(R21-Pad1)">
       <node ref="R21" pin="1" pintype="passive"/>
       <node ref="U1" pin="5" pinfunction="+" pintype="input"/>
     </net>
-    <net code="94" name="Net-(R22-Pad1)">
+    <net code="96" name="Net-(R22-Pad1)">
       <node ref="R22" pin="1" pintype="passive"/>
       <node ref="U2" pin="3" pinfunction="+" pintype="input"/>
     </net>
-    <net code="95" name="Net-(R23-Pad1)">
+    <net code="97" name="Net-(R23-Pad1)">
       <node ref="R23" pin="1" pintype="passive"/>
       <node ref="U2" pin="5" pinfunction="+" pintype="input"/>
     </net>
-    <net code="96" name="Net-(R28-Pad1)">
+    <net code="98" name="Net-(R28-Pad1)">
       <node ref="R28" pin="1" pintype="passive"/>
       <node ref="R29" pin="1" pintype="passive"/>
       <node ref="R31" pin="2" pintype="passive"/>
       <node ref="U10" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="97" name="Net-(R30-Pad1)">
+    <net code="99" name="Net-(R30-Pad1)">
       <node ref="R30" pin="1" pintype="passive"/>
       <node ref="U10" pin="3" pinfunction="+" pintype="input"/>
     </net>
-    <net code="98" name="Net-(R31-Pad1)">
+    <net code="100" name="Net-(R31-Pad1)">
       <node ref="R31" pin="1" pintype="passive"/>
       <node ref="R32" pin="2" pintype="passive"/>
       <node ref="U10" pin="1" pintype="output"/>
     </net>
-    <net code="99" name="Net-(R33-Pad1)">
+    <net code="101" name="Net-(R33-Pad1)">
       <node ref="R33" pin="1" pintype="passive"/>
       <node ref="R34" pin="1" pintype="passive"/>
       <node ref="R36" pin="2" pintype="passive"/>
       <node ref="U12" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="100" name="Net-(R35-Pad1)">
+    <net code="102" name="Net-(R35-Pad1)">
       <node ref="R35" pin="1" pintype="passive"/>
       <node ref="U12" pin="3" pinfunction="+" pintype="input"/>
     </net>
-    <net code="101" name="Net-(R36-Pad1)">
+    <net code="103" name="Net-(R36-Pad1)">
       <node ref="R36" pin="1" pintype="passive"/>
       <node ref="R37" pin="2" pintype="passive"/>
       <node ref="U12" pin="1" pintype="output"/>
     </net>
-    <net code="102" name="Net-(R40-Pad1)">
+    <net code="104" name="Net-(R40-Pad1)">
       <node ref="R40" pin="1" pintype="passive"/>
       <node ref="R41" pin="1" pintype="passive"/>
       <node ref="R52" pin="2" pintype="passive"/>
       <node ref="R65" pin="1" pintype="passive"/>
       <node ref="U8" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="103" name="Net-(R42-Pad1)">
+    <net code="105" name="Net-(R42-Pad1)">
       <node ref="R42" pin="1" pintype="passive"/>
       <node ref="R43" pin="1" pintype="passive"/>
       <node ref="R53" pin="2" pintype="passive"/>
       <node ref="R73" pin="1" pintype="passive"/>
       <node ref="U8" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="104" name="Net-(R44-Pad1)">
+    <net code="106" name="Net-(R44-Pad1)">
       <node ref="R44" pin="1" pintype="passive"/>
       <node ref="R45" pin="1" pintype="passive"/>
       <node ref="R54" pin="2" pintype="passive"/>
       <node ref="R74" pin="1" pintype="passive"/>
       <node ref="U9" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="105" name="Net-(R46-Pad1)">
+    <net code="107" name="Net-(R46-Pad1)">
       <node ref="R46" pin="1" pintype="passive"/>
       <node ref="R47" pin="1" pintype="passive"/>
       <node ref="R55" pin="2" pintype="passive"/>
       <node ref="R75" pin="1" pintype="passive"/>
       <node ref="U9" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="106" name="Net-(R48-Pad1)">
+    <net code="108" name="Net-(R48-Pad1)">
       <node ref="R48" pin="1" pintype="passive"/>
       <node ref="U8" pin="3" pinfunction="+" pintype="input"/>
     </net>
-    <net code="107" name="Net-(R49-Pad1)">
+    <net code="109" name="Net-(R49-Pad1)">
       <node ref="R49" pin="1" pintype="passive"/>
       <node ref="U8" pin="5" pinfunction="+" pintype="input"/>
     </net>
-    <net code="108" name="Net-(R50-Pad1)">
+    <net code="110" name="Net-(R50-Pad1)">
       <node ref="R50" pin="1" pintype="passive"/>
       <node ref="U9" pin="3" pinfunction="+" pintype="input"/>
     </net>
-    <net code="109" name="Net-(R51-Pad1)">
+    <net code="111" name="Net-(R51-Pad1)">
       <node ref="R51" pin="1" pintype="passive"/>
       <node ref="U9" pin="5" pinfunction="+" pintype="input"/>
     </net>
-    <net code="110" name="Net-(R58-Pad1)">
+    <net code="112" name="Net-(R58-Pad1)">
       <node ref="R58" pin="1" pintype="passive"/>
       <node ref="U5" pin="3" pinfunction="+" pintype="input"/>
     </net>
-    <net code="111" name="Net-(R77-Pad1)">
+    <net code="113" name="Net-(R77-Pad1)">
       <node ref="R77" pin="1" pintype="passive"/>
       <node ref="R78" pin="1" pintype="passive"/>
       <node ref="U15" pin="1" pinfunction="REF" pintype="passive"/>
     </net>
-    <net code="112" name="Net-(R142-Pad1)">
+    <net code="114" name="Net-(R77-Pad2)">
+      <node ref="R77" pin="2" pintype="passive"/>
+      <node ref="RV9" pin="1" pinfunction="1" pintype="passive"/>
+    </net>
+    <net code="115" name="Net-(R142-Pad1)">
       <node ref="R142" pin="1" pintype="passive"/>
       <node ref="R143" pin="2" pintype="passive"/>
       <node ref="U5" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="113" name="Net-(RV9-Pad1)">
-      <node ref="R77" pin="2" pintype="passive"/>
-      <node ref="RV9" pin="1" pinfunction="1" pintype="passive"/>
-    </net>
-    <net code="114" name="Net-(U10-Pad6)">
+    <net code="116" name="Net-(U10-Pad6)">
       <node ref="U10" pin="6" pinfunction="-" pintype="input"/>
       <node ref="U10" pin="7" pintype="output"/>
       <node ref="U11" pin="4" pinfunction="AIN0" pintype="input"/>
     </net>
-    <net code="115" name="Net-(U11-Pad5)">
+    <net code="117" name="Net-(U11-Pad5)">
       <node ref="U11" pin="5" pinfunction="AIN1" pintype="input"/>
       <node ref="U12" pin="6" pinfunction="-" pintype="input"/>
       <node ref="U12" pin="7" pintype="output"/>
     </net>
-    <net code="116" name="Out0">
+    <net code="118" name="Out0">
       <node ref="J8" pin="2" pinfunction="T" pintype="passive"/>
       <node ref="R24" pin="1" pintype="passive"/>
       <node ref="U1" pin="1" pintype="output"/>
       <node ref="U4" pin="3" pinfunction="+" pintype="input"/>
     </net>
-    <net code="117" name="Out1">
+    <net code="119" name="Out1">
       <node ref="J9" pin="2" pinfunction="T" pintype="passive"/>
       <node ref="R25" pin="1" pintype="passive"/>
       <node ref="U1" pin="7" pintype="output"/>
       <node ref="U4" pin="5" pinfunction="+" pintype="input"/>
     </net>
-    <net code="118" name="Out2">
+    <net code="120" name="Out2">
       <node ref="J10" pin="2" pinfunction="T" pintype="passive"/>
       <node ref="R26" pin="1" pintype="passive"/>
       <node ref="U14" pin="3" pinfunction="+" pintype="input"/>
       <node ref="U2" pin="1" pintype="output"/>
     </net>
-    <net code="119" name="Out3">
+    <net code="121" name="Out3">
       <node ref="J11" pin="2" pinfunction="T" pintype="passive"/>
       <node ref="R27" pin="1" pintype="passive"/>
       <node ref="U14" pin="5" pinfunction="+" pintype="input"/>
       <node ref="U2" pin="7" pintype="output"/>
     </net>
-    <net code="120" name="Out4">
+    <net code="122" name="Out4">
       <node ref="J12" pin="2" pinfunction="T" pintype="passive"/>
       <node ref="R52" pin="1" pintype="passive"/>
       <node ref="U17" pin="3" pinfunction="+" pintype="input"/>
       <node ref="U8" pin="1" pintype="output"/>
     </net>
-    <net code="121" name="Out5">
+    <net code="123" name="Out5">
       <node ref="J13" pin="2" pinfunction="T" pintype="passive"/>
       <node ref="R53" pin="1" pintype="passive"/>
       <node ref="U17" pin="5" pinfunction="+" pintype="input"/>
       <node ref="U8" pin="7" pintype="output"/>
     </net>
-    <net code="122" name="Out6">
+    <net code="124" name="Out6">
       <node ref="J14" pin="2" pinfunction="T" pintype="passive"/>
       <node ref="R54" pin="1" pintype="passive"/>
       <node ref="U18" pin="3" pinfunction="+" pintype="input"/>
       <node ref="U9" pin="1" pintype="output"/>
     </net>
-    <net code="123" name="Out7">
+    <net code="125" name="Out7">
       <node ref="J15" pin="2" pinfunction="T" pintype="passive"/>
       <node ref="R55" pin="1" pintype="passive"/>
       <node ref="U18" pin="5" pinfunction="+" pintype="input"/>
       <node ref="U9" pin="7" pintype="output"/>
     </net>
-    <net code="124" name="P">
+    <net code="126" name="P">
       <node ref="A1" pin="7" pinfunction="D4" pintype="bidirectional"/>
       <node ref="C30" pin="1" pintype="passive"/>
       <node ref="J18" pin="7" pinfunction="Pin_7" pintype="passive"/>
       <node ref="R68" pin="2" pintype="passive"/>
       <node ref="SW5" pin="1" pinfunction="S1" pintype="passive"/>
     </net>
-    <net code="125" name="Reset">
+    <net code="127" name="Reset">
       <node ref="A1" pin="3" pinfunction="RESET" pintype="input"/>
       <node ref="J18" pin="3" pinfunction="Pin_3" pintype="passive"/>
       <node ref="J7" pin="1" pinfunction="Pin_1" pintype="passive"/>
       <node ref="U21" pin="6" pinfunction="~{RESET}" pintype="input"/>
     </net>
-    <net code="126" name="SCL">
+    <net code="128" name="SCL">
       <node ref="A1" pin="24" pinfunction="A5" pintype="bidirectional"/>
       <node ref="J19" pin="7" pinfunction="Pin_7" pintype="passive"/>
       <node ref="J5" pin="3" pintype="passive"/>
@@ -6006,7 +5972,7 @@
       <node ref="U16" pin="6" pinfunction="SCL" pintype="input"/>
       <node ref="U21" pin="1" pinfunction="SCL" pintype="input"/>
     </net>
-    <net code="127" name="SDA">
+    <net code="129" name="SDA">
       <node ref="A1" pin="23" pinfunction="A4" pintype="bidirectional"/>
       <node ref="J19" pin="8" pinfunction="Pin_8" pintype="passive"/>
       <node ref="J5" pin="4" pintype="passive"/>
@@ -6014,148 +5980,148 @@
       <node ref="U16" pin="5" pinfunction="SDA" pintype="bidirectional"/>
       <node ref="U21" pin="2" pinfunction="SDA" pintype="bidirectional"/>
     </net>
-    <net code="128" name="T0">
+    <net code="130" name="T0">
       <node ref="A1" pin="13" pinfunction="D10" pintype="bidirectional"/>
-      <node ref="C52" pin="1" pintype="passive"/>
       <node ref="D1" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D5" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="J18" pin="13" pinfunction="Pin_13" pintype="passive"/>
       <node ref="J7" pin="4" pinfunction="Pin_4" pintype="passive"/>
       <node ref="R1" pin="1" pintype="passive"/>
+      <node ref="R79" pin="1" pintype="passive"/>
       <node ref="SW1" pin="1" pinfunction="A" pintype="passive"/>
     </net>
-    <net code="129" name="T0 LED">
+    <net code="131" name="T0 LED">
       <node ref="A1" pin="2" pinfunction="D0/RX" pintype="bidirectional"/>
       <node ref="D12" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="J18" pin="2" pinfunction="Pin_2" pintype="passive"/>
     </net>
-    <net code="130" name="T1">
+    <net code="132" name="T1">
       <node ref="A1" pin="14" pinfunction="D11" pintype="bidirectional"/>
-      <node ref="C53" pin="1" pintype="passive"/>
       <node ref="D3" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D6" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="J18" pin="14" pinfunction="Pin_14" pintype="passive"/>
       <node ref="J7" pin="3" pinfunction="Pin_3" pintype="passive"/>
       <node ref="R3" pin="1" pintype="passive"/>
+      <node ref="R80" pin="1" pintype="passive"/>
       <node ref="SW2" pin="1" pinfunction="A" pintype="passive"/>
     </net>
-    <net code="131" name="T1 LED">
+    <net code="133" name="T1 LED">
       <node ref="A1" pin="1" pinfunction="D1/TX" pintype="bidirectional"/>
       <node ref="D9" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="J18" pin="1" pinfunction="Pin_1" pintype="passive"/>
     </net>
-    <net code="132" name="T2">
+    <net code="134" name="T2">
       <node ref="A1" pin="15" pinfunction="D12" pintype="bidirectional"/>
-      <node ref="C54" pin="1" pintype="passive"/>
       <node ref="D2" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D7" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="J18" pin="15" pinfunction="Pin_15" pintype="passive"/>
       <node ref="J7" pin="10" pinfunction="Pin_10" pintype="passive"/>
       <node ref="R2" pin="1" pintype="passive"/>
+      <node ref="R81" pin="1" pintype="passive"/>
       <node ref="SW3" pin="1" pinfunction="A" pintype="passive"/>
     </net>
-    <net code="133" name="T2 LED">
+    <net code="135" name="T2 LED">
       <node ref="A1" pin="5" pinfunction="D2" pintype="bidirectional"/>
       <node ref="D10" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="J18" pin="5" pinfunction="Pin_5" pintype="passive"/>
     </net>
-    <net code="134" name="T3">
+    <net code="136" name="T3">
       <node ref="A1" pin="16" pinfunction="D13" pintype="bidirectional"/>
-      <node ref="C55" pin="1" pintype="passive"/>
       <node ref="D4" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D8" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="J19" pin="15" pinfunction="Pin_15" pintype="passive"/>
       <node ref="J7" pin="7" pinfunction="Pin_7" pintype="passive"/>
       <node ref="R4" pin="1" pintype="passive"/>
+      <node ref="R82" pin="1" pintype="passive"/>
       <node ref="SW4" pin="1" pinfunction="A" pintype="passive"/>
     </net>
-    <net code="135" name="T3 LED">
+    <net code="137" name="T3 LED">
       <node ref="A1" pin="6" pinfunction="D3" pintype="bidirectional"/>
       <node ref="D11" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="J18" pin="6" pinfunction="Pin_6" pintype="passive"/>
     </net>
-    <net code="136" name="unconnected-(A1-Pad18)">
+    <net code="138" name="unconnected-(A1-Pad18)">
       <node ref="A1" pin="18" pinfunction="AREF" pintype="input"/>
     </net>
-    <net code="137" name="unconnected-(A1-Pad27)">
+    <net code="139" name="unconnected-(A1-Pad27)">
       <node ref="A1" pin="27" pinfunction="+5V" pintype="power_out"/>
     </net>
-    <net code="138" name="unconnected-(A1-Pad28)">
+    <net code="140" name="unconnected-(A1-Pad28)">
       <node ref="A1" pin="28" pinfunction="RESET" pintype="input"/>
     </net>
-    <net code="139" name="unconnected-(J8-Pad4)">
+    <net code="141" name="unconnected-(J8-Pad4)">
       <node ref="J8" pin="4" pinfunction="SW" pintype="passive"/>
     </net>
-    <net code="140" name="unconnected-(J9-Pad4)">
+    <net code="142" name="unconnected-(J9-Pad4)">
       <node ref="J9" pin="4" pinfunction="SW" pintype="passive"/>
     </net>
-    <net code="141" name="unconnected-(J10-Pad4)">
+    <net code="143" name="unconnected-(J10-Pad4)">
       <node ref="J10" pin="4" pinfunction="SW" pintype="passive"/>
     </net>
-    <net code="142" name="unconnected-(J11-Pad4)">
+    <net code="144" name="unconnected-(J11-Pad4)">
       <node ref="J11" pin="4" pinfunction="SW" pintype="passive"/>
     </net>
-    <net code="143" name="unconnected-(J12-Pad4)">
+    <net code="145" name="unconnected-(J12-Pad4)">
       <node ref="J12" pin="4" pinfunction="SW" pintype="passive"/>
     </net>
-    <net code="144" name="unconnected-(J13-Pad4)">
+    <net code="146" name="unconnected-(J13-Pad4)">
       <node ref="J13" pin="4" pinfunction="SW" pintype="passive"/>
     </net>
-    <net code="145" name="unconnected-(J14-Pad4)">
+    <net code="147" name="unconnected-(J14-Pad4)">
       <node ref="J14" pin="4" pinfunction="SW" pintype="passive"/>
     </net>
-    <net code="146" name="unconnected-(J15-Pad4)">
+    <net code="148" name="unconnected-(J15-Pad4)">
       <node ref="J15" pin="4" pinfunction="SW" pintype="passive"/>
     </net>
-    <net code="147" name="unconnected-(J19-Pad4)">
+    <net code="149" name="unconnected-(J19-Pad4)">
       <node ref="J19" pin="4" pinfunction="Pin_4" pintype="passive"/>
     </net>
-    <net code="148" name="unconnected-(J19-Pad13)">
+    <net code="150" name="unconnected-(J19-Pad13)">
       <node ref="J19" pin="13" pinfunction="Pin_13" pintype="passive"/>
     </net>
-    <net code="149" name="unconnected-(J21-Pad1)">
+    <net code="151" name="unconnected-(J21-Pad1)">
       <node ref="J21" pin="1" pintype="passive"/>
     </net>
-    <net code="150" name="unconnected-(J21-Pad2)">
+    <net code="152" name="unconnected-(J21-Pad2)">
       <node ref="J21" pin="2" pintype="passive"/>
     </net>
-    <net code="151" name="unconnected-(J21-Pad3)">
+    <net code="153" name="unconnected-(J21-Pad3)">
       <node ref="J21" pin="3" pintype="passive"/>
     </net>
-    <net code="152" name="unconnected-(J21-Pad4)">
+    <net code="154" name="unconnected-(J21-Pad4)">
       <node ref="J21" pin="4" pintype="passive"/>
     </net>
-    <net code="153" name="unconnected-(RV9-Pad3)">
+    <net code="155" name="unconnected-(RV9-Pad3)">
       <node ref="RV9" pin="3" pinfunction="3" pintype="passive"/>
     </net>
-    <net code="154" name="unconnected-(U11-Pad2)">
+    <net code="156" name="unconnected-(U11-Pad2)">
       <node ref="U11" pin="2" pinfunction="ALERT/RDY" pintype="output"/>
     </net>
-    <net code="155" name="unconnected-(U11-Pad6)">
+    <net code="157" name="unconnected-(U11-Pad6)">
       <node ref="U11" pin="6" pinfunction="AIN2" pintype="input"/>
     </net>
-    <net code="156" name="unconnected-(U16-Pad1)">
+    <net code="158" name="unconnected-(U16-Pad1)">
       <node ref="U16" pin="1" pinfunction="A0" pintype="input"/>
     </net>
-    <net code="157" name="unconnected-(U16-Pad2)">
+    <net code="159" name="unconnected-(U16-Pad2)">
       <node ref="U16" pin="2" pinfunction="A1" pintype="input"/>
     </net>
-    <net code="158" name="unconnected-(U16-Pad3)">
+    <net code="160" name="unconnected-(U16-Pad3)">
       <node ref="U16" pin="3" pinfunction="A2" pintype="input"/>
     </net>
-    <net code="159" name="unconnected-(U16-Pad7)">
+    <net code="161" name="unconnected-(U16-Pad7)">
       <node ref="U16" pin="7" pinfunction="WP" pintype="input"/>
     </net>
-    <net code="160" name="unconnected-(U21-Pad7)">
+    <net code="162" name="unconnected-(U21-Pad7)">
       <node ref="U21" pin="7" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="161" name="unconnected-(U21-Pad8)">
+    <net code="163" name="unconnected-(U21-Pad8)">
       <node ref="U21" pin="8" pinfunction="INT" pintype="output"/>
     </net>
-    <net code="162" name="unconnected-(U21-Pad10)">
+    <net code="164" name="unconnected-(U21-Pad10)">
       <node ref="U21" pin="10" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="163" name="unconnected-(U21-Pad11)">
+    <net code="165" name="unconnected-(U21-Pad11)">
       <node ref="U21" pin="11" pinfunction="NC" pintype="no_connect"/>
     </net>
   </nets>
