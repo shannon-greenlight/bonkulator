@@ -39,6 +39,8 @@ Here is a list of the batch files and folders:
 - list_ports.bat ... lists available COM ports
 - release.bat ... used to update release number in the code and create release binary zip
 - out ... this folder must be created. It holds compile output
+- Bonkulator ... folder where the code exists
+- secrets_example ... copy this folder to Bonkulator and rename it: secrets. Edit secrets.h to enter your preferred WiFi network and password.
 
 The Arduino libraries from the Arduino-Libs repo must be included. Put them in the 'code' folder in a folder named 'libraries'.
 Copy the entire contents of the folder, not the folder itself.
