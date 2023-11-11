@@ -172,7 +172,7 @@ void init_parameters()
   selected_output.put(0);
   remembered_fxn.put(0);
 
-  // do this last
+  // do this last!
   selected_output.write_int(EEPROM_INIT_FLAG, EEPROM_INIT_PATTERN);
   selected_output.write_int(EEPROM_OFFSET_FLAG, Greenface_EEPROM::eeprom_offset);
 }
