@@ -19,7 +19,7 @@ typedef void (*update_fxn)(void);
 
 #include <Wire.h>
 // Load Greenface libraries
-#include "secrets\arduino_secrets.h"
+#include "./secrets/arduino_secrets.h"
 #include "version_num.h"
 #include "is_release.h"
 #include "face1.h" // greenface logo art
