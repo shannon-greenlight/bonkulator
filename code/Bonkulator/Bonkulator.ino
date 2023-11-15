@@ -269,6 +269,7 @@ void setup()
     // selected_output.test();
   }
 
+  outputs_begin();
   Serial.println("Howdy!");
   ui.begin(face1);
   settings_put_usb_direct(0);

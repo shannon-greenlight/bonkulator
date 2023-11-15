@@ -733,8 +733,12 @@ void outputs_begin()
         outputs[i].active_time = output->get_param(OUTPUT_ACTIVE_TIME);
 
         selected_output.put(i); // required by update_ fxns
+        selected_fxn = bonk_outputs[i];
         update_idle_value();
-        update_trig_ctrl_vals();
+        update_trig_ctrl();
+        update_cv0();
+        update_cv1();
+        update_clock();
         if (output_ranges_installed)
         {
             output_update_range();
@@ -749,16 +753,11 @@ void outputs_begin()
             output->param_num = OUTPUT_ENABLE_T0 + j;
             update_trigger();
         }
-        output->param_num = 0;
-        set_waveform(i, output->get_param(OUTPUT_WAVEFORM));
-        selected_fxn = bonk_outputs[i];
-        update_cv0();
-        update_cv1();
     }
     selected_fxn = selected_fxn_memory;
     selected_output.put(output_memory);
-    update_clock();
-    update_trig_ctrl();
+    // update_clock();
+    // update_trig_ctrl();
 }
 
 void check_outputs()
