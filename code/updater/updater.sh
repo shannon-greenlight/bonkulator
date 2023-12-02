@@ -3,8 +3,8 @@
 # List available serial ports and store them in an array
 echo "Available COM ports:"
 ports=(/dev/tty.*)
-for i in "${!ports[@]}"; do 
-    echo "$((i+1)): ${ports[$i]}"
+for i in {1..$#ports}; do 
+    echo "$i: ${ports[$i]}"
 done
 
 while true; do
@@ -14,7 +14,7 @@ while true; do
 
     # Check if the input is a number and if the number corresponds to a port
     if [[ $selected_port_number =~ ^[0-9]+$ ]] && [ "$selected_port_number" -ge 1 ] && [ "$selected_port_number" -le ${#ports[@]} ]; then
-        selected_port=${ports[$((selected_port_number-1))]}
+        selected_port=${ports[$selected_port_number]}
     else
         echo "Invalid selection. Please try again."
         continue
