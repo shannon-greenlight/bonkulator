@@ -6,10 +6,12 @@ ls /dev/tty.*
 
 while true; do
     # Ask the user to select a port
-    read -p "Please enter the COM port you want to use: " selected_port
+    echo "Please enter the COM port you want to use: "
+    read selected_port
 
     # Confirm the user's selection
-    read -p "You selected $selected_port. Is this correct? (y/n) " confirm
+    echo "You selected $selected_port. Is this correct? (y/n) "
+    read confirm
 
     if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]
     then
