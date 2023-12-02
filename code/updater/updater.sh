@@ -1,5 +1,11 @@
 #!/bin/zsh
 
+# Check if arduino-cli exists
+if [[ ! -f ./bin/arduino-cli ]]; then
+    echo "arduino-cli not found. Downloading..."
+    curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+fi
+
 # List available serial ports and store them in an array
 echo "Available COM ports:"
 ports=(/dev/tty.*)
