@@ -19,7 +19,7 @@ echo "$board_list" | while read -r line; do
         ports+=("$port")
         if [[ $line == *"Arduino Nano RP2040 Connect"* ]]; then
             echo "$index: Bonkulator found on $port"
-        else
+        elif [[ $line == *"Arduino NANO 33 IoT"* ]]; then
             echo "$index: Spankulator found on $port"
         fi
         ((index++))
