@@ -53,4 +53,4 @@ while true; do
         echo "Selection not confirmed. Please try again."
     fi
 done
-./bin/arduino-cli upload --verbose -p $selected_port -b arduino:mbed_nano:nanorp2040connect -i ./Bonkulator.ino.bin
+./bin/arduino-cli upload -p $selected_port -b arduino:mbed_nano:nanorp2040connect -i ./Bonkulator.ino.bin
