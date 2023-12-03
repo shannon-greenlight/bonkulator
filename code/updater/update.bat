@@ -4,12 +4,12 @@ echo.
 echo Update The Bonkulator's software to:
 type release.txt
 echo.
-echo Available COM ports
-echo -------------------
-powershell.exe [System.IO.Ports.SerialPort]::getportnames()
+
+REM Get a list of connected boards
+powershell -Command "$boardList = .\arduino-cli board list; $boardList -split \"`n\" | ForEach-Object { if ($_ -match '^(COM\d+)\s') { $port = $Matches[1]; if ($_ -match 'Arduino Nano RP2040 Connect') { Write-Host \"Bonkulator found on $port\" } else { Write-Host \"Spankulator found on $port\" } } }"
+
 echo.
-echo.
-set /p port=What's the COM port? (please enter a number or press ENTER to use COM%port%) 'x' to exit 
+set /p port=What's the COM port? (please enter a number) 'x' to exit 
 
 if %port% == x exit
 

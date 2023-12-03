@@ -6,11 +6,24 @@ if [[ ! -f ./bin/arduino-cli ]]; then
     curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
 fi
 
-# List available serial ports and store them in an array
-echo "Available COM ports:"
-ports=(/dev/tty.*)
-for i in {1..$#ports}; do 
-    echo "$i: ${ports[$i]}"
+# Get a list of connected boards
+board_list=$(./bin/arduino-cli board list)
+
+# Parse the board list and store the ports in an array
+echo "Available boards:"
+ports=()
+index=1
+echo "$board_list" | while read -r line; do
+    if [[ $line == *"/dev/cu"* ]]; then
+        port=$(echo $line | awk '{print $1}')
+        ports+=("$port")
+        if [[ $line == *"Arduino Nano RP2040 Connect"* ]]; then
+            echo "$index: Bonkulator found on $port"
+        else
+            echo "$index: Spankulator found on $port"
+        fi
+        ((index++))
+    fi
 done
 
 while true; do
