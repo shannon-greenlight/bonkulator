@@ -1,5 +1,5 @@
 
-!#/bin/zsh
+#!/bin/zsh
 
 ./make.sh
 if [ $? -ne 0 ]; then
