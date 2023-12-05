@@ -1,4 +1,3 @@
-
 #!/bin/zsh
 
 ./make.sh
