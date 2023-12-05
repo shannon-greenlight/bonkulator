@@ -29,19 +29,13 @@ echo "$board_list" | while read -r line; do
 done
 
 port=$(cat spank_port.txt)
-echo "Using: $port"
-read -p "What's the port? (please enter a number or press ENTER to use $port) 'x' to exit " port
 
-if [ "$port" == "x" ]; then
-    exit
-fi
-
-echo $port > spank_port.txtwhile true; do
+while true; do
     # Ask the user to select a port
     echo "Please enter the number of the COM port you want to use: "
     read selected_port_number
 
-    if [ "$selected_port_number" == "x" ]; then
+    if [ $selected_port_number == "x" ]; then
         exit
     fi
 
@@ -56,5 +50,6 @@ echo $port > spank_port.txtwhile true; do
             continue
         fi
     fi
+    echo $selected_port > spank_port.txt
 done
 ./bin/arduino-cli upload -p $selected_port -b arduino:mbed_nano:nanorp2040connect -i ./out/Bonkulator.ino.bin
