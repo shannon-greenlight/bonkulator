@@ -35,11 +35,11 @@ while true; do
     echo "Please enter the number of the COM port you want to use: "
     read selected_port_number
 
-    if [ $selected_port_number == "x" ]; then
+    if [ "$selected_port_number" = "x" ]; then
         exit
     fi
 
-    if [ "$selected_port_number" == "" ]; then
+    if [ "$selected_port_number" = "" ]; then
         selected_port=$port
     else
         # Check if the input is a number and if the number corresponds to a port
