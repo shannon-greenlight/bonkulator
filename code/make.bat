@@ -3,7 +3,7 @@
 set product_name=Bonkulator
 echo "Make" %product_name%
 
-.\arduino-cli compile -b arduino:mbed_nano:nanorp2040connect --output-dir .\out --libraries .\Bonkulator\libraries Bonkulator
+.\arduino-cli compile -b arduino:mbed_nano:nanorp2040connect --output-dir .\out --libraries .\%product_name%\libraries %product_name%
 
 if errorlevel 1 (
    if [%1]==[] echo Compiler Error: %errorlevel%
