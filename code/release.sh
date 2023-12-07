@@ -5,12 +5,11 @@ file_path2="./Bonkulator/is_release.h"
 
 echo "This will set the Bonkulator software release number in $file_path"
 
-if [ -z "$BONK_RELEASE_NUM" ]; then
-    read -p "What's the NEW software release number? " release_num
-else
-    release_num=$BONK_RELEASE_NUM
+if [ -n "$BONK_RELEASE_NUM" ]; then
     echo "The current release number is: $BONK_RELEASE_NUM"
 fi
+
+read -p "What's the NEW software release number? " release_num
 
 read -p "That's $release_num, eh? (y/n) " ans
 
