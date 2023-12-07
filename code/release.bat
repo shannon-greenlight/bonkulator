@@ -48,15 +48,15 @@ copy .\out\Bonkulator.ino.elf updater
 copy Blink.ino.elf.uf2 updater
 echo %release_num% > updater\release.txt
 
-"C:\Program Files\7-Zip\7z.exe" a -r .\releases\bonkulator_updater_%release_num%.zip updater -x!updater.sh
+".\7z" a -r .\releases\bonkulator_updater_%release_num%.zip updater -x!updater.sh
 
 REM Create a tar archive using 7-Zip for the Mac/Linux users
-"C:\Program Files\7-Zip\7z.exe" a -ttar archive.tar ./updater/* -x!update.bat
+".\7z" a -ttar archive.tar ./updater/* -x!update.bat
 
 REM Compress the tar archive into .gz format using 7-Zip
-"C:\Program Files\7-Zip\7z.exe" a -tgzip .\archive.tar.gz ./archive.tar
+".\7z" a -tgzip .\archive.tar.gz ./archive.tar
 
-"C:\Program Files\7-Zip\7z.exe" a .\releases\bonkulator_updater_%release_num%.tar.zip ./archive.tar.gz
+".\7z" a .\releases\bonkulator_updater_%release_num%.tar.zip ./archive.tar.gz
 
 REM Delete the intermediate .tar file
 del archive.tar
