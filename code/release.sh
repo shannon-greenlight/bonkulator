@@ -55,7 +55,7 @@ echo $release_num > updater/release.txt
 zip -r ./releases/bonkulator_updater_$release_num.zip updater -x updater.sh
 
 # Create a tar archive using the tar command
-tar -cf archive.tar ./updater/* --exclude=update.bat
+tar -cf archive.tar --exclude=updater/update.bat updater
 
 # Compress the tar archive into .gz format using the gzip command
 gzip ./archive.tar
