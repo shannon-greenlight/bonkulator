@@ -29,7 +29,7 @@ Copy the entire contents of Arduino-Libs, not the folder itself. You can clone t
 1. Go to the code/Bonkulator folder and open a power shell if on Windows, or open a Terminal if you are on the Mac.
 2. Type: git clone https://github.com/shannon-greenlight/Arduino-Libs.git
 3. Rename the resulting Arduino-Libs folder : libraries.
-4. Keep this folder up to date uising: git pull.
+4. Keep this folder up to date using: git pull.
 
 If you are using a Mac, you must call the .sh files from a Terminal window. Use the form ./filename.sh to execute the .sh file.
 Use the following instructions to open a Terminal window in the code folder:
