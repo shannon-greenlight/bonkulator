@@ -6,7 +6,7 @@ port=$(cat spank_port.txt)
 
 while true; do
     # Ask the user to select a port
-    echo "Please enter the number of the COM port you want to use: "
+    echo "Please enter the number of the COM port you want to use: (x to exit)"
     read selected_port_number
 
     if [ "$selected_port_number" = "x" ]; then
