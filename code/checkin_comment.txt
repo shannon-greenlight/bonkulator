@@ -630,3 +630,12 @@ Adds Bounce min to App data.
  
 Check-in comment for Bonkulator-499 
 Web app supports bounce.
+ 
+Check-in comment for Bonkulator-500 
+Fixes to bounce.
+ 
+Check-in comment for Bonkulator-501 
+Adds support for Mac upload in Updater.
+ 
+Check-in comment for Bonkulator-502 
+Compiler files updated and added.
