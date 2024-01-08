@@ -47,7 +47,7 @@ Temporary Items
 .apdisk
 
 *.zip
-# !code/releases/*.zip
+!code/releases/*.zip
 
 *.kicad_pcb-bak
 *.kicad_sch-bak
