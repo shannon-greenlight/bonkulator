@@ -5,17 +5,17 @@
       "Application": "Pcbnew",
       "Version": "(6.0.1)"
     },
-    "CreationDate": "2023-12-22T21:12:26-08:00"
+    "CreationDate": "2023-11-21T01:19:50-08:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
-      "Name": "BonkDaddy2HP_Board",
-      "GUID": "426f6e6b-4461-4646-9479-3248505f426f",
-      "Revision": "1.1"
+      "Name": "BonkDaddyBoard",
+      "GUID": "426f6e6b-4461-4646-9479-426f6172642e",
+      "Revision": "1.2"
     },
     "Size": {
-      "X": 10.05,
-      "Y": 110.05
+      "X": 70.85,
+      "Y": 24.05
     },
     "LayerNumber": 2,
     "BoardThickness": 1.6,
@@ -24,57 +24,57 @@
   "DesignRules": [
     {
       "Layers": "Outer",
-      "PadToPad": 0.0,
-      "PadToTrack": 0.0,
+      "PadToPad": 0.2,
+      "PadToTrack": 0.2,
       "TrackToTrack": 0.2,
-      "MinLineWidth": 0.13,
+      "MinLineWidth": 0.2,
       "TrackToRegion": 0.508,
       "RegionToRegion": 0.508
     }
   ],
   "FilesAttributes": [
     {
-      "Path": "BonkDaddy2HP_Board-F_Cu.gbr",
+      "Path": "BonkDaddyBoard-F_Cu.gbr",
       "FileFunction": "Copper,L1,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "BonkDaddy2HP_Board-B_Cu.gbr",
+      "Path": "BonkDaddyBoard-B_Cu.gbr",
       "FileFunction": "Copper,L2,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "BonkDaddy2HP_Board-F_Paste.gbr",
+      "Path": "BonkDaddyBoard-F_Paste.gbr",
       "FileFunction": "SolderPaste,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "BonkDaddy2HP_Board-B_Paste.gbr",
+      "Path": "BonkDaddyBoard-B_Paste.gbr",
       "FileFunction": "SolderPaste,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "BonkDaddy2HP_Board-F_Silkscreen.gbr",
+      "Path": "BonkDaddyBoard-F_Silkscreen.gbr",
       "FileFunction": "Legend,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "BonkDaddy2HP_Board-B_Silkscreen.gbr",
+      "Path": "BonkDaddyBoard-B_Silkscreen.gbr",
       "FileFunction": "Legend,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "BonkDaddy2HP_Board-F_Mask.gbr",
+      "Path": "BonkDaddyBoard-F_Mask.gbr",
       "FileFunction": "SolderMask,Top",
       "FilePolarity": "Negative"
     },
     {
-      "Path": "BonkDaddy2HP_Board-B_Mask.gbr",
+      "Path": "BonkDaddyBoard-B_Mask.gbr",
       "FileFunction": "SolderMask,Bot",
       "FilePolarity": "Negative"
     },
     {
-      "Path": "BonkDaddy2HP_Board-Edge_Cuts.gbr",
+      "Path": "BonkDaddyBoard-Edge_Cuts.gbr",
       "FileFunction": "Profile",
       "FilePolarity": "Positive"
     }

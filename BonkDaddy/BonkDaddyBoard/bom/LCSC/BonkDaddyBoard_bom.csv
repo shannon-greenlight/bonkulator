@@ -1,0 +1,12 @@
+Designator,Comment,Footprint,JLCPCBPart#
+"C1, C3, ",1uF,Capacitor_THT:C_Rect_L7.0mm_W2.0mm_P5.00mm,C94708
+"J1, ",EXP,Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical,C225520
+"J3, ",USB_A,sputterizer:USB_A_Amphenol_UE27AE54100_Vertical,C386737
+"Q3, ",2N7000,Package_TO_SOT_THT:TO-92_Inline_Wide,C232838
+"Q4, ",2N3906,Package_TO_SOT_THT:TO-92_Inline_Wide,C9809
+"R1, R2, R4, R5, ",620,Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,C120050
+"R3, ",1K,Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P2.54mm_Vertical,C120055
+"R6, R9, ",10K,Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,C433778
+"R7, ",30K,Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P2.54mm_Vertical,C176499
+"R8, ",30K,Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,C176499
+"U1, ",A_14-LC-TT,Package_DIP:DIP-14_W7.62mm_Socket,C132508

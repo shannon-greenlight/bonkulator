@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>C:\Users\shann\Dropbox\moog\bonkulator\BonkDaddy\BonkDaddy2HP_Board\BonkDaddy2HP_Board.kicad_sch</source>
-    <date>6/6/2023 7:38:16 AM</date>
+    <date>12/22/2023 9:11:45 PM</date>
     <tool>Eeschema (6.0.1)</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -28,10 +28,11 @@
       <value>1uF</value>
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
+        <field name="Digi-Key Part">1276-1066-1-ND</field>
         <field name="LCSC Part #">C28323</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
-      <property name="Digi-Key Part" value=""/>
+      <property name="Digi-Key Part" value="1276-1066-1-ND"/>
       <property name="LCSC Part #" value="C28323"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddy2HP_Board.kicad_sch"/>
@@ -42,10 +43,11 @@
       <value>1uF</value>
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
+        <field name="Digi-Key Part">1276-1066-1-ND</field>
         <field name="LCSC Part #">C28323</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
-      <property name="Digi-Key Part" value=""/>
+      <property name="Digi-Key Part" value="1276-1066-1-ND"/>
       <property name="LCSC Part #" value="C28323"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddy2HP_Board.kicad_sch"/>
@@ -151,11 +153,11 @@
       <datasheet> ~</datasheet>
       <fields>
         <field name="Digi-Key Part">UE27AE54100-ND</field>
-        <field name="LCSC Part #">C718031</field>
+        <field name="LCSC Part #">C386737</field>
       </fields>
       <libsource lib="Connector" part="USB_A" description="USB Type A connector"/>
       <property name="Digi-Key Part" value="UE27AE54100-ND"/>
-      <property name="LCSC Part #" value="C718031"/>
+      <property name="LCSC Part #" value="C386737"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddy2HP_Board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
@@ -194,10 +196,11 @@
       <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
       <datasheet>https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF</datasheet>
       <fields>
+        <field name="Digi-Key Part">4878-2N7002CT-ND</field>
         <field name="LCSC Part #">C8545</field>
       </fields>
       <libsource lib="Transistor_FET" part="2N7002" description="0.115A Id, 60V Vds, N-Channel MOSFET, SOT-23"/>
-      <property name="Digi-Key Part" value=""/>
+      <property name="Digi-Key Part" value="4878-2N7002CT-ND"/>
       <property name="LCSC Part #" value="C8545"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddy2HP_Board.kicad_sch"/>
@@ -205,43 +208,46 @@
       <tstamps>8f4bc9ee-41bc-4dd4-bb63-65abf33e1efc</tstamps>
     </comp>
     <comp ref="Q4">
-      <value>MMBT5401</value>
+      <value>MMBT3906</value>
       <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
       <datasheet>https://www.onsemi.com/pub/Collateral/2N3906-D.PDF</datasheet>
       <fields>
-        <field name="LCSC Part #">C8326</field>
+        <field name="Digi-Key Part">MMBT3906LT1GOSCT-ND</field>
+        <field name="LCSC Part #">C266589</field>
       </fields>
       <libsource lib="Transistor_BJT" part="MMBT3906" description="-0.2A Ic, -40V Vce, Small Signal PNP Transistor, SOT-23"/>
-      <property name="Digi-Key Part" value=""/>
-      <property name="LCSC Part #" value="C8326"/>
+      <property name="Digi-Key Part" value="MMBT3906LT1GOSCT-ND"/>
+      <property name="LCSC Part #" value="C266589"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddy2HP_Board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>35b14c88-c68e-49eb-9cbd-208da9084d59</tstamps>
     </comp>
     <comp ref="R1">
-      <value>100</value>
+      <value>620</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
-        <field name="LCSC Part #">C17408</field>
+        <field name="Digi-Key Part">RMCF0805FT620RCT-ND</field>
+        <field name="LCSC Part #">C17782</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value=""/>
-      <property name="LCSC Part #" value="C17408"/>
+      <property name="Digi-Key Part" value="RMCF0805FT620RCT-ND"/>
+      <property name="LCSC Part #" value="C17782"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddy2HP_Board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>00000000-0000-0000-0000-0000620129e0</tstamps>
     </comp>
     <comp ref="R2">
-      <value>75</value>
+      <value>620</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
-        <field name="LCSC Part #">C17820</field>
+        <field name="Digi-Key Part">RMCF0805FT620RCT-ND</field>
+        <field name="LCSC Part #">C17782</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value=""/>
-      <property name="LCSC Part #" value="C17820"/>
+      <property name="Digi-Key Part" value="RMCF0805FT620RCT-ND"/>
+      <property name="LCSC Part #" value="C17782"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddy2HP_Board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
@@ -251,10 +257,11 @@
       <value>1K</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
+        <field name="Digi-Key Part">311-1.00KCRCT-ND</field>
         <field name="LCSC Part #">C17513</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value=""/>
+      <property name="Digi-Key Part" value="311-1.00KCRCT-ND"/>
       <property name="LCSC Part #" value="C17513"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddy2HP_Board.kicad_sch"/>
@@ -262,28 +269,30 @@
       <tstamps>1b31265c-00cd-44c3-9956-4035d1500a25</tstamps>
     </comp>
     <comp ref="R4">
-      <value>68</value>
+      <value>620</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
-        <field name="LCSC Part #">C17802</field>
+        <field name="Digi-Key Part">RMCF0805FT620RCT-ND</field>
+        <field name="LCSC Part #">C17782</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value=""/>
-      <property name="LCSC Part #" value="C17802"/>
+      <property name="Digi-Key Part" value="RMCF0805FT620RCT-ND"/>
+      <property name="LCSC Part #" value="C17782"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddy2HP_Board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>00000000-0000-0000-0000-000061f47872</tstamps>
     </comp>
     <comp ref="R5">
-      <value>47</value>
+      <value>620</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
-        <field name="LCSC Part #">C17714</field>
+        <field name="Digi-Key Part">RMCF0805FT620RCT-ND</field>
+        <field name="LCSC Part #">C17782</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value=""/>
-      <property name="LCSC Part #" value="C17714"/>
+      <property name="Digi-Key Part" value="RMCF0805FT620RCT-ND"/>
+      <property name="LCSC Part #" value="C17782"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddy2HP_Board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
@@ -293,10 +302,11 @@
       <value>10K</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
+        <field name="Digi-Key Part">RMCF0805FT10K0CT-ND</field>
         <field name="LCSC Part #">C17414</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value=""/>
+      <property name="Digi-Key Part" value="RMCF0805FT10K0CT-ND"/>
       <property name="LCSC Part #" value="C17414"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddy2HP_Board.kicad_sch"/>
@@ -307,10 +317,11 @@
       <value>30K</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
+        <field name="Digi-Key Part">RMCF0805FT30K0CT-ND</field>
         <field name="LCSC Part #">C17621</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value=""/>
+      <property name="Digi-Key Part" value="RMCF0805FT30K0CT-ND"/>
       <property name="LCSC Part #" value="C17621"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddy2HP_Board.kicad_sch"/>
@@ -318,14 +329,15 @@
       <tstamps>bebf3eb1-2c67-43f6-b231-a72de83c5659</tstamps>
     </comp>
     <comp ref="R8">
-      <value>43K</value>
+      <value>30K</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
-        <field name="LCSC Part #">C17695</field>
+        <field name="Digi-Key Part">RMCF0805FT30K0CT-ND</field>
+        <field name="LCSC Part #">C17621</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value=""/>
-      <property name="LCSC Part #" value="C17695"/>
+      <property name="Digi-Key Part" value="RMCF0805FT30K0CT-ND"/>
+      <property name="LCSC Part #" value="C17621"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddy2HP_Board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
@@ -335,10 +347,11 @@
       <value>10K</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
+        <field name="Digi-Key Part">RMCF0805FT10K0CT-ND</field>
         <field name="LCSC Part #">C17414</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value=""/>
+      <property name="Digi-Key Part" value="RMCF0805FT10K0CT-ND"/>
       <property name="LCSC Part #" value="C17414"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddy2HP_Board.kicad_sch"/>
@@ -419,15 +432,16 @@
       <footprint>Package_SO:SOIC-14_3.9x8.7mm_P1.27mm</footprint>
       <datasheet>https://assets.nexperia.com/documents/data-sheet/74AHC_AHCT04.pdf</datasheet>
       <fields>
+        <field name="Digi-Key Part">296-9179-1-ND</field>
         <field name="LCSC Part #">C5605</field>
       </fields>
       <libsource lib="74xx" part="74AHC04" description="Hex Inverter"/>
-      <property name="Digi-Key Part" value=""/>
+      <property name="Digi-Key Part" value="296-9179-1-ND"/>
       <property name="LCSC Part #" value="C5605"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddy2HP_Board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>a398f49e-0ef5-4dfa-a329-f840b4b4a6aa 2f5b70d5-9b1e-458a-bd75-9adfa7136cf9 ea9cf402-e51c-4fcf-a009-76e25cb2f1f2 69aafbb6-4ae6-4fde-a0a6-6a6085edd348 d1ae5c19-670f-4dfa-becd-0f0f5c91556c baf19081-cc2c-47d3-83f1-757779abf3c6 0be3c57e-a58a-4deb-8f89-3f9987e28bed</tstamps>
+      <tstamps>d1ae5c19-670f-4dfa-becd-0f0f5c91556c 69aafbb6-4ae6-4fde-a0a6-6a6085edd348 2f5b70d5-9b1e-458a-bd75-9adfa7136cf9 a398f49e-0ef5-4dfa-a329-f840b4b4a6aa ea9cf402-e51c-4fcf-a009-76e25cb2f1f2 baf19081-cc2c-47d3-83f1-757779abf3c6 0be3c57e-a58a-4deb-8f89-3f9987e28bed</tstamps>
     </comp>
     <comp ref="W1">
       <value>Washer</value>

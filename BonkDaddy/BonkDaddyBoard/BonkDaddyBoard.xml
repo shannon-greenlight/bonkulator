@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>C:\Users\shann\Dropbox\moog\bonkulator\BonkDaddy\BonkDaddyBoard\BonkDaddyBoard.kicad_sch</source>
-    <date>10/23/2022 7:20:19 AM</date>
+    <date>12/9/2023 11:47:09 PM</date>
     <tool>Eeschema (6.0.1)</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -25,43 +25,34 @@
   </design>
   <components>
     <comp ref="C1">
-      <value>.1uF</value>
+      <value>1uF</value>
       <footprint>Capacitor_THT:C_Rect_L7.0mm_W2.0mm_P5.00mm</footprint>
       <fields>
-        <field name="Digi-Key Part">399-9877-2-ND</field>
+        <field name="Digi-Key Part">399-9886-1-ND</field>
+        <field name="LCSC Part #">C94708</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
-      <property name="Digi-Key Part" value="399-9877-2-ND"/>
+      <property name="Digi-Key Part" value="399-9886-1-ND"/>
+      <property name="LCSC Part #" value="C94708"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>35fe7dbc-3fc9-49db-b8cc-ebba8603d8d1</tstamps>
     </comp>
-    <comp ref="C2">
-      <value>10uF</value>
-      <footprint>Capacitor_THT:CP_Radial_D5.0mm_P2.00mm</footprint>
-      <fields>
-        <field name="Digi-Key Part">P980-ND</field>
-      </fields>
-      <libsource lib="Device" part="C_Polarized_Small_US" description="Polarized capacitor, small US symbol"/>
-      <property name="Digi-Key Part" value="P980-ND"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>b759961c-4100-4a8c-b7fb-4f45da6d1c77</tstamps>
-    </comp>
     <comp ref="C3">
-      <value>10uF</value>
-      <footprint>Capacitor_THT:CP_Radial_D5.0mm_P2.00mm</footprint>
+      <value>1uF</value>
+      <footprint>Capacitor_THT:C_Rect_L7.0mm_W2.0mm_P5.00mm</footprint>
       <fields>
-        <field name="Digi-Key Part">P980-ND</field>
+        <field name="Digi-Key Part">399-9886-1-ND</field>
+        <field name="LCSC Part #">C94708</field>
       </fields>
-      <libsource lib="Device" part="C_Polarized_Small_US" description="Polarized capacitor, small US symbol"/>
-      <property name="Digi-Key Part" value="P980-ND"/>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <property name="Digi-Key Part" value="399-9886-1-ND"/>
+      <property name="LCSC Part #" value="C94708"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>70ea926b-e0d3-4519-9c88-4365cec0e83a</tstamps>
+      <tstamps>88ae6964-cdcd-4844-80f5-56db2ae889c1</tstamps>
     </comp>
     <comp ref="D1">
       <value>RED LED</value>
@@ -133,9 +124,11 @@
       <footprint>Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical</footprint>
       <fields>
         <field name="Digi-Key Part">S2011EC-05-ND</field>
+        <field name="LCSC Part #">C225520</field>
       </fields>
       <libsource lib="Connector_Generic" part="Conn_02x05_Odd_Even" description="Generic connector, double row, 02x05, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <property name="Digi-Key Part" value="S2011EC-05-ND"/>
+      <property name="LCSC Part #" value="C225520"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
@@ -160,9 +153,11 @@
       <datasheet> ~</datasheet>
       <fields>
         <field name="Digi-Key Part">UE27AE54100-ND</field>
+        <field name="LCSC Part #">C386737</field>
       </fields>
       <libsource lib="Connector" part="USB_A" description="USB Type A connector"/>
       <property name="Digi-Key Part" value="UE27AE54100-ND"/>
+      <property name="LCSC Part #" value="C386737"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
@@ -229,10 +224,12 @@
       <footprint>Package_TO_SOT_THT:TO-92_Inline_Wide</footprint>
       <datasheet>https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF</datasheet>
       <fields>
-        <field name="Digi-Key Part">2N7000BU-ND</field>
+        <field name="Digi-Key Part">2N7000FS-ND</field>
+        <field name="LCSC Part #">C232838</field>
       </fields>
       <libsource lib="Transistor_FET" part="2N7000" description="0.2A Id, 200V Vds, N-Channel MOSFET, 2.6V Logic Level, TO-92"/>
-      <property name="Digi-Key Part" value="2N7000BU-ND"/>
+      <property name="Digi-Key Part" value="2N7000FS-ND"/>
+      <property name="LCSC Part #" value="C232838"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
@@ -244,35 +241,41 @@
       <datasheet>https://www.onsemi.com/pub/Collateral/2N3906-D.PDF</datasheet>
       <fields>
         <field name="Digi-Key Part">2N3906TFCT-ND</field>
+        <field name="LCSC Part #">C9809</field>
       </fields>
       <libsource lib="Transistor_BJT" part="2N3906" description="-0.2A Ic, -40V Vce, Small Signal PNP Transistor, TO-92"/>
       <property name="Digi-Key Part" value="2N3906TFCT-ND"/>
+      <property name="LCSC Part #" value="C9809"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>21f9fd69-9bb1-463a-96ef-e2ad5cdcaa6c</tstamps>
     </comp>
     <comp ref="R1">
-      <value>100</value>
+      <value>620</value>
       <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <fields>
-        <field name="Digi-Key Part">CF14JT100RCT-ND</field>
+        <field name="Digi-Key Part">CF14JT620RCT-ND</field>
+        <field name="LCSC Part #">C120050</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="CF14JT100RCT-ND"/>
+      <property name="Digi-Key Part" value="CF14JT620RCT-ND"/>
+      <property name="LCSC Part #" value="C120050"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>00000000-0000-0000-0000-0000620129e0</tstamps>
     </comp>
     <comp ref="R2">
-      <value>75</value>
+      <value>620</value>
       <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <fields>
-        <field name="Digi-Key Part">CF14JT75R0CT-ND</field>
+        <field name="Digi-Key Part">CF14JT620RCT-ND</field>
+        <field name="LCSC Part #">C120050</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="CF14JT75R0CT-ND"/>
+      <property name="Digi-Key Part" value="CF14JT620RCT-ND"/>
+      <property name="LCSC Part #" value="C120050"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
@@ -282,36 +285,42 @@
       <value>1K</value>
       <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P2.54mm_Vertical</footprint>
       <fields>
-        <field name="Digi-Key Part">738-CFF14JT1K00CT-ND</field>
+        <field name="Digi-Key Part">CF14JT1K00CT-ND</field>
+        <field name="LCSC Part #">C120055</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="738-CFF14JT1K00CT-ND"/>
+      <property name="Digi-Key Part" value="CF14JT1K00CT-ND"/>
+      <property name="LCSC Part #" value="C120055"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>00000000-0000-0000-0000-0000620806b7</tstamps>
     </comp>
     <comp ref="R4">
-      <value>68</value>
+      <value>620</value>
       <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <fields>
-        <field name="Digi-Key Part">CF14JT68R0CT-ND</field>
+        <field name="Digi-Key Part">CF14JT620RCT-ND</field>
+        <field name="LCSC Part #">C120050</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="CF14JT68R0CT-ND"/>
+      <property name="Digi-Key Part" value="CF14JT620RCT-ND"/>
+      <property name="LCSC Part #" value="C120050"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>00000000-0000-0000-0000-000061f47872</tstamps>
     </comp>
     <comp ref="R5">
-      <value>47</value>
+      <value>620</value>
       <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <fields>
-        <field name="Digi-Key Part">CF14JT47R0CT-ND</field>
+        <field name="Digi-Key Part">CF14JT620RCT-ND</field>
+        <field name="LCSC Part #">C120050</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="CF14JT47R0CT-ND"/>
+      <property name="Digi-Key Part" value="CF14JT620RCT-ND"/>
+      <property name="LCSC Part #" value="C120050"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
@@ -322,35 +331,41 @@
       <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <fields>
         <field name="Digi-Key Part">CF14JT10K0CT-ND</field>
+        <field name="LCSC Part #">C433778</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
       <property name="Digi-Key Part" value="CF14JT10K0CT-ND"/>
+      <property name="LCSC Part #" value="C433778"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>d2010513-d039-43c6-bd57-c1f921d695f9</tstamps>
     </comp>
     <comp ref="R7">
-      <value>43K</value>
-      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
+      <value>30K</value>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P2.54mm_Vertical</footprint>
       <fields>
-        <field name="Digi-Key Part">CF14JT43K0CT-ND</field>
+        <field name="Digi-Key Part">CF14JT30K0CT-ND</field>
+        <field name="LCSC Part #">C176499</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="CF14JT43K0CT-ND"/>
+      <property name="Digi-Key Part" value="CF14JT30K0CT-ND"/>
+      <property name="LCSC Part #" value="C176499"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>455ab60b-7725-47c1-8bea-8bb2de9c3df5</tstamps>
     </comp>
     <comp ref="R8">
-      <value>43K</value>
+      <value>30K</value>
       <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <fields>
-        <field name="Digi-Key Part">CF14JT43K0CT-ND</field>
+        <field name="Digi-Key Part">CF14JT30K0CT-ND</field>
+        <field name="LCSC Part #">C176499</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="CF14JT43K0CT-ND"/>
+      <property name="Digi-Key Part" value="CF14JT30K0CT-ND"/>
+      <property name="LCSC Part #" value="C176499"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
@@ -361,9 +376,11 @@
       <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <fields>
         <field name="Digi-Key Part">CF14JT10K0CT-ND</field>
+        <field name="LCSC Part #">C433778</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
       <property name="Digi-Key Part" value="CF14JT10K0CT-ND"/>
+      <property name="LCSC Part #" value="C433778"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
@@ -427,13 +444,15 @@
     </comp>
     <comp ref="SK1">
       <value>A_14-LC-TT</value>
+      <footprint>Package_DIP:DIP-14_W7.62mm_Socket</footprint>
       <datasheet>http://www.assmann-wsw.com/fileadmin/datasheets/ASS_0810_CO.pdf</datasheet>
       <fields>
         <field name="Digi-Key Part">AE9989-ND</field>
+        <field name="LCSC Part #">C132508</field>
       </fields>
       <libsource lib="dk_Sockets-for-ICs-Transistors" part="A_14-LC-TT" description=""/>
       <property name="Digi-Key Part" value="AE9989-ND"/>
-      <property name="LCSC Part #" value=""/>
+      <property name="LCSC Part #" value="C132508"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <property name="exclude_from_board"/>
@@ -510,18 +529,19 @@
       <tstamps>00000000-0000-0000-0000-000061f6ab8e</tstamps>
     </comp>
     <comp ref="U1">
-      <value>74AHC04</value>
+      <value>74HC14</value>
       <footprint>Package_DIP:DIP-14_W7.62mm_Socket</footprint>
       <datasheet>https://assets.nexperia.com/documents/data-sheet/74AHC_AHCT04.pdf</datasheet>
       <fields>
-        <field name="Digi-Key Part">296-12772-5-ND</field>
+        <field name="Digi-Key Part">TC74HC14APF-ND</field>
       </fields>
       <libsource lib="74xx" part="74AHC04" description="Hex Inverter"/>
-      <property name="Digi-Key Part" value="296-12772-5-ND"/>
+      <property name="Digi-Key Part" value="TC74HC14APF-ND"/>
+      <property name="LCSC Part #" value=""/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="BonkDaddyBoard.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ea9cf402-e51c-4fcf-a009-76e25cb2f1f2 69aafbb6-4ae6-4fde-a0a6-6a6085edd348 a398f49e-0ef5-4dfa-a329-f840b4b4a6aa 2f5b70d5-9b1e-458a-bd75-9adfa7136cf9 baf19081-cc2c-47d3-83f1-757779abf3c6 d1ae5c19-670f-4dfa-becd-0f0f5c91556c 0be3c57e-a58a-4deb-8f89-3f9987e28bed</tstamps>
+      <tstamps>ea9cf402-e51c-4fcf-a009-76e25cb2f1f2 baf19081-cc2c-47d3-83f1-757779abf3c6 a398f49e-0ef5-4dfa-a329-f840b4b4a6aa 2f5b70d5-9b1e-458a-bd75-9adfa7136cf9 69aafbb6-4ae6-4fde-a0a6-6a6085edd348 d1ae5c19-670f-4dfa-becd-0f0f5c91556c 0be3c57e-a58a-4deb-8f89-3f9987e28bed</tstamps>
     </comp>
     <comp ref="W1">
       <value>Washer</value>
@@ -672,22 +692,6 @@
         <pin num="8" name="Pin_8" type="passive"/>
         <pin num="9" name="Pin_9" type="passive"/>
         <pin num="10" name="Pin_10" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Device" part="C_Polarized_Small_US">
-      <description>Polarized capacitor, small US symbol</description>
-      <docs>~</docs>
-      <footprints>
-        <fp>CP_*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">C</field>
-        <field name="Value">C_Polarized_Small_US</field>
-        <field name="Datasheet">~</field>
-      </fields>
-      <pins>
-        <pin num="1" name="" type="passive"/>
-        <pin num="2" name="" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="Device" part="C_Small">
@@ -865,7 +869,6 @@
   <nets>
     <net code="1" name="+3V3">
       <node ref="C1" pin="1" pintype="passive"/>
-      <node ref="C2" pin="1" pintype="passive"/>
       <node ref="D1" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D3" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D4" pin="2" pinfunction="A" pintype="passive"/>
@@ -880,7 +883,6 @@
     </net>
     <net code="3" name="GND">
       <node ref="C1" pin="2" pintype="passive"/>
-      <node ref="C2" pin="2" pintype="passive"/>
       <node ref="C3" pin="2" pintype="passive"/>
       <node ref="J1" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="J1" pin="8" pinfunction="Pin_8" pintype="passive"/>

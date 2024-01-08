@@ -11,8 +11,7 @@ set base_file=BonkDaddy2HP_Board
 
 "%bin_dir%\python" "%plugin_dir%/bom_digikey_split.py" "%base_file%.xml" "bom\Digi-Key\%base_file%_split.csv"
 
-rem todo fill in Digi-Key part numbers in the schematic. Then bom_digikey_full can be used.
-rem "%bin_dir%\python" "%plugin_dir%/bom_digikey_full.py" "%base_file%.xml" "bom\Digi-Key\%base_file%_full.csv"
+"%bin_dir%\python" "%plugin_dir%/bom_digikey_full.py" "%base_file%.xml" "bom\Digi-Key\%base_file%_full.csv"
 
 if not errorlevel 1 echo Success!
 

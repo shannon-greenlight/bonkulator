@@ -1,0 +1,17 @@
+Ref,Val,Package,PosX,PosY,Rot,Side
+"C1","1uF","C_Rect_L7.0mm_W2.0mm_P5.00mm",-69.600000,-52.025000,-90.000000,bottom
+"C3","1uF","C_Rect_L7.0mm_W2.0mm_P5.00mm",-58.750000,-66.850000,180.000000,bottom
+"J1","EXP","PinHeader_2x05_P2.54mm_Vertical",-52.325000,-60.325000,-90.000000,bottom
+"J3","USB_A","USB_A_Amphenol_UE27AE54100_Vertical",-102.825000,-59.695000,0.000000,bottom
+"Q3","2N7000","TO-92_Inline_Wide",-96.050000,-52.675000,180.000000,bottom
+"Q4","2N3906","TO-92_Inline_Wide",-98.460000,-66.835000,0.000000,bottom
+"R1","100","R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal",-101.245000,-71.225000,0.000000,bottom
+"R2","100","R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal",-70.580000,-71.175000,180.000000,bottom
+"R3","200","R_Axial_DIN0207_L6.3mm_D2.5mm_P2.54mm_Vertical",-95.800000,-59.320000,90.000000,bottom
+"R4","100","R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal",-87.895000,-71.175000,0.000000,bottom
+"R5","100","R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal",-83.255000,-71.075000,180.000000,bottom
+"R6","10K","R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal",-85.845000,-63.000000,0.000000,bottom
+"R7","30K","R_Axial_DIN0207_L6.3mm_D2.5mm_P2.54mm_Vertical",-115.700000,-65.050000,180.000000,bottom
+"R8","30K","R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal",-118.975000,-67.005000,90.000000,bottom
+"R9","10K","R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal",-73.000000,-63.000000,0.000000,bottom
+"U1","74AHC04","DIP-14_W7.62mm_Socket",-72.635000,-51.930000,-90.000000,bottom
