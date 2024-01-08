@@ -3,9 +3,10 @@
         {
             "name": "Win32",
             "includePath": [
-                    "${workspaceFolder}/**",
-                    "${default}",
-                    "C:\\Users\\shann\\Dropbox\\moog\\Arduino-Libs\\**"
+                "${workspaceFolder}/**",
+                "${default}",
+                "C:\\Users\\shann\\Dropbox\\moog\\Arduino-Libs\\**",
+                "C:\\Users\\shann\\Dropbox\\moog\\bonkulator\\code\\arduino_bin\\libraries\\**"
             ],
             "defines": [
                 "_DEBUG",
