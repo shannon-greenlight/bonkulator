@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>C:\Users\shann\Dropbox\moog\bonkulator\main_board\main_board.kicad_sch</source>
-    <date>12/25/2023 7:03:20 AM</date>
+    <date>1/9/2024 12:29:48 AM</date>
     <tool>Eeschema (6.0.1)</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -115,11 +115,11 @@
       <footprint>Capacitor_SMD:CP_Elec_6.3x5.4_Nichicon</footprint>
       <datasheet>http://www.rubycon.co.jp/en/catalog/e_pdfs/aluminum/e_ml.pdf</datasheet>
       <fields>
-        <field name="Digi-Key Part">399-EDH107M016A9GAACT-ND</field>
+        <field name="Digi-Key Part">399-A768EB107M1ELAE036DKR-ND</field>
         <field name="LCSC Part #">C2887272</field>
       </fields>
       <libsource lib="Device" part="CP1_Small" description=""/>
-      <property name="Digi-Key Part" value="399-EDH107M016A9GAACT-ND"/>
+      <property name="Digi-Key Part" value="399-A768EB107M1ELAE036DKR-ND"/>
       <property name="LCSC Part #" value="C2887272"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="main_board.kicad_sch"/>
@@ -130,11 +130,11 @@
       <value>100uF</value>
       <footprint>Capacitor_SMD:CP_Elec_6.3x5.4_Nichicon</footprint>
       <fields>
-        <field name="Digi-Key Part">399-EDH107M016A9GAACT-ND</field>
+        <field name="Digi-Key Part">399-A768EB107M1ELAE036DKR-ND</field>
         <field name="LCSC Part #">C2887272</field>
       </fields>
       <libsource lib="Device" part="CP1_Small" description=""/>
-      <property name="Digi-Key Part" value="399-EDH107M016A9GAACT-ND"/>
+      <property name="Digi-Key Part" value="399-A768EB107M1ELAE036DKR-ND"/>
       <property name="LCSC Part #" value="C2887272"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="main_board.kicad_sch"/>
@@ -146,11 +146,11 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder</footprint>
       <datasheet>http://datasheets.avx.com/SR-Series.pdf</datasheet>
       <fields>
-        <field name="Digi-Key Part">311-1888-1-ND</field>
+        <field name="Digi-Key Part">1276-1029-1-ND</field>
         <field name="LCSC Part #">C28323</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
-      <property name="Digi-Key Part" value="311-1888-1-ND"/>
+      <property name="Digi-Key Part" value="1276-1029-1-ND"/>
       <property name="LCSC Part #" value="C28323"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="main_board.kicad_sch"/>
@@ -1385,11 +1385,11 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder</footprint>
       <datasheet>http://datasheets.avx.com/SR-Series.pdf</datasheet>
       <fields>
-        <field name="Digi-Key Part">311-1888-1-ND</field>
+        <field name="Digi-Key Part">1276-1029-1-ND</field>
         <field name="LCSC Part #">C28323</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
-      <property name="Digi-Key Part" value="311-1888-1-ND"/>
+      <property name="Digi-Key Part" value="1276-1029-1-ND"/>
       <property name="LCSC Part #" value="C28323"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
@@ -1401,11 +1401,11 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder</footprint>
       <datasheet>http://datasheets.avx.com/SR-Series.pdf</datasheet>
       <fields>
-        <field name="Digi-Key Part">311-1888-1-ND</field>
+        <field name="Digi-Key Part">1276-1029-1-ND</field>
         <field name="LCSC Part #">C28323</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
-      <property name="Digi-Key Part" value="311-1888-1-ND"/>
+      <property name="Digi-Key Part" value="1276-1029-1-ND"/>
       <property name="LCSC Part #" value="C28323"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
@@ -1544,10 +1544,12 @@
       <value>7.5V</value>
       <footprint>Diode_SMD:D_SOD-123</footprint>
       <fields>
+        <field name="Digi-Key Part">DDZ7V5CDICT-ND</field>
         <field name="LCSC Part #">C545306</field>
       </fields>
       <libsource lib="Device" part="D_Zener_Small" description="Zener diode, small symbol"/>
       <property name="LCSC Part #" value="C545306"/>
+      <property name="Digi-Key Part" value="DDZ7V5CDICT-ND"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
       <sheetpath names="/Outputs/" tstamps="/b200c1d4-b772-4a0d-a7bc-c10bcb241496/"/>
@@ -1557,10 +1559,12 @@
       <value>7.5V</value>
       <footprint>Diode_SMD:D_SOD-123</footprint>
       <fields>
+        <field name="Digi-Key Part">DDZ7V5CDICT-ND</field>
         <field name="LCSC Part #">C545306</field>
       </fields>
       <libsource lib="Device" part="D_Zener_Small" description="Zener diode, small symbol"/>
       <property name="LCSC Part #" value="C545306"/>
+      <property name="Digi-Key Part" value="DDZ7V5CDICT-ND"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
       <sheetpath names="/Outputs/" tstamps="/b200c1d4-b772-4a0d-a7bc-c10bcb241496/"/>
@@ -1675,10 +1679,12 @@
       <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
       <datasheet>https://www.onsemi.com/pub/Collateral/2N3903-D.PDF</datasheet>
       <fields>
+        <field name="Digi-Key Part">4878-MMBT3904CT-ND</field>
         <field name="LCSC Part #">C20526</field>
       </fields>
       <libsource lib="Transistor_BJT" part="MMBT3904" description="0.2A Ic, 40V Vce, Small Signal NPN Transistor, SOT-23"/>
       <property name="LCSC Part #" value="C20526"/>
+      <property name="Digi-Key Part" value="4878-MMBT3904CT-ND"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
       <sheetpath names="/Outputs/" tstamps="/b200c1d4-b772-4a0d-a7bc-c10bcb241496/"/>
@@ -2228,11 +2234,11 @@
       <value>680</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
-        <field name="Digi-Key Part">RMCF0805JT20K0CT-ND</field>
+        <field name="Digi-Key Part">311-680ARCT-ND</field>
         <field name="LCSC Part #">C17798</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="RMCF0805JT20K0CT-ND"/>
+      <property name="Digi-Key Part" value="311-680ARCT-ND"/>
       <property name="LCSC Part #" value="C17798"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
@@ -2243,11 +2249,11 @@
       <value>680</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
-        <field name="Digi-Key Part">RMCF0805JT20K0CT-ND</field>
+        <field name="Digi-Key Part">311-680ARCT-ND</field>
         <field name="LCSC Part #">C17798</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="RMCF0805JT20K0CT-ND"/>
+      <property name="Digi-Key Part" value="311-680ARCT-ND"/>
       <property name="LCSC Part #" value="C17798"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
@@ -2393,10 +2399,11 @@
       <value>23.7K 1%</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
+        <field name="Digi-Key Part">RMCF0603FT23K7CT-ND</field>
         <field name="LCSC Part #">C227724</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value=""/>
+      <property name="Digi-Key Part" value="RMCF0603FT23K7CT-ND"/>
       <property name="LCSC Part #" value="C227724"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
@@ -2467,10 +2474,12 @@
       <value>10K</value>
       <footprint>Potentiometer_SMD:Potentiometer_Bourns_3224W_Vertical</footprint>
       <fields>
+        <field name="Digi-Key Part">3224W-1-103GCT-ND</field>
         <field name="LCSC Part #">C81348</field>
       </fields>
       <libsource lib="Device" part="R_Potentiometer_Trim_US" description="Trim-potentiometer, US symbol"/>
       <property name="LCSC Part #" value="C81348"/>
+      <property name="Digi-Key Part" value="3224W-1-103GCT-ND"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
       <sheetpath names="/Outputs/" tstamps="/b200c1d4-b772-4a0d-a7bc-c10bcb241496/"/>
@@ -2495,11 +2504,11 @@
       <value>TL072CDR</value>
       <footprint>Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.29x3mm</footprint>
       <fields>
-        <field name="Digi-Key Part">296-47385-1-ND</field>
+        <field name="Digi-Key Part">296-1282-1-ND</field>
         <field name="LCSC Part #">C6961</field>
       </fields>
       <libsource lib="Amplifier_Operational" part="TL072" description="Dual Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8"/>
-      <property name="Digi-Key Part" value="296-47385-1-ND"/>
+      <property name="Digi-Key Part" value="296-1282-1-ND"/>
       <property name="LCSC Part #" value="C6961"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
@@ -2510,11 +2519,11 @@
       <value>TL072CDR</value>
       <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
       <fields>
-        <field name="Digi-Key Part">296-47385-1-ND</field>
+        <field name="Digi-Key Part">296-1282-1-ND</field>
         <field name="LCSC Part #">C6961</field>
       </fields>
       <libsource lib="Amplifier_Operational" part="TL072" description="Dual Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8"/>
-      <property name="Digi-Key Part" value="296-47385-1-ND"/>
+      <property name="Digi-Key Part" value="296-1282-1-ND"/>
       <property name="LCSC Part #" value="C6961"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
@@ -2525,11 +2534,11 @@
       <value>TL072CDR</value>
       <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
       <fields>
-        <field name="Digi-Key Part">296-47385-1-ND</field>
+        <field name="Digi-Key Part">296-1282-1-ND</field>
         <field name="LCSC Part #">C6961</field>
       </fields>
       <libsource lib="Amplifier_Operational" part="TL072" description="Dual Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8"/>
-      <property name="Digi-Key Part" value="296-47385-1-ND"/>
+      <property name="Digi-Key Part" value="296-1282-1-ND"/>
       <property name="LCSC Part #" value="C6961"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
@@ -2556,11 +2565,11 @@
       <value>TL072CDR</value>
       <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
       <fields>
-        <field name="Digi-Key Part">296-47385-1-ND</field>
+        <field name="Digi-Key Part">296-1282-1-ND</field>
         <field name="LCSC Part #">C6961</field>
       </fields>
       <libsource lib="Amplifier_Operational" part="TL072" description="Dual Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8"/>
-      <property name="Digi-Key Part" value="296-47385-1-ND"/>
+      <property name="Digi-Key Part" value="296-1282-1-ND"/>
       <property name="LCSC Part #" value="C6961"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
@@ -2571,11 +2580,11 @@
       <value>TL072CDR</value>
       <footprint>Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.29x3mm</footprint>
       <fields>
-        <field name="Digi-Key Part">296-47385-1-ND</field>
+        <field name="Digi-Key Part">296-1282-1-ND</field>
         <field name="LCSC Part #">C6961</field>
       </fields>
       <libsource lib="Amplifier_Operational" part="TL072" description="Dual Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8"/>
-      <property name="Digi-Key Part" value="296-47385-1-ND"/>
+      <property name="Digi-Key Part" value="296-1282-1-ND"/>
       <property name="LCSC Part #" value="C6961"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
@@ -2587,10 +2596,12 @@
       <footprint>Package_SO:SOIC-16_3.9x9.9mm_P1.27mm</footprint>
       <datasheet>https://datasheets.maximintegrated.com/en/ds/DG411-DG413.pdf</datasheet>
       <fields>
+        <field name="Digi-Key Part">DG412DY-E3-ND</field>
         <field name="LCSC Part #">C45218</field>
       </fields>
       <libsource lib="Analog_Switch" part="DG412xY" description="Quad SPST Monolithic CMOS Analog Switches, normally OFF, 17Ohm Ron, SOIC-16"/>
       <property name="LCSC Part #" value="C45218"/>
+      <property name="Digi-Key Part" value="DG412DY-E3-ND"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
       <sheetpath names="/Outputs/" tstamps="/b200c1d4-b772-4a0d-a7bc-c10bcb241496/"/>
@@ -2633,10 +2644,12 @@
       <footprint>Package_SO:SOIC-16_3.9x9.9mm_P1.27mm</footprint>
       <datasheet>https://datasheets.maximintegrated.com/en/ds/DG411-DG413.pdf</datasheet>
       <fields>
+        <field name="Digi-Key Part">DG412DY-E3-ND</field>
         <field name="LCSC Part #">C45218</field>
       </fields>
       <libsource lib="Analog_Switch" part="DG412xY" description="Quad SPST Monolithic CMOS Analog Switches, normally OFF, 17Ohm Ron, SOIC-16"/>
       <property name="LCSC Part #" value="C45218"/>
+      <property name="Digi-Key Part" value="DG412DY-E3-ND"/>
       <property name="Sheetname" value="Outputs"/>
       <property name="Sheetfile" value="outputs.kicad_sch"/>
       <sheetpath names="/Outputs/" tstamps="/b200c1d4-b772-4a0d-a7bc-c10bcb241496/"/>
@@ -2988,11 +3001,11 @@
       <value>30.1K .1%</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
-        <field name="Digi-Key Part">P332KDACT-ND</field>
+        <field name="Digi-Key Part">P30.1KDACT-ND</field>
         <field name="LCSC Part #">C374678</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="P332KDACT-ND"/>
+      <property name="Digi-Key Part" value="P30.1KDACT-ND"/>
       <property name="LCSC Part #" value="C374678"/>
       <property name="Sheetname" value="Inputs"/>
       <property name="Sheetfile" value="inputs.kicad_sch"/>
@@ -3003,10 +3016,11 @@
       <value>10K .1%</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
+        <field name="Digi-Key Part">P10KDACT-ND</field>
         <field name="LCSC Part #">C406725</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value=""/>
+      <property name="Digi-Key Part" value="P10KDACT-ND"/>
       <property name="LCSC Part #" value="C406725"/>
       <property name="Sheetname" value="Inputs"/>
       <property name="Sheetfile" value="inputs.kicad_sch"/>
@@ -3032,10 +3046,11 @@
       <value>10K .1%</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
+        <field name="Digi-Key Part">P10KDACT-ND</field>
         <field name="LCSC Part #">C406725</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value=""/>
+      <property name="Digi-Key Part" value="P10KDACT-ND"/>
       <property name="LCSC Part #" value="C406725"/>
       <property name="Sheetname" value="Inputs"/>
       <property name="Sheetfile" value="inputs.kicad_sch"/>
@@ -3061,11 +3076,11 @@
       <value>30.1K .1%</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
-        <field name="Digi-Key Part">P332KDACT-ND</field>
+        <field name="Digi-Key Part">P30.1KDACT-ND</field>
         <field name="LCSC Part #">C374678</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value="P332KDACT-ND"/>
+      <property name="Digi-Key Part" value="P30.1KDACT-ND"/>
       <property name="LCSC Part #" value="C374678"/>
       <property name="Sheetname" value="Inputs"/>
       <property name="Sheetfile" value="inputs.kicad_sch"/>
@@ -3076,10 +3091,11 @@
       <value>10K .1%</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
+        <field name="Digi-Key Part">P10KDACT-ND</field>
         <field name="LCSC Part #">C406725</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value=""/>
+      <property name="Digi-Key Part" value="P10KDACT-ND"/>
       <property name="LCSC Part #" value="C406725"/>
       <property name="Sheetname" value="Inputs"/>
       <property name="Sheetfile" value="inputs.kicad_sch"/>
@@ -3105,10 +3121,11 @@
       <value>10K .1%</value>
       <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder</footprint>
       <fields>
+        <field name="Digi-Key Part">P10KDACT-ND</field>
         <field name="LCSC Part #">C406725</field>
       </fields>
       <libsource lib="Device" part="R_Small_US" description="Resistor, small US symbol"/>
-      <property name="Digi-Key Part" value=""/>
+      <property name="Digi-Key Part" value="P10KDACT-ND"/>
       <property name="LCSC Part #" value="C406725"/>
       <property name="Sheetname" value="Inputs"/>
       <property name="Sheetfile" value="inputs.kicad_sch"/>
@@ -3246,11 +3263,11 @@
       <value>TL072CDR</value>
       <footprint>Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.29x3mm</footprint>
       <fields>
-        <field name="Digi-Key Part">296-47385-1-ND</field>
+        <field name="Digi-Key Part">296-1282-1-ND</field>
         <field name="LCSC Part #">C6961</field>
       </fields>
       <libsource lib="Amplifier_Operational" part="TL072" description="Dual Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8"/>
-      <property name="Digi-Key Part" value="296-47385-1-ND"/>
+      <property name="Digi-Key Part" value="296-1282-1-ND"/>
       <property name="LCSC Part #" value="C6961"/>
       <property name="Sheetname" value="Inputs"/>
       <property name="Sheetfile" value="inputs.kicad_sch"/>
@@ -3262,10 +3279,12 @@
       <footprint>Package_SO:TSSOP-10_3x3mm_P0.5mm</footprint>
       <datasheet>http://www.ti.com/lit/ds/symlink/ads1015.pdf</datasheet>
       <fields>
+        <field name="Digi-Key Part">296-25227-1-ND</field>
         <field name="LCSC Part #">C193969</field>
       </fields>
       <libsource lib="Analog_ADC" part="ADS1015IDGS" description="Ultra-Small, Low-Power, I2C-Compatible, 3.3-kSPS, 12-Bit ADCs With Internal Reference, Oscillator, and Programmable Comparator, VSSOP-10"/>
       <property name="LCSC Part #" value="C193969"/>
+      <property name="Digi-Key Part" value="296-25227-1-ND"/>
       <property name="Sheetname" value="Inputs"/>
       <property name="Sheetfile" value="inputs.kicad_sch"/>
       <sheetpath names="/Inputs/" tstamps="/808a57ff-0ced-4535-b028-9fea6b6c5f09/"/>
@@ -3275,11 +3294,11 @@
       <value>TL072CDR</value>
       <footprint>Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.29x3mm</footprint>
       <fields>
-        <field name="Digi-Key Part">296-47385-1-ND</field>
+        <field name="Digi-Key Part">296-1282-1-ND</field>
         <field name="LCSC Part #">C6961</field>
       </fields>
       <libsource lib="Amplifier_Operational" part="TL072" description="Dual Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8"/>
-      <property name="Digi-Key Part" value="296-47385-1-ND"/>
+      <property name="Digi-Key Part" value="296-1282-1-ND"/>
       <property name="LCSC Part #" value="C6961"/>
       <property name="Sheetname" value="Inputs"/>
       <property name="Sheetfile" value="inputs.kicad_sch"/>
@@ -3291,11 +3310,11 @@
       <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
       <datasheet>http://www.ti.com/lit/ds/symlink/tl071.pdf</datasheet>
       <fields>
-        <field name="Digi-Key Part">296-47385-1-ND</field>
+        <field name="Digi-Key Part">296-1282-1-ND</field>
         <field name="LCSC Part #">C6961</field>
       </fields>
       <libsource lib="Amplifier_Operational" part="TL072" description="Dual Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8"/>
-      <property name="Digi-Key Part" value="296-47385-1-ND"/>
+      <property name="Digi-Key Part" value="296-1282-1-ND"/>
       <property name="LCSC Part #" value="C6961"/>
       <property name="Sheetname" value="Inputs"/>
       <property name="Sheetfile" value="inputs.kicad_sch"/>
@@ -3971,11 +3990,11 @@
       <footprint>Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.29x3mm</footprint>
       <datasheet>http://www.ti.com/lit/ds/symlink/tl071.pdf</datasheet>
       <fields>
-        <field name="Digi-Key Part">296-47385-1-ND</field>
+        <field name="Digi-Key Part">296-1282-1-ND</field>
         <field name="LCSC Part #">C6961</field>
       </fields>
       <libsource lib="Amplifier_Operational" part="TL072" description="Dual Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8"/>
-      <property name="Digi-Key Part" value="296-47385-1-ND"/>
+      <property name="Digi-Key Part" value="296-1282-1-ND"/>
       <property name="LCSC Part #" value="C6961"/>
       <property name="Sheetname" value="Output Monitors"/>
       <property name="Sheetfile" value="output_monitors.kicad_sch"/>
@@ -3987,11 +4006,11 @@
       <footprint>Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.29x3mm</footprint>
       <datasheet>http://www.ti.com/lit/ds/symlink/tl071.pdf</datasheet>
       <fields>
-        <field name="Digi-Key Part">296-47385-1-ND</field>
+        <field name="Digi-Key Part">296-1282-1-ND</field>
         <field name="LCSC Part #">C6961</field>
       </fields>
       <libsource lib="Amplifier_Operational" part="TL072" description="Dual Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8"/>
-      <property name="Digi-Key Part" value="296-47385-1-ND"/>
+      <property name="Digi-Key Part" value="296-1282-1-ND"/>
       <property name="LCSC Part #" value="C6961"/>
       <property name="Sheetname" value="Output Monitors"/>
       <property name="Sheetfile" value="output_monitors.kicad_sch"/>
@@ -4003,11 +4022,11 @@
       <footprint>Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.29x3mm</footprint>
       <datasheet>http://www.ti.com/lit/ds/symlink/tl071.pdf</datasheet>
       <fields>
-        <field name="Digi-Key Part">296-47385-1-ND</field>
+        <field name="Digi-Key Part">296-1282-1-ND</field>
         <field name="LCSC Part #">C6961</field>
       </fields>
       <libsource lib="Amplifier_Operational" part="TL072" description="Dual Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8"/>
-      <property name="Digi-Key Part" value="296-47385-1-ND"/>
+      <property name="Digi-Key Part" value="296-1282-1-ND"/>
       <property name="LCSC Part #" value="C6961"/>
       <property name="Sheetname" value="Output Monitors"/>
       <property name="Sheetfile" value="output_monitors.kicad_sch"/>
@@ -4019,11 +4038,11 @@
       <footprint>Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.29x3mm</footprint>
       <datasheet>http://www.ti.com/lit/ds/symlink/tl071.pdf</datasheet>
       <fields>
-        <field name="Digi-Key Part">296-47385-1-ND</field>
+        <field name="Digi-Key Part">296-1282-1-ND</field>
         <field name="LCSC Part #">C6961</field>
       </fields>
       <libsource lib="Amplifier_Operational" part="TL072" description="Dual Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8"/>
-      <property name="Digi-Key Part" value="296-47385-1-ND"/>
+      <property name="Digi-Key Part" value="296-1282-1-ND"/>
       <property name="LCSC Part #" value="C6961"/>
       <property name="Sheetname" value="Output Monitors"/>
       <property name="Sheetfile" value="output_monitors.kicad_sch"/>

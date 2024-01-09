@@ -59,7 +59,7 @@ spice/*.raw
 
 ~$*
 
-main_board/bom/lcsc/lcsc_bom.xls
+# main_board/bom/lcsc/lcsc_bom.xls
 main_board/fab/pos/*.csv
 main_board/fab/gerber/*.csv
 
