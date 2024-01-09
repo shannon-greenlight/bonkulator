@@ -4,8 +4,6 @@ The Bonkulator is a Eurorack module that fits into a 3U x 14HP slot. It features
 
 # main_board, panel
 
-Main Board in the release is on hold. New release coming soon! The current files haven't been made into a board yet. A release will be created after the boards have been built and tested.
-
 These repos contain the materials needed to construct the Bonkulator main board and the front panel.
 The files are for KiCAD 6.0. Go to the Greenlight Kicad repo to get the needed libraries.
 The gerber files work with JLCPC and will most likely work with other board manufacturers.
