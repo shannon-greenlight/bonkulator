@@ -376,6 +376,12 @@ String output_get_name(int output_num)
     return text;
 }
 
+bool is_toggle_waveform()
+{
+    int waveform = (the_output)().get_param(OUTPUT_WAVEFORM);
+    return waveform == WAVEFORM_TOGGLE;
+}
+
 void output_display()
 {
     update_clock();
@@ -383,13 +389,20 @@ void output_display()
     (the_output)().labels[OUTPUT_CV0] = get_input_calibrated(0) ? "CV0: " : "CV0* ";
     (the_output)().labels[OUTPUT_CV1] = get_input_calibrated(1) ? "CV1: " : "CV1* ";
 
+    clear_alt_values();
+    set_cv_alt_values((the_output)().get_param(OUTPUT_CV0), "CV0");
+    set_cv_alt_values((the_output)().get_param(OUTPUT_CV1), "CV1");
+
     int wave_num = (the_output)().get_param(OUTPUT_WAVEFORM);
+    clear_alt_values();
     switch (wave_num)
     {
     case WAVEFORM_TOGGLE:
         (the_output)().alt_values[OUTPUT_ACTIVE_TIME] = "N/A";
         (the_output)().alt_values[OUTPUT_IDLE_TIME] = "N/A";
         (the_output)().alt_values[OUTPUT_REPEAT] = "N/A";
+        (the_output)().alt_values[OUTPUT_IDLE_VALUE] = "N/A";
+        (the_output)().alt_values[OUTPUT_CLOCK] = "N/A";
         break;
     case WAVEFORM_PULSE:
         (the_output)().alt_values[OUTPUT_OFFSET] = "N/A";
@@ -397,13 +410,9 @@ void output_display()
         // (the_output)().labels[OUTPUT_IDLE_TIME] = "Idle Time: ";
         break;
     default:
-        clear_alt_values();
+        // clear_alt_values();
         break;
     }
-
-    clear_alt_values();
-    set_cv_alt_values((the_output)().get_param(OUTPUT_CV0), "CV0");
-    set_cv_alt_values((the_output)().get_param(OUTPUT_CV1), "CV1");
 
     output_update_range();
     update_idle_value();
@@ -412,6 +421,10 @@ void output_display()
 
     String text = output_get_name(selected_output.get());
     ui.printLine(text, 0, 2);
+    // ui.terminal_debug("Waveform: " + String(wave_num));
+    apply_params_to_waveform(selected_output.get());
+    get_waveform_parts(selected_output.get());
+    // ui.terminal_debug("Output: " + String(selected_output.get()));
 }
 
 void display_output()
@@ -478,18 +491,6 @@ bool any_output_triggered()
     return any_triggered;
 }
 
-void reset_outputs(int trig_num)
-{
-    (*triggers[trig_num]).state = TRIGGER_IDLE;
-    for (int i = 0; i < NUM_OUTPUTS; i++)
-    {
-        if ((*bonk_outputs[i]).get_param(OUTPUT_ENABLE_T0 + trig_num))
-        {
-            (*bonk_outputs[i]).triggered = false;
-        }
-    }
-}
-
 void add_waveform()
 {
     _output_maxs[OUTPUT_WAVEFORM]++;
@@ -541,7 +542,6 @@ void update_waveform()
 
 void update_active_time()
 {
-    // ui.terminal_debug("Active time: " + String((the_output)().get_param(OUTPUT_ACTIVE_TIME)));
     outputs[selected_output.get()].active_time = (the_output)().get_param(OUTPUT_ACTIVE_TIME);
     update_waveform();
 }
@@ -753,6 +753,7 @@ void outputs_begin()
             output->param_num = OUTPUT_ENABLE_T0 + j;
             update_trigger();
         }
+        output->param_num = OUTPUT_WAVEFORM;
     }
     selected_fxn = selected_fxn_memory;
     selected_output.put(output_memory);
@@ -760,87 +761,77 @@ void outputs_begin()
     // update_trig_ctrl();
 }
 
-void check_outputs()
+void check_cv_inputs()
 {
-    bool in_use;
     bool adc0_in_use = false;
     bool adc1_in_use = false;
-    for (int trig = 0; trig < 4; trig++)
+    for (int output = 0; output < NUM_OUTPUTS; output++)
     {
-        in_use = false;
-        for (int output = 0; output < NUM_OUTPUTS; output++)
-        {
-            if ((*bonk_outputs[output]).get_param(OUTPUT_CV0) > 0)
-                adc0_in_use = true;
-            if ((*bonk_outputs[output]).get_param(OUTPUT_CV1) > 0)
-                adc1_in_use = true;
-
-            bool this_trig_enabled;
-            switch (trig)
-            {
-            case 0:
-                this_trig_enabled = (*bonk_outputs[output]).get_param(OUTPUT_ENABLE_T0);
-                break;
-            case 1:
-                this_trig_enabled = (*bonk_outputs[output]).get_param(OUTPUT_ENABLE_T1);
-                break;
-            case 2:
-                this_trig_enabled = (*bonk_outputs[output]).get_param(OUTPUT_ENABLE_T2);
-                break;
-            case 3:
-                this_trig_enabled = (*bonk_outputs[output]).get_param(OUTPUT_ENABLE_T3);
-                break;
-            }
-            if (this_trig_enabled && (*bonk_outputs[output]).triggered)
-            {
-                // ui.terminal_debug((*bonk_outputs[output]).name + " triggered by: " + String(trig));
-                in_use = true;
-            }
-        }
-        if (!in_use)
-        {
-            // Serial.println("Turning off LED " + String(trig));
-            switch (trig)
-            {
-            case 0:
-                digitalWrite(T0_LED, LOW);
-                reset_outputs(0);
-                break;
-            case 1:
-                digitalWrite(T1_LED, LOW);
-                reset_outputs(1);
-                break;
-            case 2:
-                digitalWrite(T2_LED, LOW);
-                reset_outputs(2);
-                break;
-            case 3:
-                digitalWrite(T3_LED, LOW);
-                reset_outputs(3);
-                break;
-            }
-        }
+        if ((*bonk_outputs[output]).get_param(OUTPUT_CV0) > 0)
+            adc0_in_use = true;
+        if ((*bonk_outputs[output]).get_param(OUTPUT_CV1) > 0)
+            adc1_in_use = true;
     }
-
     // ui.terminal_debug("adc0_in_use: " + String(adc0_in_use) + " adc1_in_use: " + String(adc1_in_use));
-
-    if (adc0_in_use)
+    if (adc0_in_use || adc1_in_use)
     {
-        adc0 = adc_read(0);
-    }
-    if (adc1_in_use)
-    {
-        adc1 = adc_read(1);
-    }
-
-    for (int cv = 0; cv < 2; cv++)
-    {
-        for (int output = 0; output < NUM_OUTPUTS; output++)
+        if (adc0_in_use)
         {
-            if (adc0_in_use)
-                cv_set(OUTPUT_CV0, output, adc0);
-            if (adc1_in_use)
-                cv_set(OUTPUT_CV1, output, adc1);
+            adc0 = adc_read(0);
+        }
+        if (adc1_in_use)
+        {
+            adc1 = adc_read(1);
+        }
+
+        for (int cv = 0; cv < 2; cv++)
+        {
+            for (int output = 0; output < NUM_OUTPUTS; output++)
+            {
+                if (adc0_in_use)
+                    cv_set(OUTPUT_CV0, output, adc0);
+                if (adc1_in_use)
+                    cv_set(OUTPUT_CV1, output, adc1);
+            }
         }
     }
+}
+
+String check_outputs()
+{
+    bool output_in_use;
+    for (int output = 0; output < NUM_OUTPUTS; output++)
+    {
+        output_in_use = false;
+        for (int trig = 0; trig < 4; trig++)
+        {
+            if ((*bonk_outputs[output]).get_param(OUTPUT_ENABLE_T0 + trig) > 0 && triggers[trig]->state == TRIGGER_ACTIVE)
+            {
+                output_in_use = true;
+            }
+        }
+        if (!output_in_use)
+        {
+            (*bonk_outputs[output]).triggered = false;
+        }
+    }
+    String out = "";
+    String t = "     ";
+    for (int i = 0; i < NUM_OUTPUTS; i++)
+    {
+        if ((*bonk_outputs[i]).get_param(OUTPUT_CLOCK) == 1)
+        {
+            t = " X" + String(bonk_output(i).triggered_by) + "  ";
+        }
+        else
+        {
+            t = "     ";
+            if ((*bonk_outputs[i]).triggered)
+            {
+                t = " T" + String(bonk_output(i).triggered_by) + "  ";
+            }
+        }
+        out += String(i) + ":" + t;
+    }
+    return out;
 }

@@ -1,4 +1,5 @@
 // Trigger functions
+#include "Arduino.h"
 
 void clear_trigger(int output_num, int trig_num)
 {
@@ -94,6 +95,66 @@ String check_output_triggers()
     return out;
 }
 
+bool trigger_inactive(int trig_num)
+{
+    bool trigger_active = false;
+    for (int i = 0; i < NUM_OUTPUTS; i++)
+    {
+        if ((*bonk_outputs[i]).get_param(OUTPUT_ENABLE_T0 + trig_num) && (*bonk_outputs[i]).triggered)
+        {
+            trigger_active = true;
+        }
+    }
+    return !trigger_active;
+}
+
+void send_trig_status_to_USB()
+{
+    static trigger_state t0_memory;
+    static trigger_state t1_memory;
+    static trigger_state t2_memory;
+    static trigger_state t3_memory;
+    if (usb_direct_enabled())
+    {
+        if (trig0.state != t0_memory)
+        {
+            send_status_to_USB();
+            t0_memory = trig0.state;
+        }
+
+        if (trig1.state != t1_memory)
+        {
+            send_status_to_USB();
+            t1_memory = trig1.state;
+        }
+
+        if (trig2.state != t2_memory)
+        {
+            send_status_to_USB();
+            t2_memory = trig2.state;
+        }
+
+        if (trig3.state != t3_memory)
+        {
+            send_status_to_USB();
+            t3_memory = trig3.state;
+        }
+    }
+}
+
+void check_triggers()
+{
+    send_trig_status_to_USB();
+    for (int trig_num = 0; trig_num < 4; trig_num++)
+    {
+        if (trigger_inactive(trig_num))
+        {
+            digitalWrite(trigger_leds[trig_num], LOW);
+            (*triggers[trig_num]).state = TRIGGER_IDLE;
+        }
+    }
+}
+
 void trigger0()
 {
     trig0.trigger();
@@ -118,20 +179,15 @@ void trigger_output(byte trig_num, int output_num)
 {
     OutputData *outptr = &outputs[output_num];
     (*bonk_outputs[output_num]).trigger(trig_num);
-    if ((*bonk_outputs[output_num]).triggered || (*bonk_outputs[output_num]).get_param(OUTPUT_WAVEFORM) == WAVEFORM_TOGGLE)
+    if ((*bonk_outputs[output_num]).get_param(OUTPUT_CLOCK) != 1 && (*bonk_outputs[output_num]).get_param(OUTPUT_WAVEFORM) != WAVEFORM_TOGGLE)
     {
+        outptr->current_index = 0;
+        // digitalWrite(trigger_leds[3], output_num == 0 ? HIGH : LOW);
         outptr->repeat_count = (*bonk_outputs[output_num]).get_param(OUTPUT_REPEAT);
         outptr->next_time = (*bonk_outputs[output_num]).get_param(OUTPUT_INIT_DELAY) + millis();
     }
-    else
-    {
-        outptr->current_index = 0;
-        send_idle_value(output_num);
-    }
     // set led
-    // digitalWrite(trig_num, (*bonk_outputs[output_num]).triggered);
-    // digitalWrite(trig_num, (*triggers[trig_num]).state);
-    digitalWrite(trig_num, HIGH);
+    digitalWrite(trigger_leds[trig_num], HIGH);
 }
 
 void trigger_report()
@@ -165,19 +221,19 @@ void trigger_report()
     {
         Serial.print(String(i));
         Serial.print("\t");
-        Serial.print(String((*bounce_inputs[i]).get_param(BOUNCE_ENABLE_T0)));
+        Serial.print(String((*bounce_fxns[i]).get_param(BOUNCE_ENABLE_T0)));
         Serial.print("\t");
-        Serial.print(String((*bounce_inputs[i]).get_param(BOUNCE_ENABLE_T1)));
+        Serial.print(String((*bounce_fxns[i]).get_param(BOUNCE_ENABLE_T1)));
         Serial.print("\t");
-        Serial.print(String((*bounce_inputs[i]).get_param(BOUNCE_ENABLE_T2)));
+        Serial.print(String((*bounce_fxns[i]).get_param(BOUNCE_ENABLE_T2)));
         Serial.print("\t");
-        Serial.print(String((*bounce_inputs[i]).get_param(BOUNCE_ENABLE_T3)));
+        Serial.print(String((*bounce_fxns[i]).get_param(BOUNCE_ENABLE_T3)));
         Serial.println();
         // Serial.print("\t");
         // Serial.println(String((*bonk_outputs[i]).triggered));
     }
     Serial.println();
-    Serial.println("Trigger Outputs");
+    Serial.println("Trigger Channels");
     ui.t.printChars(16, "-");
     Serial.println();
     for (int i = 0; i < NUM_TRIGGERS; i++)

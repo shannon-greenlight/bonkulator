@@ -341,20 +341,21 @@ void process_key()
 	esc_mode = keypress == 27 || keypress == '[';
 }
 
-void keyboard_update_trigger(int val, int channel, int selected_trig_num)
+void keyboard_update_trigger(int val, int channel, int selected_trig_enable)
 {
 	Greenface_gadget *remember_fxn = selected_fxn;
-	if (channel < 8)
+	if (in_output_fxn())
 	{
-		bonk_outputs[channel]->param_put(val, selected_trig_num);
-		bonk_outputs[channel]->param_num = selected_trig_num;
+		bonk_outputs[channel]->param_put(val, selected_trig_enable);
+		bonk_outputs[channel]->param_num = selected_trig_enable;
 		output_update_trigger(channel);
 	}
 	else
 	{
-		bounce_inputs[channel - 8]->param_put(val, selected_trig_num);
-		bounce_inputs[channel - 8]->param_num = selected_trig_num;
-		selected_fxn = bounce_inputs[channel - 8];
+		// ui.terminal_debug("Update bounce trig enable: " + String(selected_trig_enable) + " val: " + String(val) + " channel: " + String(channel));
+		bounce_fxns[channel]->param_num = selected_trig_enable;
+		bounce_fxns[channel]->param_put(val, selected_trig_enable);
+		selected_fxn = bounce_fxns[channel];
 		bounce_update_trigger();
 		selected_fxn = remember_fxn;
 	}
@@ -369,7 +370,7 @@ void process_cmd(String in_str)
 	int int_param = in_str.substring(1).toInt();
 	int dig1 = in_str.substring(1, 2).toInt();
 	int dig2 = in_str.substring(2, 3).toInt();
-	int selected_trig_num = (in_output_fxn() ? OUTPUT_ENABLE_T0 : BOUNCE_ENABLE_T0) + selected_trigger->trig_num;
+	int selected_trig_enable = (in_output_fxn() ? OUTPUT_ENABLE_T0 : BOUNCE_ENABLE_T0) + selected_trigger->trig_num;
 	int selected_output_temp = selected_output.get();
 
 	int scale_indicies[] = {OUTPUT_SCALE, BOUNCE_SCALE};
@@ -417,26 +418,26 @@ void process_cmd(String in_str)
 		recv_user_waveform(in_str);
 		break;
 	case 'T':
-		// ui.terminal_debug("Modify Trigger! Output: " + String(dig2) + " Trigger: " + String(selected_trig_num));
+		// ui.terminal_debug("Modify Trigger! Output: " + String(dig2) + " Trigger: " + String(selected_trig_enable));
 		switch (dig1)
 		{
 		case 0:
 			// ui.terminal_debug("Disable Trigger! Output: " + String(dig2));
-			keyboard_update_trigger(0, dig2, selected_trig_num);
+			keyboard_update_trigger(0, dig2, selected_trig_enable);
 			break;
 		case 1:
 			// Serial.println("Enable Trigger! Output: " + String(dig2));
-			keyboard_update_trigger(1, dig2, selected_trig_num);
+			keyboard_update_trigger(1, dig2, selected_trig_enable);
 			break;
 		case 2:
 			// ui.terminal_debug("Toggle Trigger! Output: " + String(dig2));
 			if (in_output_fxn())
 			{
-				keyboard_update_trigger((bonk_outputs[dig2]->get_param(selected_trig_num) == 1) ? 0 : 1, dig2, selected_trig_num);
+				keyboard_update_trigger((bonk_outputs[dig2]->get_param(selected_trig_enable) == 1) ? 0 : 1, dig2, selected_trig_enable);
 			}
 			else
 			{
-				keyboard_update_trigger((bounce_inputs[dig2 - 8]->get_param(selected_trig_num) == 1) ? 0 : 1, dig2, selected_trig_num);
+				keyboard_update_trigger((bounce_fxns[dig2]->get_param(selected_trig_enable) == 1) ? 0 : 1, dig2, selected_trig_enable);
 			}
 			break;
 		case 3:

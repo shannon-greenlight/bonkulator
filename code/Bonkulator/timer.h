@@ -59,68 +59,51 @@ void timer_service_outputs()
   {
     OutputData *outptr = &outputs[i];
     int wave_type = (*bonk_outputs[i]).get_param(OUTPUT_WAVEFORM);
-    if (wave_type == WAVEFORM_TOGGLE)
+    if ((*bonk_outputs[i]).triggered)
     {
-      if (now >= outptr->next_time)
+      int delay = (*bonk_outputs[i]).get_param(OUTPUT_IDLE_TIME);
+      bool trigger_external = (*bonk_outputs[i]).get_param(OUTPUT_CLOCK) == 1 || wave_type == WAVEFORM_TOGGLE;
+      (*bonk_outputs[i]).triggered = !trigger_external;
+      bool ok_togo = trigger_external ? true : now >= outptr->next_time;
+      // bool ok_togo = now >= outptr->next_time;
+      if (ok_togo)
       {
-        outptr->next_time = now + 9999999; // a long time, next_time set by trigger
-        if ((*bonk_outputs[i]).triggered)
+        if (outptr->current_index == outptr->data_len)
         {
-          output_next_value(i);
+          // start of delay active_time
+          send_idle_value(i);
         }
         else
         {
-          send_idle_value(i);
+          output_next_value(i);
+        }
+
+        // are we done with waveform yet?
+        if (outptr->current_index++ >= (outptr->data_len - (delay == 0 ? 1 : 0)))
+        {
+          if ((*bonk_outputs[i]).get_param(OUTPUT_REPEAT) > 0)
+          {
+            if (outptr->repeat_count > 0)
+              outptr->repeat_count--;
+            (*bonk_outputs[i]).triggered = outptr->repeat_count > 0 && !trigger_external;
+          }
+          if (outptr->repeat_count == 0 && !trigger_external)
+            outptr->ok_set_idle = true;
+          outptr->current_index = 0;
+          outptr->next_time = now + delay;
+        }
+        else
+        {
+          outptr->next_time = now + outptr->time_inc;
         }
       }
     }
     else
     {
-      if ((*bonk_outputs[i]).triggered)
+      if (outptr->ok_set_idle)
       {
-        int delay = (*bonk_outputs[i]).get_param(OUTPUT_IDLE_TIME);
-        uint16_t trigger_external = (*bonk_outputs[i]).get_param(OUTPUT_CLOCK) == 1;
-        (*bonk_outputs[i]).triggered = !trigger_external;
-        bool ok_togo = trigger_external ? true : now >= outptr->next_time;
-        if (ok_togo)
-        {
-          if (outptr->current_index == outptr->data_len)
-          {
-            // start of delay active_time
-            send_idle_value(i);
-          }
-          else
-          {
-            output_next_value(i);
-          }
-
-          // are we done with waveform yet?
-          if (outptr->current_index++ >= (outptr->data_len - (delay == 0 ? 1 : 0)))
-          {
-            if ((*bonk_outputs[i]).get_param(OUTPUT_REPEAT) > 0)
-            {
-              if (outptr->repeat_count > 0)
-                outptr->repeat_count--;
-              (*bonk_outputs[i]).triggered = outptr->repeat_count > 0;
-            }
-            if (outptr->repeat_count == 0 && !trigger_external)
-              outptr->ok_set_idle = true;
-            outptr->current_index = 0;
-            outptr->next_time = now + delay;
-          }
-          else
-          {
-            outptr->next_time = now + outptr->time_inc;
-          }
-        }
-      }
-      else
-      {
-        if (outptr->ok_set_idle)
-        {
-          send_idle_value(i);
-          outptr->ok_set_idle = false;
-        }
+        send_idle_value(i);
+        outptr->ok_set_idle = false;
       }
     }
   }

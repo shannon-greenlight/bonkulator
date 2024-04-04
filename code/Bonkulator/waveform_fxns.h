@@ -44,10 +44,12 @@ void dump_waveform(int output, bool dump_ref)
 void apply_params_to_waveform(int output)
 {
     // int output = selected_output.get();
-    float scale = (the_output)().get_param_w_offset(OUTPUT_SCALE);
-    int offset = (the_output)().get_param_w_offset(OUTPUT_OFFSET);
-    int randomness = (the_output)().get_param(OUTPUT_RANDOMNESS);
-    int wave_type = (the_output)().get_param(OUTPUT_WAVEFORM);
+    float scale = (*bonk_outputs[output]).get_param_w_offset(OUTPUT_SCALE);
+    // return;
+    float idle_value = (*bonk_outputs[output]).get_param_w_offset(OUTPUT_IDLE_VALUE);
+    int offset = (*bonk_outputs[output]).get_param_w_offset(OUTPUT_OFFSET);
+    int randomness = (*bonk_outputs[output]).get_param(OUTPUT_RANDOMNESS);
+    int wave_type = (*bonk_outputs[output]).get_param(OUTPUT_WAVEFORM);
 
     float scale_correction = output_scale_corrections.get(output) / 1000.;
     int offset_correction = output_offset_corrections.get(output);
@@ -69,12 +71,23 @@ void apply_params_to_waveform(int output)
         offset_factor = offset_adjust = 0;
         // set_randomness_factor(randomness, abs(scale - 100) / 100.0, output);
         break;
+    case WAVEFORM_TOGGLE:
+        outputs[output].active_time = 65535;
+        outputs[output].repeat_count = 1;
+        scale_factor = scale / 100;
+        offset_factor = (offset / 100.0) * (DAC_FS + 1);
+        offset_adjust = DAC_FS * (100 - scale) / 200;
+        // ui.terminal_debug("Apply params -- Output: " + String(output) + " data_len: " + String(data_len));
+        break;
     default:
+        outputs[output].active_time = (*bonk_outputs[output]).get_param(OUTPUT_ACTIVE_TIME);
+        outputs[output].repeat_count = (*bonk_outputs[output]).get_param(OUTPUT_REPEAT);
         scale_factor = scale / 100;
         // offset_factor = ((offset + OUTPUT_OFFSET_OFFSET) / 100.0) * (DAC_FS + 1);
         offset_factor = (offset / 100.0) * (DAC_FS + 1);
         offset_adjust = DAC_FS * (100 - scale) / 200;
         // set_randomness_factor(randomness, scale_factor, output);
+        // ui.terminal_debug("Apply params -- Active Time: " + String(outputs[output].active_time) + " offset: " + String(offset));
         break;
     }
 
@@ -224,8 +237,10 @@ int calc_wave_value(int i, int waveform, uint16_t waveform_parts)
         temp = 2 * pyramid_index * (DAC_FS + 1) / waveform_parts;
         break;
     case WAVEFORM_PULSE:
-    case WAVEFORM_TOGGLE:
         temp = DAC_FS;
+        break;
+    case WAVEFORM_TOGGLE:
+        temp = (i < waveform_parts / 2) ? DAC_FS : 0;
         break;
     case WAVEFORM_MAYTAG:
         temp = random(0, DAC_FS);
@@ -243,6 +258,11 @@ void set_waveform(int output, int waveform)
     uint16_t *waveform_data = outputs[output].waveform_data;
     uint16_t waveform_parts = get_waveform_parts(output); // also sets time_inc
 
+    if (waveform == WAVEFORM_TOGGLE)
+    {
+        waveform_parts = 2;
+    }
+
     int user_wavenum = waveform - NUM_STD_WAVEFORMS;
     EEPROM_Arr16 user_waveform = (*user_waveforms_data[user_wavenum]);
 
@@ -254,7 +274,7 @@ void set_waveform(int output, int waveform)
     // int pyramid_index;
     for (int i = 0; i < waveform_parts; i++)
     {
-        if (waveform > WAVEFORM_MAYTAG) // is this a user wave?
+        if (waveform > WAVEFORM_TOGGLE) // is this a user wave?
         {
             waveform_data[i] = waveform_ref[i] = user_waveform.get(user_inc_factor * i);
         }

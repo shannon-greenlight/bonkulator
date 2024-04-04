@@ -74,6 +74,8 @@ uint16_t quantize_value(uint16_t value, uint16_t output_num);
 
 // waveforms
 void apply_params_to_waveform(int output);
+uint16_t get_waveform_parts(int output);
+
 void dump_waveform(int output_num, bool dump_ref);
 void graph_waveform(int output_num);
 void set_waveform(int, int);
@@ -94,12 +96,12 @@ int get_raw_input_offset_correction(int input);
 int get_input_scale_correction(int input);
 
 // triggers
-String check_output_triggers();
 bool check_any_triggers();
 void clear_all_triggers();
 void trigger_output(byte trig_num, int output_num);
 void trigger_report();
 void clear_trigger(int output_num, int trig_num);
+void send_trig_status_to_USB();
 
 // interface to modules
 #include "EEPROM_fxns.h"
@@ -131,6 +133,7 @@ TRIGGER trig_cv1(5);
 TRIGGER *selected_trigger;
 #define NUM_TRIGGERS 4
 TRIGGER *triggers[NUM_TRIGGERS] = {&trig0, &trig1, &trig2, &trig3};
+int trigger_leds[NUM_TRIGGERS] = {T0_LED, T1_LED, T2_LED, T3_LED};
 void select_trigger(int int_param); // used by Keyboard fxns
 
 uint8_t selected_fxn_num = 0;
@@ -242,7 +245,7 @@ void setup()
 
   hardware_begin();
   timer_begin();
-  triggers_begin();
+  // triggers_begin();
   // keyboard_begin();
   settings_begin();
   input_cal_begin();
@@ -274,6 +277,7 @@ void setup()
   ui.begin(face1);
   settings_put_usb_direct(0);
   select_fxn(remembered_fxn.get());
+  triggers_begin();
 }
 
 // the loop function runs over and over again forever
@@ -283,11 +287,6 @@ void loop()
   static bool toggle = false;
   static unsigned long cnt = 0;
   bool debug = false;
-  // static unsigned long now;
-  static trigger_state t0_memory;
-  static trigger_state t1_memory;
-  static trigger_state t2_memory;
-  static trigger_state t3_memory;
 
   check_keyboard();
   if (debug)
@@ -299,50 +298,16 @@ void loop()
 
   if (in_output_fxn() || in_bounce_fxn())
   {
-    // now = millis();
     if (in_output_fxn())
     {
-      status_string = check_output_triggers();
+      check_triggers();
+      // check_triggers();
+      status_string = check_outputs();
+      check_cv_inputs();
     }
     else
     {
       check_bounce_triggers();
-    }
-    // ui.terminal_debug("Trig0: " + String(trig0.state));
-
-    if (trig0.state != t0_memory)
-    {
-      send_status_to_USB();
-      t0_memory = trig0.state;
-    }
-
-    if (trig1.state != t1_memory)
-    {
-      send_status_to_USB();
-      t1_memory = trig1.state;
-    }
-
-    if (trig2.state != t2_memory)
-    {
-      send_status_to_USB();
-      t2_memory = trig2.state;
-    }
-
-    if (trig3.state != t3_memory)
-    {
-      send_status_to_USB();
-      t3_memory = trig3.state;
-    }
-
-    // status_string = "Delta: " + String(millis() - now);
-    // status_string = "ADC0: " + String(adc0) + " ADC1: " + String(adc1);
-    if (in_output_fxn())
-    {
-      check_outputs();
-    }
-    else
-    {
-      // check_bounce_triggers();
       String temp_status_string = check_bounce();
       if (temp_status_string != "")
       {

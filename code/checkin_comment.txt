@@ -639,3 +639,89 @@ Adds support for Mac upload in Updater.
  
 Check-in comment for Bonkulator-502 
 Compiler files updated and added.
+ 
+Check-in comment for Bonkulator-503 
+Fix for terminal mirror.
+ 
+Check-in comment for Bonkulator-504 
+Looks like trigger fix works.
+ 
+Check-in comment for Bonkulator-505 
+A little cleanup.
+ 
+Check-in comment for Bonkulator-506 
+Safety.
+ 
+Check-in comment for Bonkulator-507 
+More on triggers.
+ 
+Check-in comment for Bonkulator-508 
+Safety.
+ 
+Check-in comment for Bonkulator-509 
+Safety.
+ 
+Check-in comment for Bonkulator-510 
+Safety.
+ 
+Check-in comment for Bonkulator-511 
+check outputs and check triggers are now properly factored.
+ 
+Check-in comment for Bonkulator-512 
+Change trigger to not toggle! Part way done.
+Safety.
+ 
+Check-in comment for Bonkulator-513 
+Works in basic mode. Need to check other modes. Cleanup needed.
+Safety.
+ 
+Check-in comment for Bonkulator-514 
+Safety.
+ 
+Check-in comment for Bonkulator-515 
+Safety.
+ 
+Check-in comment for Bonkulator-516 
+Changes to bounce trigger fxns. Several name changes.
+Works better.
+ 
+Check-in comment for Bonkulator-517 
+Bounce can now be triggered remotely.
+Safety.
+ 
+Check-in comment for Bonkulator-518 
+Bounce triggers working. Need to check Toggle trigger.
+ 
+Check-in comment for Bonkulator-519 
+Sends trig status to usb in bounce now.
+ 
+Check-in comment for Bonkulator-520 
+Fixes toggle trigger?
+Needs cleanup and more testing.
+ 
+Check-in comment for Bonkulator-521 
+Don't like stopping trig when changing params in output mode. Disabled.
+Saved code just-in-case.
+Bounce trigger still can be stopped with a change in param.
+ 
+Check-in comment for Bonkulator-522 
+Safety.
+ 
+Check-in comment for Bonkulator-523 
+Looks like external clock works.
+Need to test all modes again.
+ 
+Check-in comment for Bonkulator-524 
+v3.3.2
+ 
+Check-in comment for Bonkulator-525 
+Looks like toggle waveform now works.
+Safety.
+ 
+Check-in comment for Bonkulator-526 
+Release candidate.
+ 
+Check-in comment for Bonkulator-527 
+Fixes bug where it crashes on boot if trigger signal is present.
+Fix is to begin triggers last.
+Also sets output param to Waveform on boot.

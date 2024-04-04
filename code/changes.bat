@@ -1,6 +1,6 @@
 @echo off
 
-echo This will compare a backup to the Spankulator folder
+echo This will compare a backup to the Bonkulator folder
 
 if defined BONK_BACKUP_DRIVE goto ask_num
 

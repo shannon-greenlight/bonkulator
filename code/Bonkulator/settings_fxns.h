@@ -18,8 +18,8 @@ enum
 
 uint16_t _settings_params[SETTINGS_NUM_PARAMS];
 uint16_t _settings_mins[] = {0, 0, 0, 0, 0, 1, 0, 0, 0, 10, 0};
-uint16_t _settings_maxs[] = {0, 0, 1, 2, 1, 9999, 7, 1, 1, 50, 1};
-uint16_t _settings_init_vals[] = {0, 0, 1, 0, 0, 15, 0, 0, 0, 42, 0};
+uint16_t _settings_maxs[] = {0, 0, 1, 2, 1, 9999, 7, 1, 1, 43, 1};
+uint16_t _settings_init_vals[] = {0, 0, 1, 0, 0, 15, 0, 0, 0, 43, 0};
 uint16_t *settings_stuff[] = {_settings_params, _settings_mins, _settings_maxs, _settings_init_vals};
 String settings_labels[] = {"Version: ", "Name: ", "Encoder Type: ", "WiFi: ", "USB Direct: ", "Screen Saver: ", "Waveforms: ", "Reset: ", "Calibrate: ", "Board Revision: ", "Bounce: "};
 String settings_string_params[] = {VERSION_NUM, "$~", "Normal ,Reverse", "Disabled,Enabled,Reset ", "Disabled,Enabled ", "", "User 0,User 1,User 2,User 3,User 4,User 5,User 6,User 7", ACTIVATE_STRING, "Inputs,Outputs", "", ""};
