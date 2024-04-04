@@ -45,7 +45,7 @@ int16_t *input_offsets[NUM_INPUTS] =
         intput_offsets1,
 };
 
-Greenface_gadget *bounce_inputs[NUM_INPUTS] = {
+Greenface_gadget *bounce_fxns[NUM_INPUTS] = {
     &bounce0_fxn,
     &bounce1_fxn,
 };
@@ -65,7 +65,7 @@ void bounce_init()
 {
     for (int i = 0; i < NUM_INPUTS; i++)
     {
-        (*bounce_inputs[i]).init();
+        (*bounce_fxns[i]).init();
     }
     // bounce0_fxn.init();
     // bounce1_fxn.init();
@@ -120,21 +120,22 @@ void bounce_update_trigger()
     int input = selected_fxn == &bounce0_fxn ? 0 : 1;
     int channel = input + 8;
     int trig_num = selected_fxn->param_num - BOUNCE_ENABLE_T0;
-    int trig_type = selected_fxn->get_param(); // enabled or disabled?
-    // Serial.println("Selected input: " + String(input) + " trig num: " + String(trig_num) + " trig_type: " + String(trig_type));
+    int trig_enable = selected_fxn->get_param(); // enabled or disabled?
+    (*bounce_fxns)[input].triggered = trig_enable;
+    // Serial.println("Selected input: " + String(input) + " trig num: " + String(trig_num) + " trig enabled: " + String(trig_enable));
     switch (trig_num)
     {
     case 0:
-        trig0.set_channel(channel, trig_type);
+        trig0.set_channel(channel, trig_enable);
         break;
     case 1:
-        trig1.set_channel(channel, trig_type);
+        trig1.set_channel(channel, trig_enable);
         break;
     case 2:
-        trig2.set_channel(channel, trig_type);
+        trig2.set_channel(channel, trig_enable);
         break;
     case 3:
-        trig3.set_channel(channel, trig_type);
+        trig3.set_channel(channel, trig_enable);
         break;
     }
 }
@@ -157,12 +158,12 @@ void bounce_begin()
 {
     for (int i = 0; i < 2; i++)
     {
-        (*bounce_inputs[i]).begin();
-        (*bounce_inputs[i]).string_params = bounce_string_params;
-        (*bounce_inputs[i]).update_fxns = bounce_update_fxns;
-        (*bounce_inputs[i]).offsets = input_offsets[i];
-        // (*bounce_inputs[i]).active_params = bounce_param_active;
-        selected_fxn = bounce_inputs[i];
+        (*bounce_fxns[i]).begin();
+        (*bounce_fxns[i]).string_params = bounce_string_params;
+        (*bounce_fxns[i]).update_fxns = bounce_update_fxns;
+        (*bounce_fxns[i]).offsets = input_offsets[i];
+        // (*bounce_fxns[i]).active_params = bounce_param_active;
+        selected_fxn = bounce_fxns[i];
         for (int j = 0; j < NUM_TRIGGERS; j++)
         {
             selected_fxn->param_num = BOUNCE_ENABLE_T0 + j;
@@ -188,85 +189,55 @@ void reset_inputs(int trig_num)
     (*triggers[trig_num]).state = TRIGGER_IDLE;
     for (int i = 0; i < NUM_INPUTS; i++)
     {
-        if ((*bounce_inputs[i]).get_param(BOUNCE_ENABLE_T0 + trig_num))
+        if ((*bounce_fxns[i]).get_param(BOUNCE_ENABLE_T0 + trig_num))
         {
-            (*bounce_inputs[i]).triggered = false;
+            (*bounce_fxns[i]).triggered = false;
         }
     }
 }
 
 void check_bounce_triggers()
 {
+    send_trig_status_to_USB();
     bool in_use;
-    for (int trig = 0; trig < 4; trig++)
+    for (int trig_num = 0; trig_num < 4; trig_num++)
     {
         in_use = false;
         for (int input = 0; input < NUM_INPUTS; input++)
         {
-            bool this_trig_enabled;
-            switch (trig)
+            bool this_trig_enabled = (*bounce_fxns[input]).get_param(BOUNCE_ENABLE_T0 + trig_num);
+            if (this_trig_enabled && ((*bounce_fxns[input]).triggered))
             {
-            case 0:
-                this_trig_enabled = (*bounce_inputs[input]).get_param(BOUNCE_ENABLE_T0);
-                break;
-            case 1:
-                this_trig_enabled = (*bounce_inputs[input]).get_param(BOUNCE_ENABLE_T1);
-                break;
-            case 2:
-                this_trig_enabled = (*bounce_inputs[input]).get_param(BOUNCE_ENABLE_T2);
-                break;
-            case 3:
-                this_trig_enabled = (*bounce_inputs[input]).get_param(BOUNCE_ENABLE_T3);
-                break;
-            }
-
-            if (this_trig_enabled && ((*bounce_inputs[input]).triggered))
-            {
-                // ui.terminal_debug((*bounce_inputs[input]).name + " triggered by: " + String(trig));
+                // ui.terminal_debug((*bounce_fxns[input]).name + " triggered by: " + String(trig_num));
                 bounce_reading = adc_read(input);
                 in_use = true;
             }
         }
         if (!in_use)
         {
-            // Serial.println("Turning off LED " + String(trig));
-            switch (trig)
-            {
-            case 0:
-                digitalWrite(T0_LED, LOW);
-                reset_inputs(0);
-                break;
-            case 1:
-                digitalWrite(T1_LED, LOW);
-                reset_inputs(1);
-                break;
-            case 2:
-                digitalWrite(T2_LED, LOW);
-                reset_inputs(2);
-                break;
-            case 3:
-                digitalWrite(T3_LED, LOW);
-                reset_inputs(3);
-                break;
-            }
+            digitalWrite(trigger_leds[trig_num], LOW);
+            reset_inputs(trig_num);
+            // Serial.println("Turning off LED " + String(trig_num));
         }
     }
 }
 
 // called on interrupt
+static int saved_bounce_param;
 void trigger_bounce(byte trig_num, int input_num)
 {
     // (*triggers[trig_num]).state = state;
     // input_num = bounce_input();
-    (*bounce_inputs[input_num]).trigger(trig_num);
-    bounce_triggered = (*bounce_inputs[input_num]).triggered;
+    (*bounce_fxns[input_num]).trigger(trig_num);
+    bounce_triggered = (*bounce_fxns[input_num]).triggered;
     // bounce_triggered = selected_trigger->state == TRIGGER_ACTIVE ? true : false;
 
     // bounce_triggered = true;
 
     bounce_triggered_by[input_num] = trig_num;
     // bounce_reading = adc_read(input_num);
-    digitalWrite(trig_num, HIGH);
+    digitalWrite(trigger_leds[trig_num], HIGH);
+    saved_bounce_param = (*bounce_fxns[input_num]).param_num;
 }
 
 String check_bounce()
@@ -276,9 +247,9 @@ String check_bounce()
         // ui.terminal_debug("enabled: " + String(bounce_debug) + " trig_num: " + String(trig2.trig_num));
         // float reading = IN_FS_VOLTS * bounce_reading / 1650;
         uint16_t the_bounce_input = bounce_input();
-        uint16_t output_num = (*bounce_inputs[the_bounce_input]).get_param(BOUNCE_OUTPUT);
-        float output_scale = float((*bounce_inputs[the_bounce_input]).get_param_w_offset(BOUNCE_SCALE)) / 100.0;
-        float output_offset = float((*bounce_inputs[the_bounce_input]).get_param_w_offset(BOUNCE_OFFSET)) * 19.65; // 20.48
+        uint16_t output_num = (*bounce_fxns[the_bounce_input]).get_param(BOUNCE_OUTPUT);
+        float output_scale = float((*bounce_fxns[the_bounce_input]).get_param_w_offset(BOUNCE_SCALE)) / 100.0;
+        float output_offset = float((*bounce_fxns[the_bounce_input]).get_param_w_offset(BOUNCE_OFFSET)) * 19.65; // 20.48
         int bounce_offset_correction = get_raw_output_offset_correction(output_num);
         float reading = scale_adc(bounce_reading);
         // uint16_t dac_val = (bounce_reading * output_scale + 1660) * 1.234;
@@ -291,10 +262,16 @@ String check_bounce()
         ui.printLine(" " + String(reading) + " VDC", ui.lines[1], 2);
         dac_out(output_num, dac_val);
         bounce_next_time = millis() + selected_fxn->get_param(BOUNCE_SAMPLE_TIME);
-        bounce_triggered = (*bounce_inputs[the_bounce_input]).triggered = false;
-        if (selected_fxn->get_param(BOUNCE_REPEAT))
+        // bounce_triggered = (*bounce_fxns[the_bounce_input]).triggered = false;
+        if (selected_fxn->get_param(BOUNCE_REPEAT) && (*bounce_fxns[the_bounce_input]).param_num == saved_bounce_param && (*bounce_fxns[the_bounce_input]).triggered)
         {
             trigger_bounce(bounce_triggered_by[the_bounce_input], the_bounce_input);
+        }
+        else
+        {
+            bounce_triggered = (*bounce_fxns[the_bounce_input]).triggered = false;
+            if ((*bounce_fxns[the_bounce_input]).get_param(BOUNCE_REPEAT))
+                (*bounce_fxns[the_bounce_input]).default_display();
         }
         return "  CV" + String(the_bounce_input) + " Reading: " + String(reading) + "V   Triggered by: T" + String(bounce_triggered_by[the_bounce_input]) + "  ";
     }

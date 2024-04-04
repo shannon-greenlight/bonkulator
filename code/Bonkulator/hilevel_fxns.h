@@ -1,3 +1,5 @@
+#include "Arduino.h"
+
 void scale_int(int *val, float scale)
 {
     *val *= scale;
@@ -121,7 +123,7 @@ void activate()
     {
         settings_activate();
     }
-    else if (in_output_fxn())
+    else if (in_output_fxn() || in_bounce_fxn())
     {
         selected_trigger->trigger();
     }
