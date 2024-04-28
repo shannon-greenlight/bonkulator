@@ -14,8 +14,8 @@ uint16_t _input_cal_maxs[] = {1, ADC_FS, 1300, 1};
 uint16_t _input_cal_init_vals[] = {0, 0, 1000, 0};
 uint16_t *input_cal_stuff[] = {_input_cal_params, _input_cal_mins, _input_cal_maxs, _input_cal_init_vals};
 String input_cal_labels[] = {"Input: ", "Offset: ", "Scale: ", "Calibrated: "};
-String input_cal_string_params[] = {"", "", "", "No ,Yes"};
-int16_t input_cal_offsets[] = {0, INPUT_CAL_OFFSET_CORRECTION, 0}; // allows negative numbers
+String input_cal_string_params[] = {"", "", "", "No,Yes"};
+int16_t input_cal_offsets[] = {0, INPUT_CAL_OFFSET_CORRECTION, 0, 0}; // allows negative numbers
 
 Greenface_gadget input_cal_fxn("Calibrate", input_cal_labels, input_cal_stuff, sizeof(_input_cal_params) / sizeof(_input_cal_params[0]));
 
@@ -161,7 +161,7 @@ String check_input_cal()
 {
     static float reading_memory = -100000.;
     int param_num = input_cal_fxn.param_num;
-    system_message = "Apply 0V to set Offset, 4V to set Scale.<br>";
+    system_message = F("Apply 0V to set Offset, 4V to set Scale.<br>");
     int input = input_cal_fxn.get_param(INPUT_CAL_INPUT_NUM);
     int val = adc_read(input);
     // int raw = adc_read_raw(input);
@@ -183,7 +183,7 @@ String check_input_cal()
         // if (abs(20.0 - reading_memory) > .01)
         //     send_data_to_USB('/');
         // reading_memory = 20.0;
-        return "Apply 0V to set Offset, 4V to set Scale. ";
+        return F("Apply 0V to set Offset, 4V to set Scale. ");
     }
 }
 
