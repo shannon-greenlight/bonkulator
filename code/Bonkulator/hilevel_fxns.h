@@ -105,6 +105,28 @@ void put_param_indexed(int int_param, int *index_array)
     }
 }
 
+void put_group(int int_param, int *index_array)
+{
+    int fxn_memory = selected_output.get();
+    bool in_group = group & (1 << fxn_memory);
+    if (group_active && group > 0 && in_group && in_output_fxn())
+    {
+        for (int i = 0; i < NUM_OUTPUTS; i++)
+        {
+            if ((group & (1 << i)) != 0)
+            {
+                selected_output.put(i);
+                put_param_indexed(int_param, index_array);
+            }
+        }
+        selected_output.put(fxn_memory);
+    }
+    else
+    {
+        put_param_indexed(int_param, index_array);
+    }
+}
+
 void check_rotary_encoder()
 {
     if (encoder_is_adjusting())
