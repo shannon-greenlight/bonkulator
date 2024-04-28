@@ -31,6 +31,8 @@ volatile uint32_t Timer0Count = 0;
 int user_entering_param = 1;
 
 // variables
+uint16_t group = 0; // group outputs together for setting params en masse.
+bool group_active = true;
 String version_num = VERSION_NUM;
 boolean key_held_down = false;
 int16_t adc0;
