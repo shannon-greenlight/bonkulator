@@ -376,6 +376,10 @@ void process_cmd(String in_str)
 	int scale_indicies[] = {OUTPUT_SCALE, BOUNCE_SCALE};
 	int offset_indicies[] = {OUTPUT_OFFSET, BOUNCE_OFFSET};
 	int time_indicies[] = {OUTPUT_ACTIVE_TIME, BOUNCE_SAMPLE_TIME};
+	int randomness_indicies[] = {OUTPUT_RANDOMNESS};
+	int idle_value_indicies[] = {OUTPUT_IDLE_VALUE};
+
+	// static uint16_t group = 0; // group outputs together for setting params en masse.
 
 	// ui.terminal_debug("Process cmd: " + in_str + " int_param: " + String(in_str.substring(0).toInt()) + " cmd: " + String(cmd));
 
@@ -514,24 +518,33 @@ void process_cmd(String in_str)
 		dump_waveform(dig1, dig2 > 0);
 		Serial.println("Time_inc: " + String(outputs[dig1].time_inc));
 		break;
+	case 'G':
+		group = int_param;
+		// ui.terminal_debug("Group: " + String(group));
+		break;
+	case 'g':
+		group_active = (int_param > 0);
+		// ui.terminal_debug("Group: " + String(group));
+		break;
 	case 'O':
-		put_param_indexed(int_param, offset_indicies);
+		// ui.terminal_debug("Offset - Group: " + String(group));
+		put_group(int_param, offset_indicies);
 		break;
 	case 'S':
-		put_param_indexed(int_param, scale_indicies);
+		put_group(int_param, scale_indicies);
 		break;
-	case 's':
-		put_param_indexed(int_param, time_indicies);
+	case 'A':
+		put_group(int_param, time_indicies);
+		break;
+	case 'R':
+		put_group(int_param, randomness_indicies);
+		break;
+	case 'V':
+		put_group(int_param, idle_value_indicies);
+		// (the_output)().put_param_w_offset(int(float_param * 1000), OUTPUT_IDLE_VALUE);
 		break;
 	case 'Q':
 		(the_output)().put_param(int_param, OUTPUT_QUANTIZE);
-		break;
-	case 'R':
-		(the_output)().put_param(int_param, OUTPUT_RANDOMNESS);
-		break;
-	case 'V':
-		(the_output)().put_param_w_offset(int_param, OUTPUT_IDLE_VALUE);
-		// (the_output)().put_param_w_offset(int(float_param * 1000), OUTPUT_IDLE_VALUE);
 		break;
 	case 'W':
 		ui.clearTerminal();
