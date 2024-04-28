@@ -48,7 +48,7 @@ enum
 #define CV_RANDOMNESS 5
 #define CV_TRIGGER 6
 
-#define CV_TYPES "Off   ,Scale ,Offset,Active Time,Idle Value,Randomness,Trigger"
+#define CV_TYPES "Off,Scale,Offset,Active Time,Idle Value,Randomness,Trigger"
 
 #define TIME_INC_MIN 1
 #define TIME_INC_MAX 32000
