@@ -725,3 +725,29 @@ Check-in comment for Bonkulator-527
 Fixes bug where it crashes on boot if trigger signal is present.
 Fix is to begin triggers last.
 Also sets output param to Waveform on boot.
+ 
+Check-in comment for Bonkulator-528 
+Removes spaces from output params.
+Fixes setAdj in app.
+ 
+Check-in comment for Bonkulator-529 
+Changes remote command 's' to 'A' for Active Time.
+ 
+Check-in comment for Bonkulator-530 
+Makes all slider commands in Keyboard use put_param_indexed.
+ 
+Check-in comment for Bonkulator-531 
+Sends group to USB.
+ 
+Check-in comment for Bonkulator-532 
+Adds group_active.
+ 
+Check-in comment for Bonkulator-533 
+Safety.
+ 
+Check-in comment for Bonkulator-534 
+Fixes grouping. Needed to send less data to usb. 
+Fixed input cal state. Added entry to offset adjustments!
+ 
+Check-in comment for Bonkulator-535 
+version 3.4.1
