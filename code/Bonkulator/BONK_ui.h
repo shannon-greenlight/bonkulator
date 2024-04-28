@@ -119,6 +119,11 @@ String globals_toJSON(char cmd)
   out += (toJSON("digit_num", String(digit_num)));
   out += (",");
 
+  out += (toJSON("group", String(group)));
+  out += (",");
+  out += (toJSON("group_active", String(group_active)));
+  out += (",");
+
   out += (toJSON("param_num", String(selected_fxn->param_num)));
   out += (",");
   out += (toJSON("param_active", String(selected_fxn->get_param_active())));
@@ -129,10 +134,6 @@ String globals_toJSON(char cmd)
   out += (toJSON("fs_volts", output_get_fs()));
   out += (",");
   out += (toJSON("fs_offset", output_get_fs_offset()));
-  out += (",");
-  out += (toJSON("bounce_max", "32767"));
-  out += (",");
-  out += (toJSON("bounce_min", "100"));
   out += (",");
   out += (toJSON("offset_max", "100"));
   out += (",");
