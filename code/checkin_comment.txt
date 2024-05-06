@@ -751,3 +751,23 @@ Fixed input cal state. Added entry to offset adjustments!
  
 Check-in comment for Bonkulator-535 
 version 3.4.1
+ 
+Check-in comment for Bonkulator-536 
+Adds support for quick slider changes.
+Offset only
+Safety.
+ 
+Check-in comment for Bonkulator-537 
+Quick sliders seem to work.
+ 
+Check-in comment for Bonkulator-538 
+Sends software version to USB
+version 3.5.0
+Failed!
+ 
+Check-in comment for Bonkulator-539 
+Sends software version to USB
+version 3.5.0
+ 
+Check-in comment for bonkulator-540 
+New backit
