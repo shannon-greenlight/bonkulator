@@ -89,7 +89,7 @@ code/Bonkulator/libraries
 code/Bonkulator/secrets
 code/out
 dev
-libraries
+# libraries
 
 manual/*.tmp
 docs
