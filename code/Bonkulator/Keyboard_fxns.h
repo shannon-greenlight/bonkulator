@@ -383,6 +383,7 @@ void process_cmd(String in_str)
 
 	// ui.terminal_debug("Process cmd: " + in_str + " int_param: " + String(in_str.substring(0).toInt()) + " cmd: " + String(cmd));
 
+	sending_status = false;
 	switch (cmd)
 	{
 	case '[':
@@ -529,19 +530,28 @@ void process_cmd(String in_str)
 	case 'O':
 		// ui.terminal_debug("Offset - Group: " + String(group));
 		put_group(int_param, offset_indicies);
+		send_status_to_USB("offset");
 		break;
 	case 'S':
 		put_group(int_param, scale_indicies);
+		send_status_to_USB("scale");
 		break;
 	case 'A':
 		put_group(int_param, time_indicies);
+		send_status_to_USB("Active Time");
+		break;
+	case 's':
+		put_group(int_param, time_indicies);
+		send_status_to_USB("SampleTime");
 		break;
 	case 'R':
 		put_group(int_param, randomness_indicies);
+		send_status_to_USB("randomness");
 		break;
 	case 'V':
 		put_group(int_param, idle_value_indicies);
 		// (the_output)().put_param_w_offset(int(float_param * 1000), OUTPUT_IDLE_VALUE);
+		send_status_to_USB("Idle Value");
 		break;
 	case 'Q':
 		(the_output)().put_param(int_param, OUTPUT_QUANTIZE);
@@ -697,13 +707,14 @@ void check_serial()
 				reset_keyboard();
 				in_str = "";
 			}
-			if (usb_direct_enabled())
+			if (usb_direct_enabled() && !sending_status)
 			{
 				// ui.t.println("Howdy!");
 				cmd = (cmd == '\n') ? ' ' : cmd;
 				send_data_to_USB(cmd);
 				system_message = "";
 			}
+			sending_status = false;
 		}
 	}
 }

@@ -6,6 +6,30 @@
 #define SCREEN_HEIGHT 64  // OLED display height, in pixels
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 Greenface_ui ui(&display, PRODUCT_NAME);
+enum
+{
+  OUTPUT_WAVEFORM,
+  OUTPUT_INIT_DELAY,
+  OUTPUT_ACTIVE_TIME,
+  OUTPUT_IDLE_TIME,
+  OUTPUT_REPEAT,
+  OUTPUT_ENABLE_T0,
+  OUTPUT_ENABLE_T1,
+  OUTPUT_ENABLE_T2,
+  OUTPUT_ENABLE_T3,
+  OUTPUT_CV0,
+  OUTPUT_CV1,
+  OUTPUT_SCALE,
+  OUTPUT_OFFSET,
+  OUTPUT_RANDOMNESS,
+  OUTPUT_QUANTIZE,
+  OUTPUT_IDLE_VALUE,
+  OUTPUT_CLOCK,
+  OUTPUT_RANGE,
+  OUTPUT_TRIG_CTRL,
+  OUTPUT_TRIG_CTRL_VAL,
+  NUM_OUTPUT_PARAMS
+};
 
 String old_status = "";
 void terminal_print_status(String status_string, bool force = false)
@@ -75,21 +99,50 @@ void gen_params_macro(Greenface_gadget *item, bool print_header = true, String p
 }
 
 bool sending_to_USB;
-void send_status_to_USB()
+bool sending_status = false;
+void send_status_to_USB(String event = "trigger")
 {
   if (!sending_to_USB && usb_direct_enabled())
   {
+    sending_status = true;
     sending_to_USB = true;
     ui.t.print("{");
-    ui.t.print(toJSON("status", "trigger"));
+    ui.t.print(toJSON("event", event));
     ui.t.print(",");
-    ui.t.print(toJSON("t0", trig0.state == TRIGGER_ACTIVE ? "ON" : "OFF"));
-    ui.t.print(",");
-    ui.t.print(toJSON("t1", trig1.state == TRIGGER_ACTIVE ? "ON" : "OFF"));
-    ui.t.print(",");
-    ui.t.print(toJSON("t2", trig2.state == TRIGGER_ACTIVE ? "ON" : "OFF"));
-    ui.t.print(",");
-    ui.t.print(toJSON("t3", trig3.state == TRIGGER_ACTIVE ? "ON" : "OFF"));
+    if (event == "trigger")
+    {
+      ui.t.print(toJSON("t0", trig0.state == TRIGGER_ACTIVE ? "ON" : "OFF"));
+      ui.t.print(",");
+      ui.t.print(toJSON("t1", trig1.state == TRIGGER_ACTIVE ? "ON" : "OFF"));
+      ui.t.print(",");
+      ui.t.print(toJSON("t2", trig2.state == TRIGGER_ACTIVE ? "ON" : "OFF"));
+      ui.t.print(",");
+      ui.t.print(toJSON("t3", trig3.state == TRIGGER_ACTIVE ? "ON" : "OFF"));
+    }
+    else if (event == "offset")
+    {
+      ui.t.print(toJSON("value", String(selected_fxn->get_param_w_offset(OUTPUT_OFFSET))));
+    }
+    else if (event == "scale")
+    {
+      ui.t.print(toJSON("value", String(selected_fxn->get_param_w_offset(OUTPUT_SCALE))));
+    }
+    else if (event == "Active Time")
+    {
+      ui.t.print(toJSON("value", String(selected_fxn->get_param_w_offset(OUTPUT_ACTIVE_TIME))));
+    }
+    else if (event == "SampleTime")
+    {
+      ui.t.print(toJSON("value", String(selected_fxn->get_param_w_offset(OUTPUT_ACTIVE_TIME))));
+    }
+    else if (event == "randomness")
+    {
+      ui.t.print(toJSON("value", String(selected_fxn->get_param_w_offset(OUTPUT_RANDOMNESS))));
+    }
+    else if (event == "Idle Value")
+    {
+      ui.t.print(toJSON("value", String(selected_fxn->get_param_w_offset(OUTPUT_IDLE_VALUE))));
+    }
     ui.t.print("}");
     // This terminates serialport message
     ui.t.println("\r\n\r\n");
@@ -139,9 +192,7 @@ String globals_toJSON(char cmd)
   out += (",");
   out += (toJSON("offset_min", "-100"));
   out += (",");
-  out += (toJSON("scale_min", "-100"));
-  out += (",");
-  out += (toJSON("scale_max", "100"));
+  out += (toJSON("software_version", settings_get_version()));
   out += (",");
   out += (toJSON("dac_fs", String(DAC_FS)));
   out += (",");

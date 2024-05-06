@@ -139,6 +139,12 @@ void settings_adjust_param(int encoder_val, unsigned long delta)
     }
 }
 
+// returns software version
+String settings_get_version()
+{
+    return settings_fxn.get_param_as_string(SETTINGS_VER);
+}
+
 // returns true for old style boards without output fs adjust pot
 bool settings_get_fs_fixed()
 {
