@@ -1,0 +1,17 @@
+{
+  "name": "MCP3X21",
+  "keywords": "MCP3021, MCP3221, ADC, I2C",
+  "description": "MCP3021 & MCP3221 Arduino library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pilotak/MCP3X21.git"
+  },
+  "authors": {
+    "name": "Pavel Slama",
+    "email": "info@pavelslama.cz",
+    "url": "https://github.com/pilotak"
+  },
+  "version": "1.0.1",
+  "frameworks": "arduino",
+  "platforms": "*"
+}
