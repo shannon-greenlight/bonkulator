@@ -84,15 +84,15 @@ sym-lib-table
 
 
 code/arduino_bin
-code/ArduinoLLC.ArduinoIDE_1.8.57.0_x86__mdqgnx93n4wtt
-code/Bonkulator/libraries
+# code/ArduinoLLC.ArduinoIDE_1.8.57.0_x86__mdqgnx93n4wtt
+!code/Bonkulator/libraries
 code/Bonkulator/secrets
 code/out
 dev
-# libraries
 
 manual/*.tmp
 docs
 manual/Bonkulator-Manual.pdf
 code/checkin_comment.txt
 code/spank_port.txt
+code/config.csv
