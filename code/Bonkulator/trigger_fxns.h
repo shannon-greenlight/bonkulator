@@ -178,7 +178,7 @@ void trigger3()
 void trigger_output(byte trig_num, int output_num)
 {
     OutputData *outptr = &outputs[output_num];
-    (*bonk_outputs[output_num]).trigger(trig_num);
+    (*bonk_outputs[output_num]).trigger(trig_num, (*bonk_outputs[output_num]).get_param(OUTPUT_REPEAT) == 0);
     if ((*bonk_outputs[output_num]).get_param(OUTPUT_CLOCK) != 1 && (*bonk_outputs[output_num]).get_param(OUTPUT_WAVEFORM) != WAVEFORM_TOGGLE)
     {
         outptr->current_index = 0;
